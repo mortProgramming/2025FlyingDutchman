@@ -1,0 +1,2 @@
+1. ProxyCommand - ends when interupted by other command
+2. RepeatCommand - just read it

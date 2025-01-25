@@ -1,0 +1,36 @@
+Do Later:
+1. Second order kinematics
+    a. Smudge constants?
+2.      Module Positions Viewer Page
+3. Arm Stuff
+    a. Basic Arm PID, FF, and Gravity
+4. Wrappers
+5. Java Docs
+6.      Slew Rate Limiting
+7. Using In Built Motor Controller PIDs
+8. Loop Time Optimization?
+    a. IMU multithreading
+9. Sys ID interface
+10. Remove some getters and setters
+11. Camera Stuff
+    a. Limelight
+    b. Photovision
+    c. Filters?
+12. Fly Wheel
+13. Odometry Based Movement
+14. Other logging
+15. Simulation Stuff
+17. Command Grouping Stuff
+18. Touchscreen Interface
+19. Python?
+20. Other Kinematics
+21. 
+
+Doing Now:
+1. Odometry
+2. Slew Rate Limiting
+3. Module Positions Viewer Page
+4. 
+
+Done Recently:
+1. 

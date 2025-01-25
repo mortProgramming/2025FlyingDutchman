@@ -1,4 +1,4 @@
-package org.mort11.MORTlib.others;
+package org.mort11.mortlib.others;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 

@@ -1,13 +1,14 @@
-package org.mort11.MORTlib.hardware.brands.rev;
+package org.mort11.mortlib.hardware.brands.rev;
 
 import com.revrobotics.spark.SparkBase.PersistMode;
 import com.revrobotics.spark.SparkBase.ResetMode;
+
+import org.mort11.mortlib.hardware.motor.MotorIntf;
+
 import com.revrobotics.spark.SparkClosedLoopController;
 import com.revrobotics.spark.SparkLowLevel;
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.config.SparkMaxConfig;
-
-import org.mort11.MORTlib.hardware.motor.MotorIntf;
 
 public class SparkMaxMotor implements MotorIntf {
 

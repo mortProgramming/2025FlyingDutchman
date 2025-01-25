@@ -37,7 +37,7 @@ public class IO {
       )));
     }
 
-    public static Boolean getIsBlue () {
+    public static Boolean isBlue () {
 		return DriverStation.getAlliance().isPresent() ? DriverStation.getAlliance().get() == Alliance.Blue : true;
 	}
 }

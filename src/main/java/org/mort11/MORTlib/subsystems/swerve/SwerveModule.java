@@ -1,20 +1,21 @@
-package org.mort11.MORTlib.subsystems.swerve;
+package org.mort11.mortlib.subsystems.swerve;
 
-import static org.mort11.MORTlib.subsystems.swerve.ModuleConfig.*;
+import static org.mort11.mortlib.subsystems.swerve.ModuleConfig.*;
+
+import org.mort11.mortlib.hardware.brands.ctre.CTREUtility.Falcon500;
+import org.mort11.mortlib.hardware.brands.ctre.CTREUtility.Krakenx60;
+import org.mort11.mortlib.hardware.brands.rev.RevUtility.NEO;
+import org.mort11.mortlib.hardware.brands.rev.RevUtility.NEO550;
+import org.mort11.mortlib.hardware.brands.rev.RevUtility.Vortex;
+import org.mort11.mortlib.hardware.encoder.Encoder;
+import org.mort11.mortlib.hardware.encoder.EncoderTypeEnum;
+import org.mort11.mortlib.hardware.motor.Motor;
+import org.mort11.mortlib.hardware.motor.MotorTypeEnum;
+import org.mort11.mortlib.hardware.motor.PIDMotor;
 
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
-import org.mort11.MORTlib.hardware.brands.ctre.CTREUtility.Falcon500;
-import org.mort11.MORTlib.hardware.brands.ctre.CTREUtility.Krakenx60;
-import org.mort11.MORTlib.hardware.brands.rev.RevUtility.NEO;
-import org.mort11.MORTlib.hardware.brands.rev.RevUtility.NEO550;
-import org.mort11.MORTlib.hardware.brands.rev.RevUtility.Vortex;
-import org.mort11.MORTlib.hardware.encoder.Encoder;
-import org.mort11.MORTlib.hardware.encoder.EncoderTypeEnum;
-import org.mort11.MORTlib.hardware.motor.Motor;
-import org.mort11.MORTlib.hardware.motor.MotorTypeEnum;
-import org.mort11.MORTlib.hardware.motor.PIDMotor;
 
 public class SwerveModule {
 

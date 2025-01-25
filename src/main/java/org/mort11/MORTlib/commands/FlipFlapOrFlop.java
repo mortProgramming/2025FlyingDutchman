@@ -1,11 +1,12 @@
-package org.mort11.MORTlib.commands;
+package org.mort11.mortlib.commands;
 
-import static org.mort11.MORTlib.others.Ternary.*;
+import static org.mort11.mortlib.others.Ternary.*;
 
 import java.util.function.BooleanSupplier;
 
+import org.mort11.mortlib.others.Ternary;
+
 import edu.wpi.first.wpilibj2.command.Command;
-import org.mort11.MORTlib.others.Ternary;
 
 public class FlipFlapOrFlop {
 

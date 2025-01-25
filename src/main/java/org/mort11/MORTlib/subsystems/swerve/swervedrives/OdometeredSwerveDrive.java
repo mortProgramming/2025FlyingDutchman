@@ -1,4 +1,12 @@
-package org.mort11.MORTlib.subsystems.swerve.swervedrives;
+package org.mort11.mortlib.subsystems.swerve.swervedrives;
+
+import org.mort11.mortlib.hardware.encoder.EncoderTypeEnum;
+import org.mort11.mortlib.hardware.imu.IMU;
+import org.mort11.mortlib.hardware.imu.IMUTypeEnum;
+import org.mort11.mortlib.hardware.motor.MotorTypeEnum;
+import org.mort11.mortlib.subsystems.swerve.ModuleConfigEnum;
+import org.mort11.mortlib.subsystems.swerve.Odometer;
+import org.mort11.mortlib.subsystems.swerve.SwerveModule;
 
 import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.geometry.Pose2d;
@@ -6,13 +14,6 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.trajectory.TrapezoidProfile.Constraints;
-import org.mort11.MORTlib.hardware.encoder.EncoderTypeEnum;
-import org.mort11.MORTlib.hardware.imu.IMU;
-import org.mort11.MORTlib.hardware.imu.IMUTypeEnum;
-import org.mort11.MORTlib.hardware.motor.MotorTypeEnum;
-import org.mort11.MORTlib.subsystems.swerve.ModuleConfigEnum;
-import org.mort11.MORTlib.subsystems.swerve.Odometer;
-import org.mort11.MORTlib.subsystems.swerve.SwerveModule;
 
 public class OdometeredSwerveDrive extends OrientedSwerveDrive {
     public Odometer odometer;

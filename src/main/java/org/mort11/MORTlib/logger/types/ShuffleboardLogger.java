@@ -1,10 +1,11 @@
-package org.mort11.MORTlib.logger.types;
+package org.mort11.mortlib.logger.types;
 
 import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
 
+import org.mort11.mortlib.logger.LoggerIntf;
+
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
-import org.mort11.MORTlib.logger.LoggerIntf;
 
 public class ShuffleboardLogger implements LoggerIntf {
     public String subsystemName;

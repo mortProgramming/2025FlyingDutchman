@@ -1,4 +1,6 @@
-package org.mort11.MORTlib.subsystems.swerve;
+package org.mort11.mortlib.subsystems.swerve;
+
+import org.mort11.mortlib.subsystems.swerve.swervedrives.OdometeredSwerveDrive;
 
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.config.ModuleConfig;
@@ -12,7 +14,6 @@ import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj2.command.Subsystem;
-import org.mort11.MORTlib.subsystems.swerve.swervedrives.OdometeredSwerveDrive;
 
 public class PathPlanner {
     public static void configure (

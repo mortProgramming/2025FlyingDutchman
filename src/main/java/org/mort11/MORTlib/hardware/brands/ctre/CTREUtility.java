@@ -1,4 +1,4 @@
-package org.mort11.MORTlib.hardware.brands.ctre;
+package org.mort11.mortlib.hardware.brands.ctre;
 
 public class CTREUtility {
 

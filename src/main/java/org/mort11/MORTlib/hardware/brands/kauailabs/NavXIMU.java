@@ -1,8 +1,9 @@
-package org.mort11.MORTlib.hardware.brands.kauailabs;
+package org.mort11.mortlib.hardware.brands.kauailabs;
 
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Rotation3d;
-import org.mort11.MORTlib.hardware.imu.IMUIntf;
+
+import org.mort11.mortlib.hardware.imu.IMUIntf;
 
 import com.studica.frc.AHRS;
 

@@ -1,9 +1,10 @@
-package org.mort11.MORTlib.subsystems.flywheel;
+package org.mort11.mortlib.subsystems.flywheel;
+
+import org.mort11.mortlib.hardware.motor.MotorIntf;
+import org.mort11.mortlib.hardware.motor.MotorTypeEnum;
 
 import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.trajectory.TrapezoidProfile.Constraints;
-import org.mort11.MORTlib.hardware.motor.MotorIntf;
-import org.mort11.MORTlib.hardware.motor.MotorTypeEnum;
 
 public class PIDFlywheel extends Flywheel {
     public ProfiledPIDController controller;

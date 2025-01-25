@@ -1,4 +1,4 @@
-package org.mort11.MORTlib.commands;
+package org.mort11.mortlib.commands;
 
 import java.util.function.BooleanSupplier;
 

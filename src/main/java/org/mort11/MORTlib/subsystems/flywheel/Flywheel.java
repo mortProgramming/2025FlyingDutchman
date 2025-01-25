@@ -1,9 +1,10 @@
-package org.mort11.MORTlib.subsystems.flywheel;
+package org.mort11.mortlib.subsystems.flywheel;
+
+import org.mort11.mortlib.hardware.motor.Motor;
+import org.mort11.mortlib.hardware.motor.MotorIntf;
+import org.mort11.mortlib.hardware.motor.MotorTypeEnum;
 
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
-import org.mort11.MORTlib.hardware.motor.Motor;
-import org.mort11.MORTlib.hardware.motor.MotorIntf;
-import org.mort11.MORTlib.hardware.motor.MotorTypeEnum;
 
 public class Flywheel {
     public MotorIntf motor;

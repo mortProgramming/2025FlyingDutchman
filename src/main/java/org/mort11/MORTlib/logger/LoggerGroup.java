@@ -1,6 +1,6 @@
-package org.mort11.MORTlib.logger;
+package org.mort11.mortlib.logger;
 
-import static org.mort11.MORTlib.logger.LoggerTypeEnum.*;
+import static org.mort11.mortlib.logger.LoggerTypeEnum.*;
 
 import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;

@@ -1,4 +1,4 @@
-package org.mort11.MORTlib.hardware.brands.rev;
+package org.mort11.mortlib.hardware.brands.rev;
 
 // import com.revrobotics.CANSparkMax;
 // import com.revrobotics.CANSparkLowLevel;

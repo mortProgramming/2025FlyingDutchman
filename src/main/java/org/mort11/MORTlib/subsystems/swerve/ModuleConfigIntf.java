@@ -1,4 +1,4 @@
-package org.mort11.MORTlib.subsystems.swerve;
+package org.mort11.mortlib.subsystems.swerve;
 
 public interface ModuleConfigIntf {
     public static final double WHEEL_DIAMETER = 0.10033;

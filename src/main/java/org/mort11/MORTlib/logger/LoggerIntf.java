@@ -1,4 +1,4 @@
-package org.mort11.MORTlib.logger;
+package org.mort11.mortlib.logger;
 
 import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;

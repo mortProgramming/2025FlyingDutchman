@@ -1,8 +1,9 @@
-package org.mort11.MORTlib.hardware.encoder;
+package org.mort11.mortlib.hardware.encoder;
+
+import org.mort11.mortlib.hardware.brands.ctre.CANCoderEncoder;
+import org.mort11.mortlib.hardware.brands.rev.ThroughBoreEncoder;
 
 import edu.wpi.first.math.geometry.Rotation2d;
-import org.mort11.MORTlib.hardware.brands.ctre.CANCoderEncoder;
-import org.mort11.MORTlib.hardware.brands.rev.ThroughBoreEncoder;
 
 public class Encoder implements EncoderIntf {
 

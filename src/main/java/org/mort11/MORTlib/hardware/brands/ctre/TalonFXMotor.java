@@ -1,10 +1,10 @@
-package org.mort11.MORTlib.hardware.brands.ctre;
+package org.mort11.mortlib.hardware.brands.ctre;
+
+import org.mort11.mortlib.hardware.motor.MotorIntf;
 
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.InvertedValue;
-
-import org.mort11.MORTlib.hardware.motor.MotorIntf;
 
 public class TalonFXMotor implements MotorIntf {
 

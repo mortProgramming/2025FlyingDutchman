@@ -1,8 +1,9 @@
-package org.mort11.MORTlib.hardware.brands.rev;
+package org.mort11.mortlib.hardware.brands.rev;
+
+import org.mort11.mortlib.hardware.encoder.EncoderIntf;
 
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
-import org.mort11.MORTlib.hardware.encoder.EncoderIntf;
 
 public class ThroughBoreEncoder implements EncoderIntf{
     public int ID;

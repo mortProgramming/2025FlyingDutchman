@@ -1,4 +1,6 @@
-package org.mort11.MORTlib.hardware.brands.limelight;
+package org.mort11.mortlib.hardware.brands.limelight;
+
+import org.mort11.mortlib.hardware.camera.TagCameraIntf;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Pose3d;
@@ -7,7 +9,6 @@ import edu.wpi.first.math.geometry.Rotation3d;
 import edu.wpi.first.math.geometry.Translation3d;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
-import org.mort11.MORTlib.hardware.camera.TagCameraIntf;
 
 public class LimelightTagCamera implements TagCameraIntf {
 

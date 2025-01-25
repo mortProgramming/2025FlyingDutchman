@@ -1,10 +1,11 @@
-package org.mort11.MORTlib.subsystems.arm;
+package org.mort11.mortlib.subsystems.arm;
+
+import org.mort11.mortlib.hardware.motor.Motor;
+import org.mort11.mortlib.hardware.motor.MotorIntf;
+import org.mort11.mortlib.hardware.motor.MotorTypeEnum;
 
 import edu.wpi.first.math.controller.ArmFeedforward;
 import edu.wpi.first.math.geometry.Rotation2d;
-import org.mort11.MORTlib.hardware.motor.Motor;
-import org.mort11.MORTlib.hardware.motor.MotorIntf;
-import org.mort11.MORTlib.hardware.motor.MotorTypeEnum;
 
 public class Arm {
     public MotorIntf motor;

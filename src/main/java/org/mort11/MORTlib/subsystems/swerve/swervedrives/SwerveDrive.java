@@ -1,4 +1,9 @@
-package org.mort11.MORTlib.subsystems.swerve.swervedrives;
+package org.mort11.mortlib.subsystems.swerve.swervedrives;
+
+import org.mort11.mortlib.hardware.encoder.EncoderTypeEnum;
+import org.mort11.mortlib.hardware.motor.MotorTypeEnum;
+import org.mort11.mortlib.subsystems.swerve.ModuleConfigEnum;
+import org.mort11.mortlib.subsystems.swerve.SwerveModule;
 
 import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -11,10 +16,6 @@ import edu.wpi.first.wpilibj.shuffleboard.BuiltInLayouts;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardLayout;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
-import org.mort11.MORTlib.hardware.encoder.EncoderTypeEnum;
-import org.mort11.MORTlib.hardware.motor.MotorTypeEnum;
-import org.mort11.MORTlib.subsystems.swerve.ModuleConfigEnum;
-import org.mort11.MORTlib.subsystems.swerve.SwerveModule;
 
 public class SwerveDrive {
     public SwerveModule frontLeftModule;

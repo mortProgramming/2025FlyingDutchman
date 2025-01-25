@@ -1,4 +1,4 @@
-package org.mort11.MORTlib.logger.types;
+package org.mort11.mortlib.logger.types;
 
 public class AdvantageKitLogger {
     

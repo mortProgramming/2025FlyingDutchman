@@ -1,10 +1,10 @@
-package org.mort11.MORTlib.logger;
+package org.mort11.mortlib.logger;
 
 import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
 
-import org.mort11.MORTlib.logger.types.ShuffleboardLogger;
-import org.mort11.MORTlib.logger.types.SmartDashboardLogger;
+import org.mort11.mortlib.logger.types.ShuffleboardLogger;
+import org.mort11.mortlib.logger.types.SmartDashboardLogger;
 
 public class Logger implements LoggerIntf {
     public LoggerTypeEnum loggerType;

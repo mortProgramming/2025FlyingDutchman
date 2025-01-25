@@ -1,6 +1,6 @@
-package org.mort11.MORTlib.hardware.camera;
+package org.mort11.mortlib.hardware.camera;
 
-import org.mort11.MORTlib.hardware.brands.limelight.LimelightNoteCamera;
+import org.mort11.mortlib.hardware.brands.limelight.LimelightNoteCamera;
 
 public class NoteCamera implements NoteCameraIntf {
 

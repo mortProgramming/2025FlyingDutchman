@@ -1,10 +1,11 @@
-package org.mort11.MORTlib.subsystems.arm;
+package org.mort11.mortlib.subsystems.arm;
+
+import org.mort11.mortlib.hardware.motor.MotorIntf;
+import org.mort11.mortlib.hardware.motor.MotorTypeEnum;
 
 import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.trajectory.TrapezoidProfile.Constraints;
-import org.mort11.MORTlib.hardware.motor.MotorIntf;
-import org.mort11.MORTlib.hardware.motor.MotorTypeEnum;
 
 public class PIDArm extends Arm {
 

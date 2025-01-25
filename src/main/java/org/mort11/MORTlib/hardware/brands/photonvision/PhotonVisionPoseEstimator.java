@@ -1,4 +1,4 @@
-package org.mort11.MORTlib.hardware.brands.photonvision;
+package org.mort11.mortlib.hardware.brands.photonvision;
 
 public class PhotonVisionPoseEstimator {
     

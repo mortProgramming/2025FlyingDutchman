@@ -1,10 +1,11 @@
-package org.mort11.MORTlib.hardware.imu;
+package org.mort11.mortlib.hardware.imu;
+
+import org.mort11.mortlib.hardware.brands.ctre.Pigeon2IMU;
+import org.mort11.mortlib.hardware.brands.kauailabs.NavX2IMU;
+import org.mort11.mortlib.hardware.brands.kauailabs.NavXIMU;
 
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Rotation3d;
-import org.mort11.MORTlib.hardware.brands.ctre.Pigeon2IMU;
-import org.mort11.MORTlib.hardware.brands.kauailabs.NavX2IMU;
-import org.mort11.MORTlib.hardware.brands.kauailabs.NavXIMU;
 
 public class IMU implements IMUIntf {
 

@@ -1,8 +1,9 @@
-package org.mort11.MORTlib.hardware.brands.limelight;
+package org.mort11.mortlib.hardware.brands.limelight;
+
+import org.mort11.mortlib.hardware.camera.NoteCameraIntf;
 
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
-import org.mort11.MORTlib.hardware.camera.NoteCameraIntf;
 
 public class LimelightNoteCamera implements NoteCameraIntf {
 

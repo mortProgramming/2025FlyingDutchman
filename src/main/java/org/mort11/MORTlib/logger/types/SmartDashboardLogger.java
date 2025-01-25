@@ -1,10 +1,11 @@
-package org.mort11.MORTlib.logger.types;
+package org.mort11.mortlib.logger.types;
 
 import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
 
+import org.mort11.mortlib.logger.LoggerIntf;
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.mort11.MORTlib.logger.LoggerIntf;
 
 public class SmartDashboardLogger implements LoggerIntf {
     

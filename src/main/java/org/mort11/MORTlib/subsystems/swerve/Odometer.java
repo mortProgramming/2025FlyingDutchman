@@ -1,4 +1,6 @@
-package org.mort11.MORTlib.subsystems.swerve;
+package org.mort11.mortlib.subsystems.swerve;
+
+import org.mort11.mortlib.subsystems.swerve.swervedrives.SwerveDrive;
 
 import edu.wpi.first.math.Matrix;
 import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator;
@@ -8,7 +10,6 @@ import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.numbers.N1;
 import edu.wpi.first.math.numbers.N3;
-import org.mort11.MORTlib.subsystems.swerve.swervedrives.SwerveDrive;
 
 public class Odometer {
     

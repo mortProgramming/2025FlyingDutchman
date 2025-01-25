@@ -1,4 +1,4 @@
-package org.mort11.MORTlib.hardware.camera;
+package org.mort11.mortlib.hardware.camera;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Pose3d;

@@ -1,10 +1,10 @@
-package org.mort11.MORTlib.hardware.motor;
+package org.mort11.mortlib.hardware.motor;
+
+import org.mort11.mortlib.hardware.brands.ctre.TalonFXMotor;
+import org.mort11.mortlib.hardware.brands.rev.SparkFlexMotor;
+import org.mort11.mortlib.hardware.brands.rev.SparkMaxMotor;
 
 import com.revrobotics.spark.SparkLowLevel.MotorType;
-
-import org.mort11.MORTlib.hardware.brands.ctre.TalonFXMotor;
-import org.mort11.MORTlib.hardware.brands.rev.SparkFlexMotor;
-import org.mort11.MORTlib.hardware.brands.rev.SparkMaxMotor;
 
 public class Motor implements MotorIntf {
 

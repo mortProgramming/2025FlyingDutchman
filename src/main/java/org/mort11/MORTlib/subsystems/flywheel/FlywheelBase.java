@@ -1,12 +1,13 @@
-package org.mort11.MORTlib.subsystems.flywheel;
+package org.mort11.mortlib.subsystems.flywheel;
 
-import static org.mort11.MORTlib.logger.LoggerTypeEnum.*;
+import static org.mort11.mortlib.logger.LoggerTypeEnum.*;
+
+import org.mort11.mortlib.hardware.motor.MotorGroup;
+import org.mort11.mortlib.hardware.motor.MotorTypeEnum;
+import org.mort11.mortlib.logger.LoggerGroup;
 
 import edu.wpi.first.math.trajectory.TrapezoidProfile.Constraints;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import org.mort11.MORTlib.hardware.motor.MotorGroup;
-import org.mort11.MORTlib.hardware.motor.MotorTypeEnum;
-import org.mort11.MORTlib.logger.LoggerGroup;
 
 public class FlywheelBase extends SubsystemBase {
     private MotorGroup motors;

@@ -26,7 +26,7 @@ public class LimelightTagCamera implements TagCameraIntf {
 		cameraTable.getEntry("ledMode").setNumber(input);
 	}
 
-    public void setRobotOrientation (double yaw, double yawRate) {
+    public void setRobotOrientation(double yaw, double yawRate) {
         double[] positionArray = {yaw, yawRate, 0, 0, 0, 0};
         cameraTable.getEntry("robot_orientation_set").setDoubleArray(positionArray);
     }
@@ -54,7 +54,7 @@ public class LimelightTagCamera implements TagCameraIntf {
     public Pose2d getRobotPosition() {
 		double[] poseNums = new double[6];
 		
-		poseNums = cameraTable.getEntry("botpose_wpiblue").getDoubleArray(new double[6]);
+		poseNums = cameraTable.getEntry("botpose_orb_wpiblue").getDoubleArray(new double[6]);
 
 		return new Pose2d(poseNums[0], poseNums[1], new Rotation2d(Math.toRadians(poseNums[5])));
 	}

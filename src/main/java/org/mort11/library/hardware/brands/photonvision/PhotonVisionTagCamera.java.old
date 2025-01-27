@@ -1,0 +1,26 @@
+package org.robot.library.Hardware.Brands.PhotonVision;
+
+import edu.wpi.first.math.geometry.Pose2d;
+
+import org.photonvision.PhotonCamera;
+// import org.photonvision.targeting.PhotonPipelineResult;
+// import org.photonvision.targeting.PhotonTrackedTarget;
+
+import org.robot.library.Hardware.Camera.CameraIntf;
+
+public class PhotonVisionTagCamera implements CameraIntf {
+
+    public PhotonCamera camera;
+    
+    public PhotonVisionTagCamera (String cameraName) {
+        camera = new PhotonCamera(cameraName);
+    }
+
+    public Pose2d getPosition () {
+        return new Pose2d();
+    }
+
+    // public PhotonPipelineResult getStuff() {
+    //     return camera.getLatestResult();
+    // }
+}

@@ -1,7 +1,7 @@
 package org.mort11.subsystems;
 
-import org.mort11.mortlib.hardware.camera.TagCamera;
-import org.mort11.mortlib.hardware.camera.TagCameraTypeEnum;
+import org.mort11.library.hardware.camera.TagCamera;
+import org.mort11.library.hardware.camera.TagCameraTypeEnum;
 
 import edu.wpi.first.apriltag.AprilTagFieldLayout;
 import edu.wpi.first.apriltag.AprilTagFields;

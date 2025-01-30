@@ -39,41 +39,111 @@ public class SwerveDriveBase extends SubsystemBase {
 	private LoggerGroup logger;
 
 	public SwerveDriveBase(
-		double drivetrainWheelBase, double drivetrainTrackWidth,
-		MotorTypeEnum driveMotorType, 
-		int frontLeftDriveMotorID, int frontRightDriveMotorID,
-		int backLeftDriveMotorID, int backRightDriveMotorID,
-        MotorTypeEnum steerMotorType,
-		int frontLeftSteerMotorID, int frontRightSteerMotorID,
-		int backLeftSteerMotorID, int backRightSteerMotorID,
-		EncoderTypeEnum encoderType,
-		int frontLeftEncoderID, int frontRightEncoderID,
-		int backLeftEncoderID, int backRightEncoderID,
-		ModuleConfigEnum moduleType,
-		IMUTypeEnum imuType,
-		double frontLeftOffset, double frontRightOffset,
-		double backLeftOffset, double backRightOffset
+			double drivetrainWheelBase, double drivetrainTrackWidth,
+			MotorTypeEnum driveMotorType,
+			int frontLeftDriveMotorID, int frontRightDriveMotorID,
+			int backLeftDriveMotorID, int backRightDriveMotorID,
+			MotorTypeEnum steerMotorType,
+			int frontLeftSteerMotorID, int frontRightSteerMotorID,
+			int backLeftSteerMotorID, int backRightSteerMotorID,
+			EncoderTypeEnum encoderType,
+			int frontLeftEncoderID, int frontRightEncoderID,
+			int backLeftEncoderID, int backRightEncoderID,
+			ModuleConfigEnum moduleType,
+			IMUTypeEnum imuType,
+			String canivore,
+			double frontLeftOffset, double frontRightOffset,
+			double backLeftOffset, double backRightOffset
 	) {
 		this(
-			drivetrainWheelBase, drivetrainTrackWidth,
-			driveMotorType, 
-			frontLeftDriveMotorID, frontRightDriveMotorID,
-			backLeftDriveMotorID, backRightDriveMotorID,
-       		steerMotorType,
-			frontLeftSteerMotorID, frontRightSteerMotorID,
-			backLeftSteerMotorID, backRightSteerMotorID,
-			encoderType,
-			frontLeftEncoderID, frontRightEncoderID,
-			backLeftEncoderID, backRightEncoderID,
-			moduleType, imuType, 0,
-			frontLeftOffset, frontRightOffset,
-			backLeftOffset, backRightOffset
+				drivetrainWheelBase, drivetrainTrackWidth,
+				driveMotorType,
+				frontLeftDriveMotorID, frontRightDriveMotorID,
+				backLeftDriveMotorID, backRightDriveMotorID,
+				steerMotorType,
+				frontLeftSteerMotorID, frontRightSteerMotorID,
+				backLeftSteerMotorID, backRightSteerMotorID,
+				encoderType,
+				frontLeftEncoderID, frontRightEncoderID,
+				backLeftEncoderID, backRightEncoderID,
+				moduleType, imuType, 0,
+				frontLeftOffset, frontRightOffset,
+				backLeftOffset, backRightOffset
+		);
+		swerveDrive.setCanivore(canivore);
+	}
+
+	public SwerveDriveBase(
+			double drivetrainWheelBase, double drivetrainTrackWidth,
+			MotorTypeEnum driveMotorType,
+			int frontLeftDriveMotorID, int frontRightDriveMotorID,
+			int backLeftDriveMotorID, int backRightDriveMotorID,
+			MotorTypeEnum steerMotorType,
+			int frontLeftSteerMotorID, int frontRightSteerMotorID,
+			int backLeftSteerMotorID, int backRightSteerMotorID,
+			EncoderTypeEnum encoderType,
+			int frontLeftEncoderID, int frontRightEncoderID,
+			int backLeftEncoderID, int backRightEncoderID,
+			ModuleConfigEnum moduleType,
+			IMUTypeEnum imuType, int imuID,
+			String canivore,
+			double frontLeftOffset, double frontRightOffset,
+			double backLeftOffset, double backRightOffset
+	) {
+		this(
+				drivetrainWheelBase, drivetrainTrackWidth,
+				driveMotorType,
+				frontLeftDriveMotorID, frontRightDriveMotorID,
+				backLeftDriveMotorID, backRightDriveMotorID,
+				steerMotorType,
+				frontLeftSteerMotorID, frontRightSteerMotorID,
+				backLeftSteerMotorID, backRightSteerMotorID,
+				encoderType,
+				frontLeftEncoderID, frontRightEncoderID,
+				backLeftEncoderID, backRightEncoderID,
+				moduleType, imuType, imuID,
+				frontLeftOffset, frontRightOffset,
+				backLeftOffset, backRightOffset
+		);
+		swerveDrive.setCanivore(canivore);
+	}
+
+	public SwerveDriveBase(
+			double drivetrainWheelBase, double drivetrainTrackWidth,
+			MotorTypeEnum driveMotorType,
+			int frontLeftDriveMotorID, int frontRightDriveMotorID,
+			int backLeftDriveMotorID, int backRightDriveMotorID,
+			MotorTypeEnum steerMotorType,
+			int frontLeftSteerMotorID, int frontRightSteerMotorID,
+			int backLeftSteerMotorID, int backRightSteerMotorID,
+			EncoderTypeEnum encoderType,
+			int frontLeftEncoderID, int frontRightEncoderID,
+			int backLeftEncoderID, int backRightEncoderID,
+			ModuleConfigEnum moduleType,
+			IMUTypeEnum imuType,
+			double frontLeftOffset, double frontRightOffset,
+			double backLeftOffset, double backRightOffset
+	) {
+		this(
+				drivetrainWheelBase, drivetrainTrackWidth,
+				driveMotorType,
+				frontLeftDriveMotorID, frontRightDriveMotorID,
+				backLeftDriveMotorID, backRightDriveMotorID,
+				steerMotorType,
+				frontLeftSteerMotorID, frontRightSteerMotorID,
+				backLeftSteerMotorID, backRightSteerMotorID,
+				encoderType,
+				frontLeftEncoderID, frontRightEncoderID,
+				backLeftEncoderID, backRightEncoderID,
+				moduleType, imuType, 0,
+				frontLeftOffset, frontRightOffset,
+				backLeftOffset, backRightOffset
 		);
 	}
 
-	private SwerveDriveBase(
+	public SwerveDriveBase(
 		double drivetrainWheelBase, double drivetrainTrackWidth,
-		MotorTypeEnum driveMotorType, 
+		MotorTypeEnum driveMotorType,
 		int frontLeftDriveMotorID, int frontRightDriveMotorID,
 		int backLeftDriveMotorID, int backRightDriveMotorID,
         MotorTypeEnum steerMotorType,
@@ -88,30 +158,30 @@ public class SwerveDriveBase extends SubsystemBase {
 		double backLeftOffset, double backRightOffset
 	) {
 		frontLeftModule = new SwerveModule(
-			driveMotorType, frontLeftDriveMotorID, 
-			steerMotorType, frontLeftSteerMotorID, 
-			encoderType, frontLeftEncoderID, 
+			driveMotorType, frontLeftDriveMotorID,
+			steerMotorType, frontLeftSteerMotorID,
+			encoderType, frontLeftEncoderID,
 			moduleType
 		);
 
 		frontRightModule = new SwerveModule(
-			driveMotorType, frontRightDriveMotorID, 
-			steerMotorType, frontRightSteerMotorID, 
-			encoderType, frontRightEncoderID, 
+			driveMotorType, frontRightDriveMotorID,
+			steerMotorType, frontRightSteerMotorID,
+			encoderType, frontRightEncoderID,
 			moduleType
 		);
-			
+
 		backLeftModule = new SwerveModule(
-			driveMotorType, backLeftDriveMotorID, 
-			steerMotorType, backLeftSteerMotorID, 
-			encoderType, backLeftEncoderID, 
+			driveMotorType, backLeftDriveMotorID,
+			steerMotorType, backLeftSteerMotorID,
+			encoderType, backLeftEncoderID,
 			moduleType
 		);
-			
+
 		backRightModule = new SwerveModule(
-			driveMotorType, backRightDriveMotorID, 
-			steerMotorType, backRightSteerMotorID, 
-			encoderType, backRightEncoderID, 
+			driveMotorType, backRightDriveMotorID,
+			steerMotorType, backRightSteerMotorID,
+			encoderType, backRightEncoderID,
 			moduleType
 		);
 
@@ -151,7 +221,7 @@ public class SwerveDriveBase extends SubsystemBase {
 	public void periodic() {
 		speeds = ChassisSpeeds.fromFieldRelativeSpeeds(
 			speeds.vyMetersPerSecond,-speeds.vxMetersPerSecond,
-			speeds.omegaRadiansPerSecond, 
+			speeds.omegaRadiansPerSecond,
 			drivetrain.getIMURotation()
 		);
 

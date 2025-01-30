@@ -19,7 +19,7 @@ public class Drivetrain extends SwerveDriveBase {
 
 	private ProfiledPIDController xToPosController;
 	private ProfiledPIDController yToPosController;
-  private ProfiledPIDController rotateToAngleController;
+  	private ProfiledPIDController rotateToAngleController;
 
 	private Drivetrain() {
 		super(
@@ -33,7 +33,7 @@ public class Drivetrain extends SwerveDriveBase {
 			CANCODER,
 			FRONT_LEFT_ENCODER, FRONT_RIGHT_ENCODER,
 			BACK_LEFT_ENCODER, BACK_RIGHT_ENCODER,
-			MK4i_L3, NAVX,
+			MK4i_L3, NAVX, CANIVORE_NAME,
 			FRONT_LEFT_OFFSET, FRONT_RIGHT_OFFSET,
 			BACK_LEFT_OFFSET, BACK_RIGHT_OFFSET
 		);
@@ -49,7 +49,7 @@ public class Drivetrain extends SwerveDriveBase {
 		);
 
     	xToPosController.setTolerance(POS_POS_TOLERANCE);
-		  yToPosController.setTolerance(POS_POS_TOLERANCE);
+		yToPosController.setTolerance(POS_POS_TOLERANCE);
     	rotateToAngleController.setTolerance(ANGLE_POS_TOLERANCE, ANGLE_VEL_TOLERANCE);
 
     	rotateToAngleController.enableContinuousInput(-180, 180);
@@ -74,7 +74,7 @@ public class Drivetrain extends SwerveDriveBase {
 
 		setDrive(speeds);
 
-    getSwerveDrive().update();
+    	getSwerveDrive().update();
 	}
 
 	public double calculateRotateController(double wantedDegrees) {

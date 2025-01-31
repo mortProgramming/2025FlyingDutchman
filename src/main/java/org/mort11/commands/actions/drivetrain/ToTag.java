@@ -1,9 +1,10 @@
 package org.mort11.commands.actions.drivetrain;
 
-import edu.wpi.first.math.kinematics.ChassisSpeeds;
-import edu.wpi.first.wpilibj2.command.Command;
 import org.mort11.subsystems.Drivetrain;
 import org.mort11.subsystems.Vision;
+
+import edu.wpi.first.math.kinematics.ChassisSpeeds;
+import edu.wpi.first.wpilibj2.command.Command;
 
 public class ToTag  extends Command {
 
@@ -20,7 +21,7 @@ public class ToTag  extends Command {
     }
 
     public void execute () {
-        drivetrain.getSwerveDrive().moveToPosition(vision.getTagPosition(tagNumber));
+        drivetrain.getSwerveDrive().moveToPosition(vision.getFieldTagPose(tagNumber));
     }
 
     public boolean isFinished () {

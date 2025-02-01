@@ -31,10 +31,13 @@ public final class PIDConstants {
 		public static final double POS_KP = 0.5;
 		public static final double POS_KI = 0;
 		public static final double POS_KD = 0;
-		public static final Constraints POS_CONSTRAINTS = new Constraints(10, 10);
-		public static final double POS_POS_TOLERANCE = 0.05;
+		public static final Constraints POS_CONSTRAINTS = new Constraints(0, 0);
+		// public static final double POS_POS_TOLERANCE = 0.05;
 		// public static final double POS_VEL_TOLERANCE = 0;
 
-		// public static final double K
+		public static final double POS_KS = 0;
+		public static final double POS_KG = 0;
+		public static final double POS_KV = 0;
+		public static final double POS_KA = 0;
 	}
 }

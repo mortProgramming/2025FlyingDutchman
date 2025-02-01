@@ -54,5 +54,10 @@ public static final class Controller {
 
   public static final class Vision {
     public static final String FRONT_CAMERA_NAME = "front";
+
+    public static Vision getInstance() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getInstance'");
+    }
   }
 }

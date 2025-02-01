@@ -19,7 +19,7 @@ public class Drivetrain extends SwerveDriveBase {
 
 	private ProfiledPIDController xToPosController;
 	private ProfiledPIDController yToPosController;
-  private ProfiledPIDController rotateToAngleController;
+	private ProfiledPIDController rotateToAngleController;
 
 	private Drivetrain() {
 		super(
@@ -105,4 +105,9 @@ public class Drivetrain extends SwerveDriveBase {
 		}
 		return drivetrain;
 	}
+
+    public void setAngle2Controller(double wantedAngle) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setAngle2Controller'");
+    }
 }

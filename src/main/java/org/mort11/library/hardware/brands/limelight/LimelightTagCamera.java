@@ -62,7 +62,7 @@ public class LimelightTagCamera implements TagCameraIntf {
     public Pose3d get3dRobotPosition() {
         double[] poseNums = new double[6];
 
-        poseNums = cameraTable.getEntry("botpose_wpiblue").getDoubleArray(new double[6]);
+        poseNums = cameraTable.getEntry("botpose_orb_wpiblue").getDoubleArray(new double[6]);
 
         return new Pose3d(
             new Translation3d(poseNums[0], poseNums[1], poseNums[2]), 

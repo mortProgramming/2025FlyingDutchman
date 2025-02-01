@@ -21,7 +21,19 @@ public class ToTag  extends Command {
     }
 
     public void execute () {
-        drivetrain.getSwerveDrive().moveToPosition(vision.getFieldTagPose(tagNumber));
+        drivetrain.setDrive(
+            new ChassisSpeeds(
+                drivetrain.getXController().calculate(
+                    vision.getTagToRobotPose().getX(), 0.4
+                ), 
+                drivetrain.getYController().calculate(
+                    vision.getTagToRobotPose().getY(), 0.4
+                ),
+                drivetrain.getRotateController().calculate(
+                    vision.getTagToRobotPose().getRotation().getDegrees(), 0
+                )
+            )
+        );
     }
 
     public boolean isFinished () {

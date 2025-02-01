@@ -80,7 +80,7 @@ public final class FieldConstants {
         ),
 
         new AprilTag(
-            2, 
+            2,
             new Pose3d(
                 new Translation3d(0, 0, 0),
                 new Rotation3d(0, 0, 0)

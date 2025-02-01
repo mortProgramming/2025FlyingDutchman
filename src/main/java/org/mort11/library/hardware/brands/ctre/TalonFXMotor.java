@@ -76,8 +76,15 @@ public class TalonFXMotor implements MotorIntf {
         return motor.getMotorVoltage().getValueAsDouble();
     }
 
+    public boolean getForwardLimitSwitch() {
+        return false;
+    }
+
+    public boolean getReverseLimitSwitch() {
+        return false;
+    }
+
     public TalonFX getMotor() {
         return motor;
     }
- 
 }

@@ -35,7 +35,6 @@ public class SparkMaxMotor implements MotorIntf {
     public void setCurrentLimit(double limit) {
         config.secondaryCurrentLimit(limit);
         motor.configure(config, ResetMode.kResetSafeParameters, PersistMode.kNoPersistParameters);
-
     }
 
     public void setDirectionFlip(boolean direction) {
@@ -76,6 +75,14 @@ public class SparkMaxMotor implements MotorIntf {
 
     public double getOutputVoltage() {
         return motor.getAppliedOutput();
+    }
+
+    public boolean getForwardLimitSwitch() {
+        return motor.getForwardLimitSwitch().isPressed();
+    }
+
+    public boolean getReverseLimitSwitch() {
+        return motor.getReverseLimitSwitch().isPressed();
     }
 
     public SparkMax getMotor() {

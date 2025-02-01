@@ -89,6 +89,14 @@ public class Motor implements MotorIntf {
         return motor.getOutputVoltage();
     }
 
+    public boolean getForwardLimitSwitch() {
+        return motor.getForwardLimitSwitch();
+    }
+
+    public boolean getReverseLimitSwitch() {
+        return motor.getReverseLimitSwitch();
+    }
+
     public MotorTypeEnum getMotorType() {
         return motorType;
     }

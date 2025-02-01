@@ -1,11 +1,21 @@
 package org.mort11.config;
 
-import static org.mort11.config.constants.PhysicalConstants.Drivetrain.*;
-import static org.mort11.config.constants.PortConstants.Controller.*;
+import static org.mort11.config.constants.PhysicalConstants.Drivetrain.DRIVEBASE_RADIUS_METERS;
+import static org.mort11.config.constants.PortConstants.Controller.CONTROLLER;
+import static org.mort11.config.constants.PortConstants.Controller.DEAD_BAND;
+import static org.mort11.config.constants.PortConstants.Controller.JOYSTICK;
+import static org.mort11.config.constants.PortConstants.Controller.JOYSTICK_TWIST_CHANNEL;
+import static org.mort11.config.constants.PortConstants.Controller.JOYSTICK_X_CHANNEL;
+import static org.mort11.config.constants.PortConstants.Controller.JOYSTICK_Y_CHANNEL;
+import static org.mort11.config.constants.PortConstants.Controller.MAX_ROTATE;
+import static org.mort11.config.constants.PortConstants.Controller.MAX_THROTTLE;
+import static org.mort11.config.constants.PortConstants.Controller.MIN_ROTATE;
+import static org.mort11.config.constants.PortConstants.Controller.MIN_THROTTLE;
+import static org.mort11.config.constants.PortConstants.Controller.THROTTLE_CHANNEL;
+import org.mort11.subsystems.Drivetrain;
 
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
-import org.mort11.subsystems.Drivetrain;
 
 public class Inputs {
 
@@ -17,7 +27,7 @@ public class Inputs {
 
     public static void init() {
 		joystick = new CommandJoystick(JOYSTICK);
-        xboxController= new CommandXboxController(CONTROLLER);
+        xboxController = new CommandXboxController(CONTROLLER);
 
         joystick.setXChannel(JOYSTICK_X_CHANNEL);
         joystick.setYChannel(JOYSTICK_Y_CHANNEL);

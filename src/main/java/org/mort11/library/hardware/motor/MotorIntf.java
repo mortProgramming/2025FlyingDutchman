@@ -23,4 +23,8 @@ public interface MotorIntf {
     public double getVelocityRPM();
 
     public double getOutputVoltage();
+
+    public boolean getForwardLimitSwitch();
+
+    public boolean getReverseLimitSwitch();
 }

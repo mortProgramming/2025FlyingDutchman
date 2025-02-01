@@ -5,7 +5,6 @@ import edu.wpi.first.math.trajectory.TrapezoidProfile.Constraints;
 public final class PIDConstants {
     
     public final class Drivetrain {
-
         public static final double AUTON_POS_KP = 0.315;
 		public static final double AUTON_POS_KI = 0;
 		public static final double AUTON_POS_KD = 0.001;
@@ -27,4 +26,15 @@ public final class PIDConstants {
 		public final static double ANGLE_POS_TOLERANCE = 3;
 		public final static double ANGLE_VEL_TOLERANCE = 30;
     }
+
+	public final class Elevator {
+		public static final double POS_KP = 0.5;
+		public static final double POS_KI = 0;
+		public static final double POS_KD = 0;
+		public static final Constraints POS_CONSTRAINTS = new Constraints(10, 10);
+		public static final double POS_POS_TOLERANCE = 0.05;
+		// public static final double POS_VEL_TOLERANCE = 0;
+
+		// public static final double K
+	}
 }

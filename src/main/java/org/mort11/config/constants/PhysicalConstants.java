@@ -27,4 +27,23 @@ public final class PhysicalConstants {
 		public static final double ROBOT_MOMENT_OF_INERTIA = 3;
 		public static final double DRIVE_MOTOR_CURRENT_LIMIT = 80;
     }
+
+	public static final class Elevator {
+		public static final double POSE_TO_HEIGHT = 0;
+
+		public static final double START_HEIGHT = 0;
+		public static final double REST_HEIGHT = 0;
+
+		public static final double L1_HEIGHT = 0;
+		public static final double L2_HEIGHT = 0;
+		public static final double L3_HEIGHT = 0;
+		public static final double L4_HEIGHT = 0;
+		public static final double INTAKE_HEIGHT = 0;
+
+		public static final double LOW_ALGAE_HEIGHT = 0;
+		public static final double HIGH_ALGAE_HEIGHT = 0;
+		public static final double PROCESSOR_HEIGHT = 0;
+		public static final double BARGE_HEIGHT = 0;
+		public static final double FLOOR_HEIGHT = 0;
+	}
 }

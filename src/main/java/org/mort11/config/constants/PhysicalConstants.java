@@ -27,4 +27,10 @@ public final class PhysicalConstants {
 		public static final double ROBOT_MOMENT_OF_INERTIA = 3;
 		public static final double DRIVE_MOTOR_CURRENT_LIMIT = 80;
     }
+	public final class Arm {
+		public static final double OFFSET = 0;
+		public static final double REST = 0;
+		public static final double ARM_NEVER_POSITION = 0;
+		
+	}
 }

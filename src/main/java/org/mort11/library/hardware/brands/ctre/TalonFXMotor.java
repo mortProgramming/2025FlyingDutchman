@@ -84,6 +84,14 @@ public class TalonFXMotor implements MotorIntf {
         return false;
     }
 
+    public double getAbsoluteValueEncoderPosition() {
+        return 0;
+    }
+
+    public double getAbsoluteValueEncoderVelocity() {
+        return 0;
+    }
+
     public TalonFX getMotor() {
         return motor;
     }

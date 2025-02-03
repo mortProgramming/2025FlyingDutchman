@@ -97,6 +97,14 @@ public class Motor implements MotorIntf {
         return motor.getReverseLimitSwitch();
     }
 
+    public double getAbsoluteValueEncoderPosition() {
+        return motor.getAbsoluteValueEncoderPosition();
+    }
+
+    public double getAbsoluteValueEncoderVelocity() {
+        return motor.getAbsoluteValueEncoderVelocity();
+    }
+
     public MotorTypeEnum getMotorType() {
         return motorType;
     }

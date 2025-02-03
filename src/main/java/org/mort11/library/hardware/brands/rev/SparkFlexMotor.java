@@ -86,6 +86,14 @@ public class SparkFlexMotor implements MotorIntf {
         return motor.getReverseLimitSwitch().isPressed();
     }
 
+    public double getAbsoluteValueEncoderPosition() {
+        return motor.getAbsoluteEncoder().getPosition();
+    }
+
+    public double getAbsoluteValueEncoderVelocity() {
+        return motor.getAbsoluteEncoder().getVelocity();
+    }
+
     public SparkFlex getMotor() {
         return motor;
     }

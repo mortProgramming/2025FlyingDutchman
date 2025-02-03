@@ -27,4 +27,8 @@ public interface MotorIntf {
     public boolean getForwardLimitSwitch();
 
     public boolean getReverseLimitSwitch();
+
+    public double getAbsoluteValueEncoderPosition();
+
+    public double getAbsoluteValueEncoderVelocity();
 }

@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import org.mort11.commands.actions.drivetrain.Drive;
 import org.mort11.subsystems.Drivetrain;
+import org.mort11.commands.actions.Climb;
 
 public class IO {
 
@@ -35,6 +36,9 @@ public class IO {
       joystick.button(1).whileTrue(new InstantCommand(() -> drivetrain.getSwerveDrive().resetPosition(
         new Pose2d(0, 0, Rotation2d.fromDegrees(0))
       )));
+      xboxController.a().whileTrue(new Climb(false));
+      xboxController.b().whileTrue(new Climb(true));
+
     }
 
     public static Boolean isBlue () {

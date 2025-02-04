@@ -26,5 +26,14 @@ public final class PhysicalConstants {
 		public static final double ROBOT_MASS = 15;
 		public static final double ROBOT_MOMENT_OF_INERTIA = 3;
 		public static final double DRIVE_MOTOR_CURRENT_LIMIT = 80;
+
+		// putting these here for now
+		
     }
+
+	public final static class Climber {
+		public static final int COMPRESSER_MIN_PRESSURE = 80;
+		public static final int COMPRESSER_MAX_PRESSURE = 120;
+
+	}
 }

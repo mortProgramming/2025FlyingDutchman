@@ -1,20 +1,11 @@
 package org.mort11.subsystems;
 
-import static org.mort11.config.constants.PIDConstants.Elevator.POS_CONSTRAINTS;
-import static org.mort11.config.constants.PIDConstants.Elevator.POS_KA;
-import static org.mort11.config.constants.PIDConstants.Elevator.POS_KD;
-import static org.mort11.config.constants.PIDConstants.Elevator.POS_KG;
-import static org.mort11.config.constants.PIDConstants.Elevator.POS_KI;
-import static org.mort11.config.constants.PIDConstants.Elevator.POS_KP;
-import static org.mort11.config.constants.PIDConstants.Elevator.POS_KS;
-import static org.mort11.config.constants.PIDConstants.Elevator.POS_KV;
-import static org.mort11.config.constants.PhysicalConstants.Elevator.POSE_TO_HEIGHT;
-import static org.mort11.config.constants.PhysicalConstants.Elevator.START_HEIGHT;
+import static org.mort11.config.constants.PIDConstants.Elevator.*;
+import static org.mort11.config.constants.PhysicalConstants.Elevator.*;
 import static org.mort11.config.constants.PhysicalConstants.ROBOT_VOLTAGE;
-import static org.mort11.config.constants.PortConstants.Elevator.LEFT_MOTOR;
-import static org.mort11.config.constants.PortConstants.Elevator.RIGHT_MOTOR;
-import org.mort11.library.hardware.motor.MotorGroup;
+import static org.mort11.config.constants.PortConstants.Elevator.MOTOR;
 import static org.mort11.library.hardware.motor.MotorTypeEnum.VORTEX;
+import org.mort11.library.hardware.motor.Motor;
 
 import edu.wpi.first.math.controller.ElevatorFeedforward;
 import edu.wpi.first.math.controller.ProfiledPIDController;
@@ -23,56 +14,63 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class Elevator extends SubsystemBase {
     private static Elevator elevator;
 
-    private MotorGroup motors;
-    private double motorsSpeed, elevatorOffset;
+    private Motor motor;
+    private double motorSpeed, elevatorPosition, rotationsCompleted;
 
     private ProfiledPIDController controller;
     private ElevatorFeedforward feedforward;
 
     private Elevator() {
-        motors = new MotorGroup(VORTEX, LEFT_MOTOR, RIGHT_MOTOR);
-
-        motors.setDirectionFlip(1, true);
+        motor = new Motor(VORTEX, MOTOR);
 
         controller = new ProfiledPIDController(POS_KP, POS_KI, POS_KD, POS_CONSTRAINTS);
         feedforward = new ElevatorFeedforward(POS_KS, POS_KG, POS_KV, POS_KA);
 
-        motorsSpeed = 0;
-        elevatorOffset = START_HEIGHT;
+        motorSpeed = 0;
+        elevatorPosition = START_HEIGHT;
+        rotationsCompleted = 0;
     }
 
     @Override
     public void periodic() {
-        motors.setVoltage(motorsSpeed * ROBOT_VOLTAGE);
+        motor.setVoltage(motorSpeed * ROBOT_VOLTAGE);
+
+        elevatorPosition = calculateElevatorPosition();
     }
 
     public void setElevatorPosition(double positionInches) {
-        motorsSpeed = controller.calculate(positionInches, getElevatorPositionInches()) + 
-            feedforward.calculate(getElevatorVelocityInches()
+        motorSpeed = controller.calculate(positionInches, elevatorPosition) + 
+            feedforward.calculate(getElevatorVelocityRPM()
         );
-    }
-
-    public void setElevatorOffset(double elevatorOffset) {
-        this.elevatorOffset = elevatorOffset;
     }
 
 
 
     public double getElevatorPositionInches() {
-        return motors.getPositionRotations() * POSE_TO_HEIGHT + elevatorOffset;
+        return elevatorPosition;
     }
 
-    // 60 is seconds per minute
-    public double getElevatorVelocityInches() {
-        return motors.getVelocityRPM() * 60 * POSE_TO_HEIGHT;
+    public double getElevatorVelocityRPM() {
+        return motor.getAbsoluteValueEncoderVelocity() * ROTATIONS_TO_INCHES;
     }
 
-    public boolean getTopLimitSwitch() {
-        return motors.getMotor(0).getForwardLimitSwitch();
+    public double getAbsoluteEncoderPositionRotations() {
+        return motor.getAbsoluteValueEncoderPosition();
     }
 
-    public boolean getBottomLimitSwitch() {
-        return motors.getMotor(0).getForwardLimitSwitch();
+
+
+    public double calculateElevatorPosition() {
+        double inchesFound = (getAbsoluteEncoderPositionRotations() + rotationsCompleted) * ROTATIONS_TO_INCHES;
+        if((inchesFound - elevatorPosition) > MAXIMUM_INCH_CHANGE) {
+            rotationsCompleted += 1;
+        }
+
+        if((elevatorPosition - inchesFound) > MAXIMUM_INCH_CHANGE) {
+            rotationsCompleted -= 1;
+        }
+
+        return (getAbsoluteEncoderPositionRotations() + rotationsCompleted) * ROTATIONS_TO_INCHES;
     }
 
     public static Elevator getInstance() {

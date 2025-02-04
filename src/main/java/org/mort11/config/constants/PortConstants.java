@@ -53,11 +53,7 @@ public static final class Controller {
   }
 
   public static final class Elevator {
-		public static final int LEFT_MOTOR = 0;
-		public static final int RIGHT_MOTOR = 0;
-
-    public static final int BOTTOM_LIMITSWITCH_SPARKMAX = 0;
-    public static final int TOP_LIMITSWITCH_SPARKMAX = 0;
+		public static final int MOTOR = 0;
 	}
 
   public static final class Vision {

@@ -4,11 +4,11 @@ import org.mort11.subsystems.Elevator;
 
 import edu.wpi.first.wpilibj2.command.Command;
 
-public class ElevatorPosition extends Command {
+public class Elevate extends Command {
     private final Elevator elevator;
     private final double targetPosition;
 
-    public ElevatorPosition(Elevator elevator, double targetPosition) {
+    public Elevate(Elevator elevator, double targetPosition) {
         this.elevator = elevator;
         this.targetPosition = targetPosition;
 

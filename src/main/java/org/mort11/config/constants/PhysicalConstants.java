@@ -33,7 +33,8 @@ public final class PhysicalConstants {
 	public static final class Elevator {
 
 		//all in inches
-		public static final double POSE_TO_HEIGHT = 0;
+		public static final double ROTATIONS_TO_INCHES = 0;
+		public static final double MAXIMUM_INCH_CHANGE = 0;
 
 		public static final double START_HEIGHT = 0;
 		public static final double REST_HEIGHT = 0;

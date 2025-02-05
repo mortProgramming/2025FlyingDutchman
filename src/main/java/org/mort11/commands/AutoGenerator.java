@@ -58,14 +58,14 @@ public class AutoGenerator extends SequentialCommandGroup {
         int greaterLength = (otherCommand.length > paths.size() ? otherCommand.length : paths.size());
 
         for (int i = 0; i < greaterLength; i++){
-        
+            
             if(otherCommand.length < i && paths.size() >= i) {
                 auto = new SequentialCommandGroup(
                     auto,
                     AutoBuilder.followPath(paths.get(i))
                 );
             }
-
+            
             else if(otherCommand.length >= i && paths.size() < i) {
                 auto = new SequentialCommandGroup(
                     auto, 

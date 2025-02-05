@@ -18,13 +18,14 @@ import edu.wpi.first.math.controller.ArmFeedforward;
 import static org.mort11.config.constants.PIDConstants.Arm.*;
 
 public class TikiTorch extends SubsystemBase {
-    public static Motor coralArmMotor;
-    public static Motor tikiWheel;
-    public static Encoder encoder;
-    private static double armSpeed;
-    private static double rollerSpeed;
-    private static ProfiledPIDController armPidController;
-    private static ArmFeedforward feedforward;
+    public  Motor coralArmMotor;
+    public  Motor tikiWheel;
+    public  Encoder encoder;
+    private double armSpeed;
+    private double rollerSpeed;
+    private ProfiledPIDController armPidController;
+    private ArmFeedforward feedforward;
+    private static TikiTorch tikitorch;
 
     public TikiTorch(){
         coralArmMotor = new Motor(NEO550,0);
@@ -47,21 +48,21 @@ public class TikiTorch extends SubsystemBase {
         coralArmMotor.setVoltage(armSpeed * 12);
         tikiWheel.setVoltage(rollerSpeed * 12);
     }
-        public static double getEncoderPosition(){
-        return encoder.getPosition().getDegrees();
-    }
-
-    public static void setPosition(double setpoint) {
-        armSpeed = armPidController.calculate(encoderToDegrees(), setpoint) + feedforward.calculate
-        (Math.toRadians(encoderToDegrees()),encoder.getVelocityRotations());
-    }
-
-    public static void setFeedforward(double kS, double kV, double kG, double kA){
-        feedforward = new ArmFeedforward(kS, kG, kV, kA);
-    }
-
-    public static double encoderToDegrees() {
-        double degrees = getEncoderPosition() * 360 + OFFSET;
+        public  double getEncoderPosition(){
+                return this.encoder.getPosition().getDegrees();
+            }
+        
+            public void setPosition(double setpoint) {
+                this.armSpeed = this.armPidController.calculate(encoderToDegrees(), setpoint) + feedforward.calculate
+                (Math.toRadians(encoderToDegrees()),encoder.getVelocityRotations());
+            }
+        
+            public void setFeedforward(double kS, double kV, double kG, double kA){
+                this.feedforward = new ArmFeedforward(kS, kG, kV, kA);
+            }
+        
+            public double encoderToDegrees() {
+                double degrees = getEncoderPosition() * 360 + OFFSET;
         if (degrees < 0) {
             degrees += 360;
         }
@@ -76,29 +77,33 @@ public class TikiTorch extends SubsystemBase {
         return degrees;
     }
 
-    public static double getArmVoltage(){
-        return coralArmMotor.getOutputVoltage();
+    public double getArmVoltage(){
+        return this.coralArmMotor.getOutputVoltage();
     }
 
-    public static void setArmVoltage(double voltage){
-        coralArmMotor.setVoltage(voltage);
+    public void setArmVoltage(double voltage){
+        this.coralArmMotor.setVoltage(voltage);
     }
 
-    public static void setRollerVoltage(double voltage){
+    public void setRollerVoltage(double voltage){
+        this.rollerSpeed = voltage / 12;
         tikiWheel.setVoltage(voltage);
     }
 
-    public static Motor getTikiWheel(){
-        return tikiWheel;
+    public Motor getTikiWheel(){
+        return this.tikiWheel;
     }
 
-    public static Motor getArmMotor(){
-        return coralArmMotor;
+    public Motor getArmMotor(){
+        return this.coralArmMotor;
     }
 
-    public static TikiTorch getTikiTorch(){
-        return new TikiTorch();
-    }
+    public static TikiTorch getInstance() {
+		if (tikitorch == null) {
+			tikitorch = new TikiTorch();
+		}
+		return tikitorch;
+	}
 
 }
 

@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 
-import org.mort11.commands.actions.EndEffector.SetArm;
+import org.mort11.commands.actions.EndEffector.SetTikiArm;
 import org.mort11.commands.actions.drivetrain.Drive;
 import org.mort11.subsystems.Drivetrain;
 import org.mort11.subsystems.TikiTorch;
@@ -22,7 +22,7 @@ public class IO {
 
     public static void init() {
 		drivetrain = Drivetrain.getInstance();
-    tikiTorch = TikiTorch.getTikiTorch();
+    tikiTorch = TikiTorch.getInstance();
     }
 
     public static void configure() {

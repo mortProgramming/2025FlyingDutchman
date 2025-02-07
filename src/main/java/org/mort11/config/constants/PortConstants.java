@@ -52,6 +52,10 @@ public static final class Controller {
     public static final String CANIVORE_NAME = "drivetrain";
   }
 
+  public static final class Elevator {
+		public static final int MOTOR = 0;
+	}
+
   public static final class Vision {
     public static final String FRONT_CAMERA_NAME = "front";
   }

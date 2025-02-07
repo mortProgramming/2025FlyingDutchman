@@ -4,6 +4,8 @@ import edu.wpi.first.math.util.Units;
 
 public final class PhysicalConstants {
 
+	public static final double ROBOT_VOLTAGE = 12;
+
 	public static final double ROBO_VOLTAGE = 12;
 	
     public final static class Drivetrain {
@@ -31,6 +33,28 @@ public final class PhysicalConstants {
 		public static final double DRIVE_MOTOR_CURRENT_LIMIT = 80;
     }
 
+	public static final class Elevator {
+
+		//all in inches
+		public static final double ROTATIONS_TO_INCHES = 0;
+		public static final double MAXIMUM_INCH_CHANGE = 0;
+
+		public static final double START_HEIGHT = 0;
+		public static final double REST_HEIGHT = 0;
+
+		public static final double L1_HEIGHT = 0;
+		public static final double L2_HEIGHT = 0;
+		public static final double L3_HEIGHT = 0;
+		public static final double L4_HEIGHT = 0;
+		public static final double INTAKE_HEIGHT = 0;
+
+		public static final double LOW_ALGAE_HEIGHT = 0;
+		public static final double HIGH_ALGAE_HEIGHT = 0;
+		public static final double PROCESSOR_HEIGHT = 0;
+		public static final double BARGE_HEIGHT = 0;
+		public static final double FLOOR_HEIGHT = 0;
+	}
+
 	public final static class Arm	{
 
 		public static final double OFFSET = 0;
@@ -44,4 +68,5 @@ public final class PhysicalConstants {
 		public static final double L1 = 0;
 
 	} 
+
 }

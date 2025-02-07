@@ -3,8 +3,11 @@ package org.mort11.config.constants;
 import edu.wpi.first.math.util.Units;
 
 public final class PhysicalConstants {
+
 	public static final double ROBOT_VOLTAGE = 12;
 
+	public static final double ROBO_VOLTAGE = 12;
+	
     public final static class Drivetrain {
         // The left-to-right distance between the drivetrain wheels measured from center
 		// to center.
@@ -51,4 +54,19 @@ public final class PhysicalConstants {
 		public static final double BARGE_HEIGHT = 0;
 		public static final double FLOOR_HEIGHT = 0;
 	}
+
+	public final static class Arm	{
+
+		public static final double OFFSET = 0;
+
+		public static final double REST = 0;
+		public static final double ARM_NEVER_POSITION = 0;
+
+		public static final double L4 = 0;
+		public static final double L3 = 0;
+		public static final double L2 = 0;
+		public static final double L1 = 0;
+
+	} 
+
 }

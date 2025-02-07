@@ -59,4 +59,10 @@ public static final class Controller {
   public static final class Vision {
     public static final String FRONT_CAMERA_NAME = "front";
   }
+
+  public static final class Arm {
+    public static final int CORAL_ARM_MOTOR = 0;
+    public static final int TIKI_TORCH_MOTOR = 0;
+    public static final int CORAL_ARM_ENCODER = 0;
+  }
 }

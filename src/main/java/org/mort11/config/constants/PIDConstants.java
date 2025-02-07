@@ -27,7 +27,7 @@ public final class PIDConstants {
 		public final static double ANGLE_VEL_TOLERANCE = 30;
     }
 
-	public final class Elevator {
+  public final class Elevator {
 		public static final double POS_KP = 0.5;
 		public static final double POS_KI = 0;
 		public static final double POS_KD = 0;
@@ -39,5 +39,19 @@ public final class PIDConstants {
 		public static final double POS_KG = 0;
 		public static final double POS_KV = 0;
 		public static final double POS_KA = 0;
+
+	public final static class Arm	{
+		//FeedForward
+		public final static double ROT_KS = 0;
+		public final static double ROT_KV = 0;
+		public final static double ROT_KG = 0;
+		public final static double ROT_KA = 0;
+
+		//PID Rotational
+		public final static double ROT_KP = 0;
+		public final static double ROT_KI = 0;
+		public final static double ROT_KD = 0;
+		public final static Constraints ARM_ROT_CONSTRAINTS = new Constraints(	0,0 );
+
 	}
 }

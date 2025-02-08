@@ -6,17 +6,25 @@ public final class PhysicalConstants {
 
 	public static final double ROBOT_VOLTAGE = 12;
 
-	public final static class AlgaeScoop {
+	public final static class AlgaeArm {
 
 		public static final double OFFSET = 0;
 
 		public static final double REST = 0;
-		public static final double ARM_NEVER_POSITION = 0;
 
-		public static final double L4 = 0;
-		public static final double L3 = 0;
-		public static final double L2 = 0;
-		public static final double L1 = 0;
+		public static final double ARM_TOP_NEVER_POSITION = 0;
+		public static final double ARM_BOTTOM_NEVER_POSITION = 0;
+
+		public static final double L23_INTAKE = 0;
+		public static final double FLOOR_INTAKE = 0;
+
+		public static final double PROCESSOR_SCORE = 0;
+		public static final double BARGE_SCORE = 0;
+	} 
+
+	public final static class AlgaeRoller {
+		public static final int INTAKE_SPEED = 0;
+		public static final int OUTAKE_SPEED = 0;
 	} 
 	
     public final static class Drivetrain {
@@ -72,17 +80,25 @@ public final class PhysicalConstants {
 		public static final double FLOOR_HEIGHT = 0;
 	}
 
-	public final static class TikiTorch {
+	public final static class TikiTorchArm {
 
 		public static final double OFFSET = 0;
 
 		public static final double REST = 0;
-		public static final double ARM_NEVER_POSITION = 0;
 
-		public static final double L4 = 0;
-		public static final double L3 = 0;
-		public static final double L2 = 0;
-		public static final double L1 = 0;
+		public static final double ARM_TOP_NEVER_POSITION = 0;
+		public static final double ARM_BOTTOM_NEVER_POSITION = 0;
+
+		public static final double L4_SCORE = 0;
+		public static final double L23_SCORE = 0;
+		public static final double L1_SCORE = 0;
+
+		public static final double INTAKE = 0;
+	}
+
+	public final static class TikiTorchRoller {
+		public static final int INTAKE_SPEED = 0;
+		public static final int OUTAKE_SPEED = 0;
 	} 
 
 }

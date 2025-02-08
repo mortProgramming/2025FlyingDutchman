@@ -5,12 +5,13 @@ import org.mort11.commands.actions.drivetrain.Angle2AprilTag;
 import org.mort11.commands.actions.drivetrain.Drive;
 import org.mort11.commands.actions.drivetrain.ToTag;
 import org.mort11.commands.actions.endeffector.Climb;
+import org.mort11.commands.actions.endeffector.Elevate;
 import static org.mort11.config.Inputs.joystick;
 import static org.mort11.config.Inputs.xboxController;
 import static org.mort11.config.constants.PhysicalConstants.Drivetrain.IMU_TO_ROBOT_FRONT_ANGLE;
 import org.mort11.subsystems.Drivetrain;
 import org.mort11.subsystems.Elevator;
-import org.mort11.subsystems.TikiTorch;
+import org.mort11.subsystems.TikiTorchArm;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -22,12 +23,12 @@ public class IO {
 
 	private static Drivetrain drivetrain;
   private static Elevator elevator;
-  private static TikiTorch tikiTorch;
+  private static TikiTorchArm tikiTorch;
 
 
   public static void init() {
 		drivetrain = Drivetrain.getInstance();
-    tikiTorch = TikiTorch.getInstance();
+    tikiTorch = TikiTorchArm.getInstance();
     elevator = Elevator.getInstance();
   }
 
@@ -70,7 +71,7 @@ public class IO {
       xboxController.a().whileTrue(new Climb(false));
       xboxController.b().whileTrue(new Climb(true));
 
-
+      xboxController.pov(90).whileTrue(Elevate.l1());
     }
 
   public static Boolean isBlue () {

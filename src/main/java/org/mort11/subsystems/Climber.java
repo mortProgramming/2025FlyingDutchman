@@ -18,26 +18,21 @@ public class Climber extends SubsystemBase{
     //climber up is true climber down is false
     private boolean climberUp;
 
-
     private static DoubleSolenoid rightPiston, leftPiston;
-
-
-    
 
     private Climber(){
         // Module type might be wrong? CTREPCM
-        rightPiston = new DoubleSolenoid(RIGHT_PNEUMATIC_PORT, PneumaticsModuleType.CTREPCM, RIGHT_CLIMBER_PORT_UP,RIGHT_CLIMBER_PORT_DOWN);
+        rightPiston = new DoubleSolenoid(PNEUMATICS_MODULE_PORT, PneumaticsModuleType.CTREPCM, RIGHT_CLIMBER_PORT_UP,RIGHT_CLIMBER_PORT_DOWN);
 
-        leftPiston = new DoubleSolenoid(LEFT_PNEUMATIC_PORT, PneumaticsModuleType.CTREPCM,LEFT_CLIMBER_PORT_UP,LEFT_CLIMBER_PORT_DOWN);
-        // Compressor first parameter might be wrong 
-        compressor = new Compressor(RIGHT_PNEUMATIC_PORT,PneumaticsModuleType.CTREPCM);
+        leftPiston = new DoubleSolenoid(PNEUMATICS_MODULE_PORT, PneumaticsModuleType.CTREPCM,LEFT_CLIMBER_PORT_UP,LEFT_CLIMBER_PORT_DOWN);
+        
+        compressor = new Compressor(PNEUMATICS_MODULE_PORT, PneumaticsModuleType.CTREPCM);
         compressor.enableDigital();
-        compressor.enableAnalog(COMPRESSER_MIN_PRESSURE, COMPRESSER_MAX_PRESSURE);    
     }
 
 	@Override
 	public void periodic() {
-        if(climberUp==true){
+        if(climberUp == true){
             rightPiston.set(DoubleSolenoid.Value.kForward);
             leftPiston.set(DoubleSolenoid.Value.kForward);
         }

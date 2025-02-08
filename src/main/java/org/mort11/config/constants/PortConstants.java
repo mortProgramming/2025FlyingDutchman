@@ -19,19 +19,19 @@ public static final class Controller {
     public static final double MIN_ROTATE = 0.03;
   }
 
-  public static final class AlgaeScoop {
-    public static final int ALGAESCOOP_ARM_MOTOR = 13;
-    public static final int ALGAESCOOP_ROLLER_MOTOR = 12;
-    public static final int ALGAESCOOP_ENCODER = 0;
+  public static final class AlgaeArm {
+    public static final int ARM_MOTOR = 13;
+  }
+
+  public static final class AlgaeRoller {
+    public static final int ROLLER_MOTOR = 12;
   }
 
   public static final class Climber{
     //ASSIGNED to zero because don't know yet
-    public static final int RIGHT_PNEUMATIC_PORT = 0;
-    public static final int LEFT_PNEUMATIC_PORT = 0;
+    public static final int PNEUMATICS_MODULE_PORT = 0;
 
-    
-    public static final int RIGHT_CLIMBER_PORT_UP = 0;
+      public static final int RIGHT_CLIMBER_PORT_UP = 0;
     public static final int RIGHT_CLIMBER_PORT_DOWN = 0;
 
     public static final int LEFT_CLIMBER_PORT_UP = 0;
@@ -64,10 +64,12 @@ public static final class Controller {
 		public static final int MOTOR = 10;
 	}
 
-  public static final class TikiTorch {
-    public static final int TIKITORCH_ARM_MOTOR = 15;
-    public static final int TIKITORCH_ROLLER_MOTOR = 14;
-    public static final int TIKITORCH_ENCODER = 0;
+  public static final class TikiTorchArm {
+    public static final int ARM_MOTOR = 15;
+  }
+
+  public static final class TikiTorchRoller {
+    public static final int ROLLER_MOTOR = 14;
   }
 
   public static final class Vision {

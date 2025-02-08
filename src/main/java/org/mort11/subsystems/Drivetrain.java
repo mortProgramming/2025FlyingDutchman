@@ -21,6 +21,8 @@ public class Drivetrain extends SwerveDriveBase {
 	private ProfiledPIDController yToPosController;
 	private ProfiledPIDController rotateToAngleController;
 
+  	private ProfiledPIDController rotateToAngleController;
+
 	private Drivetrain() {
 		super(
 			DRIVETRAIN_WHEELBASE_METERS, DRIVETRAIN_TRACKWIDTH_METERS,

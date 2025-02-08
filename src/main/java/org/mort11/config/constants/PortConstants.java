@@ -51,6 +51,26 @@ public static final class Controller {
 
     public static final String CANIVORE_NAME = "drivetrain";
   }
+  public static final class Climber{
+    //ASSIGNED to zero because don't know yet
+    public static final int RIGHT_PNEUMATIC_PORT = 0;
+    public static final int LEFT_PNEUMATIC_PORT = 0;
+
+    
+    public static final int RIGHT_CLIMBER_PORT_UP = 0;
+    public static final int RIGHT_CLIMBER_PORT_DOWN = 0;
+
+    public static final int LEFT_CLIMBER_PORT_UP = 0;
+    public static final int LEFT_CLIMBER_PORT_DOWN = 0;
+
+
+    
+
+  }
+
+  public static final class Elevator {
+		public static final int MOTOR = 0;
+	}
 
   public static final class Vision {
     public static final String FRONT_CAMERA_NAME = "front";
@@ -59,5 +79,11 @@ public static final class Controller {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getInstance'");
     }
+  }
+
+  public static final class Arm {
+    public static final int CORAL_ARM_MOTOR = 0;
+    public static final int TIKI_TORCH_MOTOR = 0;
+    public static final int CORAL_ARM_ENCODER = 0;
   }
 }

@@ -4,8 +4,7 @@ import static org.mort11.config.constants.PIDConstants.TikiTorch.*;
 import static org.mort11.config.constants.PhysicalConstants.TikiTorch.*;
 import static org.mort11.config.constants.PortConstants.TikiTorch.*;
 
-import org.mort11.library.hardware.encoder.Encoder;
-import static org.mort11.library.hardware.encoder.EncoderTypeEnum.THROUGHBORE;
+import static org.mort11.config.constants.PhysicalConstants.ROBOT_VOLTAGE;
 import org.mort11.library.hardware.motor.Motor;
 import static org.mort11.library.hardware.motor.MotorTypeEnum.NEO550;
 
@@ -37,8 +36,8 @@ public class TikiTorch extends SubsystemBase {
 
     @Override
     public void periodic(){
-        tikiArm.setVoltage(armSpeed * 12);
-        tikiRoller.setVoltage(rollerSpeed * 12);
+        tikiArm.setVoltage(armSpeed * ROBOT_VOLTAGE);
+        tikiRoller.setVoltage(rollerSpeed * ROBOT_VOLTAGE);
 
         SmartDashboard.putNumber("Encoder Position Degress", getEncoderPosition());
         SmartDashboard.putNumber("ArmSpeed", getEncoderVelocityDegrees());

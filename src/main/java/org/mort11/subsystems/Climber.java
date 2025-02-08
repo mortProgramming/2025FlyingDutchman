@@ -2,6 +2,7 @@ package org.mort11.subsystems;
 
 import static org.mort11.config.constants.PortConstants.Climber.*;
 import static org.mort11.config.constants.PhysicalConstants.Climber.*;
+import static org.mort11.config.constants.PhysicalConstants.ROBOT_VOLTAGE;
 
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;

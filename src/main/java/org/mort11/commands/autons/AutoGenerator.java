@@ -1,6 +1,5 @@
 package org.mort11.commands.autons;
 
-import java.io.IOException;
 import java.util.List;
 
 import com.pathplanner.lib.auto.AutoBuilder;
@@ -11,15 +10,15 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
 public class AutoGenerator extends SequentialCommandGroup {
-    SequentialCommandGroup auto;
-    List<PathPlannerPath> paths;
-    int pathIndex;
+    static SequentialCommandGroup auto;
+    static List<PathPlannerPath> paths;
+    static int pathIndex;
 
     public AutoGenerator() {
         auto = new SequentialCommandGroup();
     }
 
-    public Command generate(String autoName, Command... otherCommand) throws ClassNotFoundException {
+    public static Command generate(String autoName, Command... otherCommand) throws ClassNotFoundException {
         auto = new SequentialCommandGroup();
 
         try {
@@ -60,7 +59,7 @@ public class AutoGenerator extends SequentialCommandGroup {
         return auto;
     }
 
-    public Command generate(List<PathPlannerPath> paths, Command... otherCommand) {
+    public static Command generate(List<PathPlannerPath> paths, Command... otherCommand) {
         auto = new SequentialCommandGroup();
 
         int greaterLength = (otherCommand.length > paths.size() ? otherCommand.length : paths.size());

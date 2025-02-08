@@ -4,6 +4,7 @@ import static org.mort11.config.constants.PIDConstants.AlgaeScoop.*;
 import static org.mort11.config.constants.PhysicalConstants.AlgaeScoop.*;
 import static org.mort11.config.constants.PortConstants.AlgaeScoop.*;
 
+import static org.mort11.config.constants.PhysicalConstants.ROBOT_VOLTAGE;
 import org.mort11.library.hardware.encoder.Encoder;
 import static org.mort11.library.hardware.encoder.EncoderTypeEnum.THROUGHBORE;
 import org.mort11.library.hardware.motor.Motor;
@@ -24,7 +25,7 @@ public class AlgaeScoop extends SubsystemBase {
     private ProfiledPIDController armPidController;
     private ArmFeedforward feedforward;
     
-    public AlgaeScoop(){
+    public AlgaeScoop() {
         scoopArm = new Motor(NEO550, ALGAESCOOP_ARM_MOTOR);
         scoopRoller = new Motor(NEO550, ALGAESCOOP_ROLLER_MOTOR);
         
@@ -37,8 +38,8 @@ public class AlgaeScoop extends SubsystemBase {
 
     @Override
     public void periodic(){
-        scoopArm.setVoltage(armSpeed * 12);
-        scoopRoller.setVoltage(rollerSpeed * 12);
+        scoopArm.setVoltage(armSpeed * ROBOT_VOLTAGE);
+        scoopRoller.setVoltage(rollerSpeed * ROBOT_VOLTAGE);
 
         SmartDashboard.putNumber("Encoder Position Degress", getEncoderPosition());
         SmartDashboard.putNumber("ArmSpeed", getEncoderVelocityDegrees());

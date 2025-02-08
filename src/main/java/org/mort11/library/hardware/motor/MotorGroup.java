@@ -153,6 +153,22 @@ public class MotorGroup implements MotorIntf {
         return motors[motorNumber].getReverseLimitSwitch();
     }
 
+    public double getAbsoluteValueEncoderPosition() {
+        return motors[0].getAbsoluteValueEncoderPosition();
+    }
+
+    public double getAbsoluteValueEncoderPosition(int motorNumber) {
+        return motors[motorNumber].getAbsoluteValueEncoderPosition();
+    }
+
+    public double getAbsoluteValueEncoderVelocity() {
+        return motors[0].getAbsoluteValueEncoderVelocity();
+    }
+
+    public double getAbsoluteValueEncoderVelocity(int motorNumber) {
+        return motors[motorNumber].getAbsoluteValueEncoderVelocity();
+    }
+
     public MotorIntf[] getMotor () {
         return motors;
     }

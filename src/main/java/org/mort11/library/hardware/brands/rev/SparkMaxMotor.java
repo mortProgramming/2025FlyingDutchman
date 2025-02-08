@@ -85,6 +85,14 @@ public class SparkMaxMotor implements MotorIntf {
         return motor.getReverseLimitSwitch().isPressed();
     }
 
+    public double getAbsoluteValueEncoderPosition() {
+        return motor.getAbsoluteEncoder().getPosition();
+    }
+
+    public double getAbsoluteValueEncoderVelocity() {
+        return motor.getAbsoluteEncoder().getVelocity();
+    }
+
     public SparkMax getMotor() {
         return motor;
     }

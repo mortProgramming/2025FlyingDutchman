@@ -11,7 +11,7 @@ public class CTREUtility {
     }
 
     public static final class Krakenx60 {
-        public static final double SWERVE_STEER_KP = 15;
+        public static final double SWERVE_STEER_KP = 2;
         public static final double SWERVE_STEER_KI = 0;
         public static final double SWERVE_STEER_KD = 0;
 

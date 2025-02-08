@@ -1,13 +1,9 @@
 package org.mort11.library.subsystems.swerve;
 
-import static org.mort11.library.logger.LoggerTypeEnum.SHUFFLEBOARD;
-import static org.mort11.library.logger.LoggerTypeEnum.SMARTDASHBOARD;
-
 import org.mort11.library.hardware.encoder.EncoderTypeEnum;
 import org.mort11.library.hardware.imu.IMU;
 import org.mort11.library.hardware.imu.IMUTypeEnum;
 import org.mort11.library.hardware.motor.MotorTypeEnum;
-import org.mort11.library.logger.LoggerGroup;
 import org.mort11.library.subsystems.swerve.swervedrives.OdometeredSwerveDrive;
 
 import edu.wpi.first.math.geometry.Pose2d;
@@ -16,8 +12,6 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class SwerveDriveBase extends SubsystemBase {
@@ -36,7 +30,7 @@ public class SwerveDriveBase extends SubsystemBase {
 
 	private ChassisSpeeds speeds;
 
-	private LoggerGroup logger;
+	//private LoggerGroup logger;
 
 	public SwerveDriveBase(
 		double drivetrainWheelBase, double drivetrainTrackWidth,
@@ -138,13 +132,13 @@ public class SwerveDriveBase extends SubsystemBase {
 
 		speeds = new ChassisSpeeds(0.0, 0.0, 0.0);
 
-		logger = new LoggerGroup("Drivetrain", SMARTDASHBOARD, SHUFFLEBOARD);
+		// logger = new LoggerGroup("Drivetrain", SMARTDASHBOARD, SHUFFLEBOARD);
 
-		logger.putDouble("XPose", () -> swerveDrive.getPosition().getX());
-		logger.putDouble("YPose", () -> swerveDrive.getPosition().getY());
-		logger.putDouble("Yaw", () -> Math.toDegrees(swerveDrive.getRobotRotations().getZ()));
-		logger.putDouble("Pitch", () -> Math.toDegrees(swerveDrive.getRobotRotations().getY()));
-		logger.putDouble("Roll", () -> Math.toDegrees(swerveDrive.getRobotRotations().getX()));
+		// logger.putDouble("XPose", () -> swerveDrive.getPosition().getX());
+		// logger.putDouble("YPose", () -> swerveDrive.getPosition().getY());
+		// logger.putDouble("Yaw", () -> Math.toDegrees(swerveDrive.getRobotRotations().getZ()));
+		// logger.putDouble("Pitch", () -> Math.toDegrees(swerveDrive.getRobotRotations().getY()));
+		// logger.putDouble("Roll", () -> Math.toDegrees(swerveDrive.getRobotRotations().getX()));
 	}
 
 	@Override
@@ -173,15 +167,13 @@ public class SwerveDriveBase extends SubsystemBase {
 		);
 	}
 
-	public Command setGyroscopeZero(double angle) {
-		return new InstantCommand(() -> swerveDrive.zeroIMU(angle), drivetrain);
-	}
+	// public Command setGyroscopeZero(double angle) {
+	// 	return new InstantCommand(() -> swerveDrive.zeroIMU(angle), drivetrain);
+	// }
 
 	public void resetPosition(Pose2d pose) {
 		swerveDrive.resetPosition(pose);
 	}
-
-
 
 	public ChassisSpeeds getChassisSpeeds() {
         return speeds;
@@ -207,7 +199,7 @@ public class SwerveDriveBase extends SubsystemBase {
 		return swerveDrive.getFieldRelativeAngle2d();
 	}
 
-	public LoggerGroup getLogger() {
-		return logger;
-	}
+	// public LoggerGroup getLogger() {
+	// 	return logger;
+	// }
 }

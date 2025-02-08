@@ -35,8 +35,8 @@ public static final class Controller {
     public static final int FRONT_LEFT_STEER_MOTOR = 8;
     public static final int FRONT_LEFT_ENCODER = 38;
 
-    public static final int FRONT_RIGHT_DRIVE_MOTOR = 2;
-    public static final int FRONT_RIGHT_STEER_MOTOR = 1;
+    public static final int FRONT_RIGHT_DRIVE_MOTOR = 1;
+    public static final int FRONT_RIGHT_STEER_MOTOR = 2;
     public static final int FRONT_RIGHT_ENCODER = 35;
 
     public static final int BACK_LEFT_DRIVE_MOTOR = 5;
@@ -47,7 +47,7 @@ public static final class Controller {
     public static final int BACK_RIGHT_STEER_MOTOR = 3;
     public static final int BACK_RIGHT_ENCODER = 36;
 
-    public static final int IMU_ID = 0;
+    public static final int IMU_ID = 10;
 
     public static final String CANIVORE_NAME = "drivetrain";
   }

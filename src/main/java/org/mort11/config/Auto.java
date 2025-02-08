@@ -30,7 +30,7 @@ public class Auto {
 	}
 
 	public static void configureAutoBuilder() {
-		drivetrain.setGyroscopeZero(0);
+		//drivetrain.setGyroscopeZero(0);
 
 		PathPlanner.configure(
 			drivetrain, drivetrain.getSwerveDrive(),

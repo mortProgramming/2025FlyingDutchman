@@ -168,7 +168,7 @@ public class SwerveModule {
         }
 
         steerMotor.setPIDEnableContinuousInput(0, 1);
-        steerMotor.setPIDTolerance(0.5, 10);
+        steerMotor.setPIDTolerance(0.5, 100);
 
         maxSpeed = maxSpeed * moduleConfig.WHEEL_DIAMETER * moduleConfig.DRIVE_REDUCTION;
         rotationToMeters = rotationToMeters * moduleConfig.WHEEL_DIAMETER * moduleConfig.DRIVE_REDUCTION;

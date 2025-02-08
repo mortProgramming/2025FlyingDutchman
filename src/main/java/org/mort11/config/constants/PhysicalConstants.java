@@ -34,13 +34,7 @@ public final class PhysicalConstants {
 
 		// putting these here for now
 		
-    }
-	public final class Arm {
-		public static final double OFFSET = 0;
-		public static final double REST = 0;
-		public static final double ARM_NEVER_POSITION = 0;
-		
-	}
+    }	
 
 
   public final static class Climber {
@@ -71,7 +65,7 @@ public final class PhysicalConstants {
 		public static final double FLOOR_HEIGHT = 0;
 	}
 
-	public final static class Arm	{
+	public final static class Arm{
 
 		public static final double OFFSET = 0;
 

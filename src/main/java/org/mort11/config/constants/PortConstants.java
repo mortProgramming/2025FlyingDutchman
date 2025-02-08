@@ -51,6 +51,7 @@ public static final class Controller {
 
     public static final String CANIVORE_NAME = "drivetrain";
   }
+
   public static final class Climber{
     //ASSIGNED to zero because don't know yet
     public static final int RIGHT_PNEUMATIC_PORT = 0;
@@ -62,9 +63,6 @@ public static final class Controller {
 
     public static final int LEFT_CLIMBER_PORT_UP = 0;
     public static final int LEFT_CLIMBER_PORT_DOWN = 0;
-
-
-    
 
   }
 

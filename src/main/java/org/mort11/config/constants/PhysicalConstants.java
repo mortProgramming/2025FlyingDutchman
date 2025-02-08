@@ -6,7 +6,18 @@ public final class PhysicalConstants {
 
 	public static final double ROBOT_VOLTAGE = 12;
 
-	public static final double ROBO_VOLTAGE = 12;
+	public final static class AlgaeScoop {
+
+		public static final double OFFSET = 0;
+
+		public static final double REST = 0;
+		public static final double ARM_NEVER_POSITION = 0;
+
+		public static final double L4 = 0;
+		public static final double L3 = 0;
+		public static final double L2 = 0;
+		public static final double L1 = 0;
+	} 
 	
     public final static class Drivetrain {
         // The left-to-right distance between the drivetrain wheels measured from center
@@ -31,16 +42,12 @@ public final class PhysicalConstants {
 		public static final double ROBOT_MASS = 15;
 		public static final double ROBOT_MOMENT_OF_INERTIA = 3;
 		public static final double DRIVE_MOTOR_CURRENT_LIMIT = 80;
-
-		// putting these here for now
-		
     }	
 
 
   public final static class Climber {
 		public static final int COMPRESSER_MIN_PRESSURE = 80;
 		public static final int COMPRESSER_MAX_PRESSURE = 120;
-
 	}
 
 	public static final class Elevator {
@@ -65,7 +72,7 @@ public final class PhysicalConstants {
 		public static final double FLOOR_HEIGHT = 0;
 	}
 
-	public final static class Arm{
+	public final static class TikiTorch {
 
 		public static final double OFFSET = 0;
 
@@ -76,7 +83,6 @@ public final class PhysicalConstants {
 		public static final double L3 = 0;
 		public static final double L2 = 0;
 		public static final double L1 = 0;
-
 	} 
 
 }

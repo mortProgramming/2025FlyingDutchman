@@ -1,8 +1,6 @@
-package org.mort11.commands.actions;
+package org.mort11.commands.actions.endeffector;
 
 import org.mort11.subsystems.Climber;
-import org.mort11.config.constants.PortConstants;
-import org.mort11.config.constants.PhysicalConstants;
 
 import edu.wpi.first.wpilibj2.command.Command;
 

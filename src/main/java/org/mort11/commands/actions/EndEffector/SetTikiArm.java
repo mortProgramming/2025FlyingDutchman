@@ -1,4 +1,5 @@
-package org.mort11.commands.actions.EndEffector;
+package org.mort11.commands.actions.endeffector;
+
 import org.mort11.subsystems.TikiTorch;
 
 import edu.wpi.first.wpilibj2.command.Command;

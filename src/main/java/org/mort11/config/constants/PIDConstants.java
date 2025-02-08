@@ -3,6 +3,20 @@ package org.mort11.config.constants;
 import edu.wpi.first.math.trajectory.TrapezoidProfile.Constraints;
 
 public final class PIDConstants {
+
+	public final static class AlgaeScoop	{
+		//FeedForward
+		public final static double ROT_KS = 0;
+		public final static double ROT_KV = 0;
+		public final static double ROT_KG = 0;
+		public final static double ROT_KA = 0;
+
+		//PID Rotational
+		public final static double ROT_KP = 0;
+		public final static double ROT_KI = 0;
+		public final static double ROT_KD = 0;
+		public final static Constraints ARM_ROT_CONSTRAINTS = new Constraints(0,0);
+	}
     
     public final class Drivetrain {
         public static final double AUTON_POS_KP = 0.315;
@@ -43,7 +57,7 @@ public final class PIDConstants {
 		public static final double POS_KA = 0;
   }
 
-	public final static class Arm	{
+	public final static class TikiTorch	{
 		//FeedForward
 		public final static double ROT_KS = 0;
 		public final static double ROT_KV = 0;
@@ -55,6 +69,5 @@ public final class PIDConstants {
 		public final static double ROT_KI = 0;
 		public final static double ROT_KD = 0;
 		public final static Constraints ARM_ROT_CONSTRAINTS = new Constraints(0,0);
-
 	}
 }

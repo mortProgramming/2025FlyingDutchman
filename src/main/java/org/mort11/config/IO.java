@@ -1,33 +1,22 @@
 package org.mort11.config;
 
 
+import org.mort11.commands.actions.drivetrain.Angle2AprilTag;
 import org.mort11.commands.actions.drivetrain.Drive;
+import org.mort11.commands.actions.drivetrain.ToTag;
+import org.mort11.commands.actions.endeffector.Climb;
 import static org.mort11.config.Inputs.joystick;
+import static org.mort11.config.Inputs.xboxController;
 import static org.mort11.config.constants.PhysicalConstants.Drivetrain.IMU_TO_ROBOT_FRONT_ANGLE;
 import org.mort11.subsystems.Drivetrain;
 import org.mort11.subsystems.Elevator;
-import static org.mort11.config.Inputs.*;
-import static org.mort11.config.constants.PhysicalConstants.Arm.*;
-import static org.mort11.config.constants.PhysicalConstants.Drivetrain.*;
-
+import org.mort11.subsystems.TikiTorch;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-
-import org.mort11.commands.actions.drivetrain.Angle2AprilTag;
-
-
-import org.mort11.commands.actions.EndEffector.SetTikiArm;
-import org.mort11.commands.actions.drivetrain.Drive;
-import org.mort11.commands.actions.drivetrain.ToTag;
-import org.mort11.subsystems.Drivetrain;
-
-import org.mort11.commands.actions.Climb;
-
-import org.mort11.subsystems.TikiTorch;
 
 public class IO {
 
@@ -45,9 +34,6 @@ public class IO {
   public static void configure() {
     init();
     Inputs.init();
-    
-    }
-
 
 		drivetrain.setDefaultCommand(
 			new Drive(Inputs::getJoystickX, Inputs::getJoystickY, Inputs::getJoystickTwist)
@@ -64,7 +50,6 @@ public class IO {
     )));
 
     //controller inputs
-  }
 
 		  drivetrain.setDefaultCommand(
 			  new Drive(Inputs::getJoystickX, Inputs::getJoystickY, Inputs::getJoystickTwist)

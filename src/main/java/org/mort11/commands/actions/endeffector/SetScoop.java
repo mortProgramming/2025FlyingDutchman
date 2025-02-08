@@ -4,12 +4,16 @@ import org.mort11.subsystems.AlgaeScoop;
 import edu.wpi.first.wpilibj2.command.Command;
 
 public class SetScoop extends Command {
+  private AlgaeScoop algaeScoop;
+
   private double setpoint;
 
   public SetScoop(double setpoint) {
+    algaeScoop = AlgaeScoop.getInstance();
+
     this.setpoint = setpoint;
 
-    addRequirements(AlgaeScoop.getAlgaeScoop());
+    addRequirements(algaeScoop);
   }
 
   @Override
@@ -18,7 +22,7 @@ public class SetScoop extends Command {
 
   @Override
   public void execute(){
-    AlgaeScoop.setPosition(setpoint);
+    algaeScoop.setPosition(setpoint);
   }
 
   @Override
@@ -28,7 +32,7 @@ public class SetScoop extends Command {
 
   @Override
   public void end(boolean interrupted){
-    AlgaeScoop.setPosition(setpoint);
+    algaeScoop.setPosition(setpoint);
   }
 }
 

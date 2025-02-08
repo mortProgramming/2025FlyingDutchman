@@ -3,7 +3,6 @@ package org.mort11.commands.actions.drivetrain;
 import org.mort11.subsystems.Drivetrain;
 import org.mort11.subsystems.Vision;
 
-
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj2.command.Command;
 
@@ -34,9 +33,10 @@ public class Angle2AprilTag extends Command{
         double wantedAngle = vision.getFrontCamera().getPicturePosition()[0];
 
         //uses the yaw angle to rotate to wanted angle
-        drivetrain.setAngle2Controller(wantedAngle);
+        drivetrain.calculateChangeRotateController(wantedAngle);
         System.out.println(wantedAngle);
     }
+
     @Override
     public void end(boolean interrupted){
         drivetrain.setDrive(new ChassisSpeeds(0,0,0));

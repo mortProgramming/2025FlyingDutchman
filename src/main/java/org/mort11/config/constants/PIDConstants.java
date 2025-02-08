@@ -4,7 +4,7 @@ import edu.wpi.first.math.trajectory.TrapezoidProfile.Constraints;
 
 public final class PIDConstants {
 
-	public final static class AlgaeScoop	{
+	public final static class AlgaeArm	{
 		//FeedForward
 		public final static double ROT_KS = 0;
 		public final static double ROT_KV = 0;
@@ -57,7 +57,7 @@ public final class PIDConstants {
 		public static final double POS_KA = 0;
   }
 
-	public final static class TikiTorch	{
+	public final static class TikiTorchArm	{
 		//FeedForward
 		public final static double ROT_KS = 0;
 		public final static double ROT_KV = 0;

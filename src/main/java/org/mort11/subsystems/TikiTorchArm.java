@@ -1,8 +1,8 @@
 package org.mort11.subsystems;
 
-import static org.mort11.config.constants.PIDConstants.TikiTorch.*;
-import static org.mort11.config.constants.PhysicalConstants.TikiTorch.*;
-import static org.mort11.config.constants.PortConstants.TikiTorch.*;
+import static org.mort11.config.constants.PIDConstants.TikiTorchArm.*;
+import static org.mort11.config.constants.PhysicalConstants.TikiTorchArm.*;
+import static org.mort11.config.constants.PortConstants.TikiTorchArm.*;
 
 import static org.mort11.config.constants.PhysicalConstants.ROBOT_VOLTAGE;
 import org.mort11.library.hardware.motor.Motor;
@@ -13,19 +13,18 @@ import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class TikiTorch extends SubsystemBase {
-    public static TikiTorch tikiTorch;
+public class TikiTorchArm extends SubsystemBase {
+    public static TikiTorchArm tikiTorchArm;
 
-    public Motor tikiArm, tikiRoller;
+    public Motor tikiTorchArmMotor;
 
     private double armSpeed, rollerSpeed;
     
     private ProfiledPIDController armPidController;
     private ArmFeedforward feedforward;
     
-    public TikiTorch(){
-        tikiArm = new Motor(NEO550, TIKITORCH_ARM_MOTOR);
-        tikiRoller = new Motor(NEO550, TIKITORCH_ROLLER_MOTOR);
+    public TikiTorchArm(){
+        tikiTorchArmMotor = new Motor(NEO550, ARM_MOTOR);
 
         armSpeed = 0;
         rollerSpeed = 0;
@@ -36,8 +35,7 @@ public class TikiTorch extends SubsystemBase {
 
     @Override
     public void periodic(){
-        tikiArm.setVoltage(armSpeed * ROBOT_VOLTAGE);
-        tikiRoller.setVoltage(rollerSpeed * ROBOT_VOLTAGE);
+        tikiTorchArmMotor.setVoltage(armSpeed * ROBOT_VOLTAGE);
 
         SmartDashboard.putNumber("Encoder Position Degress", getEncoderPosition());
         SmartDashboard.putNumber("ArmSpeed", getEncoderVelocityDegrees());
@@ -56,46 +54,36 @@ public class TikiTorch extends SubsystemBase {
             this.rollerSpeed = rollerSpeed / 12;
         }
 
-    public double encoderToDegrees() {
-        double degrees = getEncoderPosition() * 360 + OFFSET;
-        if (degrees < 0) {
-            degrees += 360;
+        public double encoderToDegrees() {
+            double degrees = getEncoderPosition() * 360;
+        
+            if (degrees < ARM_TOP_NEVER_POSITION && degrees > ARM_BOTTOM_NEVER_POSITION) {
+                degrees += 360;
+            }
+        
+            return degrees + OFFSET; 
         }
-
-        if (degrees > ARM_NEVER_POSITION) {
-            degrees -= 360;
-        }
-
-        if (degrees < -90 && degrees > -270) {
-            degrees += 360;
-        }
-        return degrees;
-    }
 
     public double getArmVoltage(){
-        return tikiArm.getOutputVoltage();
+        return tikiTorchArmMotor.getOutputVoltage();
     }
 
     public double getEncoderPosition(){
-        return tikiArm.getAbsoluteValueEncoderPosition();
+        return tikiTorchArmMotor.getAbsoluteValueEncoderPosition();
     }
     
     public double getEncoderVelocityDegrees() {
-        return tikiArm.getAbsoluteValueEncoderVelocity() * 360;
-    }
-
-    public Motor getRollerMotor(){
-        return tikiRoller;
+        return tikiTorchArmMotor.getAbsoluteValueEncoderVelocity() * 360;
     }
 
     public Motor getArmMotor(){
-        return tikiArm;
+        return tikiTorchArmMotor;
     }
 
-    public static TikiTorch getInstance() {
-		if (tikiTorch == null) {
-			tikiTorch = new TikiTorch();
+    public static TikiTorchArm getInstance() {
+		if (tikiTorchArm == null) {
+			tikiTorchArm = new TikiTorchArm();
 		}
-		return tikiTorch;
+		return tikiTorchArm;
 	}
 }

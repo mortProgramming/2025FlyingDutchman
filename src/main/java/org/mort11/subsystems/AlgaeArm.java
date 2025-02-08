@@ -1,8 +1,8 @@
 package org.mort11.subsystems;
 
-import static org.mort11.config.constants.PIDConstants.AlgaeScoop.*;
-import static org.mort11.config.constants.PhysicalConstants.AlgaeScoop.*;
-import static org.mort11.config.constants.PortConstants.AlgaeScoop.*;
+import static org.mort11.config.constants.PIDConstants.AlgaeArm.*;
+import static org.mort11.config.constants.PhysicalConstants.AlgaeArm.*;
+import static org.mort11.config.constants.PortConstants.AlgaeArm.*;
 
 import static org.mort11.config.constants.PhysicalConstants.ROBOT_VOLTAGE;
 import org.mort11.library.hardware.encoder.Encoder;
@@ -15,22 +15,20 @@ import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class AlgaeScoop extends SubsystemBase {
-    public static AlgaeScoop algaeScoop;
+public class AlgaeArm extends SubsystemBase {
+    public static AlgaeArm algaeScoop;
 
-    public Motor scoopArm, scoopRoller;
+    public Motor scoopArm;
 
-    private double armSpeed, rollerSpeed;
+    private double armSpeed;
 
     private ProfiledPIDController armPidController;
     private ArmFeedforward feedforward;
     
-    public AlgaeScoop() {
-        scoopArm = new Motor(NEO550, ALGAESCOOP_ARM_MOTOR);
-        scoopRoller = new Motor(NEO550, ALGAESCOOP_ROLLER_MOTOR);
+    public AlgaeArm() {
+        scoopArm = new Motor(NEO550, ARM_MOTOR);
         
         armSpeed = 0;
-        rollerSpeed = 0;
 
         armPidController = new ProfiledPIDController(ROT_KP, ROT_KI, ROT_KD, ARM_ROT_CONSTRAINTS);
         feedforward = new ArmFeedforward(ROT_KS, ROT_KG, ROT_KV, ROT_KA);
@@ -39,7 +37,6 @@ public class AlgaeScoop extends SubsystemBase {
     @Override
     public void periodic(){
         scoopArm.setVoltage(armSpeed * ROBOT_VOLTAGE);
-        scoopRoller.setVoltage(rollerSpeed * ROBOT_VOLTAGE);
 
         SmartDashboard.putNumber("Encoder Position Degress", getEncoderPosition());
         SmartDashboard.putNumber("ArmSpeed", getEncoderVelocityDegrees());
@@ -54,24 +51,14 @@ public class AlgaeScoop extends SubsystemBase {
        this.armSpeed = voltage / 12;
     }
 
-    public void setRollerSpeed(double rollerSpeed){
-        this.rollerSpeed = rollerSpeed / 12;
-    }
-
 public double encoderToDegrees() {
-    double degrees = getEncoderPosition() * 360 + OFFSET;
-    if (degrees < 0) {
+    double degrees = getEncoderPosition() * 360;
+
+    if (degrees < ARM_TOP_NEVER_POSITION && degrees > ARM_BOTTOM_NEVER_POSITION) {
         degrees += 360;
     }
 
-    if (degrees > ARM_NEVER_POSITION) {
-        degrees -= 360;
-    }
-
-    if (degrees < -90 && degrees > -270) {
-        degrees += 360;
-    }
-    return degrees;
+    return degrees + OFFSET; 
 }
 
 public double getArmVoltage(){
@@ -86,17 +73,13 @@ public double getEncoderVelocityDegrees() {
     return scoopArm.getAbsoluteValueEncoderVelocity() * 360;
 }
 
-public Motor getRollerMotor(){
-    return scoopRoller;
-}
-
 public Motor getArmMotor(){
     return scoopArm;
 }
 
-    public static AlgaeScoop getInstance(){
+    public static AlgaeArm getInstance(){
         if (algaeScoop == null) {
-			algaeScoop = new AlgaeScoop();
+			algaeScoop = new AlgaeArm();
 		}
 		return algaeScoop;
     }

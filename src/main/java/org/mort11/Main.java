@@ -4,6 +4,8 @@
 
 package org.mort11;
 
+import org.mort11.library.logger.types.Elastic;
+
 import edu.wpi.first.wpilibj.RobotBase;
 
 /**
@@ -21,5 +23,7 @@ public final class Main {
    */
   public static void main(String... args) {
     RobotBase.startRobot(Robot::new);
+    // Elastic.Notification notification = new Elastic.Notification(Elastic.Notification.NotificationLevel.ERROR, "Error Notification", "This is an example error notification.");
+    // Elastic.sendNotification(notification);
   }
 }

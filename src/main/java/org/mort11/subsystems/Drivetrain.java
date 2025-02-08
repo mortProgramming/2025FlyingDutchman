@@ -1,14 +1,39 @@
 package org.mort11.subsystems;
 
-import static org.mort11.config.constants.PhysicalConstants.Drivetrain.*;
-import static org.mort11.config.constants.PIDConstants.Drivetrain.*;
-import static org.mort11.config.constants.PortConstants.Drivetrain.*;
-import static org.mort11.library.hardware.encoder.EncoderTypeEnum.*;
-import static org.mort11.library.hardware.imu.IMUTypeEnum.*;
-import static org.mort11.library.hardware.motor.MotorTypeEnum.*;
-import static org.mort11.library.subsystems.swerve.ModuleConfigEnum.*;
-
 import org.mort11.config.IO;
+import static org.mort11.config.constants.PIDConstants.Drivetrain.ANGLE_CONSTRAINTS;
+import static org.mort11.config.constants.PIDConstants.Drivetrain.ANGLE_KD;
+import static org.mort11.config.constants.PIDConstants.Drivetrain.ANGLE_KI;
+import static org.mort11.config.constants.PIDConstants.Drivetrain.ANGLE_KP;
+import static org.mort11.config.constants.PIDConstants.Drivetrain.ANGLE_POS_TOLERANCE;
+import static org.mort11.config.constants.PIDConstants.Drivetrain.ANGLE_VEL_TOLERANCE;
+import static org.mort11.config.constants.PIDConstants.Drivetrain.POS_CONSTRAINTS;
+import static org.mort11.config.constants.PIDConstants.Drivetrain.POS_KD;
+import static org.mort11.config.constants.PIDConstants.Drivetrain.POS_KI;
+import static org.mort11.config.constants.PIDConstants.Drivetrain.POS_KP;
+import static org.mort11.config.constants.PIDConstants.Drivetrain.POS_POS_TOLERANCE;
+import static org.mort11.config.constants.PhysicalConstants.Drivetrain.BACK_LEFT_OFFSET;
+import static org.mort11.config.constants.PhysicalConstants.Drivetrain.BACK_RIGHT_OFFSET;
+import static org.mort11.config.constants.PhysicalConstants.Drivetrain.DRIVETRAIN_TRACKWIDTH_METERS;
+import static org.mort11.config.constants.PhysicalConstants.Drivetrain.DRIVETRAIN_WHEELBASE_METERS;
+import static org.mort11.config.constants.PhysicalConstants.Drivetrain.FRONT_LEFT_OFFSET;
+import static org.mort11.config.constants.PhysicalConstants.Drivetrain.FRONT_RIGHT_OFFSET;
+import static org.mort11.config.constants.PortConstants.Drivetrain.BACK_LEFT_DRIVE_MOTOR;
+import static org.mort11.config.constants.PortConstants.Drivetrain.BACK_LEFT_ENCODER;
+import static org.mort11.config.constants.PortConstants.Drivetrain.BACK_LEFT_STEER_MOTOR;
+import static org.mort11.config.constants.PortConstants.Drivetrain.BACK_RIGHT_DRIVE_MOTOR;
+import static org.mort11.config.constants.PortConstants.Drivetrain.BACK_RIGHT_ENCODER;
+import static org.mort11.config.constants.PortConstants.Drivetrain.BACK_RIGHT_STEER_MOTOR;
+import static org.mort11.config.constants.PortConstants.Drivetrain.FRONT_LEFT_DRIVE_MOTOR;
+import static org.mort11.config.constants.PortConstants.Drivetrain.FRONT_LEFT_ENCODER;
+import static org.mort11.config.constants.PortConstants.Drivetrain.FRONT_LEFT_STEER_MOTOR;
+import static org.mort11.config.constants.PortConstants.Drivetrain.FRONT_RIGHT_DRIVE_MOTOR;
+import static org.mort11.config.constants.PortConstants.Drivetrain.FRONT_RIGHT_ENCODER;
+import static org.mort11.config.constants.PortConstants.Drivetrain.FRONT_RIGHT_STEER_MOTOR;
+import static org.mort11.library.hardware.encoder.EncoderTypeEnum.CANCODER;
+import static org.mort11.library.hardware.imu.IMUTypeEnum.NAVX;
+import static org.mort11.library.hardware.motor.MotorTypeEnum.KRAKEN;
+import static org.mort11.library.subsystems.swerve.ModuleConfigEnum.MK4i_L3;
 import org.mort11.library.subsystems.swerve.SwerveDriveBase;
 
 import edu.wpi.first.math.controller.ProfiledPIDController;
@@ -86,8 +111,6 @@ public class Drivetrain extends SwerveDriveBase {
 	public double calculateChangeRotateController(double wantedPosition) {
 		return rotateToAngleController.calculate(getIMURotation().getDegrees(), getIMURotation().getDegrees() + wantedPosition);
 	}
-
-
 
 	public ProfiledPIDController getXController() {
 		return xToPosController;

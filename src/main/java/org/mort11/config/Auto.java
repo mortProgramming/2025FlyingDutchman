@@ -14,6 +14,7 @@ import org.mort11.commands.autons.timed.Taxi;
 import org.mort11.library.subsystems.swerve.PathPlanner;
 import org.mort11.subsystems.Drivetrain;
 import org.mort11.commands.autons.pathplanned.BasicCommands;
+import org.mort11.commands.autons.pathplanned.ScoreL4JDescoreKL;
 
 
 public class Auto {
@@ -45,9 +46,14 @@ public class Auto {
 		autoChooser = new SendableChooser<Command>();
 
 		autoChooser.setDefaultOption("nothing", null);
-
+		
 		autoChooser.addOption("Forward", new Taxi());
 		// autoChooser.addOption("Circle", GetPlanned.getCircle());
+
+		//PATHPLANNED
+
+		autoChooser.addOption("ScoreL4JDescoreKL", 
+		new ScoreL4JDescoreKL());
 
 		SmartDashboard.putData(autoChooser);
 	}

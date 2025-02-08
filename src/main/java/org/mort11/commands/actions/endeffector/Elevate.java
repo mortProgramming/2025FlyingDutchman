@@ -1,14 +1,13 @@
 package org.mort11.commands.actions.endeffector;
 
-import org.mort11.subsystems.Elevator;
-
 import static org.mort11.config.constants.PhysicalConstants.Elevator.*;
+import org.mort11.subsystems.Elevator;
 
 import edu.wpi.first.wpilibj2.command.Command;
 
 public class Elevate extends Command {
-    private final Elevator elevator;
-    private final double targetPosition;
+    private Elevator elevator;
+    private double targetPosition;
 
     public Elevate(double targetPosition) {
         this.elevator = Elevator.getInstance();

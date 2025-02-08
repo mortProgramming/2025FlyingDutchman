@@ -137,6 +137,38 @@ public class MotorGroup implements MotorIntf {
         return motors[motorNumber];
     }
 
+    public boolean getForwardLimitSwitch() {
+        return motors[0].getForwardLimitSwitch();
+    }
+
+    public boolean getForwardLimitSwitch(int motorNumber) {
+        return motors[motorNumber].getForwardLimitSwitch();
+    }
+
+    public boolean getReverseLimitSwitch() {
+        return motors[0].getReverseLimitSwitch();
+    }
+
+    public boolean getReverseLimitSwitch(int motorNumber) {
+        return motors[motorNumber].getReverseLimitSwitch();
+    }
+
+    public double getAbsoluteValueEncoderPosition() {
+        return motors[0].getAbsoluteValueEncoderPosition();
+    }
+
+    public double getAbsoluteValueEncoderPosition(int motorNumber) {
+        return motors[motorNumber].getAbsoluteValueEncoderPosition();
+    }
+
+    public double getAbsoluteValueEncoderVelocity() {
+        return motors[0].getAbsoluteValueEncoderVelocity();
+    }
+
+    public double getAbsoluteValueEncoderVelocity(int motorNumber) {
+        return motors[motorNumber].getAbsoluteValueEncoderVelocity();
+    }
+
     public MotorIntf[] getMotor () {
         return motors;
     }

@@ -15,8 +15,7 @@ public class Elevator extends SubsystemBase {
     private static Elevator elevator;
 
     private Motor motor;
-    // private double motorSpeed, elevatorPosition, rotationsCompleted;
-    private double motorSpeed, offset;
+    private double motorSpeed, elevatorPosition, rotationsCompleted;
 
     private ProfiledPIDController controller;
     private ElevatorFeedforward feedforward;
@@ -28,17 +27,15 @@ public class Elevator extends SubsystemBase {
         feedforward = new ElevatorFeedforward(POS_KS, POS_KG, POS_KV, POS_KA);
 
         motorSpeed = 0;
-        // elevatorPosition = START_HEIGHT;
-        // rotationsCompleted = 0;
-
-        offset = START_HEIGHT;
+        elevatorPosition = START_HEIGHT;
+        rotationsCompleted = 0;
     }
 
     @Override
     public void periodic() {
         motor.setVoltage(motorSpeed * ROBOT_VOLTAGE);
 
-        // elevatorPosition = calculateElevatorPosition();
+        elevatorPosition = calculateElevatorPosition();
     }
 
     public void setElevatorPosition(double positionInches) {
@@ -49,40 +46,32 @@ public class Elevator extends SubsystemBase {
 
 
 
-    // public double getElevatorPositionInches() {
-    //     return elevatorPosition;
-    // }
-
     public double getElevatorPositionInches() {
-        return motor.getPositionRotations() * ROTATIONS_TO_INCHES + offset;
+        return elevatorPosition;
     }
-
-    // public double getElevatorVelocityRPM() {
-    //     return motor.getAbsoluteValueEncoderVelocity() * ROTATIONS_TO_INCHES;
-    // }
 
     public double getElevatorVelocityRPM() {
         return motor.getAbsoluteValueEncoderVelocity() * ROTATIONS_TO_INCHES;
     }
 
-    // public double getAbsoluteEncoderPositionRotations() {
-    //     return motor.getAbsoluteValueEncoderPosition();
-    // }
+    public double getAbsoluteEncoderPositionRotations() {
+        return motor.getAbsoluteValueEncoderPosition();
+    }
 
 
 
-    // public double calculateElevatorPosition() {
-    //     double inchesFound = (getAbsoluteEncoderPositionRotations() + rotationsCompleted) * ROTATIONS_TO_INCHES;
-    //     if((inchesFound - elevatorPosition) > MAXIMUM_INCH_CHANGE) {
-    //         rotationsCompleted += 1;
-    //     }
+    public double calculateElevatorPosition() {
+        double inchesFound = (getAbsoluteEncoderPositionRotations() + rotationsCompleted) * ROTATIONS_TO_INCHES;
+        if((inchesFound - elevatorPosition) > MAXIMUM_INCH_CHANGE) {
+            rotationsCompleted += 1;
+        }
 
-    //     if((elevatorPosition - inchesFound) > MAXIMUM_INCH_CHANGE) {
-    //         rotationsCompleted -= 1;
-    //     }
+        if((elevatorPosition - inchesFound) > MAXIMUM_INCH_CHANGE) {
+            rotationsCompleted -= 1;
+        }
 
-    //     return (getAbsoluteEncoderPositionRotations() + rotationsCompleted) * ROTATIONS_TO_INCHES;
-    // }
+        return (getAbsoluteEncoderPositionRotations() + rotationsCompleted) * ROTATIONS_TO_INCHES;
+    }
 
     public static Elevator getInstance() {
         if(elevator == null) {

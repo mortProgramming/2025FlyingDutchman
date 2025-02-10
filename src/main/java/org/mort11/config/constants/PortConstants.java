@@ -55,13 +55,13 @@ public static final class Controller {
     public static final int BACK_RIGHT_STEER_MOTOR = 3;
     public static final int BACK_RIGHT_ENCODER = 36;
 
-    public static final int IMU_ID = 0;
+    public static final int IMU_ID = 30;
 
     public static final String CANIVORE_NAME = "drivetrain";
   }
 
   public static final class Elevator {
-		public static final int MOTOR = 10;
+		public static final int MOTOR = 11;
 	}
 
   public static final class TikiTorchArm {

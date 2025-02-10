@@ -21,10 +21,10 @@ public final class PhysicalConstants {
 		public static final double PROCESSOR_SCORE = 0;
 		public static final double BARGE_SCORE = 0;
 	} 
-
+	
 	public final static class AlgaeRoller {
-		public static final int INTAKE_SPEED = 0;
-		public static final int OUTAKE_SPEED = 0;
+		public static final double INTAKE_SPEED = 0.2;
+		public static final double OUTAKE_SPEED = -0.2;
 	} 
 	
     public final static class Drivetrain {
@@ -61,8 +61,8 @@ public final class PhysicalConstants {
 	public static final class Elevator {
 
 		//all in inches
-		public static final double ROTATIONS_TO_INCHES = 0;
-		public static final double MAXIMUM_INCH_CHANGE = 0;
+		public static final double ROTATIONS_TO_INCHES = 5.07;
+		public static final double MAXIMUM_INCH_CHANGE = 4.0;
 
 		public static final double START_HEIGHT = 0;
 		public static final double REST_HEIGHT = 0;
@@ -97,8 +97,8 @@ public final class PhysicalConstants {
 	}
 
 	public final static class TikiTorchRoller {
-		public static final int INTAKE_SPEED = 0;
-		public static final int OUTAKE_SPEED = 0;
+		public static final double INTAKE_SPEED = -0.2;
+		public static final double OUTAKE_SPEED = 0.2;
 	} 
 
 }

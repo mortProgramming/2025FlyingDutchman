@@ -6,6 +6,7 @@ import org.mort11.commands.actions.drivetrain.Drive;
 import org.mort11.commands.actions.drivetrain.ToTag;
 import org.mort11.commands.actions.endeffector.Climb;
 import org.mort11.commands.actions.endeffector.Elevate;
+import org.mort11.commands.actions.endeffector.MoveAlgaeArm;
 import org.mort11.commands.actions.endeffector.MoveElevator;
 import org.mort11.commands.actions.endeffector.MoveTikiTorchArm;
 import org.mort11.commands.actions.endeffector.SetAlgaeArm;
@@ -41,7 +42,7 @@ public class IO {
   public static void configure() {
     init();
     Inputs.init();
-
+    
     //TODO Joystick Commands
 
 		drivetrain.setDefaultCommand(
@@ -88,6 +89,9 @@ public class IO {
 
       xboxController.axisLessThan(5, -0.5).whileTrue(new MoveElevator(-0.2));
       xboxController.axisGreaterThan(5, 0.5).whileTrue(new MoveElevator(0.2));
+
+      // xboxController.axisLessThan(4, -0.5).whileTrue(new MoveAlgaeArm(-0.2));
+      // xboxController.axisGreaterThan(4, -0.5).whileTrue(new MoveAlgaeArm(0.2));
 
     }
 

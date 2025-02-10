@@ -9,6 +9,7 @@ import org.mort11.library.hardware.motor.Motor;
 
 import edu.wpi.first.math.controller.ElevatorFeedforward;
 import edu.wpi.first.math.controller.ProfiledPIDController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Elevator extends SubsystemBase {
@@ -36,6 +37,7 @@ public class Elevator extends SubsystemBase {
         motor.setVoltage(motorSpeed * ROBOT_VOLTAGE);
 
         elevatorPosition = calculateElevatorPosition();
+        SmartDashboard.putNumber("Elevator Height", getElevatorPositionInches());
     }
 
     public void setElevatorPosition(double positionInches) {

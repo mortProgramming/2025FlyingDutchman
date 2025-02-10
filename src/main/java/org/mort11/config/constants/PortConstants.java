@@ -29,13 +29,13 @@ public static final class Controller {
 
   public static final class Climber{
     //ASSIGNED to zero because don't know yet
-    public static final int PNEUMATICS_MODULE_PORT = 0;
+    public static final int PNEUMATICS_MODULE_PORT = 62;
 
-      public static final int RIGHT_CLIMBER_PORT_UP = 0;
-    public static final int RIGHT_CLIMBER_PORT_DOWN = 0;
+      public static final int RIGHT_CLIMBER_PORT_UP = 61;
+    public static final int RIGHT_CLIMBER_PORT_DOWN = 60;
 
-    public static final int LEFT_CLIMBER_PORT_UP = 0;
-    public static final int LEFT_CLIMBER_PORT_DOWN = 0;
+    public static final int LEFT_CLIMBER_PORT_UP = 59;
+    public static final int LEFT_CLIMBER_PORT_DOWN = 78;
   }
   
   public static final class Drivetrain {

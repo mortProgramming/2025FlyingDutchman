@@ -1,29 +1,34 @@
 package org.mort11.commands.actions.endeffector;
 
-import edu.wpi.first.wpilibj2.command.Command;
 import org.mort11.subsystems.TikiTorchArm;
+
+import edu.wpi.first.wpilibj2.command.Command;
 
 public class MoveTikiTorchArm extends Command  {
     
     private TikiTorchArm tikiTorchArm;
 
-    private double incrementInPerSecond;
+    private double incrementDegPerSecond, totalDistanceChanged, startPosition;
 
-    public MoveTikiTorchArm(double incrementInPerSecond) {
-        this.incrementInPerSecond = incrementInPerSecond;
+    public MoveTikiTorchArm(double incrementDegPerSecond) {
+        this.incrementDegPerSecond = incrementDegPerSecond;
 
         tikiTorchArm = TikiTorchArm.getInstance();
+
+        totalDistanceChanged = 0;
 
         addRequirements(tikiTorchArm);
     }
 
     @Override
-    public void initialize(){}
+    public void initialize(){
+      startPosition = tikiTorchArm.encoderToDegrees();
+    }
 
     @Override
     public void execute() {
-        double increment = incrementInPerSecond / 50;
-        tikiTorchArm.setPosition(tikiTorchArm.encoderToDegrees() + increment);
+      totalDistanceChanged += incrementDegPerSecond / 50;
+        tikiTorchArm.setPosition(startPosition + totalDistanceChanged);
     }
 
   @Override

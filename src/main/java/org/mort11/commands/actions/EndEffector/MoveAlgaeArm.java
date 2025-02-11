@@ -1,29 +1,34 @@
 package org.mort11.commands.actions.endeffector;
 
-import edu.wpi.first.wpilibj2.command.Command;
 import org.mort11.subsystems.AlgaeArm;
+
+import edu.wpi.first.wpilibj2.command.Command;
 
 public class MoveAlgaeArm extends Command  {
     
     private AlgaeArm algaeArm;
 
-    private double incrementInPerSecond;
+    private double incrementDegPerSecond, totalDistanceChanged, startPosition;
 
-    public MoveAlgaeArm(double incrementInPerSecond) {
-        this.incrementInPerSecond = incrementInPerSecond;
+    public MoveAlgaeArm(double incrementDegPerSecond) {
+        this.incrementDegPerSecond = incrementDegPerSecond;
 
         algaeArm = AlgaeArm.getInstance();
+
+        totalDistanceChanged = 0;
 
         addRequirements(algaeArm);
     }
 
     @Override
-    public void initialize(){}
+    public void initialize(){
+      startPosition = algaeArm.encoderToDegrees();
+    }
 
     @Override
     public void execute() {
-        double increment = incrementInPerSecond / 50;
-        algaeArm.setPosition(algaeArm.encoderToDegrees() + increment);
+      totalDistanceChanged += incrementDegPerSecond / 50;
+        algaeArm.setPosition(startPosition + totalDistanceChanged);
     }
 
   @Override

@@ -37,8 +37,8 @@ public class TikiTorchArm extends SubsystemBase {
     public void periodic(){
         tikiTorchArmMotor.setVoltage(armSpeed * ROBOT_VOLTAGE);
 
-        SmartDashboard.putNumber("Encoder Position Degress", getEncoderPosition());
-        SmartDashboard.putNumber("ArmSpeed", getEncoderVelocityDegrees());
+        SmartDashboard.putNumber("Tiki Encoder Position Degress", encoderToDegrees());
+        SmartDashboard.putNumber("TikiArmSpeed", getEncoderVelocityDegrees());
     }
         
         public void setPosition(double setpoint) {

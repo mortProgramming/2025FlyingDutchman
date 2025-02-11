@@ -42,7 +42,7 @@ public class IO {
   public static void configure() {
     init();
     Inputs.init();
-    
+
     //TODO Joystick Commands
 
 		drivetrain.setDefaultCommand(
@@ -51,7 +51,7 @@ public class IO {
       // drivetrain.setDefaultCommand(
       //     new Drive(Inputs::getLeftControllerXSwerve, Inputs::getLeftControllerYSwerve, Inputs::getRightControllerXSwerve)
       // );
-    joystick.button(0).whileTrue(drivetrain.setGyroscopeZero(IMU_TO_ROBOT_FRONT_ANGLE));
+    joystick.trigger().whileTrue(drivetrain.setGyroscopeZero(IMU_TO_ROBOT_FRONT_ANGLE));
 
     joystick.button(1).whileTrue(new InstantCommand(() -> drivetrain.getSwerveDrive().resetPosition(
       new Pose2d(0, 0, Rotation2d.fromDegrees(0))
@@ -63,35 +63,35 @@ public class IO {
 
     //TODO Xbox Controller Commands
 
-      xboxController.a().whileTrue(new Climb(false));
-      xboxController.b().whileTrue(new Climb(true));
+      // xboxController.a().whileTrue(new Climb(false));
+      // xboxController.b().whileTrue(new Climb(true));
 
-      xboxController.pov(0).toggleOnTrue(Elevate.l1());
-      xboxController.pov(0).toggleOnFalse(Elevate.rest());
-      xboxController.pov(270).whileTrue(Elevate.l2());
-      xboxController.pov(180).whileTrue(Elevate.l3());
-      xboxController.pov(90).whileTrue(Elevate.l4());
+      // xboxController.pov(0).toggleOnTrue(Elevate.l1());
+      // xboxController.pov(0).toggleOnFalse(Elevate.rest());
+      // xboxController.pov(270).whileTrue(Elevate.l2());
+      // xboxController.pov(180).whileTrue(Elevate.l3());
+      // xboxController.pov(90).whileTrue(Elevate.l4());
 
-      xboxController.rightTrigger().whileTrue(SetTikiTorchRoller.outtake());
-      xboxController.rightBumper().whileTrue(SetTikiTorchRoller.intake());
+      // xboxController.rightTrigger().whileTrue(SetTikiTorchRoller.outtake());
+      // xboxController.rightBumper().whileTrue(SetTikiTorchRoller.intake());
 
-      xboxController.leftBumper().whileTrue(SetAlgaeRoller.intake());
-      xboxController.leftTrigger().whileTrue(SetAlgaeRoller.outtake());
+      // xboxController.leftBumper().whileTrue(SetAlgaeRoller.intake());
+      // xboxController.leftTrigger().whileTrue(SetAlgaeRoller.outtake());
 
-      xboxController.y().toggleOnTrue(SetTikiTorchArm.intake());
-      xboxController.y().toggleOnFalse(SetTikiTorchArm.l4());
+      // xboxController.y().toggleOnTrue(SetTikiTorchArm.intake());
+      // xboxController.y().toggleOnFalse(SetTikiTorchArm.l4());
 
-      xboxController.x().toggleOnTrue(SetAlgaeArm.l23Intake());
-      xboxController.x().toggleOnFalse(SetAlgaeArm.rest());
+      // xboxController.x().toggleOnTrue(SetAlgaeArm.l23Intake());
+      // xboxController.x().toggleOnFalse(SetAlgaeArm.rest());
 
-      xboxController.axisLessThan(4, -0.5).whileTrue(new MoveTikiTorchArm(-0.2));
-      xboxController.axisGreaterThan(4, 0.5).whileTrue(new MoveTikiTorchArm(0.2));
+      xboxController.axisLessThan(1, -0.5).whileTrue(new MoveTikiTorchArm(-0.2));
+      xboxController.axisGreaterThan(1, 0.5).whileTrue(new MoveTikiTorchArm(0.2));
 
-      xboxController.axisLessThan(5, -0.5).whileTrue(new MoveElevator(-0.2));
-      xboxController.axisGreaterThan(5, 0.5).whileTrue(new MoveElevator(0.2));
+      // xboxController.axisLessThan(5, -0.5).whileTrue(new MoveElevator(-0.2));
+      // xboxController.axisGreaterThan(5, 0.5).whileTrue(new MoveElevator(0.2));
 
-      // xboxController.axisLessThan(4, -0.5).whileTrue(new MoveAlgaeArm(-0.2));
-      // xboxController.axisGreaterThan(4, -0.5).whileTrue(new MoveAlgaeArm(0.2));
+      xboxController.axisLessThan(5, -0.5).whileTrue(new MoveAlgaeArm(-0.2));
+      xboxController.axisGreaterThan(5, -0.5).whileTrue(new MoveAlgaeArm(0.2));
 
     }
 

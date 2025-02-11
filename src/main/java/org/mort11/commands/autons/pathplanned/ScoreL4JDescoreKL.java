@@ -4,12 +4,12 @@ import org.mort11.commands.autons.AutoGenerator;
 
 public class ScoreL4JDescoreKL extends SequentialCommandGroup{
     
-    public ScoreL4JDescoreKL() {
-        try {
-            AutoGenerator.generate("ScoreL4JDescoreKL");
-        } catch (ClassNotFoundException e) {
+    // public ScoreL4JDescoreKL() {
+    //     try {
+    //         AutoGenerator.generate("ScoreL4JDescoreKL");
+    //     } catch (ClassNotFoundException e) {
             
-        }
+    //     }
         
-    }
+    // }
 }

@@ -3,8 +3,8 @@ package org.mort11.config.constants;
 public final class PortConstants {
 
 public static final class Controller {
-    public static final int JOYSTICK = 0;
-    public static final int CONTROLLER = 1;
+    public static final int JOYSTICK = 1;
+    public static final int CONTROLLER = 2;
 
     public static final int JOYSTICK_X_CHANNEL = 0;
     public static final int JOYSTICK_Y_CHANNEL = 1;
@@ -31,11 +31,11 @@ public static final class Controller {
     //ASSIGNED to zero because don't know yet
     public static final int PNEUMATICS_MODULE_PORT = 62;
 
-      public static final int RIGHT_CLIMBER_PORT_UP = 61;
-    public static final int RIGHT_CLIMBER_PORT_DOWN = 60;
+      public static final int RIGHT_CLIMBER_PORT_UP = 0;
+    public static final int RIGHT_CLIMBER_PORT_DOWN = 1;
 
-    public static final int LEFT_CLIMBER_PORT_UP = 59;
-    public static final int LEFT_CLIMBER_PORT_DOWN = 78;
+    public static final int LEFT_CLIMBER_PORT_UP = 2;
+    public static final int LEFT_CLIMBER_PORT_DOWN = 3;
   }
   
   public static final class Drivetrain {

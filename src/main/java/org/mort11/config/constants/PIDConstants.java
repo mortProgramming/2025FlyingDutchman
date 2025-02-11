@@ -12,10 +12,10 @@ public final class PIDConstants {
 		public final static double ROT_KA = 0;
 
 		//PID Rotational
-		public final static double ROT_KP = 0;
+		public final static double ROT_KP = 0.03;
 		public final static double ROT_KI = 0;
 		public final static double ROT_KD = 0;
-		public final static Constraints ARM_ROT_CONSTRAINTS = new Constraints(0,0);
+		public final static Constraints ARM_ROT_CONSTRAINTS = new Constraints(20,20);
 	}
     
     public final class Drivetrain {

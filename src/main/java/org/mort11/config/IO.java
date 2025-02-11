@@ -84,15 +84,13 @@ public class IO {
       // xboxController.x().toggleOnTrue(SetAlgaeArm.l23Intake());
       // xboxController.x().toggleOnFalse(SetAlgaeArm.rest());
 
-      xboxController.axisLessThan(1, -0.5).whileTrue(new MoveTikiTorchArm(-0.2));
-      xboxController.axisGreaterThan(1, 0.5).whileTrue(new MoveTikiTorchArm(0.2));
+      xboxController.axisLessThan(1, -0.5).whileTrue(new MoveTikiTorchArm(-5));
+      xboxController.axisGreaterThan(1, 0.5).whileTrue(new MoveTikiTorchArm(5));
 
       // xboxController.axisLessThan(5, -0.5).whileTrue(new MoveElevator(-0.2));
       // xboxController.axisGreaterThan(5, 0.5).whileTrue(new MoveElevator(0.2));
-
-      xboxController.axisLessThan(5, -0.5).whileTrue(new MoveAlgaeArm(-0.2));
-      xboxController.axisGreaterThan(5, -0.5).whileTrue(new MoveAlgaeArm(0.2));
-
+      xboxController.x().whileTrue(new MoveAlgaeArm(-0.2));
+      xboxController.y().whileTrue(new MoveAlgaeArm(0.2));
     }
 
   public static Boolean isBlue () {

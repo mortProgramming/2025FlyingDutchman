@@ -42,4 +42,8 @@ public class SetAlgaeRoller extends Command {
   public static Command outtake() {
     return new SetAlgaeRoller(OUTAKE_SPEED);
   }
+
+  public static Command nothing(){
+    return new SetAlgaeRoller(0);
+  }
 }

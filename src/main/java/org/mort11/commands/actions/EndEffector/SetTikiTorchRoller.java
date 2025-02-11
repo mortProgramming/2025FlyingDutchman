@@ -42,6 +42,11 @@ public class SetTikiTorchRoller extends Command {
   public static Command outtake() {
     return new SetTikiTorchRoller(OUTAKE_SPEED);
   }
+
+  public static Command nothing(){
+    return new SetTikiTorchRoller(0);
+  }
+
 }
 
 

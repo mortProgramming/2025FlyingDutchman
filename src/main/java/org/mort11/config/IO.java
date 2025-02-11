@@ -72,11 +72,17 @@ public class IO {
       // xboxController.pov(180).whileTrue(Elevate.l3());
       // xboxController.pov(90).whileTrue(Elevate.l4());
 
-      // xboxController.rightTrigger().whileTrue(SetTikiTorchRoller.outtake());
-      // xboxController.rightBumper().whileTrue(SetTikiTorchRoller.intake());
+      xboxController.rightTrigger().whileTrue(SetTikiTorchRoller.outtake());
+      xboxController.rightTrigger().whileFalse(SetTikiTorchRoller.nothing());
 
-      // xboxController.leftBumper().whileTrue(SetAlgaeRoller.intake());
-      // xboxController.leftTrigger().whileTrue(SetAlgaeRoller.outtake());
+      xboxController.rightBumper().whileTrue(SetTikiTorchRoller.intake());
+      xboxController.rightBumper().whileFalse(SetTikiTorchRoller.nothing());
+
+      xboxController.leftBumper().whileTrue(SetAlgaeRoller.intake());
+      xboxController.leftBumper().whileFalse(SetAlgaeRoller.nothing());
+
+      xboxController.leftTrigger().whileTrue(SetAlgaeRoller.outtake());
+      xboxController.leftTrigger().whileFalse(SetAlgaeRoller.nothing());
 
       // xboxController.y().toggleOnTrue(SetTikiTorchArm.intake());
       // xboxController.y().toggleOnFalse(SetTikiTorchArm.l4());
@@ -84,13 +90,23 @@ public class IO {
       // xboxController.x().toggleOnTrue(SetAlgaeArm.l23Intake());
       // xboxController.x().toggleOnFalse(SetAlgaeArm.rest());
 
-      xboxController.axisLessThan(1, -0.5).whileTrue(new MoveTikiTorchArm(-5));
-      xboxController.axisGreaterThan(1, 0.5).whileTrue(new MoveTikiTorchArm(5));
+      // xboxController.axisLessThan(1, -0.5).whileTrue(new MoveTikiTorchArm(-5));
+      // xboxController.axisGreaterThan(1, 0.5).whileTrue(new MoveTikiTorchArm(5));
 
       // xboxController.axisLessThan(5, -0.5).whileTrue(new MoveElevator(-0.2));
       // xboxController.axisGreaterThan(5, 0.5).whileTrue(new MoveElevator(0.2));
+      xboxController.a().whileTrue(new MoveTikiTorchArm(-0.2));
+      xboxController.a().whileFalse(new MoveTikiTorchArm(0));
+
+      xboxController.b().whileTrue(new MoveTikiTorchArm(0.2));
+      xboxController.b().whileFalse(new MoveTikiTorchArm(0));
+
       xboxController.x().whileTrue(new MoveAlgaeArm(-0.2));
+      xboxController.x().whileFalse(new MoveAlgaeArm(0));
+
       xboxController.y().whileTrue(new MoveAlgaeArm(0.2));
+      xboxController.y().whileFalse(new MoveAlgaeArm(0));
+
     }
 
   public static Boolean isBlue () {

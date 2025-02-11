@@ -23,8 +23,8 @@ public final class PhysicalConstants {
 	} 
 
 	public final static class AlgaeRoller {
-		public static final double INTAKE_SPEED = 0.2;
-		public static final double OUTAKE_SPEED = -0.2;
+		public static final double INTAKE_SPEED = 0.8;
+		public static final double OUTAKE_SPEED = -0.8;
 	} 
 	
     public final static class Drivetrain {
@@ -86,8 +86,8 @@ public final class PhysicalConstants {
 
 		public static final double REST = 0;
 
-		public static final double ARM_TOP_NEVER_POSITION = 0;
-		public static final double ARM_BOTTOM_NEVER_POSITION = 0;
+		public static final double ARM_TOP_NEVER_POSITION = 250;
+		public static final double ARM_BOTTOM_NEVER_POSITION = 5;
 
 		public static final double L4_SCORE = 0;
 		public static final double L23_SCORE = 0;
@@ -97,8 +97,8 @@ public final class PhysicalConstants {
 	}
 
 	public final static class TikiTorchRoller {
-		public static final double INTAKE_SPEED = -0.2;
-		public static final double OUTAKE_SPEED = 0.2;
+		public static final double INTAKE_SPEED = -1;
+		public static final double OUTAKE_SPEED = 1;
 	} 
 
 }

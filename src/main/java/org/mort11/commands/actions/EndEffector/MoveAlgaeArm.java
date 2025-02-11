@@ -7,15 +7,23 @@ import edu.wpi.first.wpilibj2.command.Command;
 public class MoveAlgaeArm extends Command  {
     
     private AlgaeArm algaeArm;
+    private double testingSpeed;
 
     private double incrementDegPerSecond, totalDistanceChanged, startPosition;
 
-    public MoveAlgaeArm(double incrementDegPerSecond) {
-        this.incrementDegPerSecond = incrementDegPerSecond;
+    // public MoveAlgaeArm(double incrementDegPerSecond) {
+    //     this.incrementDegPerSecond = incrementDegPerSecond;
 
-        algaeArm = AlgaeArm.getInstance();
+    //     algaeArm = AlgaeArm.getInstance();
 
-        totalDistanceChanged = 0;
+    //     totalDistanceChanged = 0;
+
+    //     addRequirements(algaeArm);
+    // }
+
+    public MoveAlgaeArm(double testingSpeed){
+        this.testingSpeed = testingSpeed;
+        algaeArm = algaeArm.getInstance();
 
         addRequirements(algaeArm);
     }
@@ -27,8 +35,9 @@ public class MoveAlgaeArm extends Command  {
 
     @Override
     public void execute() {
-      totalDistanceChanged += incrementDegPerSecond / 50;
-        algaeArm.setPosition(startPosition + totalDistanceChanged);
+      // totalDistanceChanged += incrementDegPerSecond / 200;
+      // algaeArm.setPosition(startPosition + totalDistanceChanged);
+      algaeArm.getArmMotor().setPercent(testingSpeed);
     }
 
   @Override

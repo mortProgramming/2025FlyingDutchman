@@ -24,7 +24,7 @@ public static final class Controller {
   }
 
   public static final class AlgaeRoller {
-    public static final int ROLLER_MOTOR = 12;
+    public static final int ROLLER_MOTOR = 14;
   }
 
   public static final class Climber{
@@ -65,11 +65,11 @@ public static final class Controller {
 	}
 
   public static final class TikiTorchArm {
-    public static final int ARM_MOTOR = 15;
+    public static final int ARM_MOTOR = 12;
   }
 
   public static final class TikiTorchRoller {
-    public static final int ROLLER_MOTOR = 14;
+    public static final int ROLLER_MOTOR = 15;
   }
 
   public static final class Vision {

@@ -16,6 +16,8 @@ import org.mort11.commands.actions.endeffector.SetTikiTorchRoller;
 import static org.mort11.config.Inputs.joystick;
 import static org.mort11.config.Inputs.xboxController;
 import static org.mort11.config.constants.PhysicalConstants.Drivetrain.IMU_TO_ROBOT_FRONT_ANGLE;
+
+import org.mort11.subsystems.Climber;
 import org.mort11.subsystems.Drivetrain;
 import org.mort11.subsystems.Elevator;
 import org.mort11.subsystems.TikiTorchArm;
@@ -31,12 +33,14 @@ public class IO {
 	private static Drivetrain drivetrain;
   private static Elevator elevator;
   private static TikiTorchArm tikiTorch;
+  private static Climber climber;
 
 
   public static void init() {
 		drivetrain = Drivetrain.getInstance();
     tikiTorch = TikiTorchArm.getInstance();
     elevator = Elevator.getInstance();
+    climber = Climber.getInstance();
   }
 
   public static void configure() {
@@ -95,6 +99,7 @@ public class IO {
 
       // xboxController.axisLessThan(5, -0.5).whileTrue(new MoveElevator(-0.2));
       // xboxController.axisGreaterThan(5, 0.5).whileTrue(new MoveElevator(0.2));
+
       xboxController.a().whileTrue(new MoveTikiTorchArm(-0.2));
       xboxController.a().whileFalse(new MoveTikiTorchArm(0));
 
@@ -111,6 +116,9 @@ public class IO {
       xboxController.pov(0).whileFalse(new MoveElevator(0));
       xboxController.pov(180).whileTrue(new MoveElevator(-0.2));
       xboxController.pov(180).whileFalse(new MoveElevator(0));
+
+      xboxController.pov(90).toggleOnTrue(new Climb(true));
+      xboxController.pov(270).toggleOnTrue(new Climb(false));
 
     }
 

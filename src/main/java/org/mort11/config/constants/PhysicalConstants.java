@@ -8,12 +8,12 @@ public final class PhysicalConstants {
 
 	public final static class AlgaeArm {
 
-		public static final double OFFSET = 0;
+		public static final double OFFSET = -200;
 
 		public static final double REST = 0;
 
-		public static final double ARM_TOP_NEVER_POSITION = 290;
-		public static final double ARM_BOTTOM_NEVER_POSITION = 106;
+		public static final double ARM_TOP_NEVER_POSITION = 0;
+		public static final double ARM_BOTTOM_NEVER_POSITION = 0;
 
 		public static final double L23_INTAKE = 0;
 		public static final double FLOOR_INTAKE = 0;
@@ -61,7 +61,9 @@ public final class PhysicalConstants {
 	public static final class Elevator {
 
 		//all in inches
-		public static final double ROTATIONS_TO_INCHES = 5.07;
+
+		//3 is elevator stage count
+		public static final double ROTATIONS_TO_INCHES = 5.07 * 3;
 		public static final double MAXIMUM_INCH_CHANGE = 4.0;
 
 		public static final double START_HEIGHT = 0;
@@ -82,12 +84,12 @@ public final class PhysicalConstants {
 
 	public final static class TikiTorchArm {
 
-		public static final double OFFSET = 0;
+		public static final double OFFSET = 295;
 
 		public static final double REST = 0;
 
-		public static final double ARM_TOP_NEVER_POSITION = 250;
-		public static final double ARM_BOTTOM_NEVER_POSITION = 5;
+		public static final double ARM_TOP_NEVER_POSITION = 45;
+		public static final double ARM_BOTTOM_NEVER_POSITION = 0;
 
 		public static final double L4_SCORE = 0;
 		public static final double L23_SCORE = 0;

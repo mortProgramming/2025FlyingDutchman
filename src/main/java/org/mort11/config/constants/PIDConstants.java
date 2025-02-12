@@ -52,7 +52,7 @@ public final class PIDConstants {
 		// public static final double POS_VEL_TOLERANCE = 0;
 
 		public static final double POS_KS = 0;
-		public static final double POS_KG = 0;
+		public static final double POS_KG = -0.05;
 		public static final double POS_KV = 0;
 		public static final double POS_KA = 0;
   }
@@ -61,7 +61,7 @@ public final class PIDConstants {
 		//FeedForward
 		public final static double ROT_KS = 0;
 		public final static double ROT_KV = 0;
-		public final static double ROT_KG = 0;
+		public final static double ROT_KG = -0.025;
 		public final static double ROT_KA = 0;
 
 		//PID Rotational

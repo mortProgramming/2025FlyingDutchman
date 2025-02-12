@@ -62,6 +62,7 @@ public static final class Controller {
 
   public static final class Elevator {
 		public static final int MOTOR = 11;
+    public static final int ENCODER = 0;
 	}
 
   public static final class TikiTorchArm {

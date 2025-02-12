@@ -37,7 +37,7 @@ public class MoveTikiTorchArm extends Command  {
     public void execute() {
       // totalDistanceChanged += incrementDegPerSecond / 50;
       //   tikiTorchArm.setPosition(startPosition + totalDistanceChanged);
-      tikiTorchArm.getArmMotor().setPercent(testingSpeed);
+      tikiTorchArm.setArmMotorPercent(testingSpeed);
     }
 
   @Override

@@ -107,6 +107,11 @@ public class IO {
       xboxController.y().whileTrue(new MoveAlgaeArm(0.2));
       xboxController.y().whileFalse(new MoveAlgaeArm(0));
 
+      xboxController.pov(0).whileTrue(new MoveElevator(0.2));
+      xboxController.pov(0).whileFalse(new MoveElevator(0));
+      xboxController.pov(180).whileTrue(new MoveElevator(-0.2));
+      xboxController.pov(180).whileFalse(new MoveElevator(0));
+
     }
 
   public static Boolean isBlue () {

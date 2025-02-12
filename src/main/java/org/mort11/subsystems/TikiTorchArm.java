@@ -16,9 +16,9 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class TikiTorchArm extends SubsystemBase {
     public static TikiTorchArm tikiTorchArm;
 
-    public Motor tikiTorchArmMotor;
+    private Motor tikiTorchArmMotor;
 
-    private double armSpeed, rollerSpeed;
+    private double armSpeed;
     
     private ProfiledPIDController armPidController;
     private ArmFeedforward feedforward;
@@ -27,7 +27,6 @@ public class TikiTorchArm extends SubsystemBase {
         tikiTorchArmMotor = new Motor(NEO550, ARM_MOTOR);
 
         armSpeed = 0;
-        rollerSpeed = 0;
 
         armPidController = new ProfiledPIDController(ROT_KP, ROT_KI, ROT_KD, ARM_ROT_CONSTRAINTS);
         feedforward = new ArmFeedforward(ROT_KS, ROT_KG, ROT_KV, ROT_KA);
@@ -45,12 +44,8 @@ public class TikiTorchArm extends SubsystemBase {
             feedforward.calculate(Math.toRadians(encoderToDegrees()), getEncoderVelocityDegrees());
         }
 
-        public void setArmVoltage(double voltage){
-           this.armSpeed = voltage / 12;
-        }
-    
-        public void setRollerSpeed(double rollerSpeed){
-            this.rollerSpeed = rollerSpeed / 12;
+        public void setArmMotorPercent(double percent){
+           this.armSpeed = percent + feedforward.calculate(Math.toRadians(encoderToDegrees()), getEncoderVelocityDegrees());
         }
 
         public double encoderToDegrees() {
@@ -60,7 +55,7 @@ public class TikiTorchArm extends SubsystemBase {
                 degrees += 360;
             }
         
-            return degrees + OFFSET; 
+            return - degrees + OFFSET; 
         }
 
     public double getArmVoltage(){

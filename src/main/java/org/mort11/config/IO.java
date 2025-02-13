@@ -5,14 +5,15 @@ import org.mort11.commands.actions.drivetrain.Angle2AprilTag;
 import org.mort11.commands.actions.drivetrain.Drive;
 import org.mort11.commands.actions.drivetrain.ToTag;
 import org.mort11.commands.actions.endeffector.Climb;
-import org.mort11.commands.actions.endeffector.Elevate;
 import org.mort11.commands.actions.endeffector.MoveAlgaeArm;
 import org.mort11.commands.actions.endeffector.MoveElevator;
 import org.mort11.commands.actions.endeffector.MoveTikiTorchArm;
-import org.mort11.commands.actions.endeffector.SetAlgaeArm;
 import org.mort11.commands.actions.endeffector.SetAlgaeRoller;
-import org.mort11.commands.actions.endeffector.SetTikiTorchArm;
 import org.mort11.commands.actions.endeffector.SetTikiTorchRoller;
+import org.mort11.commands.actions.endeffector.pid.Elevate;
+import org.mort11.commands.actions.endeffector.pid.SetAlgaeArm;
+import org.mort11.commands.actions.endeffector.pid.SetTikiTorchArm;
+
 import static org.mort11.config.Inputs.joystick;
 import static org.mort11.config.Inputs.xboxController;
 import static org.mort11.config.constants.PhysicalConstants.Drivetrain.IMU_TO_ROBOT_FRONT_ANGLE;

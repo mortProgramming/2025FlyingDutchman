@@ -34,8 +34,8 @@ public class Elevator extends SubsystemBase {
         feedforward = new ElevatorFeedforward(POS_KS, POS_KG, POS_KV, POS_KA);
 
         motorSpeed = 0;
-        elevatorPosition = START_HEIGHT;
-        rotationsCompleted = 0;
+        elevatorPosition = 0;
+        rotationsCompleted = START_HEIGHT / ROTATIONS_TO_INCHES;
     }
 
     @Override

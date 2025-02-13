@@ -1,4 +1,4 @@
-package org.mort11.commands.actions.endeffector;
+package org.mort11.commands.actions.endeffector.pid;
 
 import static org.mort11.config.constants.PhysicalConstants.TikiTorchArm.*;
 

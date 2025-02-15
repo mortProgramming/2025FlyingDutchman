@@ -116,15 +116,15 @@ public class Inputs {
     }
     
     public static double getLeftControllerXSwerve() {
-        return driveController.getLeftX() * drivetrain.getMaxSpeedMeters();
+        return -modifyAxis1(driveController.getLeftX(), 1)  * drivetrain.getMaxSpeedMeters();
     }
 
     public static double getLeftControllerYSwerve() {
-        return driveController.getLeftY() * drivetrain.getMaxSpeedMeters();
+        return modifyAxis1(driveController.getLeftY(), 1) * drivetrain.getMaxSpeedMeters();
     }
     
     public static double getRightControllerXSwerve(){
-        return driveController.getRightX() * drivetrain.getMaxSpeedMeters() / 
+        return modifyAxis1(driveController.getRawAxis(2), 1) * drivetrain.getMaxSpeedMeters() / 
                 DRIVEBASE_RADIUS_METERS;
     }
 }

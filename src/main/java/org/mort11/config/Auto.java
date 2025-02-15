@@ -53,9 +53,10 @@ public class Auto {
 		//PATHPLANNED
 
 		autoChooser.addOption("ScoreL4JDescoreKL", 
-		new ScoreL4JDescoreKL());
+			new ScoreL4JDescoreKL()
+		);
 
-		SmartDashboard.putData(autoChooser);
+		SmartDashboard.putData("Auton Chooser", autoChooser);
 	}
 
 	public static Command getPlanned(String plan) {

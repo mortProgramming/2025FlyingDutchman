@@ -128,7 +128,9 @@ public class Drivetrain extends SubsystemBase {
 			);
 		}
 
-		swerveDrive.setOrientedVelocity(speeds);
+		
+
+		swerveDrive.setVelocity(speeds);
 
     swerveDrive.update();
 
@@ -145,7 +147,7 @@ public class Drivetrain extends SubsystemBase {
   }
 
   public Command setGyroscopeZero(double angle) {
-		return new InstantCommand(() -> swerveDrive.zeroIMU(angle));
+		return new InstantCommand(() -> swerveDrive.zeroIMU(angle), drivetrain);
 	}
 
 

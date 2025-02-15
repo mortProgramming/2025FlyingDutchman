@@ -5,7 +5,7 @@ public final class PortConstants {
 public static final class Controller {
     public static final int JOYSTICK = 1;
     public static final int TESTING_CONTROLLER = 2;
-    public static final int DRIVE_CONTROLLER = 1;
+    public static final int DRIVE_CONTROLLER = 4;
     public static final int COMP_CONTROLLER = 3;
 
     public static final int JOYSTICK_X_CHANNEL = 0;
@@ -13,7 +13,7 @@ public static final class Controller {
     public static final int JOYSTICK_TWIST_CHANNEL = 3;
     public static final int THROTTLE_CHANNEL = 2;
 
-    public static final double DEAD_BAND = 0;
+    public static final double DEAD_BAND = 0.05;
 
     public static final double MAX_THROTTLE = 0.2;
     public static final double MIN_THROTTLE = 0.05;

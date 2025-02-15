@@ -36,11 +36,19 @@ public class Drive extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    // drivetrain.setDrive(
+    //   new ChassisSpeeds(
+    //     wantedX.getAsDouble(),
+		// 		wantedY.getAsDouble(), 
+    //     wantedTheta.getAsDouble()
+    //   )
+    // );
     drivetrain.setDrive(
-      new ChassisSpeeds(
+      ChassisSpeeds.fromFieldRelativeSpeeds(
         wantedX.getAsDouble(),
 				wantedY.getAsDouble(), 
-        wantedTheta.getAsDouble()
+        wantedTheta.getAsDouble(),
+        drivetrain.getRotation2d()
       )
     );
   }

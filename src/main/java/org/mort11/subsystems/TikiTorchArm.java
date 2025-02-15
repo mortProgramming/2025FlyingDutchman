@@ -39,13 +39,15 @@ public class TikiTorchArm extends SubsystemBase {
         SmartDashboard.putNumber("TikiArmSpeed", getEncoderVelocityDegrees());
     }
         
-        public void setPosition(double setpoint) {
-            armSpeed = armPidController.calculate(encoderToDegrees(), setpoint) + 
-            feedforward.calculate(Math.toRadians(encoderToDegrees()), getEncoderVelocityDegrees());
-        }
+        // public void setPosition(double setpoint) {
+        //     armSpeed = armPidController.calculate(encoderToDegrees(), setpoint) + 
+        //     feedforward.calculate(Math.toRadians(encoderToDegrees()), getEncoderVelocityDegrees());
+        // }
 
         public void setArmMotorPercent(double percent){
-           this.armSpeed = percent + feedforward.calculate(Math.toRadians(encoderToDegrees()), getEncoderVelocityDegrees());
+            this.armSpeed = percent + feedforward.calculate(Math.toRadians(encoderToDegrees()), getEncoderVelocityDegrees());
+            //this.armSpeed = percent;
+
         }
 
         public double encoderToDegrees() {

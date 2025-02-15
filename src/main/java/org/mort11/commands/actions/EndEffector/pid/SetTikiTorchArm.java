@@ -26,11 +26,13 @@ public class SetTikiTorchArm extends Command {
   @Override
   public void execute() {
     tiki.setArmMotorPercent(
-            tiki.getPIDController().calculate(
+            -tiki.getPIDController().calculate(
                 tiki.encoderToDegrees(), 
                 setpoint
             )
         );
+
+
   }
 
   @Override
@@ -40,7 +42,7 @@ public class SetTikiTorchArm extends Command {
 
   @Override
   public void end(boolean interrupted) {
-    tiki.setPosition(setpoint);
+    tiki.setArmMotorPercent(0);
   }
 
   public static Command l1() {
@@ -61,5 +63,9 @@ public class SetTikiTorchArm extends Command {
 
   public static Command rest() {
     return new SetTikiTorchArm(REST);
+  }
+
+  public static Command algaeClear() {
+    return new SetTikiTorchArm(ALGAE_CLEAR);
   }
 }

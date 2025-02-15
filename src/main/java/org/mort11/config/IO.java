@@ -3,11 +3,13 @@ package org.mort11.config;
 import org.mort11.commands.actions.drivetrain.Angle2AprilTag;
 import org.mort11.commands.actions.drivetrain.Drive;
 import org.mort11.commands.actions.drivetrain.ToTag;
-import org.mort11.commands.actions.endeffector.move.MoveElevator;
-import org.mort11.commands.actions.endeffector.move.MoveTikiTorchArm;
+
 import org.mort11.commands.actions.endeffector.pid.Elevate;
 import org.mort11.commands.actions.endeffector.pid.SetAlgaeArm;
 import org.mort11.commands.actions.endeffector.pid.SetTikiTorchArm;
+import org.mort11.commands.actions.endeffector.pid.ToggleAlgaeArm;
+import org.mort11.commands.actions.endeffector.pid.ToggleTiki;
+
 import org.mort11.commands.actions.endeffector.velocity.Climb;
 import org.mort11.commands.actions.endeffector.velocity.VelocityAlgaeRoller;
 import org.mort11.commands.actions.endeffector.velocity.VelocityTikiTorchRoller;
@@ -40,7 +42,7 @@ public class IO {
   private static TikiTorchArm tikiTorch;
   private static Climber climber;
 
-  private static FlipOrFlop algaeArmToggle;
+  private static FlipOrFlop algaeArmToggle, tikiArmToggle;
 
 
   public static void init() {
@@ -50,6 +52,7 @@ public class IO {
     climber = Climber.getInstance();
 
     algaeArmToggle = new FlipOrFlop();
+    tikiArmToggle = new FlipOrFlop();
   }
 
   public static void configure() {
@@ -67,12 +70,14 @@ public class IO {
 
     driveController.touchpad().whileTrue(drivetrain.setGyroscopeZero(IMU_TO_ROBOT_FRONT_ANGLE));
 
+    joystick.trigger().whileTrue(drivetrain.setGyroscopeZero(IMU_TO_ROBOT_FRONT_ANGLE));
+
     testingController.start().whileTrue(new InstantCommand(() -> drivetrain.getSwerveDrive().resetPosition(
       new Pose2d(0, 0, Rotation2d.fromDegrees(0))
     )));
 
-      joystick.trigger().whileTrue(new Angle2AprilTag(0));
-      driveController.axisGreaterThan(3, 0.7).whileTrue(new ToTag(0));
+      // joystick.trigger().whileTrue(new Angle2AprilTag(0));
+      // driveController.axisGreaterThan(3, 0.7).whileTrue(new ToTag(0));
 
 
     //TODO Xbox Controller Commands
@@ -86,35 +91,59 @@ public class IO {
       compController.pov(270).whileTrue(Elevate.l2());
       compController.pov(180).whileTrue(Elevate.l3());
       compController.pov(90).whileTrue(Elevate.l4());
+      compController.start().whileTrue(Elevate.highAlgae());
+      compController.back().whileTrue(Elevate.lowAlgae());
 
-      compController.y().whileTrue(SetTikiTorchArm.l4());
-      compController.y().whileFalse(SetTikiTorchArm.intake());
+      // compController.y().whileTrue(SetTikiTorchArm.intake());
+      // compController.y().whileFalse(SetTikiTorchArm.l4());
+
+      // tikiTorch.setDefaultCommand(new ToggleTiki(() -> compController.y().getAsBoolean()));
+      compController.y().onTrue(new ToggleTiki(() -> compController.y().getAsBoolean()));
+
+      // compController.y().toggleOnTrue(SetTikiTorchArm.intake());
+      // compController.y().toggleOnFalse(SetTikiTorchArm.l4());
+
+      compController.b().whileTrue(SetTikiTorchArm.algaeClear());
+      // compController.b().whileFalse(SetTikiTorchArm.l4());
+
+      compController.x().onTrue(new ToggleAlgaeArm(() -> compController.x().getAsBoolean()));
       
-      compController.x().whileTrue(SetAlgaeArm.l23Intake());
-      compController.x().whileFalse(SetAlgaeArm.rest());
+      // compController.x().whileTrue(SetAlgaeArm.l23Intake());
+      // compController.x().whileFalse(SetAlgaeArm.rest());
 
-      compController.x().onTrue(
-        algaeArmToggle.FlipFlop(
-          SetAlgaeArm.rest(), 
-          SetAlgaeArm.l23Intake(), 
-          () -> compController.x().getAsBoolean()
-        )
-      );
+      compController.a().whileTrue(SetAlgaeArm.floor());
+      // compController.a().whileFalse(SetAlgaeArm.rest());
+
+      compController.axisGreaterThan(3, 0.25).whileTrue(VelocityTikiTorchRoller.outtake());
+      compController.axisGreaterThan(3, 0.25).whileFalse(VelocityTikiTorchRoller.nothing());
+
+      compController.rightBumper().whileTrue(VelocityTikiTorchRoller.intake());
+      compController.rightBumper().whileFalse(VelocityTikiTorchRoller.nothing());
+
+      compController.leftBumper().whileTrue(VelocityAlgaeRoller.intake());
+      compController.leftBumper().whileFalse(VelocityAlgaeRoller.nothing());
+
+      compController.axisGreaterThan(2, 0.25).whileTrue(VelocityAlgaeRoller.outtake());
+      compController.axisGreaterThan(2, 0.25).whileFalse(VelocityAlgaeRoller.nothing());
+
+      // compController.x().onTrue(
+      //   algaeArmToggle.FlipFlop(
+      //     SetAlgaeArm.rest(), 
+      //     SetAlgaeArm.l23Intake(), 
+      //     () -> compController.x().getAsBoolean()
+      //   )
+      // );
+
+      // compController.y().onTrue(
+      //   tikiArmToggle.FlipFlop(
+      //     SetTikiTorchArm.rest(), 
+      //     SetTikiTorchArm.l4(), 
+      //     () -> compController.y().getAsBoolean()
+      //   )
+      // );
 
 
       //TESTING XBOXCONTROLLER SETTINGS
-
-      testingController.rightTrigger().whileTrue(VelocityTikiTorchRoller.outtake());
-      testingController.rightTrigger().whileFalse(VelocityTikiTorchRoller.nothing());
-
-      testingController.rightBumper().whileTrue(VelocityTikiTorchRoller.intake());
-      testingController.rightBumper().whileFalse(VelocityTikiTorchRoller.nothing());
-
-      testingController.leftBumper().whileTrue(VelocityAlgaeRoller.intake());
-      testingController.leftBumper().whileFalse(VelocityAlgaeRoller.nothing());
-
-      testingController.leftTrigger().whileTrue(VelocityAlgaeRoller.outtake());
-      testingController.leftTrigger().whileFalse(VelocityAlgaeRoller.nothing());
 
       testingController.a().whileTrue(new VelocityTikiTorchArm(-0.2));
       testingController.a().whileFalse(new VelocityTikiTorchArm(0));

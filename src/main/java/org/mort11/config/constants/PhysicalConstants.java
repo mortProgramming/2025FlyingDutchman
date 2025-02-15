@@ -15,8 +15,8 @@ public final class PhysicalConstants {
 		public static final double ARM_TOP_NEVER_POSITION = 0;
 		public static final double ARM_BOTTOM_NEVER_POSITION = 0;
 
-		public static final double L23_INTAKE = 57;
-		public static final double FLOOR_INTAKE = 0;
+		public static final double L23_INTAKE = 45;
+		public static final double FLOOR_INTAKE = -35;
 
 		public static final double PROCESSOR_SCORE = 0;
 		public static final double BARGE_SCORE = 0;
@@ -65,12 +65,12 @@ public final class PhysicalConstants {
 		public static final double ROTATIONS_TO_INCHES = 5.642 * 3;
 		public static final double MAXIMUM_INCH_CHANGE = 4.0;
 
-		public static final double ELEVATOR_OFFSET = -2.5;
+		public static final double ELEVATOR_OFFSET = 10.5;
 		public static final double REST_HEIGHT = 4;
 
 		public static final double L1_HEIGHT = 13;
 		public static final double L2_HEIGHT = 32;
-		public static final double L3_HEIGHT = 41;
+		public static final double L3_HEIGHT = 46;
 		public static final double L4_HEIGHT = 71;
 		public static final double INTAKE_HEIGHT = 0;
 
@@ -94,7 +94,9 @@ public final class PhysicalConstants {
 		public static final double L23_SCORE = -49;
 		public static final double L1_SCORE = 0;
 
-		public static final double INTAKE = 0;
+		public static final double INTAKE = 47;
+
+		public static final double ALGAE_CLEAR = -89;
 	}
 
 	public final static class TikiTorchRoller {

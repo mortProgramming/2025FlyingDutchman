@@ -44,14 +44,13 @@ public class Elevator extends SubsystemBase {
 
         elevatorPosition = calculateElevatorPosition();
         SmartDashboard.putNumber("Elevator Height", getElevatorPositionInches());
-        SmartDashboard.putNumber("Elevator Absolite Encoder", getAbsoluteEncoderPositionRotations());
+        SmartDashboard.putNumber("Elevator Speed Inches", getElevatorVelocityInches());
     }
 
     public void setElevatorPosition(double positionInches) {
         motorSpeed = controller.calculate(positionInches, getElevatorPositionInches()) + 
         POS_KG;
     }
-
 
     public void setElevatorMotorPercent(double motorSpeed) {
         this.motorSpeed = motorSpeed + POS_KG;
@@ -63,7 +62,7 @@ public class Elevator extends SubsystemBase {
         return elevatorPosition;
     }
 
-    public double getElevatorVelocityRPM() {
+    public double getElevatorVelocityInches() {
         return encoder.getVelocityRotations() * ROTATIONS_TO_INCHES;
     }
 

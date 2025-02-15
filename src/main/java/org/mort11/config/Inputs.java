@@ -1,17 +1,7 @@
 package org.mort11.config;
 
 import static org.mort11.config.constants.PhysicalConstants.Drivetrain.DRIVEBASE_RADIUS_METERS;
-import static org.mort11.config.constants.PortConstants.Controller.CONTROLLER;
-import static org.mort11.config.constants.PortConstants.Controller.DEAD_BAND;
-import static org.mort11.config.constants.PortConstants.Controller.JOYSTICK;
-import static org.mort11.config.constants.PortConstants.Controller.JOYSTICK_TWIST_CHANNEL;
-import static org.mort11.config.constants.PortConstants.Controller.JOYSTICK_X_CHANNEL;
-import static org.mort11.config.constants.PortConstants.Controller.JOYSTICK_Y_CHANNEL;
-import static org.mort11.config.constants.PortConstants.Controller.MAX_ROTATE;
-import static org.mort11.config.constants.PortConstants.Controller.MAX_THROTTLE;
-import static org.mort11.config.constants.PortConstants.Controller.MIN_ROTATE;
-import static org.mort11.config.constants.PortConstants.Controller.MIN_THROTTLE;
-import static org.mort11.config.constants.PortConstants.Controller.THROTTLE_CHANNEL;
+import static org.mort11.config.constants.PortConstants.Controller.*;
 import org.mort11.subsystems.Drivetrain;
 
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
@@ -21,13 +11,16 @@ public class Inputs {
 
     public static CommandJoystick joystick;
 	// private static CommandJoystick throttle;
-	public static CommandXboxController xboxController;
+	public static CommandXboxController testingController;
+
+    public static CommandXboxController compController;
 
 	public static Drivetrain drivetrain;
 
     public static void init() {
 		joystick = new CommandJoystick(JOYSTICK);
-        xboxController = new CommandXboxController(CONTROLLER);
+        testingController = new CommandXboxController(TESTING_CONTROLLER);
+        compController = new CommandXboxController(COMP_CONTROLLER);
 
         joystick.setXChannel(JOYSTICK_X_CHANNEL);
         joystick.setYChannel(JOYSTICK_Y_CHANNEL);
@@ -88,8 +81,8 @@ public class Inputs {
     }
 
     public static double getThrottle() {
-        return (joystick.getThrottle() + 1 ) / 2;
-        // return throttle.getThrottle();
+        return 1 - (joystick.getThrottle() + 1 ) / 2;
+        // return joystick.getThrottle();
     }
 
     /**
@@ -117,18 +110,19 @@ public class Inputs {
 			    * drivetrain.getMaxSpeedMeters() / 
                 DRIVEBASE_RADIUS_METERS;
     }
-    
-    public static double getLeftControllerXSwerve() {
-        return xboxController.getLeftX() * drivetrain.getMaxSpeedMeters();
-    }
-
-    public static double getLeftControllerYSwerve() {
-        return xboxController.getLeftY() * drivetrain.getMaxSpeedMeters();
-    }
-    
-    public static double getRightControllerXSwerve(){
-        return xboxController.getRightX() * drivetrain.getMaxSpeedMeters() / 
-                DRIVEBASE_RADIUS_METERS;
-    }
 }
+    
+//     public static double getLeftControllerXSwerve() {
+//         return xboxController.getLeftX() * drivetrain.getMaxSpeedMeters();
+//     }
+
+//     public static double getLeftControllerYSwerve() {
+//         return xboxController.getLeftY() * drivetrain.getMaxSpeedMeters();
+//     }
+    
+//     public static double getRightControllerXSwerve(){
+//         return xboxController.getRightX() * drivetrain.getMaxSpeedMeters() / 
+//                 DRIVEBASE_RADIUS_METERS;
+//     }
+// }
  

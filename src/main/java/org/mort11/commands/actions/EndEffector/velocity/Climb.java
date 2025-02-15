@@ -1,4 +1,4 @@
-package org.mort11.commands.actions.endeffector;
+package org.mort11.commands.actions.endeffector.velocity;
 
 import org.mort11.subsystems.Climber;
 

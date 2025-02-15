@@ -5,8 +5,6 @@ import static org.mort11.config.constants.PhysicalConstants.AlgaeArm.*;
 import static org.mort11.config.constants.PortConstants.AlgaeArm.*;
 
 import static org.mort11.config.constants.PhysicalConstants.ROBOT_VOLTAGE;
-import org.mort11.library.hardware.encoder.Encoder;
-import static org.mort11.library.hardware.encoder.EncoderTypeEnum.THROUGHBORE;
 import org.mort11.library.hardware.motor.Motor;
 import static org.mort11.library.hardware.motor.MotorTypeEnum.NEO550;
 
@@ -35,8 +33,9 @@ public class AlgaeArm extends SubsystemBase {
     }
 
     @Override
-    public void periodic(){
-        scoopArm.setPercent(armSpeed);
+    public void periodic() {
+        scoopArm.setVoltage(armSpeed * ROBOT_VOLTAGE);
+
         SmartDashboard.putNumber("Algae Encoder Position Degress", encoderToDegrees());
         SmartDashboard.putNumber("AlgaeArmSpeed", getEncoderVelocityDegrees());
     }
@@ -46,8 +45,8 @@ public class AlgaeArm extends SubsystemBase {
         feedforward.calculate(Math.toRadians(encoderToDegrees()), getEncoderVelocityDegrees());
     }
 
-    public void setArmVoltage(double voltage){
-       this.armSpeed = voltage / 12;
+    public void setArmPercent(double armSpeed) {
+       this.armSpeed = armSpeed + feedforward.calculate(Math.toRadians(encoderToDegrees()), getEncoderVelocityDegrees());
     }
 
 public double encoderToDegrees() {
@@ -70,6 +69,10 @@ public double getEncoderPosition(){
 
 public double getEncoderVelocityDegrees() {
     return scoopArm.getAbsoluteValueEncoderVelocity() * 360;
+}
+
+public ProfiledPIDController getPIDController() {
+    return armPidController;
 }
 
 public Motor getArmMotor(){

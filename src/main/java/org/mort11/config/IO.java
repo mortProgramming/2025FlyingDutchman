@@ -1,21 +1,23 @@
 package org.mort11.config;
 
-
 import org.mort11.commands.actions.drivetrain.Angle2AprilTag;
 import org.mort11.commands.actions.drivetrain.Drive;
 import org.mort11.commands.actions.drivetrain.ToTag;
-import org.mort11.commands.actions.endeffector.Climb;
-import org.mort11.commands.actions.endeffector.MoveAlgaeArm;
-import org.mort11.commands.actions.endeffector.MoveElevator;
-import org.mort11.commands.actions.endeffector.MoveTikiTorchArm;
-import org.mort11.commands.actions.endeffector.SetAlgaeRoller;
-import org.mort11.commands.actions.endeffector.SetTikiTorchRoller;
+import org.mort11.commands.actions.endeffector.move.MoveElevator;
+import org.mort11.commands.actions.endeffector.move.MoveTikiTorchArm;
 import org.mort11.commands.actions.endeffector.pid.Elevate;
 import org.mort11.commands.actions.endeffector.pid.SetAlgaeArm;
 import org.mort11.commands.actions.endeffector.pid.SetTikiTorchArm;
+import org.mort11.commands.actions.endeffector.velocity.Climb;
+import org.mort11.commands.actions.endeffector.velocity.VelocityAlgaeRoller;
+import org.mort11.commands.actions.endeffector.velocity.VelocityTikiTorchRoller;
+import org.mort11.commands.actions.endeffector.velocity.VelocityAlgaeArm;
+import org.mort11.commands.actions.endeffector.velocity.VelocityElevator;
+import org.mort11.commands.actions.endeffector.velocity.VelocityTikiTorchArm;
 
 import static org.mort11.config.Inputs.joystick;
-import static org.mort11.config.Inputs.xboxController;
+import static org.mort11.config.Inputs.testingController;
+import static org.mort11.config.Inputs.compController;
 import static org.mort11.config.constants.PhysicalConstants.Drivetrain.IMU_TO_ROBOT_FRONT_ANGLE;
 
 import org.mort11.subsystems.Climber;
@@ -68,58 +70,56 @@ public class IO {
 
     //TODO Xbox Controller Commands
 
-      // xboxController.a().whileTrue(new Climb(false));
-      // xboxController.b().whileTrue(new Climb(true));
+      // compController.a().whileTrue(new Climb(false));
+      // compController.b().whileTrue(new Climb(true));
 
-      // xboxController.pov(0).toggleOnTrue(Elevate.l1());
-      // xboxController.pov(0).toggleOnFalse(Elevate.rest());
-      // xboxController.pov(270).whileTrue(Elevate.l2());
-      // xboxController.pov(180).whileTrue(Elevate.l3());
-      // xboxController.pov(90).whileTrue(Elevate.l4());
+      // compController.pov(0).toggleOnTrue(Elevate.l1());
+      // compController.pov(0).toggleOnFalse(Elevate.rest());
+      compController.pov(0).whileTrue(Elevate.rest());
+      compController.pov(270).whileTrue(Elevate.l2());
+      compController.pov(180).whileTrue(Elevate.l3());
+      compController.pov(90).whileTrue(Elevate.l4());
 
-      xboxController.rightTrigger().whileTrue(SetTikiTorchRoller.outtake());
-      xboxController.rightTrigger().whileFalse(SetTikiTorchRoller.nothing());
+      compController.y().whileTrue(SetTikiTorchArm.l4());
+      compController.y().whileFalse(SetTikiTorchArm.intake());
+      
+      compController.x().whileTrue(SetAlgaeArm.l23Intake());
+      compController.x().whileFalse(SetAlgaeArm.rest());
 
-      xboxController.rightBumper().whileTrue(SetTikiTorchRoller.intake());
-      xboxController.rightBumper().whileFalse(SetTikiTorchRoller.nothing());
 
-      xboxController.leftBumper().whileTrue(SetAlgaeRoller.intake());
-      xboxController.leftBumper().whileFalse(SetAlgaeRoller.nothing());
+      //TESTING XBOXCONTROLLER SETTINGS
 
-      xboxController.leftTrigger().whileTrue(SetAlgaeRoller.outtake());
-      xboxController.leftTrigger().whileFalse(SetAlgaeRoller.nothing());
+      testingController.rightTrigger().whileTrue(VelocityTikiTorchRoller.outtake());
+      testingController.rightTrigger().whileFalse(VelocityTikiTorchRoller.nothing());
 
-      // xboxController.y().toggleOnTrue(SetTikiTorchArm.intake());
-      // xboxController.y().toggleOnFalse(SetTikiTorchArm.l4());
+      testingController.rightBumper().whileTrue(VelocityTikiTorchRoller.intake());
+      testingController.rightBumper().whileFalse(VelocityTikiTorchRoller.nothing());
 
-      // xboxController.x().toggleOnTrue(SetAlgaeArm.l23Intake());
-      // xboxController.x().toggleOnFalse(SetAlgaeArm.rest());
+      testingController.leftBumper().whileTrue(VelocityAlgaeRoller.intake());
+      testingController.leftBumper().whileFalse(VelocityAlgaeRoller.nothing());
 
-      // xboxController.axisLessThan(1, -0.5).whileTrue(new MoveTikiTorchArm(-5));
-      // xboxController.axisGreaterThan(1, 0.5).whileTrue(new MoveTikiTorchArm(5));
+      testingController.leftTrigger().whileTrue(VelocityAlgaeRoller.outtake());
+      testingController.leftTrigger().whileFalse(VelocityAlgaeRoller.nothing());
 
-      // xboxController.axisLessThan(5, -0.5).whileTrue(new MoveElevator(-0.2));
-      // xboxController.axisGreaterThan(5, 0.5).whileTrue(new MoveElevator(0.2));
+      testingController.a().whileTrue(new VelocityTikiTorchArm(-0.2));
+      testingController.a().whileFalse(new VelocityTikiTorchArm(0));
 
-      xboxController.a().whileTrue(new MoveTikiTorchArm(-0.2));
-      xboxController.a().whileFalse(new MoveTikiTorchArm(0));
+      testingController.b().whileTrue(new VelocityTikiTorchArm(0.2));
+      testingController.b().whileFalse(new VelocityTikiTorchArm(0));
 
-      xboxController.b().whileTrue(new MoveTikiTorchArm(0.2));
-      xboxController.b().whileFalse(new MoveTikiTorchArm(0));
+      testingController.x().whileTrue(new VelocityAlgaeArm(-0.2));
+      testingController.x().whileFalse(new VelocityAlgaeArm(0));
 
-      xboxController.x().whileTrue(new MoveAlgaeArm(-0.2));
-      xboxController.x().whileFalse(new MoveAlgaeArm(0));
+      testingController.y().whileTrue(new VelocityAlgaeArm(0.2));
+      testingController.y().whileFalse(new VelocityAlgaeArm(0));
 
-      xboxController.y().whileTrue(new MoveAlgaeArm(0.2));
-      xboxController.y().whileFalse(new MoveAlgaeArm(0));
+      testingController.pov(0).whileTrue(new VelocityElevator(-0.2));
+      testingController.pov(0).whileFalse(new VelocityElevator(0));
+      testingController.pov(180).whileTrue(new VelocityElevator(0.2));
+      testingController.pov(180).whileFalse(new VelocityElevator(0));
 
-      xboxController.pov(0).whileTrue(new MoveElevator(0.2));
-      xboxController.pov(0).whileFalse(new MoveElevator(0));
-      xboxController.pov(180).whileTrue(new MoveElevator(-0.2));
-      xboxController.pov(180).whileFalse(new MoveElevator(0));
-
-      xboxController.pov(90).toggleOnTrue(new Climb(true));
-      xboxController.pov(270).toggleOnTrue(new Climb(false));
+      testingController.pov(90).toggleOnTrue(new Climb(true));
+      testingController.pov(270).toggleOnTrue(new Climb(false));
 
     }
 

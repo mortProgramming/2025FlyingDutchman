@@ -18,7 +18,13 @@ public class Elevate extends Command {
 
     @Override
     public void execute() {
-        elevator.setElevatorPosition(targetPosition);
+        // elevator.setElevatorPosition(targetPosition);
+        elevator.setElevatorMotorPercent(
+            -elevator.getPIDController().calculate(
+                elevator.getElevatorPositionInches(), 
+                targetPosition
+            )
+        );
     }
 
     @Override
@@ -27,7 +33,9 @@ public class Elevate extends Command {
     }
 
     @Override
-    public void end(boolean interrupted) {}
+    public void end(boolean interrupted) {
+        elevator.setElevatorMotorPercent(0);
+    }
 
     public static Command l1() {
         return new Elevate(L1_HEIGHT);

@@ -25,7 +25,12 @@ public class SetAlgaeArm extends Command {
 
   @Override
   public void execute(){
-    algaeArm.setPosition(setpoint);
+    algaeArm.setArmPercent(
+          algaeArm.getPIDController().calculate(
+                algaeArm.encoderToDegrees(), 
+                setpoint
+            )
+        );
   }
 
   @Override
@@ -35,7 +40,7 @@ public class SetAlgaeArm extends Command {
 
   @Override
   public void end(boolean interrupted){
-    algaeArm.setPosition(setpoint);
+    algaeArm.setArmPercent(0);
   }
 
   public static Command l23Intake() {

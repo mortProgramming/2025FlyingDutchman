@@ -10,12 +10,12 @@ public final class PhysicalConstants {
 
 		public static final double OFFSET = -200;
 
-		public static final double REST = 0;
+		public static final double REST = 95;
 
 		public static final double ARM_TOP_NEVER_POSITION = 0;
 		public static final double ARM_BOTTOM_NEVER_POSITION = 0;
 
-		public static final double L23_INTAKE = 0;
+		public static final double L23_INTAKE = 57;
 		public static final double FLOOR_INTAKE = 0;
 
 		public static final double PROCESSOR_SCORE = 0;
@@ -47,8 +47,8 @@ public final class PhysicalConstants {
 		public static final int IMU_TO_ROBOT_FRONT_ANGLE = 0;
 
 		public static final double WHEEL_COEFFICIENT_OF_FRICTION = 1;
-		public static final double ROBOT_MASS = 15;
-		public static final double ROBOT_MOMENT_OF_INERTIA = 3;
+		public static final double ROBOT_MASS = 52.1;
+		public static final double ROBOT_MOMENT_OF_INERTIA = ROBOT_MASS * 0.254 * 0.254 / 2;
 		public static final double DRIVE_MOTOR_CURRENT_LIMIT = 80;
     }	
 
@@ -59,24 +59,23 @@ public final class PhysicalConstants {
 	}
 
 	public static final class Elevator {
-
 		//all in inches
 
 		//3 is elevator stage count
-		public static final double ROTATIONS_TO_INCHES = 5.07 * 3;
+		public static final double ROTATIONS_TO_INCHES = 5.642 * 3;
 		public static final double MAXIMUM_INCH_CHANGE = 4.0;
 
-		public static final double START_HEIGHT = -2.5;
-		public static final double REST_HEIGHT = 0;
+		public static final double ELEVATOR_OFFSET = -2.5;
+		public static final double REST_HEIGHT = 4;
 
-		public static final double L1_HEIGHT = 0;
-		public static final double L2_HEIGHT = 0;
-		public static final double L3_HEIGHT = 0;
-		public static final double L4_HEIGHT = 0;
+		public static final double L1_HEIGHT = 13;
+		public static final double L2_HEIGHT = 32;
+		public static final double L3_HEIGHT = 41;
+		public static final double L4_HEIGHT = 71;
 		public static final double INTAKE_HEIGHT = 0;
 
-		public static final double LOW_ALGAE_HEIGHT = 0;
-		public static final double HIGH_ALGAE_HEIGHT = 0;
+		public static final double LOW_ALGAE_HEIGHT = 13.5;
+		public static final double HIGH_ALGAE_HEIGHT = 30;
 		public static final double PROCESSOR_HEIGHT = 0;
 		public static final double BARGE_HEIGHT = 0;
 		public static final double FLOOR_HEIGHT = 0;
@@ -86,13 +85,13 @@ public final class PhysicalConstants {
 
 		public static final double OFFSET = 295;
 
-		public static final double REST = 0;
+		public static final double REST = 59.3;
 
 		public static final double ARM_TOP_NEVER_POSITION = 45;
 		public static final double ARM_BOTTOM_NEVER_POSITION = 0;
 
-		public static final double L4_SCORE = 0;
-		public static final double L23_SCORE = 0;
+		public static final double L4_SCORE = -49;
+		public static final double L23_SCORE = -49;
 		public static final double L1_SCORE = 0;
 
 		public static final double INTAKE = 0;

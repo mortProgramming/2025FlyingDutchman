@@ -1,4 +1,4 @@
-package org.mort11.commands.actions.endeffector;
+package org.mort11.commands.actions.endeffector.velocity;
 
 import static org.mort11.config.constants.PhysicalConstants.TikiTorchRoller.*;
 
@@ -6,12 +6,12 @@ import org.mort11.subsystems.TikiTorchRoller;
 
 import edu.wpi.first.wpilibj2.command.Command;
 
-public class SetTikiTorchRoller extends Command {
+public class VelocityTikiTorchRoller extends Command {
   private TikiTorchRoller tikiTorchRoller;
 
   private double speed;
 
-  public SetTikiTorchRoller(double speed) {
+  public VelocityTikiTorchRoller(double speed) {
     tikiTorchRoller = TikiTorchRoller.getInstance();
 
     this.speed = speed;
@@ -36,15 +36,15 @@ public class SetTikiTorchRoller extends Command {
   public void end(boolean interrupted){}
 
   public static Command intake() {
-    return new SetTikiTorchRoller(INTAKE_SPEED);
+    return new VelocityTikiTorchRoller(INTAKE_SPEED);
   }
 
   public static Command outtake() {
-    return new SetTikiTorchRoller(OUTAKE_SPEED);
+    return new VelocityTikiTorchRoller(OUTAKE_SPEED);
   }
 
   public static Command nothing(){
-    return new SetTikiTorchRoller(0);
+    return new VelocityTikiTorchRoller(0);
   }
 
 }

@@ -35,7 +35,7 @@ public class Elevator extends SubsystemBase {
 
         motorSpeed = 0;
         elevatorPosition = 0;
-        rotationsCompleted = START_HEIGHT / ROTATIONS_TO_INCHES;
+        rotationsCompleted = ELEVATOR_OFFSET / ROTATIONS_TO_INCHES;
     }
 
     @Override
@@ -49,8 +49,7 @@ public class Elevator extends SubsystemBase {
 
     public void setElevatorPosition(double positionInches) {
         motorSpeed = controller.calculate(positionInches, getElevatorPositionInches()) + 
-            feedforward.calculate(getElevatorVelocityRPM()
-        );
+        POS_KG;
     }
 
 
@@ -70,6 +69,10 @@ public class Elevator extends SubsystemBase {
 
     public double getAbsoluteEncoderPositionRotations() {
         return 1 - encoder.getPosition().getRotations();
+    }
+
+    public ProfiledPIDController getPIDController() {
+        return controller;
     }
 
 

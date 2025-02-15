@@ -12,10 +12,10 @@ public final class PIDConstants {
 		public final static double ROT_KA = 0;
 
 		//PID Rotational
-		public final static double ROT_KP = 0.03;
+		public final static double ROT_KP = 0.003;
 		public final static double ROT_KI = 0;
 		public final static double ROT_KD = 0;
-		public final static Constraints ARM_ROT_CONSTRAINTS = new Constraints(20,20);
+		public final static Constraints ARM_ROT_CONSTRAINTS = new Constraints(10,10);
 	}
     
     public final class Drivetrain {
@@ -44,10 +44,10 @@ public final class PIDConstants {
 
 
   public final class Elevator {
-		public static final double POS_KP = 0.5;
+		public static final double POS_KP = 0.04;
 		public static final double POS_KI = 0;
 		public static final double POS_KD = 0;
-		public static final Constraints POS_CONSTRAINTS = new Constraints(0, 0);
+		public static final Constraints POS_CONSTRAINTS = new Constraints(75, 300);
 		// public static final double POS_POS_TOLERANCE = 0.05;
 		// public static final double POS_VEL_TOLERANCE = 0;
 
@@ -65,9 +65,9 @@ public final class PIDConstants {
 		public final static double ROT_KA = 0;
 
 		//PID Rotational
-		public final static double ROT_KP = 0;
+		public final static double ROT_KP = 0.03;
 		public final static double ROT_KI = 0;
 		public final static double ROT_KD = 0;
-		public final static Constraints ARM_ROT_CONSTRAINTS = new Constraints(0,0);
+		public final static Constraints ARM_ROT_CONSTRAINTS = new Constraints(10,10);
 	}
 }

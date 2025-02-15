@@ -70,6 +70,10 @@ public class TikiTorchArm extends SubsystemBase {
         return tikiTorchArmMotor.getAbsoluteValueEncoderVelocity() * 360;
     }
 
+    public ProfiledPIDController getPIDController() {
+        return armPidController;
+    }
+
     public Motor getArmMotor(){
         return tikiTorchArmMotor;
     }

@@ -4,7 +4,8 @@ public final class PortConstants {
 
 public static final class Controller {
     public static final int JOYSTICK = 1;
-    public static final int CONTROLLER = 2;
+    public static final int TESTING_CONTROLLER = 2;
+    public static final int COMP_CONTROLLER = 3;
 
     public static final int JOYSTICK_X_CHANNEL = 0;
     public static final int JOYSTICK_Y_CHANNEL = 1;

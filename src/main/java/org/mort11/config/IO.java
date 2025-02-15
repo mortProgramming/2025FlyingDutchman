@@ -11,6 +11,7 @@ import org.mort11.commands.actions.endeffector.pid.SetTikiTorchArm;
 import org.mort11.commands.actions.endeffector.velocity.Climb;
 import org.mort11.commands.actions.endeffector.velocity.VelocityAlgaeRoller;
 import org.mort11.commands.actions.endeffector.velocity.VelocityTikiTorchRoller;
+import org.mort11.library.commands.FlipOrFlop;
 import org.mort11.commands.actions.endeffector.velocity.VelocityAlgaeArm;
 import org.mort11.commands.actions.endeffector.velocity.VelocityElevator;
 import org.mort11.commands.actions.endeffector.velocity.VelocityTikiTorchArm;
@@ -18,6 +19,7 @@ import org.mort11.commands.actions.endeffector.velocity.VelocityTikiTorchArm;
 import static org.mort11.config.Inputs.joystick;
 import static org.mort11.config.Inputs.testingController;
 import static org.mort11.config.Inputs.compController;
+import static org.mort11.config.Inputs.driveController;
 import static org.mort11.config.constants.PhysicalConstants.Drivetrain.IMU_TO_ROBOT_FRONT_ANGLE;
 
 import org.mort11.subsystems.Climber;
@@ -38,12 +40,16 @@ public class IO {
   private static TikiTorchArm tikiTorch;
   private static Climber climber;
 
+  private static FlipOrFlop algaeArmToggle;
+
 
   public static void init() {
 		drivetrain = Drivetrain.getInstance();
     tikiTorch = TikiTorchArm.getInstance();
     elevator = Elevator.getInstance();
     climber = Climber.getInstance();
+
+    algaeArmToggle = new FlipOrFlop();
   }
 
   public static void configure() {
@@ -52,20 +58,21 @@ public class IO {
 
     //TODO Joystick Commands
 
-		drivetrain.setDefaultCommand(
-			new Drive(Inputs::getJoystickX, Inputs::getJoystickY, Inputs::getJoystickTwist)
-    );
-      // drivetrain.setDefaultCommand(
-      //     new Drive(Inputs::getLeftControllerXSwerve, Inputs::getLeftControllerYSwerve, Inputs::getRightControllerXSwerve)
-      // );
-    joystick.trigger().whileTrue(drivetrain.setGyroscopeZero(IMU_TO_ROBOT_FRONT_ANGLE));
+		// drivetrain.setDefaultCommand(
+		// 	new Drive(Inputs::getJoystickX, Inputs::getJoystickY, Inputs::getJoystickTwist)
+    // );
+      drivetrain.setDefaultCommand(
+          new Drive(Inputs::getLeftControllerXSwerve, Inputs::getLeftControllerYSwerve, Inputs::getRightControllerXSwerve)
+      );
 
-    joystick.button(1).whileTrue(new InstantCommand(() -> drivetrain.getSwerveDrive().resetPosition(
+    driveController.touchpad().whileTrue(drivetrain.setGyroscopeZero(IMU_TO_ROBOT_FRONT_ANGLE));
+
+    testingController.start().whileTrue(new InstantCommand(() -> drivetrain.getSwerveDrive().resetPosition(
       new Pose2d(0, 0, Rotation2d.fromDegrees(0))
     )));
 
       joystick.trigger().whileTrue(new Angle2AprilTag(0));
-      joystick.button(4).whileTrue(new ToTag(0));
+      driveController.axisGreaterThan(3, 0.7).whileTrue(new ToTag(0));
 
 
     //TODO Xbox Controller Commands
@@ -85,6 +92,14 @@ public class IO {
       
       compController.x().whileTrue(SetAlgaeArm.l23Intake());
       compController.x().whileFalse(SetAlgaeArm.rest());
+
+      compController.x().onTrue(
+        algaeArmToggle.FlipFlop(
+          SetAlgaeArm.rest(), 
+          SetAlgaeArm.l23Intake(), 
+          () -> compController.x().getAsBoolean()
+        )
+      );
 
 
       //TESTING XBOXCONTROLLER SETTINGS

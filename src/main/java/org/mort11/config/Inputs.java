@@ -5,6 +5,7 @@ import static org.mort11.config.constants.PortConstants.Controller.*;
 import org.mort11.subsystems.Drivetrain;
 
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
+import edu.wpi.first.wpilibj2.command.button.CommandPS5Controller;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 
 public class Inputs {
@@ -15,12 +16,15 @@ public class Inputs {
 
     public static CommandXboxController compController;
 
+    public static CommandPS5Controller driveController;
+
 	public static Drivetrain drivetrain;
 
     public static void init() {
 		joystick = new CommandJoystick(JOYSTICK);
         testingController = new CommandXboxController(TESTING_CONTROLLER);
         compController = new CommandXboxController(COMP_CONTROLLER);
+        driveController = new CommandPS5Controller(DRIVE_CONTROLLER);
 
         joystick.setXChannel(JOYSTICK_X_CHANNEL);
         joystick.setYChannel(JOYSTICK_Y_CHANNEL);
@@ -110,19 +114,18 @@ public class Inputs {
 			    * drivetrain.getMaxSpeedMeters() / 
                 DRIVEBASE_RADIUS_METERS;
     }
-}
     
-//     public static double getLeftControllerXSwerve() {
-//         return xboxController.getLeftX() * drivetrain.getMaxSpeedMeters();
-//     }
+    public static double getLeftControllerXSwerve() {
+        return driveController.getLeftX() * drivetrain.getMaxSpeedMeters();
+    }
 
-//     public static double getLeftControllerYSwerve() {
-//         return xboxController.getLeftY() * drivetrain.getMaxSpeedMeters();
-//     }
+    public static double getLeftControllerYSwerve() {
+        return driveController.getLeftY() * drivetrain.getMaxSpeedMeters();
+    }
     
-//     public static double getRightControllerXSwerve(){
-//         return xboxController.getRightX() * drivetrain.getMaxSpeedMeters() / 
-//                 DRIVEBASE_RADIUS_METERS;
-//     }
-// }
+    public static double getRightControllerXSwerve(){
+        return driveController.getRightX() * drivetrain.getMaxSpeedMeters() / 
+                DRIVEBASE_RADIUS_METERS;
+    }
+}
  

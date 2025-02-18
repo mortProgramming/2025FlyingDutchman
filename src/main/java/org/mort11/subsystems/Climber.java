@@ -27,6 +27,7 @@ public class Climber extends SubsystemBase{
         compressor = new Compressor(PNEUMATICS_MODULE_PORT, PneumaticsModuleType.CTREPCM);
         compressor.enableDigital();
 
+        rightPiston.set(DoubleSolenoid.Value.kReverse);
     }
 
 	@Override

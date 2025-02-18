@@ -10,16 +10,16 @@ public final class PhysicalConstants {
 
 		public static final double OFFSET = -200;
 
-		public static final double REST = 95;
+		public static final double ALGAE_REST = 95;
 
 		public static final double ARM_TOP_NEVER_POSITION = 0;
 		public static final double ARM_BOTTOM_NEVER_POSITION = 0;
 
-		public static final double L23_INTAKE = 45;
-		public static final double FLOOR_INTAKE = -35;
+		public static final double ALGAE_REEF_INTAKE = 45;
+		public static final double ALGAE_FLOOR_INTAKE = -35;
 
-		public static final double PROCESSOR_SCORE = 0;
-		public static final double BARGE_SCORE = 0;
+		public static final double ALGAE_PROCESSOR_SCORE = 0;
+		public static final double ALGAE_BARGE_SCORE = 0;
 	} 
 
 	public final static class AlgaeRoller {
@@ -66,37 +66,36 @@ public final class PhysicalConstants {
 		public static final double MAXIMUM_INCH_CHANGE = 4.0;
 
 		public static final double ELEVATOR_OFFSET = 10.5;
-		public static final double REST_HEIGHT = 4;
+		public static final double ELEVATOR_REST_HEIGHT = 4;
 
-		public static final double L1_HEIGHT = 13;
-		public static final double L2_HEIGHT = 32;
-		public static final double L3_HEIGHT = 46;
-		public static final double L4_HEIGHT = 71;
-		public static final double INTAKE_HEIGHT = 0;
+		public static final double ELEVATOR_L1_HEIGHT = 13;
+		public static final double ELEVATOR_L2_HEIGHT = 32;
+		public static final double ELEVATOR_L3_HEIGHT = 46;
+		public static final double ELEVATOR_L4_HEIGHT = 71;
+		public static final double ELEVATOR_INTAKE_HEIGHT = 0;
 
-		public static final double LOW_ALGAE_HEIGHT = 13.5;
-		public static final double HIGH_ALGAE_HEIGHT = 30;
-		public static final double PROCESSOR_HEIGHT = 0;
-		public static final double BARGE_HEIGHT = 0;
-		public static final double FLOOR_HEIGHT = 0;
+		public static final double ELEVATOR_LOW_ALGAE_HEIGHT = 13.5;
+		public static final double ELEVATOR_HIGH_ALGAE_HEIGHT = 30;
+		public static final double ELEVATOR_PROCESSOR_HEIGHT = 0;
+		public static final double ELEVATOR_BARGE_HEIGHT = 0;
+		public static final double ELEVATOR_FLOOR_HEIGHT = 0;
 	}
 
 	public final static class TikiTorchArm {
 
 		public static final double OFFSET = 295;
 
-		public static final double REST = 59.3;
+		public static final double TIKI_REST = 59.3;
 
 		public static final double ARM_TOP_NEVER_POSITION = 45;
 		public static final double ARM_BOTTOM_NEVER_POSITION = 0;
 
-		public static final double L4_SCORE = -49;
-		public static final double L23_SCORE = -49;
-		public static final double L1_SCORE = 0;
+		public static final double TIKI_L234_SCORE = -49;
+		public static final double TIKI_L1_SCORE = 0;
 
-		public static final double INTAKE = 47;
+		public static final double TIKI_INTAKE = 47;
 
-		public static final double ALGAE_CLEAR = -89;
+		public static final double TIKI_ALGAE_CLEAR = -89;
 	}
 
 	public final static class TikiTorchRoller {

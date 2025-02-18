@@ -1,7 +1,7 @@
 package org.mort11.commands.actions.endeffector.pid;
 
-import static org.mort11.config.constants.PhysicalConstants.TikiTorchArm.INTAKE;
-import static org.mort11.config.constants.PhysicalConstants.TikiTorchArm.L4_SCORE;
+import static org.mort11.config.constants.PhysicalConstants.TikiTorchArm.TIKI_INTAKE;
+import static org.mort11.config.constants.PhysicalConstants.TikiTorchArm.TIKI_L234_SCORE;
 
 import java.util.function.BooleanSupplier;
 
@@ -44,7 +44,7 @@ public class ToggleTiki extends Command {
         tikiArm.setArmMotorPercent(
           -tikiArm.getPIDController().calculate(
                 tikiArm.encoderToDegrees(), 
-                L4_SCORE
+                TIKI_L234_SCORE
             )
         );
     }
@@ -52,7 +52,7 @@ public class ToggleTiki extends Command {
         tikiArm.setArmMotorPercent(
           -tikiArm.getPIDController().calculate(
                 tikiArm.encoderToDegrees(), 
-                INTAKE
+                TIKI_INTAKE
             )
         );
     }

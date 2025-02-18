@@ -1,7 +1,7 @@
 package org.mort11.commands.actions.endeffector.pid;
 
-import static org.mort11.config.constants.PhysicalConstants.AlgaeArm.REST;
-import static org.mort11.config.constants.PhysicalConstants.AlgaeArm.L23_INTAKE;
+import static org.mort11.config.constants.PhysicalConstants.AlgaeArm.ALGAE_REST;
+import static org.mort11.config.constants.PhysicalConstants.AlgaeArm.ALGAE_REEF_INTAKE;
 
 import java.util.function.BooleanSupplier;
 
@@ -44,7 +44,7 @@ public class ToggleAlgaeArm extends Command {
       algaeArm.setArmPercent(
         algaeArm.getPIDController().calculate(
               algaeArm.encoderToDegrees(), 
-              REST
+              ALGAE_REST
           )
       );
     }
@@ -52,7 +52,7 @@ public class ToggleAlgaeArm extends Command {
       algaeArm.setArmPercent(
         algaeArm.getPIDController().calculate(
               algaeArm.encoderToDegrees(), 
-              L23_INTAKE
+              ALGAE_REEF_INTAKE
           )
       );
     }

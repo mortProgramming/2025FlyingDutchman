@@ -38,46 +38,46 @@ public class Elevate extends Command {
     }
 
     public static Command l1() {
-        return new Elevate(L1_HEIGHT);
+        return new Elevate(ELEVATOR_L1_HEIGHT);
     }
 
     public static Command l2() {
-        return new Elevate(L2_HEIGHT);
+        return new Elevate(ELEVATOR_L2_HEIGHT);
     }
 
     public static Command l3() {
-        return new Elevate(L3_HEIGHT);
+        return new Elevate(ELEVATOR_L3_HEIGHT);
     }
 
     public static Command l4() {
-        return new Elevate(L4_HEIGHT);
+        return new Elevate(ELEVATOR_L4_HEIGHT);
     }
 
     public static Command intake() {
-        return new Elevate(L1_HEIGHT);
+        return new Elevate(ELEVATOR_L1_HEIGHT);
     }
 
     public static Command rest() {
-        return new Elevate(REST_HEIGHT);
+        return new Elevate(ELEVATOR_REST_HEIGHT);
     }
 
     public static Command lowAlgae() {
-        return new Elevate(LOW_ALGAE_HEIGHT);
+        return new Elevate(ELEVATOR_LOW_ALGAE_HEIGHT);
     }
 
     public static Command highAlgae() {
-        return new Elevate(HIGH_ALGAE_HEIGHT);
+        return new Elevate(ELEVATOR_HIGH_ALGAE_HEIGHT);
     }
 
     public static Command processor() {
-        return new Elevate(PROCESSOR_HEIGHT);
+        return new Elevate(ELEVATOR_PROCESSOR_HEIGHT);
     }
 
     public static Command floor() {
-        return new Elevate(FLOOR_HEIGHT);
+        return new Elevate(ELEVATOR_FLOOR_HEIGHT);
     }
 
     public static Command barge() {
-        return new Elevate(BARGE_HEIGHT);
+        return new Elevate(ELEVATOR_BARGE_HEIGHT);
     }
 }

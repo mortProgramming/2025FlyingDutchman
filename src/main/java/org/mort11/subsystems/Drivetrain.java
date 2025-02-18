@@ -41,6 +41,8 @@ public class Drivetrain extends SubsystemBase {
 
   private ProfiledPIDController xToPosController, yToPosController, rotateToAngleController;
 
+  private double fieldOrientationOffset;
+
   @SuppressWarnings("OverridableMethodCallInConstructor")
   private Drivetrain() {
     configureSwerve();
@@ -58,6 +60,8 @@ public class Drivetrain extends SubsystemBase {
 		);
 
 		rotateToAngleController.enableContinuousInput(POS_KI, POS_KI);
+
+		fieldOrientationOffset = 0;
   }
 
   public void configureSwerve () {
@@ -147,7 +151,11 @@ public class Drivetrain extends SubsystemBase {
   }
 
   public Command setGyroscopeZero(double angle) {
-		return new InstantCommand(() -> swerveDrive.zeroIMU(angle), drivetrain);
+		return new InstantCommand(() -> setFieldOffset(angle), drivetrain);
+	}
+
+	public void setFieldOffset(double fieldOrientationOffset) {
+		this.fieldOrientationOffset = this.fieldOrientationOffset + fieldOrientationOffset;
 	}
 
 
@@ -183,7 +191,7 @@ public class Drivetrain extends SubsystemBase {
 	}
 
 	public Rotation2d getRotation2d() {
-		return imu.getRotation2d();
+		return imu.getRotation2d().rotateBy(Rotation2d.fromDegrees(fieldOrientationOffset));
 	}
 
 	public Pose2d getPose() {

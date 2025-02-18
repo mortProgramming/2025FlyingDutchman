@@ -114,17 +114,17 @@ public class Inputs {
 			    * drivetrain.getMaxSpeedMeters() / 
                 DRIVEBASE_RADIUS_METERS;
     }
-    
+
     public static double getLeftControllerXSwerve() {
-        return -modifyAxis1(driveController.getLeftX(), 1)  * drivetrain.getMaxSpeedMeters();
+        return -deadband(driveController.getLeftX(), DEAD_BAND)  * drivetrain.getMaxSpeedMeters();
     }
 
     public static double getLeftControllerYSwerve() {
-        return modifyAxis1(driveController.getLeftY(), 1) * drivetrain.getMaxSpeedMeters();
+        return deadband(driveController.getLeftY(), DEAD_BAND) * drivetrain.getMaxSpeedMeters();
     }
     
     public static double getRightControllerXSwerve(){
-        return modifyAxis1(driveController.getRawAxis(2), 1) * drivetrain.getMaxSpeedMeters() / 
+        return deadband(driveController.getRawAxis(2), DEAD_BAND) * drivetrain.getMaxSpeedMeters() / 
                 DRIVEBASE_RADIUS_METERS;
     }
 }

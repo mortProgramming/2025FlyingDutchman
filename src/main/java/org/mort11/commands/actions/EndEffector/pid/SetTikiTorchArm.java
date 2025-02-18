@@ -46,26 +46,22 @@ public class SetTikiTorchArm extends Command {
   }
 
   public static Command l1() {
-    return new SetTikiTorchArm(L1_SCORE);
+    return new SetTikiTorchArm(TIKI_L1_SCORE);
   }
 
-  public static Command l23() {
-    return new SetTikiTorchArm(L23_SCORE);
-  }
-
-  public static Command l4() {
-    return new SetTikiTorchArm(L4_SCORE);
+  public static Command score() {
+    return new SetTikiTorchArm(TIKI_L234_SCORE);
   }
 
   public static Command intake() {
-    return new SetTikiTorchArm(INTAKE);
+    return new SetTikiTorchArm(TIKI_INTAKE);
   }
 
   public static Command rest() {
-    return new SetTikiTorchArm(REST);
+    return new SetTikiTorchArm(TIKI_REST);
   }
 
   public static Command algaeClear() {
-    return new SetTikiTorchArm(ALGAE_CLEAR);
+    return new SetTikiTorchArm(TIKI_ALGAE_CLEAR);
   }
 }

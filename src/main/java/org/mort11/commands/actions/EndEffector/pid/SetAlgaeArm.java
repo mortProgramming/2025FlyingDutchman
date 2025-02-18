@@ -44,22 +44,22 @@ public class SetAlgaeArm extends Command {
   }
 
   public static Command l23Intake() {
-    return new SetAlgaeArm(L23_INTAKE);
+    return new SetAlgaeArm(ALGAE_REEF_INTAKE);
   }
 
   public static Command floor() {
-    return new SetAlgaeArm(FLOOR_INTAKE);
+    return new SetAlgaeArm(ALGAE_FLOOR_INTAKE);
   }
 
   public static Command processor() {
-    return new SetAlgaeArm(PROCESSOR_SCORE);
+    return new SetAlgaeArm(ALGAE_PROCESSOR_SCORE);
   }
 
   public static Command barge() {
-    return new SetAlgaeArm(BARGE_SCORE);
+    return new SetAlgaeArm(ALGAE_BARGE_SCORE);
   }
 
   public static Command rest() {
-    return new SetAlgaeArm(REST);
+    return new SetAlgaeArm(ALGAE_REST);
   }
 }

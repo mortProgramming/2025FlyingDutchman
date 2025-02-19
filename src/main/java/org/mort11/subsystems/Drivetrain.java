@@ -144,6 +144,8 @@ public class Drivetrain extends SubsystemBase {
     SmartDashboard.putNumber("Yaw", Math.toDegrees(swerveDrive.getRobotRotations().getZ()));
     SmartDashboard.putNumber("Pitch", Math.toDegrees(swerveDrive.getRobotRotations().getY()));
     SmartDashboard.putNumber("Roll", Math.toDegrees(swerveDrive.getRobotRotations().getX()));
+
+	SmartDashboard.putNumber("Field hing", fieldOrientationOffset);
   }
 
   public void setDrive(ChassisSpeeds speeds) {
@@ -155,7 +157,7 @@ public class Drivetrain extends SubsystemBase {
 	}
 
 	public void setFieldOffset(double fieldOrientationOffset) {
-		this.fieldOrientationOffset = this.fieldOrientationOffset + fieldOrientationOffset;
+		this.fieldOrientationOffset = getAbsoluteRotation().getDegrees() + fieldOrientationOffset;
 	}
 
 
@@ -191,7 +193,11 @@ public class Drivetrain extends SubsystemBase {
 	}
 
 	public Rotation2d getRotation2d() {
-		return imu.getRotation2d().rotateBy(Rotation2d.fromDegrees(fieldOrientationOffset));
+		return getAbsoluteRotation().minus(Rotation2d.fromDegrees(fieldOrientationOffset));
+	}
+
+	public Rotation2d getAbsoluteRotation() {
+		return imu.getRotation2d();
 	}
 
 	public Pose2d getPose() {

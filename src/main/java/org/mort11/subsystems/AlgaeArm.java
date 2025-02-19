@@ -34,6 +34,7 @@ public class AlgaeArm extends SubsystemBase {
 
     @Override
     public void periodic() {
+        if(armSpeed > 0.2) {armSpeed = 0.2;}
         scoopArm.setVoltage(armSpeed * ROBOT_VOLTAGE);
 
         SmartDashboard.putNumber("Algae Encoder Position Degress", encoderToDegrees());

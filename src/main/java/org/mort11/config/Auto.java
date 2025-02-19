@@ -3,6 +3,7 @@ package org.mort11.config;
 import static org.mort11.config.constants.PhysicalConstants.Drivetrain.*;
 import static org.mort11.config.constants.PIDConstants.Drivetrain.*;
 
+import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.commands.PathPlannerAuto;
 import com.pathplanner.lib.config.PIDConstants;
 
@@ -55,6 +56,21 @@ public class Auto {
 		autoChooser.addOption("ScoreL4JDescoreKL", 
 			new ScoreL4JDescoreKL()
 		);
+
+		autoChooser.addOption("path thing", new PathPlannerAuto("ScoreL4JDescoreKL"));
+
+		// try {
+		// autoChooser.addOption("test", 
+		// 	AutoBuilder.followPath(
+		// 		PathPlannerAuto.getPathGroupFromAutoFile(
+		// 			"ScoreL4JDescoreKL"
+		// 		).get(0)
+		// 	)
+		// );
+		// }
+		// catch (Exception e) {
+
+		// }
 
 		SmartDashboard.putData("Auton Chooser", autoChooser);
 	}

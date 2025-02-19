@@ -85,26 +85,32 @@ public class IO {
       new Pose2d(0, 0, Rotation2d.fromDegrees(0))
     )));
 
+    driveController.pov(90).whileTrue(new Climb(true));
+
+    driveController.pov(270).whileTrue(new Climb(false));
+
       // joystick.trigger().whileTrue(new Angle2AprilTag(0));
       // driveController.axisGreaterThan(3, 0.7).whileTrue(new ToTag(0));
 
 
     //TODO Xbox Controller Commands
 
-      // compController.pov(0).whileTrue(Elevate.rest());
+      // compController.pov(90).whileTrue(Elevate.rest());
       // compController.pov(270).whileTrue(Elevate.l2());
       // compController.pov(180).whileTrue(Elevate.l3());
-      // compController.pov(90).whileTrue(Elevate.l4());
+      // compController.pov(0).whileTrue(Elevate.l4());
       // compController.start().whileTrue(Elevate.highAlgae());
       // compController.back().whileTrue(Elevate.lowAlgae());
 
-      // compController.y().onTrue(new ToggleTiki(() -> compController.y().getAsBoolean()));
+      // compController.x().onTrue(new ToggleTiki(() -> compController.x().getAsBoolean()));
 
       // compController.b().whileTrue(SetTikiTorchArm.algaeClear());
 
-      // compController.x().onTrue(new ToggleAlgaeArm(() -> compController.x().getAsBoolean()));
+      // compController.y().onTrue(new ToggleAlgaeArm(() -> compController.y().getAsBoolean()));
 
       // compController.a().whileTrue(SetAlgaeArm.floor());
+
+
 
       compController.axisGreaterThan(3, 0.25).whileTrue(VelocityTikiTorchRoller.outtake());
       compController.axisGreaterThan(3, 0.25).whileFalse(VelocityTikiTorchRoller.nothing());
@@ -120,10 +126,14 @@ public class IO {
 
       //auto endeffector
 
-      compController.pov(0).onTrue(SetEndeffector.rest());
-      compController.pov(90).onTrue(SetEndeffector.l2());
-      compController.pov(180).onTrue(SetEndeffector.l3());
-      compController.pov(270).onTrue(SetEndeffector.l4());
+      compController.pov(90).whileTrue(SetEndeffector.rest());
+      compController.pov(270).whileTrue(SetEndeffector.l2());
+      compController.pov(180).whileTrue(SetEndeffector.l3());
+      compController.pov(0).whileTrue(SetEndeffector.l4());
+      compController.back().whileTrue(SetEndeffector.lowAlgae());
+      compController.start().whileTrue(SetEndeffector.highAlgae());
+      compController.a().whileTrue(SetEndeffector.floor());
+      compController.b().whileTrue(SetEndeffector.intake());
 
 
       //TESTING XBOXCONTROLLER SETTINGS
@@ -147,6 +157,18 @@ public class IO {
 
       testingController.pov(90).toggleOnTrue(new Climb(true));
       testingController.pov(270).toggleOnTrue(new Climb(false));
+
+      testingController.axisGreaterThan(3, 0.25).whileTrue(VelocityTikiTorchRoller.outtake());
+      testingController.axisGreaterThan(3, 0.25).whileFalse(VelocityTikiTorchRoller.nothing());
+
+      testingController.rightBumper().whileTrue(VelocityTikiTorchRoller.intake());
+      testingController.rightBumper().whileFalse(VelocityTikiTorchRoller.nothing());
+
+      testingController.leftBumper().whileTrue(VelocityAlgaeRoller.intake());
+      testingController.leftBumper().whileFalse(VelocityAlgaeRoller.nothing());
+
+      testingController.axisGreaterThan(2, 0.25).whileTrue(VelocityAlgaeRoller.outtake());
+      testingController.axisGreaterThan(2, 0.25).whileFalse(VelocityAlgaeRoller.nothing());
 
     }
 

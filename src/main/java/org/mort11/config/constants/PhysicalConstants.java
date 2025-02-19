@@ -47,7 +47,7 @@ public final class PhysicalConstants {
 		public static final int IMU_TO_ROBOT_FRONT_ANGLE = 0;
 
 		public static final double WHEEL_COEFFICIENT_OF_FRICTION = 1;
-		public static final double ROBOT_MASS = 52.1;
+		public static final double ROBOT_MASS = 62.1;
 		public static final double ROBOT_MOMENT_OF_INERTIA = ROBOT_MASS * 0.254 * 0.254 / 2;
 		public static final double DRIVE_MOTOR_CURRENT_LIMIT = 80;
     }	
@@ -65,14 +65,14 @@ public final class PhysicalConstants {
 		public static final double ROTATIONS_TO_INCHES = 5.642 * 3;
 		public static final double MAXIMUM_INCH_CHANGE = 4.0;
 
-		public static final double ELEVATOR_OFFSET = 10.5;
-		public static final double ELEVATOR_REST_HEIGHT = 4;
+		public static final double ELEVATOR_OFFSET = 0.5;
+		public static final double ELEVATOR_REST_HEIGHT = 5.5;
 
 		public static final double ELEVATOR_L1_HEIGHT = 13;
-		public static final double ELEVATOR_L2_HEIGHT = 32;
+		public static final double ELEVATOR_L2_HEIGHT = 29.5;
 		public static final double ELEVATOR_L3_HEIGHT = 46;
 		public static final double ELEVATOR_L4_HEIGHT = 71;
-		public static final double ELEVATOR_INTAKE_HEIGHT = 0;
+		public static final double ELEVATOR_INTAKE_HEIGHT = 20;
 
 		public static final double ELEVATOR_LOW_ALGAE_HEIGHT = 13.5;
 		public static final double ELEVATOR_HIGH_ALGAE_HEIGHT = 30;
@@ -99,8 +99,8 @@ public final class PhysicalConstants {
 	}
 
 	public final static class TikiTorchRoller {
-		public static final double INTAKE_SPEED = -1;
-		public static final double OUTAKE_SPEED = 1;
+		public static final double INTAKE_SPEED = 1;
+		public static final double OUTAKE_SPEED = -1;
 	} 
 
 }

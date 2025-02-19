@@ -26,13 +26,11 @@ public class SetTikiTorchArm extends Command {
   @Override
   public void execute() {
     tiki.setArmMotorPercent(
-            -tiki.getPIDController().calculate(
-                tiki.encoderToDegrees(), 
-                setpoint
-            )
-        );
-
-
+      -tiki.getPIDController().calculate(
+        tiki.encoderToDegrees(), 
+        setpoint
+      )
+    );
   }
 
   @Override

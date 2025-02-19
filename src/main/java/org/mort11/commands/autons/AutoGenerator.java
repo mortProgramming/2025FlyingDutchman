@@ -32,15 +32,20 @@ public class AutoGenerator extends SequentialCommandGroup {
         int greaterLength = (otherCommand.length > paths.size() ? otherCommand.length : paths.size());
 
         for (int i = 0; i < greaterLength; i++){
+
+            //only pathcommands left
         
-            if(otherCommand.length < i && paths.size() >= i) {
+            if(otherCommand.length < (i + 1) && paths.size() >= (i)) {
                 auto = new SequentialCommandGroup(
                     auto,
                     AutoBuilder.followPath(paths.get(i))
                 );
+                System.out.println("HELLO");
             }
 
-            else if(otherCommand.length >= i && paths.size() < i) {
+            //only othercommands left
+
+            else if(otherCommand.length >= (i) && paths.size() < (i + 1)) {
                 auto = new SequentialCommandGroup(
                     auto, 
                     otherCommand[i]
@@ -59,36 +64,36 @@ public class AutoGenerator extends SequentialCommandGroup {
         return auto;
     }
 
-    public static Command generate(List<PathPlannerPath> paths, Command... otherCommand) {
-        auto = new SequentialCommandGroup();
+    // public static Command generate(List<PathPlannerPath> paths, Command... otherCommand) {
+    //     auto = new SequentialCommandGroup();
 
-        int greaterLength = (otherCommand.length > paths.size() ? otherCommand.length : paths.size());
+    //     int greaterLength = (otherCommand.length > paths.size() ? otherCommand.length : paths.size());
 
-        for (int i = 0; i < greaterLength; i++){
+    //     for (int i = 0; i < greaterLength; i++){
             
-            if(otherCommand.length < i && paths.size() >= i) {
-                auto = new SequentialCommandGroup(
-                    auto,
-                    AutoBuilder.followPath(paths.get(i))
-                );
-            }
+    //         if(otherCommand.length < i && paths.size() >= i) {
+    //             auto = new SequentialCommandGroup(
+    //                 auto,
+    //                 AutoBuilder.followPath(paths.get(i))
+    //             );
+    //         }
             
-            else if(otherCommand.length >= i && paths.size() < i) {
-                auto = new SequentialCommandGroup(
-                    auto, 
-                    otherCommand[i]
-                );
-            }
+    //         else if(otherCommand.length >= i && paths.size() < i) {
+    //             auto = new SequentialCommandGroup(
+    //                 auto, 
+    //                 otherCommand[i]
+    //             );
+    //         }
 
-            else {
-                auto = new SequentialCommandGroup(
-                    auto,
-                    otherCommand[i], 
-                    AutoBuilder.followPath(paths.get(i))
-                );
-            }
-        }
+    //         else {
+    //             auto = new SequentialCommandGroup(
+    //                 auto,
+    //                 otherCommand[i], 
+    //                 AutoBuilder.followPath(paths.get(i))
+    //             );
+    //         }
+    //     }
 
-        return auto;
-    }
+    //     return auto;
+    // }
 }

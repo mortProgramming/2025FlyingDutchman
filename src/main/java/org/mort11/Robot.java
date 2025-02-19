@@ -9,6 +9,8 @@ import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+
+import org.mort11.commands.actions.Initiate;
 import org.mort11.config.Auto;
 import org.mort11.config.IO;
 
@@ -91,6 +93,8 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
+
+    CommandScheduler.getInstance().schedule(new Initiate());
   }
 
   /** This function is called periodically during operator control. */

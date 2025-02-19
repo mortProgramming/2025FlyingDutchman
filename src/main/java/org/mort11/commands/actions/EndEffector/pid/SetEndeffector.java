@@ -1,8 +1,13 @@
 package org.mort11.commands.actions.endeffector.pid;
 
+import org.mort11.config.constants.PhysicalConstants;
+import org.mort11.subsystems.TikiTorchArm;
+import org.mort11.subsystems.Elevator;
+
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 
 import static org.mort11.config.constants.PhysicalConstants.Elevator.*;
 import static org.mort11.config.constants.PhysicalConstants.TikiTorchArm.*;
@@ -10,20 +15,62 @@ import static org.mort11.config.constants.PhysicalConstants.AlgaeArm.*;
 
 public class SetEndeffector extends SequentialCommandGroup {
 
+    private Elevator elevator;
+    private TikiTorchArm tikiTorchArm;
+
     public SetEndeffector(double elevatorPos, double tikiArmPos, double algaeArmPos) {
-        addCommands(
+
+        elevator = Elevator.getInstance();
+        tikiTorchArm = TikiTorchArm.getInstance();
+
+        // if(elevator.getElevatorPositionInches() < 9 && tikiTorchArm.encoderToDegrees() > -70) {
+        //     addCommands(
+            
+        //         new SequentialCommandGroup(
+        //             new Elevate(10).withTimeout(0.5),
+        //             new ParallelCommandGroup(
+        //                 SetTikiTorchArm.algaeClear(),
+        //                 SetAlgaeArm.rest()
+        //             ).withTimeout(0.5),
+
+        //             new ParallelCommandGroup(
+        //                 new Elevate(elevatorPos),
+
+        //                 new SequentialCommandGroup(
+
+        //                     new WaitCommand(0.75),
+        //                     new ParallelCommandGroup(
+        //                         new SetTikiTorchArm(tikiArmPos),
+        //                         new SetAlgaeArm(algaeArmPos)
+        //                     )
+        //                 )
+        //             )
+        //         )
+        //     );
+        // }   else {
+            addCommands(
+            
             new SequentialCommandGroup(
                 new ParallelCommandGroup(
                     SetTikiTorchArm.algaeClear(),
                     SetAlgaeArm.rest()
                 ).withTimeout(0.5),
-                new Elevate(elevatorPos),
+
                 new ParallelCommandGroup(
-                    new SetTikiTorchArm(tikiArmPos),
-                    new SetAlgaeArm(algaeArmPos)
+                    new Elevate(elevatorPos),
+
+                    new SequentialCommandGroup(
+
+                        new WaitCommand(0.75),
+                        new ParallelCommandGroup(
+                            new SetTikiTorchArm(tikiArmPos),
+                            new SetAlgaeArm(algaeArmPos)
+                        )
+                    )
                 )
             )
         );
+        // }
     }
 
     public static Command rest() {
@@ -64,5 +111,9 @@ public class SetEndeffector extends SequentialCommandGroup {
 
     public static Command processor() {
         return new SetEndeffector(ELEVATOR_FLOOR_HEIGHT, TIKI_ALGAE_CLEAR, ALGAE_FLOOR_INTAKE);
+    }
+
+    public static Command intake() {
+        return new SetEndeffector(ELEVATOR_INTAKE_HEIGHT, TIKI_INTAKE, ALGAE_REST);
     }
 }

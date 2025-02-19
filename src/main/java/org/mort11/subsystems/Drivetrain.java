@@ -145,7 +145,11 @@ public class Drivetrain extends SubsystemBase {
     SmartDashboard.putNumber("Pitch", Math.toDegrees(swerveDrive.getRobotRotations().getY()));
     SmartDashboard.putNumber("Roll", Math.toDegrees(swerveDrive.getRobotRotations().getX()));
 
-	SmartDashboard.putNumber("Field hing", fieldOrientationOffset);
+	SmartDashboard.putNumber("Max Speed", getSwerveDrive().getModule(0).maxSpeed);
+	SmartDashboard.putNumber("Wheel Diameter", getSwerveDrive().getModule(0).getModuleConfig().WHEEL_DIAMETER);
+	SmartDashboard.putNumber("Module Width", getSwerveDrive().kinematics.getModules()[0].getX() * 2);
+
+
   }
 
   public void setDrive(ChassisSpeeds speeds) {

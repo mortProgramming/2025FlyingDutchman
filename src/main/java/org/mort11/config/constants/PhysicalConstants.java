@@ -16,7 +16,7 @@ public final class PhysicalConstants {
 		public static final double ARM_BOTTOM_NEVER_POSITION = 0;
 
 		public static final double ALGAE_REEF_INTAKE = 45;
-		public static final double ALGAE_FLOOR_INTAKE = -35;
+		public static final double ALGAE_FLOOR_INTAKE = -15;
 
 		public static final double ALGAE_PROCESSOR_SCORE = 0;
 		public static final double ALGAE_BARGE_SCORE = 0;
@@ -49,7 +49,7 @@ public final class PhysicalConstants {
 		public static final double WHEEL_COEFFICIENT_OF_FRICTION = 1;
 		public static final double ROBOT_MASS = 62.1;
 		public static final double ROBOT_MOMENT_OF_INERTIA = ROBOT_MASS * 0.254 * 0.254 / 2;
-		public static final double DRIVE_MOTOR_CURRENT_LIMIT = 80;
+		public static final double DRIVE_MOTOR_CURRENT_LIMIT = 60;
     }	
 
 

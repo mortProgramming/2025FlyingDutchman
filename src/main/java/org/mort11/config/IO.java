@@ -1,5 +1,6 @@
 package org.mort11.config;
 
+import org.mort11.commands.actions.Initiate;
 import org.mort11.commands.actions.drivetrain.Angle2AprilTag;
 import org.mort11.commands.actions.drivetrain.Drive;
 import org.mort11.commands.actions.drivetrain.DriveSetSpeed;
@@ -169,6 +170,8 @@ public class IO {
 
       testingController.axisGreaterThan(2, 0.25).whileTrue(VelocityAlgaeRoller.outtake());
       testingController.axisGreaterThan(2, 0.25).whileFalse(VelocityAlgaeRoller.nothing());
+
+      testingController.start().whileTrue(new Initiate());
 
     }
 

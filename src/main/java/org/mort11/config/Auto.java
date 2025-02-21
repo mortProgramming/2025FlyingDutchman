@@ -9,6 +9,7 @@ import com.pathplanner.lib.config.ModuleConfig;
 import com.pathplanner.lib.config.PIDConstants;
 import com.pathplanner.lib.config.RobotConfig;
 import com.pathplanner.lib.controllers.PPHolonomicDriveController;
+import com.pathplanner.lib.path.PathPlannerPath;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
@@ -24,6 +25,8 @@ import org.mort11.library.subsystems.swerve.PathPlanner;
 import org.mort11.subsystems.Drivetrain;
 import org.mort11.commands.autons.pathplanned.BasicCommands;
 import org.mort11.commands.autons.pathplanned.ScoreL4JDescoreKL;
+
+import com.pathplanner.lib.path.PathPlannerPath;
 
 
 public class Auto {
@@ -50,8 +53,34 @@ public class Auto {
 		// 	ROBOT_MASS, ROBOT_MOMENT_OF_INERTIA
 		// );
 
+		// AutoBuilder.configure(
+        //     () -> drivetrain.getSwerveDrive().getPosition(),  //get current robot position on the field
+        //     (Pose2d startPose) -> drivetrain.getSwerveDrive().resetPosition(startPose), //reset odometry to a given pose. WILL ONLY RUN IF AUTON HAS A SET POSE, DOES NOTHING OTHERWISE. 
+        //     () -> drivetrain.getSwerveDrive().velocity, //get the current ROBOT RELATIVE SPEEDS
+        //     (ChassisSpeeds robotRelativeOutput) -> drivetrain.getSwerveDrive().setVelocity(robotRelativeOutput), //makes the robot move given ROBOT RELATIVE CHASSISSPEEDS
+        //     new PPHolonomicDriveController(
+        //         new PIDConstants(AUTON_POS_KP, AUTON_POS_KI, AUTON_POS_KD),
+        //         new PIDConstants(AUTON_ROTATION_KP, AUTON_ROTATION_KI, AUTON_ROTATION_KD)
+        //     ),
+        //     new RobotConfig(
+        //         ROBOT_MASS,
+        //         ROBOT_MOMENT_OF_INERTIA,
+        //         new ModuleConfig(
+        //             drivetrain.getSwerveDrive().getModule(0).getModuleConfig().WHEEL_DIAMETER,
+        //             drivetrain.getSwerveDrive().getModule(0).maxSpeed,
+        //             WHEEL_COEFFICIENT_OF_FRICTION,
+        //             DCMotor.getKrakenX60(1),
+        //             DRIVE_MOTOR_CURRENT_LIMIT,
+        //             1
+        //         ),
+        //         drivetrain.getSwerveDrive().kinematics.getModules()[0].getX() * 2
+        //     ),
+        //     () -> (DriverStation.getAlliance().isPresent() ? DriverStation.getAlliance().get() == Alliance.Red : false), //method for checking current alliance. Path flips if alliance is red
+        //     drivetrain
+        // );
+
 		AutoBuilder.configure(
-            () -> drivetrain.getSwerveDrive().getPosition(),  //get current robot position on the field
+            () -> drivetrain.getPose(),  //get current robot position on the field
             (Pose2d startPose) -> drivetrain.getSwerveDrive().resetPosition(startPose), //reset odometry to a given pose. WILL ONLY RUN IF AUTON HAS A SET POSE, DOES NOTHING OTHERWISE. 
             () -> drivetrain.getSwerveDrive().velocity, //get the current ROBOT RELATIVE SPEEDS
             (ChassisSpeeds robotRelativeOutput) -> drivetrain.getSwerveDrive().setVelocity(robotRelativeOutput), //makes the robot move given ROBOT RELATIVE CHASSISSPEEDS
@@ -63,18 +92,19 @@ public class Auto {
                 ROBOT_MASS,
                 ROBOT_MOMENT_OF_INERTIA,
                 new ModuleConfig(
-                    drivetrain.getSwerveDrive().getModule(0).getModuleConfig().WHEEL_DIAMETER,
-                    drivetrain.getSwerveDrive().getModule(0).maxSpeed,
+                    0.103,
+                    5,
                     WHEEL_COEFFICIENT_OF_FRICTION,
                     DCMotor.getKrakenX60(1),
                     DRIVE_MOTOR_CURRENT_LIMIT,
                     1
                 ),
-                drivetrain.getSwerveDrive().kinematics.getModules()[0].getX() * 2
+                0.609
             ),
-            () -> (DriverStation.getAlliance().isPresent() ? DriverStation.getAlliance().get() == Alliance.Red : false), //method for checking current alliance. Path flips if alliance is red
+            () -> false, //method for checking current alliance. Path flips if alliance is red
             drivetrain
         );
+		System.out.println ("hi");
 	}
 	
 	public static void addAutoOptions () {
@@ -93,8 +123,9 @@ public class Auto {
 			new ScoreL4JDescoreKL()
 		);
 
-		autoChooser.addOption("path thing", new PathPlannerAuto("ScoreL4JDescoreKL"));
+		autoChooser.addOption("Path Forward", new PathPlannerAuto("Forward"));
 
+		autoChooser.addOption("forward path", getPathCommand());
 		// try {
 		// autoChooser.addOption("test", 
 		// 	AutoBuilder.followPath(
@@ -109,6 +140,7 @@ public class Auto {
 		// }
 
 		SmartDashboard.putData("Auton Chooser", autoChooser);
+		
 	}
 
 	public static Command getPlanned(String plan) {
@@ -120,4 +152,14 @@ public class Auto {
 	public static Command getAutonomousCommand () {
 		return autoChooser.getSelected();
 	}
+
+	public static Command getPathCommand(){
+		try {
+			return AutoBuilder.followPath(PathPlannerPath.fromPathFile("Forward"));
+		} catch (Exception e) {
+			DriverStation.reportError(e.getMessage(), e.getStackTrace());
+			return autoChooser.getSelected();
+		}
+	}
+
 }

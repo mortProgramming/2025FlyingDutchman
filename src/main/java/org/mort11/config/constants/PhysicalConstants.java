@@ -26,8 +26,14 @@ public final class PhysicalConstants {
 		public static final double INTAKE_SPEED = 0.8;
 		public static final double OUTAKE_SPEED = -0.8;
 	} 
-	
-    public final static class Drivetrain {
+
+
+  public final static class Climber {
+		public static final int COMPRESSER_MIN_PRESSURE = 80;
+		public static final int COMPRESSER_MAX_PRESSURE = 120;
+	}
+
+	public final static class Drivetrain {
         // The left-to-right distance between the drivetrain wheels measured from center
 		// to center.
 		public static final double DRIVETRAIN_TRACKWIDTH_METERS = Units.inchesToMeters(27.75);
@@ -52,12 +58,6 @@ public final class PhysicalConstants {
 		public static final double DRIVE_MOTOR_CURRENT_LIMIT = 60;
     }	
 
-
-  public final static class Climber {
-		public static final int COMPRESSER_MIN_PRESSURE = 80;
-		public static final int COMPRESSER_MAX_PRESSURE = 120;
-	}
-
 	public static final class Elevator {
 		//all in inches
 
@@ -65,7 +65,7 @@ public final class PhysicalConstants {
 		public static final double ROTATIONS_TO_INCHES = 5.642 * 3;
 		public static final double MAXIMUM_INCH_CHANGE = 4.0;
 
-		public static final double ELEVATOR_OFFSET = 0.5;
+		public static final double ELEVATOR_OFFSET = -0.5;
 		public static final double ELEVATOR_REST_HEIGHT = 5.5;
 
 		public static final double ELEVATOR_L1_HEIGHT = 13;

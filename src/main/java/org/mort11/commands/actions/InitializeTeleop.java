@@ -9,17 +9,11 @@ import org.mort11.commands.actions.endeffector.velocity.VelocityElevator;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
-public class Initiate extends SequentialCommandGroup {
-    public Initiate() {
+public class InitializeTeleop extends SequentialCommandGroup {
+    public InitializeTeleop() {
         addCommands(
             new SequentialCommandGroup(
-                new Climb(true),
-                new VelocityElevator(-0.2).withTimeout(0.5),
-                new ParallelCommandGroup(
-                    Elevate.l2(),
-                    SetAlgaeArm.l23Intake(),
-                    SetTikiTorchArm.score()
-                )
+                new Climb(true)
             )
         );
     }

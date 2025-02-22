@@ -12,12 +12,20 @@ import static org.mort11.library.subsystems.swerve.ModuleConfigEnum.MK4i_L3;
 import org.mort11.library.subsystems.swerve.SwerveModule;
 import org.mort11.library.subsystems.swerve.swervedrives.OdometeredSwerveDrive;
 
+import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.config.ModuleConfig;
+import com.pathplanner.lib.config.PIDConstants;
+import com.pathplanner.lib.config.RobotConfig;
+import com.pathplanner.lib.controllers.PPHolonomicDriveController;
+
 import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
+import edu.wpi.first.math.system.plant.DCMotor;
+import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
@@ -43,6 +51,8 @@ public class Drivetrain extends SubsystemBase {
 
   private double fieldOrientationOffset;
 
+  private Field2d field;
+
   @SuppressWarnings("OverridableMethodCallInConstructor")
   private Drivetrain() {
     configureSwerve();
@@ -62,6 +72,34 @@ public class Drivetrain extends SubsystemBase {
 		rotateToAngleController.enableContinuousInput(POS_KI, POS_KI);
 
 		fieldOrientationOffset = 0;
+
+		field = new Field2d();
+
+		// AutoBuilder.configure(
+    //         () -> drivetrain.getPose(),  //get current robot position on the field
+    //         (Pose2d startPose) -> drivetrain.getSwerveDrive().resetPosition(startPose), //reset odometry to a given pose. WILL ONLY RUN IF AUTON HAS A SET POSE, DOES NOTHING OTHERWISE. 
+    //         () -> drivetrain.getSwerveDrive().velocity, //get the current ROBOT RELATIVE SPEEDS
+    //         (ChassisSpeeds robotRelativeOutput) -> drivetrain.setDrive(robotRelativeOutput), //makes the robot move given ROBOT RELATIVE CHASSISSPEEDS
+    //         new PPHolonomicDriveController(
+    //             new PIDConstants(AUTON_POS_KP, AUTON_POS_KI, AUTON_POS_KD),
+    //             new PIDConstants(AUTON_ROTATION_KP, AUTON_ROTATION_KI, AUTON_ROTATION_KD)
+    //         ),
+    //         new RobotConfig(
+    //             ROBOT_MASS,
+    //             ROBOT_MOMENT_OF_INERTIA,
+    //             new ModuleConfig(
+    //                 0.0515,
+    //                 5,
+    //                 WHEEL_COEFFICIENT_OF_FRICTION,
+    //                 DCMotor.getKrakenX60(1),
+    //                 DRIVE_MOTOR_CURRENT_LIMIT,
+    //                 1
+    //             ),
+    //             0.609
+    //         ),
+    //         () -> false, //method for checking current alliance. Path flips if alliance is red
+    //         drivetrain
+    //     );
   }
 
   public void configureSwerve () {
@@ -145,11 +183,8 @@ public class Drivetrain extends SubsystemBase {
     SmartDashboard.putNumber("Pitch", Math.toDegrees(swerveDrive.getRobotRotations().getY()));
     SmartDashboard.putNumber("Roll", Math.toDegrees(swerveDrive.getRobotRotations().getX()));
 
-	SmartDashboard.putNumber("Max Speed", getSwerveDrive().getModule(0).maxSpeed);
-	SmartDashboard.putNumber("Wheel Diameter", getSwerveDrive().getModule(0).getModuleConfig().WHEEL_DIAMETER);
-	SmartDashboard.putNumber("Module Width", getSwerveDrive().kinematics.getModules()[0].getX() * 2);
-
-
+	field.setRobotPose(getPose());
+	SmartDashboard.putData(field);
   }
 
   public void setDrive(ChassisSpeeds speeds) {
@@ -162,6 +197,11 @@ public class Drivetrain extends SubsystemBase {
 
 	public void setFieldOffset(double fieldOrientationOffset) {
 		this.fieldOrientationOffset = getAbsoluteRotation().getDegrees() + fieldOrientationOffset;
+	}
+
+	public Command setRobotPosition(double x, double y, double rotationDegrees) {
+		return new InstantCommand(() -> swerveDrive.resetPosition(
+			new Pose2d(x, y, Rotation2d.fromDegrees(rotationDegrees))));
 	}
 
 
@@ -206,6 +246,10 @@ public class Drivetrain extends SubsystemBase {
 
 	public Pose2d getPose() {
 		return swerveDrive.getPosition();
+	}
+
+	public ChassisSpeeds getSpeed() {
+		return speeds;
 	}
 
 	public ProfiledPIDController getXController() {

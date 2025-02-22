@@ -23,37 +23,12 @@ public class SetEndeffector extends SequentialCommandGroup {
         elevator = Elevator.getInstance();
         tikiTorchArm = TikiTorchArm.getInstance();
 
-        // if(elevator.getElevatorPositionInches() < 9 && tikiTorchArm.encoderToDegrees() > -70) {
-        //     addCommands(
-            
-        //         new SequentialCommandGroup(
-        //             new Elevate(10).withTimeout(0.5),
-        //             new ParallelCommandGroup(
-        //                 SetTikiTorchArm.algaeClear(),
-        //                 SetAlgaeArm.rest()
-        //             ).withTimeout(0.5),
-
-        //             new ParallelCommandGroup(
-        //                 new Elevate(elevatorPos),
-
-        //                 new SequentialCommandGroup(
-
-        //                     new WaitCommand(0.75),
-        //                     new ParallelCommandGroup(
-        //                         new SetTikiTorchArm(tikiArmPos),
-        //                         new SetAlgaeArm(algaeArmPos)
-        //                     )
-        //                 )
-        //             )
-        //         )
-        //     );
-        // }   else {
             addCommands(
             
             new SequentialCommandGroup(
                 new ParallelCommandGroup(
-                    SetTikiTorchArm.algaeClear(),
-                    SetAlgaeArm.rest()
+                    SetTikiTorchArm.algaeClear()
+                    // SetAlgaeArm.rest()
                 ).withTimeout(0.5),
 
                 new ParallelCommandGroup(
@@ -63,8 +38,39 @@ public class SetEndeffector extends SequentialCommandGroup {
 
                         new WaitCommand(0.75),
                         new ParallelCommandGroup(
-                            new SetTikiTorchArm(tikiArmPos),
-                            new SetAlgaeArm(algaeArmPos)
+                            new SetTikiTorchArm(tikiArmPos)
+                            // new SetAlgaeArm(algaeArmPos)
+                        )
+                    )
+                )
+            )
+        );
+        // }
+    }
+
+    public SetEndeffector(double elevatorPos, double tikiArmPos, double algaeArmPos, double time) {
+
+        elevator = Elevator.getInstance();
+        tikiTorchArm = TikiTorchArm.getInstance();
+
+            addCommands(
+            
+            new SequentialCommandGroup(
+                new ParallelCommandGroup(
+                    SetTikiTorchArm.algaeClear()
+                    //SetAlgaeArm.rest()
+                ).withTimeout(0.5),
+
+                new ParallelCommandGroup(
+                    new Elevate(elevatorPos),
+                    
+
+                    new SequentialCommandGroup(
+
+                        new WaitCommand(time),
+                        new ParallelCommandGroup(
+                            new SetTikiTorchArm(tikiArmPos)
+                           // new SetAlgaeArm(algaeArmPos)
                         )
                     )
                 )
@@ -106,7 +112,7 @@ public class SetEndeffector extends SequentialCommandGroup {
     }
 
     public static Command barge() {
-        return new SetEndeffector(ELEVATOR_BARGE_HEIGHT, TIKI_ALGAE_CLEAR, ALGAE_BARGE_SCORE);
+        return new SetEndeffector(ELEVATOR_BARGE_HEIGHT, TIKI_ALGAE_CLEAR, ALGAE_BARGE_SCORE, 2.5);
     }
 
     public static Command processor() {

@@ -4,15 +4,32 @@
 
 package org.mort11;
 
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.kinematics.ChassisSpeeds;
+import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
+import static org.mort11.config.constants.PhysicalConstants.Drivetrain.DRIVE_MOTOR_CURRENT_LIMIT;
+import static org.mort11.config.constants.PhysicalConstants.Drivetrain.ROBOT_MASS;
+import static org.mort11.config.constants.PhysicalConstants.Drivetrain.ROBOT_MOMENT_OF_INERTIA;
+import static org.mort11.config.constants.PhysicalConstants.Drivetrain.WHEEL_COEFFICIENT_OF_FRICTION;
+
+// import org.mort11.commands.actions.InitializeTeleop;
 import org.mort11.commands.actions.Initiate;
 import org.mort11.config.Auto;
 import org.mort11.config.IO;
+import org.mort11.subsystems.Drivetrain;
+
+import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.commands.PathPlannerAuto;
+import com.pathplanner.lib.config.ModuleConfig;
+import com.pathplanner.lib.config.PIDConstants;
+import com.pathplanner.lib.config.RobotConfig;
+import com.pathplanner.lib.controllers.PPHolonomicDriveController;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -25,6 +42,8 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
   private Alliance alliance = Alliance.Blue;
+
+  private Drivetrain drivetrain;
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -61,23 +80,55 @@ public class Robot extends TimedRobot {
 
   @Override
   public void disabledPeriodic() {
-    if(DriverStation.isDSAttached() && DriverStation.isFMSAttached()){
-			if (DriverStation.getAlliance().get() != alliance){
-				Auto.configure();
-				alliance = DriverStation.getAlliance().get();
-			}
-		}
+    // if(DriverStation.isDSAttached() && DriverStation.isFMSAttached()){
+		// 	if (DriverStation.getAlliance().get() != alliance){
+		// 		Auto.configure();
+		// 		alliance = DriverStation.getAlliance().get();
+		// 	}
+		// }
   }
 
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
+    // Auto.configure();
+    // CommandScheduler.getInstance().schedule(new InitializeTeleop());
+
+    // drivetrain = Drivetrain.getInstance();
+
+    // AutoBuilder.configure(
+    //         () -> drivetrain.getPose(),  //get current robot position on the field
+    //         (Pose2d startPose) -> drivetrain.getSwerveDrive().resetPosition(startPose), //reset odometry to a given pose. WILL ONLY RUN IF AUTON HAS A SET POSE, DOES NOTHING OTHERWISE. 
+    //         () -> drivetrain.getSpeed(), //get the current ROBOT RELATIVE SPEEDS
+    //         (ChassisSpeeds robotRelativeOutput) -> drivetrain.setDrive(robotRelativeOutput), //makes the robot move given ROBOT RELATIVE CHASSISSPEEDS
+    //         new PPHolonomicDriveController(
+    //             new PIDConstants(0.3, 0, 0),
+    //             new PIDConstants(0.3, 0, 0)
+    //         ),
+    //         new RobotConfig(
+    //             ROBOT_MASS,
+    //             ROBOT_MOMENT_OF_INERTIA,
+    //             new ModuleConfig(
+    //                 0.0515,
+    //                 5,
+    //                 WHEEL_COEFFICIENT_OF_FRICTION,
+    //                 DCMotor.getKrakenX60(1),
+    //                 DRIVE_MOTOR_CURRENT_LIMIT,
+    //                 1
+    //             ),
+    //             0.609
+    //         ),
+    //         () -> false, //method for checking current alliance. Path flips if alliance is red
+    //         drivetrain
+    //     );
     m_autonomousCommand = Auto.getAutonomousCommand();
 
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
     }
+
+    // new PathPlannerAuto("Forward").schedule();
   }
 
   /** This function is called periodically during autonomous. */
@@ -94,7 +145,7 @@ public class Robot extends TimedRobot {
       m_autonomousCommand.cancel();
     }
 
-    CommandScheduler.getInstance().schedule(new Initiate());
+    // CommandScheduler.getInstance().schedule(new InitializeTeleop());
   }
 
   /** This function is called periodically during operator control. */

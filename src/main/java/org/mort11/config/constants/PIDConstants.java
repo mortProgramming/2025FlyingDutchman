@@ -19,7 +19,8 @@ public final class PIDConstants {
 	}
     
     public final class Drivetrain {
-        public static final double AUTON_POS_KP = 0.315;
+        // public static final double AUTON_POS_KP = 0.315;
+		public static final double AUTON_POS_KP = 45;
 		public static final double AUTON_POS_KI = 0;
 		public static final double AUTON_POS_KD = 0.001;
 	
@@ -27,10 +28,10 @@ public final class PIDConstants {
 		public static final double AUTON_ROTATION_KI = 0;
 		public static final double AUTON_ROTATION_KD = 0;
 
-		public final static double POS_KP = 0.5;
+		public final static double POS_KP = 1;
 		public final static double POS_KI = 0;
 		public final static double POS_KD = 0;
-		public static final Constraints POS_CONSTRAINTS = new Constraints(10, 10);
+		public static final Constraints POS_CONSTRAINTS = new Constraints(2, 4);
 		public final static double POS_POS_TOLERANCE = 0.05;
 
 		public final static double ANGLE_KP = 0.07;

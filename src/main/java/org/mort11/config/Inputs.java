@@ -7,7 +7,6 @@ import org.mort11.subsystems.Drivetrain;
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandPS5Controller;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
-
 public class Inputs {
 
     public static CommandJoystick joystick;

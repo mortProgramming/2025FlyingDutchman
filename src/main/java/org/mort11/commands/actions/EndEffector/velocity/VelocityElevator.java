@@ -30,6 +30,6 @@ public class VelocityElevator extends Command  {
 
   @Override
   public void end(boolean interrupted){
-    
+    elevator.setElevatorMotorPercent(0);
   }
 }

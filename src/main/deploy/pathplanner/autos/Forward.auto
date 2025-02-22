@@ -5,6 +5,12 @@
     "data": {
       "commands": [
         {
+          "type": "named",
+          "data": {
+            "name": "AlgaeUp"
+          }
+        },
+        {
           "type": "path",
           "data": {
             "pathName": "Forward"

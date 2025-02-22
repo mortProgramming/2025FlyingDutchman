@@ -1,26 +1,19 @@
 package org.mort11.config;
 
-import org.mort11.commands.actions.drivetrain.Angle2AprilTag;
-import org.mort11.commands.actions.drivetrain.Drive;
+import org.mort11.commands.actions.Initiate;
 import org.mort11.commands.actions.drivetrain.DriveSetSpeed;
-import org.mort11.commands.actions.drivetrain.ToTag;
+import org.mort11.commands.actions.drivetrain.ResetPosition;
 
-import org.mort11.commands.actions.endeffector.pid.Elevate;
-import org.mort11.commands.actions.endeffector.pid.SetAlgaeArm;
 import org.mort11.commands.actions.endeffector.pid.SetEndeffector;
 import org.mort11.commands.actions.endeffector.pid.SetTikiTorchArm;
-import org.mort11.commands.actions.endeffector.pid.ToggleAlgaeArm;
-import org.mort11.commands.actions.endeffector.pid.ToggleTiki;
 
 import org.mort11.commands.actions.endeffector.velocity.Climb;
 import org.mort11.commands.actions.endeffector.velocity.VelocityAlgaeRoller;
 import org.mort11.commands.actions.endeffector.velocity.VelocityTikiTorchRoller;
-import org.mort11.library.commands.FlipOrFlop;
 import org.mort11.commands.actions.endeffector.velocity.VelocityAlgaeArm;
 import org.mort11.commands.actions.endeffector.velocity.VelocityElevator;
 import org.mort11.commands.actions.endeffector.velocity.VelocityTikiTorchArm;
 
-import static org.mort11.config.Inputs.joystick;
 import static org.mort11.config.Inputs.testingController;
 import static org.mort11.config.Inputs.compController;
 import static org.mort11.config.Inputs.driveController;
@@ -64,7 +57,7 @@ public class IO {
       drivetrain.setDefaultCommand(
           new DriveSetSpeed(
             Inputs::getLeftControllerXSwerve, Inputs::getLeftControllerYSwerve, Inputs::getRightControllerXSwerve,
-            1
+            0.15
           )
       );
 
@@ -78,12 +71,27 @@ public class IO {
       0.3
     ));
 
-    // driveController.triangle().whileTrue(drivetrain.setGyroscopeZero(IMU_TO_ROBOT_FRONT_ANGLE));
-    driveController.triangle().whileTrue(new InstantCommand(() -> drivetrain.setFieldOffset(IMU_TO_ROBOT_FRONT_ANGLE), drivetrain));
+    driveController.square().onTrue(new DriveSetSpeed(
+      Inputs::getLeftControllerXSwerve, Inputs::getLeftControllerYSwerve, Inputs::getRightControllerXSwerve, 
+      0.5
+    ));
 
-    testingController.start().whileTrue(new InstantCommand(() -> drivetrain.getSwerveDrive().resetPosition(
-      new Pose2d(0, 0, Rotation2d.fromDegrees(0))
-    )));
+    driveController.triangle().onTrue(new DriveSetSpeed(
+      Inputs::getLeftControllerXSwerve, Inputs::getLeftControllerYSwerve, Inputs::getRightControllerXSwerve, 
+      0.75
+    ));
+
+    driveController.axisGreaterThan(4, 0.25).onTrue(new DriveSetSpeed(
+      Inputs::getLeftControllerXSwerve, Inputs::getLeftControllerYSwerve, Inputs::getRightControllerXSwerve, 
+      0.4
+    ));
+
+    driveController.axisLessThan(4, 0.25).onFalse(new DriveSetSpeed(
+      Inputs::getLeftControllerXSwerve, Inputs::getLeftControllerYSwerve, Inputs::getRightControllerXSwerve, 
+      0.15
+    ));
+
+    driveController.pov(0).whileTrue(new ResetPosition(0, 0, 0));
 
     driveController.pov(90).whileTrue(new Climb(true));
 
@@ -112,17 +120,17 @@ public class IO {
 
 
 
-      compController.axisGreaterThan(3, 0.25).whileTrue(VelocityTikiTorchRoller.outtake());
+      compController.axisGreaterThan(3, 0.25).whileTrue(VelocityTikiTorchRoller.intake());
       compController.axisGreaterThan(3, 0.25).whileFalse(VelocityTikiTorchRoller.nothing());
 
-      compController.rightBumper().whileTrue(VelocityTikiTorchRoller.intake());
+      compController.rightBumper().whileTrue(VelocityTikiTorchRoller.outtake());
       compController.rightBumper().whileFalse(VelocityTikiTorchRoller.nothing());
 
-      compController.leftBumper().whileTrue(VelocityAlgaeRoller.intake());
-      compController.leftBumper().whileFalse(VelocityAlgaeRoller.nothing());
+      // compController.leftBumper().whileTrue(VelocityAlgaeRoller.intake());
+      // compController.leftBumper().whileFalse(VelocityAlgaeRoller.nothing());
 
-      compController.axisGreaterThan(2, 0.25).whileTrue(VelocityAlgaeRoller.outtake());
-      compController.axisGreaterThan(2, 0.25).whileFalse(VelocityAlgaeRoller.nothing());
+      // compController.axisGreaterThan(2, 0.25).whileTrue(VelocityAlgaeRoller.outtake());
+      // compController.axisGreaterThan(2, 0.25).whileFalse(VelocityAlgaeRoller.nothing());
 
       //auto endeffector
 
@@ -130,10 +138,16 @@ public class IO {
       compController.pov(270).whileTrue(SetEndeffector.l2());
       compController.pov(180).whileTrue(SetEndeffector.l3());
       compController.pov(0).whileTrue(SetEndeffector.l4());
-      compController.back().whileTrue(SetEndeffector.lowAlgae());
-      compController.start().whileTrue(SetEndeffector.highAlgae());
+      // compController.back().whileTrue(SetEndeffector.lowAlgae());
+      // compController.start().whileTrue(SetEndeffector.highAlgae());
       compController.a().whileTrue(SetEndeffector.floor());
       compController.b().whileTrue(SetEndeffector.intake());
+      // compController.button(9).whileTrue(SetEndeffector.barge());
+
+      compController.y().whileTrue(SetTikiTorchArm.score());
+      compController.x().whileTrue(SetTikiTorchArm.intake());
+
+      compController.button(10).whileTrue(new Initiate());
 
 
       //TESTING XBOXCONTROLLER SETTINGS
@@ -144,19 +158,19 @@ public class IO {
       testingController.b().whileTrue(new VelocityTikiTorchArm(0.2));
       testingController.b().whileFalse(new VelocityTikiTorchArm(0));
 
-      testingController.x().whileTrue(new VelocityAlgaeArm(-0.2));
-      testingController.x().whileFalse(new VelocityAlgaeArm(0));
+      // testingController.x().whileTrue(new VelocityAlgaeArm(-0.2));
+      // testingController.x().whileFalse(new VelocityAlgaeArm(0));
 
-      testingController.y().whileTrue(new VelocityAlgaeArm(0.2));
-      testingController.y().whileFalse(new VelocityAlgaeArm(0));
+      // testingController.y().whileTrue(new VelocityAlgaeArm(0.2));
+      // testingController.y().whileFalse(new VelocityAlgaeArm(0));
 
       testingController.pov(0).whileTrue(new VelocityElevator(-0.2));
       testingController.pov(0).whileFalse(new VelocityElevator(0));
       testingController.pov(180).whileTrue(new VelocityElevator(0.2));
       testingController.pov(180).whileFalse(new VelocityElevator(0));
 
-      testingController.pov(90).toggleOnTrue(new Climb(true));
-      testingController.pov(270).toggleOnTrue(new Climb(false));
+      // testingController.pov(90).toggleOnTrue(new Climb(true));
+      // testingController.pov(270).toggleOnTrue(new Climb(false));
 
       testingController.axisGreaterThan(3, 0.25).whileTrue(VelocityTikiTorchRoller.outtake());
       testingController.axisGreaterThan(3, 0.25).whileFalse(VelocityTikiTorchRoller.nothing());
@@ -164,11 +178,17 @@ public class IO {
       testingController.rightBumper().whileTrue(VelocityTikiTorchRoller.intake());
       testingController.rightBumper().whileFalse(VelocityTikiTorchRoller.nothing());
 
-      testingController.leftBumper().whileTrue(VelocityAlgaeRoller.intake());
-      testingController.leftBumper().whileFalse(VelocityAlgaeRoller.nothing());
+      // testingController.leftBumper().whileTrue(VelocityAlgaeRoller.intake());
+      // testingController.leftBumper().whileFalse(VelocityAlgaeRoller.nothing());
 
-      testingController.axisGreaterThan(2, 0.25).whileTrue(VelocityAlgaeRoller.outtake());
-      testingController.axisGreaterThan(2, 0.25).whileFalse(VelocityAlgaeRoller.nothing());
+      // testingController.axisGreaterThan(2, 0.25).whileTrue(VelocityAlgaeRoller.outtake());
+      // testingController.axisGreaterThan(2, 0.25).whileFalse(VelocityAlgaeRoller.nothing());
+
+      testingController.start().whileTrue(new Initiate());
+
+      testingController.back().whileTrue(new InstantCommand(() -> drivetrain.getSwerveDrive().resetPosition(
+      new Pose2d(7, 4, Rotation2d.fromDegrees(180))
+    )));
 
     }
 

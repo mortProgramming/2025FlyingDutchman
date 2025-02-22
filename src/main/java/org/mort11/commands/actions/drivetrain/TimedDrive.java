@@ -34,7 +34,7 @@ public class TimedDrive extends Command{
     this.x = x;
     this.y = y;
     this.omega = omega;
-    this.fieldOriented = true;
+    this.fieldOriented = false;
     addRequirements(drivetrain);
   }
   public TimedDrive(double time, double x, double y, double omega, boolean fieldOriented) {

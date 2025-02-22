@@ -15,6 +15,12 @@
           "data": {
             "pathName": "Forward"
           }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ElevatorDown"
+          }
         }
       ]
     }

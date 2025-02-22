@@ -18,6 +18,7 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
+import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
@@ -43,6 +44,8 @@ public class Drivetrain extends SubsystemBase {
 
   private double fieldOrientationOffset;
 
+  private Field2d field;
+
   @SuppressWarnings("OverridableMethodCallInConstructor")
   private Drivetrain() {
     configureSwerve();
@@ -62,6 +65,8 @@ public class Drivetrain extends SubsystemBase {
 		rotateToAngleController.enableContinuousInput(POS_KI, POS_KI);
 
 		fieldOrientationOffset = 0;
+
+		field = new Field2d();
   }
 
   public void configureSwerve () {
@@ -145,11 +150,8 @@ public class Drivetrain extends SubsystemBase {
     SmartDashboard.putNumber("Pitch", Math.toDegrees(swerveDrive.getRobotRotations().getY()));
     SmartDashboard.putNumber("Roll", Math.toDegrees(swerveDrive.getRobotRotations().getX()));
 
-	SmartDashboard.putNumber("Max Speed", getSwerveDrive().getModule(0).maxSpeed);
-	SmartDashboard.putNumber("Wheel Diameter", getSwerveDrive().getModule(0).getModuleConfig().WHEEL_DIAMETER);
-	SmartDashboard.putNumber("Module Width", getSwerveDrive().kinematics.getModules()[0].getX() * 2);
-
-
+	field.setRobotPose(getPose());
+	SmartDashboard.putData(field);
   }
 
   public void setDrive(ChassisSpeeds speeds) {
@@ -206,6 +208,10 @@ public class Drivetrain extends SubsystemBase {
 
 	public Pose2d getPose() {
 		return swerveDrive.getPosition();
+	}
+
+	public ChassisSpeeds getSpeed() {
+		return speeds;
 	}
 
 	public ProfiledPIDController getXController() {

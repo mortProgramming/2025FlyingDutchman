@@ -1,27 +1,18 @@
 package org.mort11.config;
 
 import org.mort11.commands.actions.Initiate;
-import org.mort11.commands.actions.drivetrain.Angle2AprilTag;
-import org.mort11.commands.actions.drivetrain.Drive;
 import org.mort11.commands.actions.drivetrain.DriveSetSpeed;
-import org.mort11.commands.actions.drivetrain.ToTag;
 
-import org.mort11.commands.actions.endeffector.pid.Elevate;
-import org.mort11.commands.actions.endeffector.pid.SetAlgaeArm;
 import org.mort11.commands.actions.endeffector.pid.SetEndeffector;
 import org.mort11.commands.actions.endeffector.pid.SetTikiTorchArm;
-import org.mort11.commands.actions.endeffector.pid.ToggleAlgaeArm;
-import org.mort11.commands.actions.endeffector.pid.ToggleTiki;
 
 import org.mort11.commands.actions.endeffector.velocity.Climb;
 import org.mort11.commands.actions.endeffector.velocity.VelocityAlgaeRoller;
 import org.mort11.commands.actions.endeffector.velocity.VelocityTikiTorchRoller;
-import org.mort11.library.commands.FlipOrFlop;
 import org.mort11.commands.actions.endeffector.velocity.VelocityAlgaeArm;
 import org.mort11.commands.actions.endeffector.velocity.VelocityElevator;
 import org.mort11.commands.actions.endeffector.velocity.VelocityTikiTorchArm;
 
-import static org.mort11.config.Inputs.joystick;
 import static org.mort11.config.Inputs.testingController;
 import static org.mort11.config.Inputs.compController;
 import static org.mort11.config.Inputs.driveController;
@@ -79,12 +70,21 @@ public class IO {
       0.3
     ));
 
-    // driveController.triangle().whileTrue(drivetrain.setGyroscopeZero(IMU_TO_ROBOT_FRONT_ANGLE));
-    driveController.triangle().whileTrue(new InstantCommand(() -> drivetrain.setFieldOffset(IMU_TO_ROBOT_FRONT_ANGLE), drivetrain));
+    driveController.square().onTrue(new DriveSetSpeed(
+      Inputs::getLeftControllerXSwerve, Inputs::getLeftControllerYSwerve, Inputs::getRightControllerXSwerve, 
+      0.5
+    ));
 
-    testingController.start().whileTrue(new InstantCommand(() -> drivetrain.getSwerveDrive().resetPosition(
-      new Pose2d(0, 0, Rotation2d.fromDegrees(0))
-    )));
+    driveController.triangle().onTrue(new DriveSetSpeed(
+      Inputs::getLeftControllerXSwerve, Inputs::getLeftControllerYSwerve, Inputs::getRightControllerXSwerve, 
+      0.75
+    ));
+
+    driveController.pov(0).whileTrue(new InstantCommand(() -> drivetrain.setFieldOffset(IMU_TO_ROBOT_FRONT_ANGLE), drivetrain));
+
+    // testingController.start().whileTrue(new InstantCommand(() -> drivetrain.getSwerveDrive().resetPosition(
+    //   new Pose2d(0, 0, Rotation2d.fromDegrees(0))
+    // )));
 
     driveController.pov(90).whileTrue(new Climb(true));
 
@@ -135,6 +135,12 @@ public class IO {
       compController.start().whileTrue(SetEndeffector.highAlgae());
       compController.a().whileTrue(SetEndeffector.floor());
       compController.b().whileTrue(SetEndeffector.intake());
+      compController.button(9).whileTrue(SetEndeffector.barge());
+
+      compController.y().whileTrue(SetTikiTorchArm.score());
+      compController.x().whileTrue(SetTikiTorchArm.intake());
+
+      compController.button(10).whileTrue(new Initiate());
 
 
       //TESTING XBOXCONTROLLER SETTINGS

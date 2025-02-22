@@ -43,7 +43,6 @@ public class Auto {
 	}
 
 	public static void configureAutoBuilder() {
-		drivetrain.setGyroscopeZero(0);
 
 		// PathPlanner.configure(
 		// 	drivetrain, drivetrain.getSwerveDrive(),
@@ -78,12 +77,12 @@ public class Auto {
         //     () -> (DriverStation.getAlliance().isPresent() ? DriverStation.getAlliance().get() == Alliance.Red : false), //method for checking current alliance. Path flips if alliance is red
         //     drivetrain
         // );
-
+		
 		AutoBuilder.configure(
             () -> drivetrain.getPose(),  //get current robot position on the field
             (Pose2d startPose) -> drivetrain.getSwerveDrive().resetPosition(startPose), //reset odometry to a given pose. WILL ONLY RUN IF AUTON HAS A SET POSE, DOES NOTHING OTHERWISE. 
             () -> drivetrain.getSwerveDrive().velocity, //get the current ROBOT RELATIVE SPEEDS
-            (ChassisSpeeds robotRelativeOutput) -> drivetrain.getSwerveDrive().setVelocity(robotRelativeOutput), //makes the robot move given ROBOT RELATIVE CHASSISSPEEDS
+            (ChassisSpeeds robotRelativeOutput) -> drivetrain.setDrive(robotRelativeOutput), //makes the robot move given ROBOT RELATIVE CHASSISSPEEDS
             new PPHolonomicDriveController(
                 new PIDConstants(AUTON_POS_KP, AUTON_POS_KI, AUTON_POS_KD),
                 new PIDConstants(AUTON_ROTATION_KP, AUTON_ROTATION_KI, AUTON_ROTATION_KD)
@@ -92,7 +91,7 @@ public class Auto {
                 ROBOT_MASS,
                 ROBOT_MOMENT_OF_INERTIA,
                 new ModuleConfig(
-                    0.103,
+                    0.0515,
                     5,
                     WHEEL_COEFFICIENT_OF_FRICTION,
                     DCMotor.getKrakenX60(1),

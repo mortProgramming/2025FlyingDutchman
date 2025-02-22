@@ -19,11 +19,11 @@ public final class PhysicalConstants {
 		public static final double ALGAE_FLOOR_INTAKE = -15;
 
 		public static final double ALGAE_PROCESSOR_SCORE = 0;
-		public static final double ALGAE_BARGE_SCORE = 0;
+		public static final double ALGAE_BARGE_SCORE = 45;
 	} 
 
 	public final static class AlgaeRoller {
-		public static final double INTAKE_SPEED = 0.8;
+		public static final double INTAKE_SPEED = 0.6;
 		public static final double OUTAKE_SPEED = -0.8;
 	} 
 
@@ -72,12 +72,12 @@ public final class PhysicalConstants {
 		public static final double ELEVATOR_L2_HEIGHT = 29.5;
 		public static final double ELEVATOR_L3_HEIGHT = 46;
 		public static final double ELEVATOR_L4_HEIGHT = 71;
-		public static final double ELEVATOR_INTAKE_HEIGHT = 20;
+		public static final double ELEVATOR_INTAKE_HEIGHT = 22;
 
 		public static final double ELEVATOR_LOW_ALGAE_HEIGHT = 13.5;
 		public static final double ELEVATOR_HIGH_ALGAE_HEIGHT = 30;
 		public static final double ELEVATOR_PROCESSOR_HEIGHT = 0;
-		public static final double ELEVATOR_BARGE_HEIGHT = 0;
+		public static final double ELEVATOR_BARGE_HEIGHT = 72;
 		public static final double ELEVATOR_FLOOR_HEIGHT = 0;
 	}
 
@@ -93,7 +93,7 @@ public final class PhysicalConstants {
 		public static final double TIKI_L234_SCORE = -49;
 		public static final double TIKI_L1_SCORE = 0;
 
-		public static final double TIKI_INTAKE = 47;
+		public static final double TIKI_INTAKE = 46;
 
 		public static final double TIKI_ALGAE_CLEAR = -89;
 	}

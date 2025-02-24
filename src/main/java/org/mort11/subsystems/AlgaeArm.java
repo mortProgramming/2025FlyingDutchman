@@ -51,13 +51,13 @@ public class AlgaeArm extends SubsystemBase {
     }
 
 public double encoderToDegrees() {
-    double degrees = getEncoderPosition() * 360;
+    double degrees = getEncoderPosition() * 360 + OFFSET;
 
     if (degrees < ARM_TOP_NEVER_POSITION && degrees > ARM_BOTTOM_NEVER_POSITION) {
         degrees += 360;
     }
 
-    return degrees + OFFSET; 
+    return degrees; 
 }
 
 public double getArmVoltage(){

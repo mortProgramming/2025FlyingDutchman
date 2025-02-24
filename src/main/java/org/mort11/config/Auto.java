@@ -29,6 +29,7 @@ import org.mort11.commands.autons.pathplanned.BasicCommands;
 import org.mort11.commands.autons.pathplanned.ScoreL4JDescoreKL;
 
 import com.pathplanner.lib.path.PathPlannerPath;
+import com.pathplanner.lib.util.DriveFeedforwards;
 
 
 public class Auto {
@@ -139,7 +140,7 @@ public class Auto {
             () -> drivetrain.getPose(),  //get current robot position on the field
             (Pose2d startPose) -> drivetrain.setRobotPosition(startPose.getX(), startPose.getY(), startPose.getRotation().getDegrees()), //reset odometry to a given pose. WILL ONLY RUN IF AUTON HAS A SET POSE, DOES NOTHING OTHERWISE. 
             () -> drivetrain.getChassisSpeeds(), //get the current ROBOT RELATIVE SPEEDS
-            (ChassisSpeeds robotRelativeOutput) -> drivetrain.setDrive(robotRelativeOutput), //makes the robot move given ROBOT RELATIVE CHASSISSPEEDS
+            (ChassisSpeeds robotRelativeOutput, DriveFeedforwards feedForwards) -> drivetrain.setDrive(robotRelativeOutput), //makes the robot move given ROBOT RELATIVE CHASSISSPEEDS
             new PPHolonomicDriveController(
                 new PIDConstants(AUTON_POS_KP, AUTON_POS_KI, AUTON_POS_KD),
                 new PIDConstants(AUTON_ROTATION_KP, AUTON_ROTATION_KI, AUTON_ROTATION_KD)
@@ -160,7 +161,6 @@ public class Auto {
             () -> false, //method for checking current alliance. Path flips if alliance is red
             drivetrain
         );
-
 	}
 	
 	public static void addAutoOptions () {

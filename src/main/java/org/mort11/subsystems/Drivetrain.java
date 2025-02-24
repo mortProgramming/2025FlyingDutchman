@@ -199,6 +199,10 @@ public class Drivetrain extends SubsystemBase {
 		this.fieldOrientationOffset = getAbsoluteRotation().getDegrees() + fieldOrientationOffset;
 	}
 
+  public void setRobotPosition(Pose2d pose) {
+		swerveDrive.resetPosition(pose);
+	}
+
 	public Command setRobotPosition(double x, double y, double rotationDegrees) {
 		return new InstantCommand(() -> swerveDrive.resetPosition(
 			new Pose2d(x, y, Rotation2d.fromDegrees(rotationDegrees))));

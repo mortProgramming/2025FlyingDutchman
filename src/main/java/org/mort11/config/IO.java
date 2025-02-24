@@ -28,6 +28,7 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 
 public class IO {
@@ -97,28 +98,53 @@ public class IO {
 
     driveController.pov(270).whileTrue(new Climb(false));
 
+    // //rest
+    // compController.pov(90).onTrue(new DriveSetSpeed(
+    //   Inputs::getLeftControllerXSwerve, Inputs::getLeftControllerYSwerve, Inputs::getRightControllerXSwerve,
+    //   0.4
+    // ));
+    // // l2
+    //   compController.pov(270).onTrue(new DriveSetSpeed(
+    //     Inputs::getLeftControllerXSwerve, Inputs::getLeftControllerYSwerve, Inputs::getRightControllerXSwerve,
+    //     0.15
+    //   ));
+    //   //l3
+    //   compController.pov(180).onTrue(new DriveSetSpeed(
+    //     Inputs::getLeftControllerXSwerve, Inputs::getLeftControllerYSwerve, Inputs::getRightControllerXSwerve,
+    //     0.15
+    //   ));
+    //   //l4
+    //   compController.pov(0).onTrue(new DriveSetSpeed(
+    //     Inputs::getLeftControllerXSwerve, Inputs::getLeftControllerYSwerve, Inputs::getRightControllerXSwerve,
+    //     0.15
+    //   ));
+    //   //low algae
+    //   compController.back().onTrue(new DriveSetSpeed(
+    //     Inputs::getLeftControllerXSwerve, Inputs::getLeftControllerYSwerve, Inputs::getRightControllerXSwerve,
+    //     0.15
+    //   ));
+
+    //   //high algae
+    //   compController.start().onTrue(new DriveSetSpeed(
+    //     Inputs::getLeftControllerXSwerve, Inputs::getLeftControllerYSwerve, Inputs::getRightControllerXSwerve,
+    //     0.15
+    //   ));
+    //   //floor
+    //   compController.a().onTrue(new DriveSetSpeed(
+    //     Inputs::getLeftControllerXSwerve, Inputs::getLeftControllerYSwerve, Inputs::getRightControllerXSwerve,
+    //     0.15
+    //   ));
+    //   //intake
+    //   compController.b().onTrue(new DriveSetSpeed(
+    //     Inputs::getLeftControllerXSwerve, Inputs::getLeftControllerYSwerve, Inputs::getRightControllerXSwerve,
+    //     0.15
+    //   ));
+
       // joystick.trigger().whileTrue(new Angle2AprilTag(0));
       // driveController.axisGreaterThan(3, 0.7).whileTrue(new ToTag(0));
 
 
     //TODO Xbox Controller Commands
-
-      // compController.pov(90).whileTrue(Elevate.rest());
-      // compController.pov(270).whileTrue(Elevate.l2());
-      // compController.pov(180).whileTrue(Elevate.l3());
-      // compController.pov(0).whileTrue(Elevate.l4());
-      // compController.start().whileTrue(Elevate.highAlgae());
-      // compController.back().whileTrue(Elevate.lowAlgae());
-
-      // compController.x().onTrue(new ToggleTiki(() -> compController.x().getAsBoolean()));
-
-      // compController.b().whileTrue(SetTikiTorchArm.algaeClear());
-
-      // compController.y().onTrue(new ToggleAlgaeArm(() -> compController.y().getAsBoolean()));
-
-      // compController.a().whileTrue(SetAlgaeArm.floor());
-
-
 
       compController.axisGreaterThan(3, 0.25).whileTrue(VelocityTikiTorchRoller.intake());
       compController.axisGreaterThan(3, 0.25).whileFalse(VelocityTikiTorchRoller.nothing());
@@ -126,11 +152,11 @@ public class IO {
       compController.rightBumper().whileTrue(VelocityTikiTorchRoller.outtake());
       compController.rightBumper().whileFalse(VelocityTikiTorchRoller.nothing());
 
-      // compController.leftBumper().whileTrue(VelocityAlgaeRoller.intake());
-      // compController.leftBumper().whileFalse(VelocityAlgaeRoller.nothing());
+      compController.leftBumper().whileTrue(VelocityAlgaeRoller.intake());
+      compController.leftBumper().whileFalse(VelocityAlgaeRoller.nothing());
 
-      // compController.axisGreaterThan(2, 0.25).whileTrue(VelocityAlgaeRoller.outtake());
-      // compController.axisGreaterThan(2, 0.25).whileFalse(VelocityAlgaeRoller.nothing());
+      compController.axisGreaterThan(2, 0.25).whileTrue(VelocityAlgaeRoller.outtake());
+      compController.axisGreaterThan(2, 0.25).whileFalse(VelocityAlgaeRoller.nothing());
 
       //auto endeffector
 
@@ -138,11 +164,11 @@ public class IO {
       compController.pov(270).whileTrue(SetEndeffector.l2());
       compController.pov(180).whileTrue(SetEndeffector.l3());
       compController.pov(0).whileTrue(SetEndeffector.l4());
-      // compController.back().whileTrue(SetEndeffector.lowAlgae());
-      // compController.start().whileTrue(SetEndeffector.highAlgae());
+      compController.back().whileTrue(SetEndeffector.lowAlgae());
+      compController.start().whileTrue(SetEndeffector.highAlgae());
       compController.a().whileTrue(SetEndeffector.floor());
       compController.b().whileTrue(SetEndeffector.intake());
-      // compController.button(9).whileTrue(SetEndeffector.barge());
+      compController.button(9).whileTrue(SetEndeffector.barge());
 
       compController.y().whileTrue(SetTikiTorchArm.score());
       compController.x().whileTrue(SetTikiTorchArm.intake());
@@ -158,19 +184,19 @@ public class IO {
       testingController.b().whileTrue(new VelocityTikiTorchArm(0.2));
       testingController.b().whileFalse(new VelocityTikiTorchArm(0));
 
-      // testingController.x().whileTrue(new VelocityAlgaeArm(-0.2));
-      // testingController.x().whileFalse(new VelocityAlgaeArm(0));
+      testingController.x().whileTrue(new VelocityAlgaeArm(-0.2));
+      testingController.x().whileFalse(new VelocityAlgaeArm(0));
 
-      // testingController.y().whileTrue(new VelocityAlgaeArm(0.2));
-      // testingController.y().whileFalse(new VelocityAlgaeArm(0));
+      testingController.y().whileTrue(new VelocityAlgaeArm(0.2));
+      testingController.y().whileFalse(new VelocityAlgaeArm(0));
 
       testingController.pov(0).whileTrue(new VelocityElevator(-0.2));
       testingController.pov(0).whileFalse(new VelocityElevator(0));
       testingController.pov(180).whileTrue(new VelocityElevator(0.2));
       testingController.pov(180).whileFalse(new VelocityElevator(0));
 
-      // testingController.pov(90).toggleOnTrue(new Climb(true));
-      // testingController.pov(270).toggleOnTrue(new Climb(false));
+      testingController.pov(90).toggleOnTrue(new Climb(true));
+      testingController.pov(270).toggleOnTrue(new Climb(false));
 
       testingController.axisGreaterThan(3, 0.25).whileTrue(VelocityTikiTorchRoller.outtake());
       testingController.axisGreaterThan(3, 0.25).whileFalse(VelocityTikiTorchRoller.nothing());
@@ -178,11 +204,11 @@ public class IO {
       testingController.rightBumper().whileTrue(VelocityTikiTorchRoller.intake());
       testingController.rightBumper().whileFalse(VelocityTikiTorchRoller.nothing());
 
-      // testingController.leftBumper().whileTrue(VelocityAlgaeRoller.intake());
-      // testingController.leftBumper().whileFalse(VelocityAlgaeRoller.nothing());
+      testingController.leftBumper().whileTrue(VelocityAlgaeRoller.intake());
+      testingController.leftBumper().whileFalse(VelocityAlgaeRoller.nothing());
 
-      // testingController.axisGreaterThan(2, 0.25).whileTrue(VelocityAlgaeRoller.outtake());
-      // testingController.axisGreaterThan(2, 0.25).whileFalse(VelocityAlgaeRoller.nothing());
+      testingController.axisGreaterThan(2, 0.25).whileTrue(VelocityAlgaeRoller.outtake());
+      testingController.axisGreaterThan(2, 0.25).whileFalse(VelocityAlgaeRoller.nothing());
 
       testingController.start().whileTrue(new Initiate());
 

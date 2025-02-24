@@ -27,8 +27,8 @@ public class SetEndeffector extends SequentialCommandGroup {
             
             new SequentialCommandGroup(
                 new ParallelCommandGroup(
-                    SetTikiTorchArm.algaeClear()
-                    // SetAlgaeArm.rest()
+                    SetTikiTorchArm.algaeClear(),
+                    SetAlgaeArm.rest()
                 ).withTimeout(0.5),
 
                 new ParallelCommandGroup(
@@ -38,8 +38,8 @@ public class SetEndeffector extends SequentialCommandGroup {
 
                         new WaitCommand(0.75),
                         new ParallelCommandGroup(
-                            new SetTikiTorchArm(tikiArmPos)
-                            // new SetAlgaeArm(algaeArmPos)
+                            new SetTikiTorchArm(tikiArmPos),
+                            new SetAlgaeArm(algaeArmPos)
                         )
                     )
                 )
@@ -57,8 +57,8 @@ public class SetEndeffector extends SequentialCommandGroup {
             
             new SequentialCommandGroup(
                 new ParallelCommandGroup(
-                    SetTikiTorchArm.algaeClear()
-                    //SetAlgaeArm.rest()
+                    SetTikiTorchArm.algaeClear(),
+                    SetAlgaeArm.rest()
                 ).withTimeout(0.5),
 
                 new ParallelCommandGroup(
@@ -69,8 +69,8 @@ public class SetEndeffector extends SequentialCommandGroup {
 
                         new WaitCommand(time),
                         new ParallelCommandGroup(
-                            new SetTikiTorchArm(tikiArmPos)
-                           // new SetAlgaeArm(algaeArmPos)
+                            new SetTikiTorchArm(tikiArmPos),
+                           new SetAlgaeArm(algaeArmPos)
                         )
                     )
                 )

@@ -14,11 +14,11 @@ public class Initiate extends SequentialCommandGroup {
     public Initiate() {
         addCommands(
             new SequentialCommandGroup(
-                //new Climb(true),
+                new Climb(true),
                 new VelocityElevator(-0.2).withTimeout(0.5),
                 new ParallelCommandGroup(
                     Elevate.l2().withTimeout(0.5),
-                    //SetAlgaeArm.l23Intake(),
+                    SetAlgaeArm.l23Intake(),
                     SetTikiTorchArm.score()
                 )
             ).withTimeout(1)
@@ -29,11 +29,11 @@ public class Initiate extends SequentialCommandGroup {
         addCommands(
             new SequentialCommandGroup(
                 new ResetPosition(x, y, rotationDegrees),
-                //new Climb(true),
+                new Climb(true),
                 new VelocityElevator(-0.2).withTimeout(0.5),
                 new ParallelCommandGroup(
                     Elevate.l2().withTimeout(0.5),
-                    //SetAlgaeArm.l23Intake(),
+                    SetAlgaeArm.l23Intake(),
                     SetTikiTorchArm.score()
                 ),
                 Elevate.rest()

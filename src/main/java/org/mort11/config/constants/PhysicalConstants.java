@@ -8,12 +8,12 @@ public final class PhysicalConstants {
 
 	public final static class AlgaeArm {
 
-		public static final double OFFSET = -200;
+		public static final double OFFSET = -261;
 
 		public static final double ALGAE_REST = 95;
 
-		public static final double ARM_TOP_NEVER_POSITION = 0;
-		public static final double ARM_BOTTOM_NEVER_POSITION = 0;
+		public static final double ARM_TOP_NEVER_POSITION = -120;
+		public static final double ARM_BOTTOM_NEVER_POSITION = -300;
 
 		public static final double ALGAE_REEF_INTAKE = 45;
 		public static final double ALGAE_FLOOR_INTAKE = -15;
@@ -101,6 +101,5 @@ public final class PhysicalConstants {
 	public final static class TikiTorchRoller {
 		public static final double INTAKE_SPEED = -1;
 		public static final double OUTAKE_SPEED = 1;
-	} 
-
+	}
 }

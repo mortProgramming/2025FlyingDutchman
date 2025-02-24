@@ -28,7 +28,7 @@ public class Vision extends SubsystemBase {
 		frontCamera = new TagCamera(TagCameraTypeEnum.LIMELIGHT, FRONT_CAMERA_NAME);
 
 		tagLayout = new AprilTagFieldLayout(APRIL_TAGS, FIELD_LENGTH, FIELD_WIDTH);
-		cameraFieldLayout = AprilTagFieldLayout.loadField(AprilTagFields.k2025Reefscape);
+		cameraFieldLayout = AprilTagFieldLayout.loadField(AprilTagFields.k2025ReefscapeAndyMark);
 	}
 
 	public Translation2d getRobotPoseField() {

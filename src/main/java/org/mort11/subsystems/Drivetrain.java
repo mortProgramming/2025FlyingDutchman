@@ -172,7 +172,7 @@ public class Drivetrain extends SubsystemBase {
 
 		
 
-		// swerveDrive.setVelocity(speeds);
+		swerveDrive.setVelocity(speeds);
 
     swerveDrive.update();
 
@@ -189,7 +189,6 @@ public class Drivetrain extends SubsystemBase {
 
   public void setDrive(ChassisSpeeds speeds) {
     this.speeds = speeds;
-    swerveDrive.setVelocity(speeds);
   }
 
   public Command setGyroscopeZero(double angle) {
@@ -250,7 +249,6 @@ public class Drivetrain extends SubsystemBase {
 	}
 
 	public Pose2d getPose() {
-    System.out.println(swerveDrive.getPosition().getX());
 		return swerveDrive.getPosition();
 	}
 

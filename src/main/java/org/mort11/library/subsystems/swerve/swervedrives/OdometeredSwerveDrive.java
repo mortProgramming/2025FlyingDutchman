@@ -109,7 +109,7 @@ public class OdometeredSwerveDrive extends OrientedSwerveDrive {
         rotationController.enableContinuousInput(-180, 180);
     }
 
-    public void moveToPosition (Pose2d position) {
+    public void moveToPosition(Pose2d position) {
         setOrientedVelocity(new ChassisSpeeds(
             xController.calculate(getPosition().getX(), position.getX()),
             yController.calculate(getPosition().getY(), position.getY()),

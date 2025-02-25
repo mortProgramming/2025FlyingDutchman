@@ -158,8 +158,8 @@ public class Auto {
                 ),
                 0.609
             ),
-            () -> false, //method for checking current alliance. Path flips if alliance is red
-            drivetrain
+            () -> (DriverStation.getAlliance().isPresent() ? DriverStation.getAlliance().get() != Alliance.Red : false), //method for checking current alliance. Path flips if alliance is red
+        drivetrain
         );
 	}
 	
@@ -189,20 +189,10 @@ public class Auto {
 		// );
 
 		autoChooser.addOption("Pathplanner Auto Forward", new PathPlannerAuto("Forward"));
+        autoChooser.addOption("ScoreL4DescoreKL", new PathPlannerAuto("ScoreL4JDescoreKL"));
 
 		autoChooser.addOption("Forward Path", getPathCommand());
-		try {
-		autoChooser.addOption("test", 
-			AutoBuilder.followPath(
-				PathPlannerAuto.getPathGroupFromAutoFile(
-					"ScoreL4JDescoreKL"
-				).get(0)
-			)
-		);
-		}
-		catch (Exception e) {
-			// throw new ClassNotFoundException("Wrong");
-		}
+		
 
 		SmartDashboard.putData("Auton Chooser", autoChooser);
 

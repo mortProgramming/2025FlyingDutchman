@@ -20,6 +20,7 @@ import static org.mort11.config.constants.PhysicalConstants.Drivetrain.WHEEL_COE
 
 import org.mort11.commands.actions.InitializeTeleop;
 import org.mort11.commands.actions.Initiate;
+import org.mort11.commands.actions.endeffector.velocity.Climb;
 import org.mort11.config.Auto;
 import org.mort11.config.IO;
 import org.mort11.subsystems.Drivetrain;
@@ -92,6 +93,8 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     m_autonomousCommand = Auto.getAutonomousCommand();
+
+    CommandScheduler.getInstance().schedule(new Climb(true));
 
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {

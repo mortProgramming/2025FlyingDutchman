@@ -138,7 +138,7 @@ public class Auto {
 
 		AutoBuilder.configure(
             () -> drivetrain.getPose(),  //get current robot position on the field
-            (Pose2d startPose) -> drivetrain.setRobotPosition(startPose.getX(), startPose.getY(), startPose.getRotation().getDegrees()), //reset odometry to a given pose. WILL ONLY RUN IF AUTON HAS A SET POSE, DOES NOTHING OTHERWISE. 
+            (Pose2d startPose) -> drivetrain.setRobotPosition(startPose), //reset odometry to a given pose. WILL ONLY RUN IF AUTON HAS A SET POSE, DOES NOTHING OTHERWISE. 
             () -> drivetrain.getChassisSpeeds(), //get the current ROBOT RELATIVE SPEEDS
             (ChassisSpeeds robotRelativeOutput, DriveFeedforwards feedForwards) -> drivetrain.setDrive(robotRelativeOutput), //makes the robot move given ROBOT RELATIVE CHASSISSPEEDS
             new PPHolonomicDriveController(
@@ -152,7 +152,7 @@ public class Auto {
                     0.0515,
                     5,
                     WHEEL_COEFFICIENT_OF_FRICTION,
-                    DCMotor.getKrakenX60(1),
+                    DCMotor.getKrakenX60(1).withReduction(5.473),
                     DRIVE_MOTOR_CURRENT_LIMIT,
                     1
                 ),

@@ -8,7 +8,7 @@ import static org.mort11.library.hardware.encoder.EncoderTypeEnum.CANCODER;
 import org.mort11.library.hardware.imu.IMU;
 import static org.mort11.library.hardware.imu.IMUTypeEnum.PIGEON2;
 import static org.mort11.library.hardware.motor.MotorTypeEnum.KRAKEN;
-import static org.mort11.library.subsystems.swerve.ModuleConfigEnum.MK4i_L3;
+import static org.mort11.library.subsystems.swerve.ModuleConfigEnum.MK4iPlus;
 import org.mort11.library.subsystems.swerve.SwerveModule;
 import org.mort11.library.subsystems.swerve.swervedrives.OdometeredSwerveDrive;
 
@@ -24,6 +24,7 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
+import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -48,6 +49,8 @@ public class Drivetrain extends SubsystemBase {
   private ChassisSpeeds speeds;
 
   private ProfiledPIDController xToPosController, yToPosController, rotateToAngleController;
+
+  private SwerveDriveOdometry otherOdometry;
 
   private double fieldOrientationOffset;
 
@@ -75,31 +78,10 @@ public class Drivetrain extends SubsystemBase {
 
 		field = new Field2d();
 
-		// AutoBuilder.configure(
-    //         () -> drivetrain.getPose(),  //get current robot position on the field
-    //         (Pose2d startPose) -> drivetrain.getSwerveDrive().resetPosition(startPose), //reset odometry to a given pose. WILL ONLY RUN IF AUTON HAS A SET POSE, DOES NOTHING OTHERWISE. 
-    //         () -> drivetrain.getSwerveDrive().velocity, //get the current ROBOT RELATIVE SPEEDS
-    //         (ChassisSpeeds robotRelativeOutput) -> drivetrain.setDrive(robotRelativeOutput), //makes the robot move given ROBOT RELATIVE CHASSISSPEEDS
-    //         new PPHolonomicDriveController(
-    //             new PIDConstants(AUTON_POS_KP, AUTON_POS_KI, AUTON_POS_KD),
-    //             new PIDConstants(AUTON_ROTATION_KP, AUTON_ROTATION_KI, AUTON_ROTATION_KD)
-    //         ),
-    //         new RobotConfig(
-    //             ROBOT_MASS,
-    //             ROBOT_MOMENT_OF_INERTIA,
-    //             new ModuleConfig(
-    //                 0.0515,
-    //                 5,
-    //                 WHEEL_COEFFICIENT_OF_FRICTION,
-    //                 DCMotor.getKrakenX60(1),
-    //                 DRIVE_MOTOR_CURRENT_LIMIT,
-    //                 1
-    //             ),
-    //             0.609
-    //         ),
-    //         () -> false, //method for checking current alliance. Path flips if alliance is red
-    //         drivetrain
-    //     );
+    otherOdometry = new SwerveDriveOdometry(
+      kinematics, 
+      Rotation2d.fromDegrees(0), 
+      swerveDrive.getModulePositions());
   }
 
   public void configureSwerve () {
@@ -107,28 +89,28 @@ public class Drivetrain extends SubsystemBase {
       KRAKEN, FRONT_LEFT_DRIVE_MOTOR, 
       KRAKEN, FRONT_LEFT_STEER_MOTOR, 
       CANCODER, FRONT_LEFT_ENCODER, 
-      MK4i_L3
+      MK4iPlus
     );
 
     frontRightModule = new SwerveModule(
       KRAKEN, FRONT_RIGHT_DRIVE_MOTOR, 
       KRAKEN, FRONT_RIGHT_STEER_MOTOR, 
       CANCODER, FRONT_RIGHT_ENCODER, 
-      MK4i_L3
+      MK4iPlus
     );
 
     backLeftModule = new SwerveModule(
       KRAKEN, BACK_LEFT_DRIVE_MOTOR, 
       KRAKEN, BACK_LEFT_STEER_MOTOR, 
       CANCODER, BACK_LEFT_ENCODER, 
-      MK4i_L3
+      MK4iPlus
     );
 
     backRightModule = new SwerveModule(
       KRAKEN, BACK_RIGHT_DRIVE_MOTOR, 
       KRAKEN, BACK_RIGHT_STEER_MOTOR, 
       CANCODER, BACK_RIGHT_ENCODER, 
-      MK4i_L3
+      MK4iPlus
     );
 
     kinematics = new SwerveDriveKinematics(
@@ -157,18 +139,23 @@ public class Drivetrain extends SubsystemBase {
 
   @Override
   public void periodic() {
-    if (IO.isBlue()) {
-			speeds = new ChassisSpeeds(
-				speeds.vyMetersPerSecond, -speeds.vxMetersPerSecond,
+    // if (IO.isBlue()) {
+		// 	speeds = new ChassisSpeeds(
+		// 		speeds.vyMetersPerSecond, -speeds.vxMetersPerSecond,
+		// 		speeds.omegaRadiansPerSecond
+		// 	);
+		// }
+		// else {
+		// 	speeds = new ChassisSpeeds(
+		// 		-speeds.vyMetersPerSecond, speeds.vxMetersPerSecond,
+		// 		speeds.omegaRadiansPerSecond
+		// 	);
+		// }
+
+    speeds = new ChassisSpeeds(
+				speeds.vxMetersPerSecond, speeds.vyMetersPerSecond,
 				speeds.omegaRadiansPerSecond
 			);
-		}
-		else {
-			speeds = new ChassisSpeeds(
-				-speeds.vyMetersPerSecond, speeds.vxMetersPerSecond,
-				speeds.omegaRadiansPerSecond
-			);
-		}
 
 		
 
@@ -176,8 +163,15 @@ public class Drivetrain extends SubsystemBase {
 
     swerveDrive.update();
 
+   otherOdometry.update(getAbsoluteRotation(), swerveDrive.getModulePositions());
+
+   SmartDashboard.putNumber("Other XPose", otherOdometry.getPoseMeters().getX());
+    SmartDashboard.putNumber("Other YPose", otherOdometry.getPoseMeters().getY());
+    SmartDashboard.putNumber("Other Odometry Rot", otherOdometry.getPoseMeters().getRotation().getDegrees());
+
     SmartDashboard.putNumber("XPose", swerveDrive.getPosition().getX());
     SmartDashboard.putNumber("YPose", swerveDrive.getPosition().getY());
+    SmartDashboard.putNumber("Odometry Rot", swerveDrive.getPosition().getRotation().getDegrees());
 
     SmartDashboard.putNumber("Yaw", Math.toDegrees(swerveDrive.getRobotRotations().getZ()));
     SmartDashboard.putNumber("Pitch", Math.toDegrees(swerveDrive.getRobotRotations().getY()));
@@ -201,6 +195,7 @@ public class Drivetrain extends SubsystemBase {
 
   public void setRobotPosition(Pose2d pose) {
 		swerveDrive.resetPosition(pose);
+    otherOdometry.resetPose(pose);
 	}
 
 	public Command setRobotPosition(double x, double y, double rotationDegrees) {
@@ -250,6 +245,10 @@ public class Drivetrain extends SubsystemBase {
 
 	public Pose2d getPose() {
 		return swerveDrive.getPosition();
+	}
+
+  public Pose2d getOtherPose() {
+		return otherOdometry.getPoseMeters();
 	}
 
 	public ChassisSpeeds getSpeed() {

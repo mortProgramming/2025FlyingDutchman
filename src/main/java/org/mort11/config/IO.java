@@ -92,7 +92,9 @@ public class IO {
       0.15
     ));
 
-    driveController.pov(0).whileTrue(new ResetPosition(0, 0, 0));
+    driveController.pov(0).whileTrue(new InstantCommand(() -> drivetrain.setGyroscopeZero(IMU_TO_ROBOT_FRONT_ANGLE), drivetrain));
+
+    driveController.pov(180).whileTrue(new ResetPosition(0, 0, 0));
 
     driveController.pov(90).whileTrue(new Climb(true));
 

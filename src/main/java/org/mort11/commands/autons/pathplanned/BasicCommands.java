@@ -9,9 +9,12 @@ import com.pathplanner.lib.auto.NamedCommands;
 public class BasicCommands {
     
     public static void setCommands () {
-        // NamedCommands.registerCommand("AlgaeUp", SetAlgaeArm.l23Intake());
+        NamedCommands.registerCommand("AlgaeUp", SetAlgaeArm.l23Intake());
+        NamedCommands.registerCommand("AlgaeDown", SetAlgaeArm.rest());
 
-        NamedCommands.registerCommand("AlgaeUp", Elevate.l2().withTimeout(2));
+        NamedCommands.registerCommand("ElevatorL2", Elevate.l2().withTimeout(2));
+        NamedCommands.registerCommand("ElevatorL3", Elevate.l3().withTimeout(2));
+        NamedCommands.registerCommand("ElevatorL4", Elevate.l4().withTimeout(2));
         NamedCommands.registerCommand("ElevatorDown", Elevate.rest().withTimeout(2));
     }
 }

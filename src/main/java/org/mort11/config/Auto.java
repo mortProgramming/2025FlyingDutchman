@@ -47,96 +47,7 @@ public class Auto {
 	}
 
 	public static void configureAutoBuilder() {
-
-		// PathPlanner.configure(
-		// 	drivetrain, drivetrain.getSwerveDrive(),
-		// 	new PIDConstants(AUTON_POS_KP, AUTON_POS_KI, AUTON_POS_KD), 
-		// 	new PIDConstants(AUTON_ROTATION_KP, AUTON_ROTATION_KI, AUTON_ROTATION_KD),
-		// 	WHEEL_COEFFICIENT_OF_FRICTION, DRIVE_MOTOR_CURRENT_LIMIT,
-		// 	ROBOT_MASS, ROBOT_MOMENT_OF_INERTIA
-		// );
-
-		// AutoBuilder.configure(
-        //     () -> drivetrain.getSwerveDrive().getPosition(),  //get current robot position on the field
-        //     (Pose2d startPose) -> drivetrain.getSwerveDrive().resetPosition(startPose), //reset odometry to a given pose. WILL ONLY RUN IF AUTON HAS A SET POSE, DOES NOTHING OTHERWISE. 
-        //     () -> drivetrain.getSwerveDrive().velocity, //get the current ROBOT RELATIVE SPEEDS
-        //     (ChassisSpeeds robotRelativeOutput) -> drivetrain.getSwerveDrive().setVelocity(robotRelativeOutput), //makes the robot move given ROBOT RELATIVE CHASSISSPEEDS
-        //     new PPHolonomicDriveController(
-        //         new PIDConstants(AUTON_POS_KP, AUTON_POS_KI, AUTON_POS_KD),
-        //         new PIDConstants(AUTON_ROTATION_KP, AUTON_ROTATION_KI, AUTON_ROTATION_KD)
-        //     ),
-        //     new RobotConfig(
-        //         ROBOT_MASS,
-        //         ROBOT_MOMENT_OF_INERTIA,
-        //         new ModuleConfig(
-        //             drivetrain.getSwerveDrive().getModule(0).getModuleConfig().WHEEL_DIAMETER,
-        //             drivetrain.getSwerveDrive().getModule(0).maxSpeed,
-        //             WHEEL_COEFFICIENT_OF_FRICTION,
-        //             DCMotor.getKrakenX60(1),
-        //             DRIVE_MOTOR_CURRENT_LIMIT,
-        //             1
-        //         ),
-        //         drivetrain.getSwerveDrive().kinematics.getModules()[0].getX() * 2
-        //     ),
-        //     () -> (DriverStation.getAlliance().isPresent() ? DriverStation.getAlliance().get() == Alliance.Red : false), //method for checking current alliance. Path flips if alliance is red
-        //     drivetrain
-        // );
-		
-		// AutoBuilder.configure(
-        //     () -> drivetrain.getPose(),  //get current robot position on the field
-        //     (Pose2d startPose) -> drivetrain.getSwerveDrive().resetPosition(startPose), //reset odometry to a given pose. WILL ONLY RUN IF AUTON HAS A SET POSE, DOES NOTHING OTHERWISE. 
-        //     () -> drivetrain.getSwerveDrive().velocity, //get the current ROBOT RELATIVE SPEEDS
-        //     (ChassisSpeeds robotRelativeOutput) -> drivetrain.setDrive(robotRelativeOutput), //makes the robot move given ROBOT RELATIVE CHASSISSPEEDS
-        //     new PPHolonomicDriveController(
-        //         new PIDConstants(AUTON_POS_KP, AUTON_POS_KI, AUTON_POS_KD),
-        //         new PIDConstants(AUTON_ROTATION_KP, AUTON_ROTATION_KI, AUTON_ROTATION_KD)
-        //     ),
-        //     new RobotConfig(
-        //         ROBOT_MASS,
-        //         ROBOT_MOMENT_OF_INERTIA,
-        //         new ModuleConfig(
-        //             0.0515,
-        //             5,
-        //             WHEEL_COEFFICIENT_OF_FRICTION,
-        //             DCMotor.getKrakenX60(1),
-        //             DRIVE_MOTOR_CURRENT_LIMIT,
-        //             1
-        //         ),
-        //         0.609
-        //     ),
-        //     () -> false, //method for checking current alliance. Path flips if alliance is red
-        //     drivetrain
-        // );
-
-
-
-	// 	AutoBuilder.configure(
-    //         () -> drivetrain.getPose(),  //get current robot position on the field
-    //         (Pose2d startPose) -> drivetrain.getSwerveDrive().resetPosition(startPose), //reset odometry to a given pose. WILL ONLY RUN IF AUTON HAS A SET POSE, DOES NOTHING OTHERWISE. 
-    //         () -> drivetrain.getSwerveDrive().velocity, //get the current ROBOT RELATIVE SPEEDS
-    //         (ChassisSpeeds robotRelativeOutput) -> drivetrain.setDrive(robotRelativeOutput), //makes the robot move given ROBOT RELATIVE CHASSISSPEEDS
-    //         new PPHolonomicDriveController(
-    //             new PIDConstants(AUTON_POS_KP, AUTON_POS_KI, AUTON_POS_KD),
-    //             new PIDConstants(AUTON_ROTATION_KP, AUTON_ROTATION_KI, AUTON_ROTATION_KD)
-    //         ),
-    //         new RobotConfig(
-    //             ROBOT_MASS,
-    //             ROBOT_MOMENT_OF_INERTIA,
-    //             new ModuleConfig(
-    //                 0.0515,
-    //                 5,
-    //                 WHEEL_COEFFICIENT_OF_FRICTION,
-    //                 DCMotor.getKrakenX60(1),
-    //                 DRIVE_MOTOR_CURRENT_LIMIT,
-    //                 1
-    //             ),
-    //             0.609
-    //         ),
-    //         () -> false, //method for checking current alliance. Path flips if alliance is red
-    //         drivetrain
-    //     );
-
-		AutoBuilder.configure(
+        AutoBuilder.configure(
             () -> drivetrain.getPose(),  //get current robot position on the field
             (Pose2d startPose) -> drivetrain.setRobotPosition(startPose), //reset odometry to a given pose. WILL ONLY RUN IF AUTON HAS A SET POSE, DOES NOTHING OTHERWISE. 
             () -> drivetrain.getChassisSpeeds(), //get the current ROBOT RELATIVE SPEEDS
@@ -152,15 +63,43 @@ public class Auto {
                     0.0515,
                     5,
                     WHEEL_COEFFICIENT_OF_FRICTION,
-                    DCMotor.getKrakenX60(1).withReduction(5.473),
+                    DCMotor.getKrakenX60(1).withReduction(5.472),
                     DRIVE_MOTOR_CURRENT_LIMIT,
                     1
                 ),
                 0.609
             ),
-            () -> (DriverStation.getAlliance().isPresent() ? DriverStation.getAlliance().get() != Alliance.Red : false), //method for checking current alliance. Path flips if alliance is red
+            // () -> (DriverStation.getAlliance().isPresent() ? DriverStation.getAlliance().get() == Alliance.Red : false), //method for checking current alliance. Path flips if alliance is red
+            () -> false,
+
         drivetrain
         );
+
+        // AutoBuilder.configure(
+        //     () -> drivetrain.getOtherPose(),  //get current robot position on the field
+        //     (Pose2d startPose) -> drivetrain.setRobotPosition(startPose), //reset odometry to a given pose. WILL ONLY RUN IF AUTON HAS A SET POSE, DOES NOTHING OTHERWISE. 
+        //     () -> drivetrain.getChassisSpeeds(), //get the current ROBOT RELATIVE SPEEDS
+        //     (ChassisSpeeds robotRelativeOutput, DriveFeedforwards feedForwards) -> drivetrain.setDrive(robotRelativeOutput), //makes the robot move given ROBOT RELATIVE CHASSISSPEEDS
+        //     new PPHolonomicDriveController(
+        //         new PIDConstants(AUTON_POS_KP, AUTON_POS_KI, AUTON_POS_KD),
+        //         new PIDConstants(AUTON_ROTATION_KP, AUTON_ROTATION_KI, AUTON_ROTATION_KD)
+        //     ),
+        //     new RobotConfig(
+        //         ROBOT_MASS,
+        //         ROBOT_MOMENT_OF_INERTIA,
+        //         new ModuleConfig(
+        //             0.0515,
+        //             5,
+        //             WHEEL_COEFFICIENT_OF_FRICTION,
+        //             DCMotor.getKrakenX60(1).withReduction(5.472),
+        //             DRIVE_MOTOR_CURRENT_LIMIT,
+        //             1
+        //         ),
+        //         0.609
+        //     ),
+        //     () -> (DriverStation.getAlliance().isPresent() ? DriverStation.getAlliance().get() == Alliance.Red : false), //method for checking current alliance. Path flips if alliance is red
+        // drivetrain
+        // );
 	}
 	
 	public static void addAutoOptions () {
@@ -189,10 +128,13 @@ public class Auto {
 		// );
 
 		autoChooser.addOption("Pathplanner Auto Forward", new PathPlannerAuto("Forward"));
-        autoChooser.addOption("ScoreL4DescoreKL", new PathPlannerAuto("ScoreL4JDescoreKL"));
+        autoChooser.addOption("ScoreL4DescoreKL Auto", new PathPlannerAuto("ScoreL4JDescoreKL"));
+        autoChooser.addOption("BBarge2H", new PathPlannerAuto("BBarge2H"));
 
 		autoChooser.addOption("Forward Path", getPathCommand());
 		
+
+
 
 		SmartDashboard.putData("Auton Chooser", autoChooser);
 

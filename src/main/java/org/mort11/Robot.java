@@ -81,12 +81,12 @@ public class Robot extends TimedRobot {
 
   @Override
   public void disabledPeriodic() {
-    // if(DriverStation.isDSAttached() && DriverStation.isFMSAttached()){
-		// 	if (DriverStation.getAlliance().get() != alliance){
-		// 		Auto.configure();
-		// 		alliance = DriverStation.getAlliance().get();
-		// 	}
-		// }
+    if(DriverStation.isDSAttached() && DriverStation.isFMSAttached()){
+			if (DriverStation.getAlliance().get() != alliance){
+				Auto.configure();
+				alliance = DriverStation.getAlliance().get();
+			}
+		}
   }
 
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */

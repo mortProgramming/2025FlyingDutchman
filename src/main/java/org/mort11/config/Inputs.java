@@ -88,32 +88,6 @@ public class Inputs {
         // return joystick.getThrottle();
     }
 
-    /**
-     * 
-     * @return
-     */
-    public static double getJoystickX() {
-		return modifyAxis1(-joystick.getX(), getThrottle()) * drivetrain.getMaxSpeedMeters();
-	}
-
-    /**
-     * 
-     * @return
-     */
-	public static double getJoystickY() {
-		return modifyAxis1(joystick.getY(), getThrottle()) * drivetrain.getMaxSpeedMeters();
-	}
-
-    /**
-     * 
-     * @return
-     */
-	public static double getJoystickTwist() {
-		return modifyAxisTwist(joystick.getTwist(), getThrottle())
-			    * drivetrain.getMaxSpeedMeters() / 
-                DRIVEBASE_RADIUS_METERS;
-    }
-
     public static double getLeftControllerXSwerve() {
         return -deadband(driveController.getLeftX(), DEAD_BAND)  * drivetrain.getMaxSpeedMeters();
     }

@@ -75,6 +75,9 @@ public class SwerveModule {
             case MK4i_L3:
                 moduleConfig = new MK4i_L3();
                 break;
+            case MK4iPlus:
+                moduleConfig = new MK4i_L3Plus();
+                break;
         }
 
         maxSpeed = maxSpeed * moduleConfig.WHEEL_DIAMETER * moduleConfig.DRIVE_REDUCTION;

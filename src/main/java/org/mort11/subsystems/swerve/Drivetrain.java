@@ -3,11 +3,16 @@ package org.mort11.subsystems.swerve;
 import org.mort11.config.IO;
 import org.mort11.library.hardware.imu.IMU;
 import static org.mort11.library.hardware.imu.IMUTypeEnum.PIGEON2;
+
+import org.mort11.Utility;
+
 import static org.mort11.config.constants.PIDConstants.Drivetrain.*;
 import static org.mort11.config.constants.PhysicalConstants.Drivetrain.*;
 import static org.mort11.config.constants.PortConstants.Drivetrain.*;
 
-import edu.wpi.first.math.controller.ProfiledPIDController;
+import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
@@ -28,7 +33,11 @@ public class Drivetrain extends SubsystemBase {
   private ChassisSpeeds speeds;
   private double fieldOrientationOffset;
 
-  private ProfiledPIDController xToPosController, yToPosController, rotateToAngleController;
+  private PIDController xToPosController, yToPosController;
+
+  private PIDController rotateToAngleController;
+
+  private SlewRateLimiter xSlewLimiter, ySlewLimiter, rotateSlewLimiter;
 
   private SwerveDriveOdometry odometer;
 
@@ -42,25 +51,33 @@ public class Drivetrain extends SubsystemBase {
     imu = new IMU(PIGEON2, IMU_ID);
     imu.setCanivore(CANIVORE_NAME);
 
-    // xToPosController = new ProfiledPIDController(
-	// 		POS_KP, POS_KI, POS_KD
-	// 	);
-	// 	yToPosController = new ProfiledPIDController(
-	// 		POS_KP, POS_KI, POS_KD
-	// 	);
-    // 	rotateToAngleController = new ProfiledPIDController(
-	// 		ANGLE_KP, ANGLE_KI, ANGLE_KD
-	// 	);
+    xToPosController = new PIDController(
+			POS_KP, POS_KI, POS_KD
+		);
+		yToPosController = new PIDController(
+			POS_KP, POS_KI, POS_KD
+		);
+    	rotateToAngleController = new PIDController(
+			ANGLE_KP, ANGLE_KI, ANGLE_KD
+		);
 
-	    xToPosController = new ProfiledPIDController(
-			POS_KP, POS_KI, POS_KD, POS_CONSTRAINTS
-		);
-		yToPosController = new ProfiledPIDController(
-			POS_KP, POS_KI, POS_KD, POS_CONSTRAINTS
-		);
-    	rotateToAngleController = new ProfiledPIDController(
-			ANGLE_KP, ANGLE_KI, ANGLE_KD, ANGLE_CONSTRAINTS
-		);
+	    // xToPosController = new PIDController(
+		// 	POS_KP, POS_KI, POS_KD, POS_CONSTRAINTS
+		// );
+		// yToPosController = new PIDController(
+		// 	POS_KP, POS_KI, POS_KD, POS_CONSTRAINTS
+		// );
+    	// // rotateToAngleController = new PIDController(
+		// // 	ANGLE_KP, ANGLE_KI, ANGLE_KD, ANGLE_CONSTRAINTS
+		// // );
+		// rotateToAngleController = new PIDController(
+		// 	ANGLE_KP, ANGLE_KI, ANGLE_KD
+		// );
+
+		xSlewLimiter = new SlewRateLimiter(TRANSLATIONAL_SLEW_LIMIT);
+		ySlewLimiter = new SlewRateLimiter(TRANSLATIONAL_SLEW_LIMIT);
+		rotateSlewLimiter = new SlewRateLimiter(ROTATIONAL_SLEW_LIMIT);
+
 
 		rotateToAngleController.enableContinuousInput(-180, 180);
 
@@ -102,7 +119,7 @@ public class Drivetrain extends SubsystemBase {
     SmartDashboard.putNumber("YPose", odometer.getPoseMeters().getY());
     SmartDashboard.putNumber("Odometry Rot", odometer.getPoseMeters().getRotation().getDegrees());
 
-    SmartDashboard.putNumber("Yaw", Math.toDegrees(imu.getRotation3d().getZ()));
+    SmartDashboard.putNumber("Yaw", getRotation2d().getDegrees());
     SmartDashboard.putNumber("Pitch", Math.toDegrees(imu.getRotation3d().getY()));
     SmartDashboard.putNumber("Roll", Math.toDegrees(imu.getRotation3d().getX()));
 
@@ -123,22 +140,11 @@ public class Drivetrain extends SubsystemBase {
 
   public void setDriveWithMax(ChassisSpeeds speeds, double max) {
     this.speeds = new ChassisSpeeds(
-        clamp(speeds.vxMetersPerSecond, max),
-        clamp(speeds.vyMetersPerSecond, max),
+        Utility.clamp(speeds.vxMetersPerSecond, max),
+        Utility.clamp(speeds.vyMetersPerSecond, max),
         speeds.omegaRadiansPerSecond
     );
   }
-
-public static double clamp(double value, double max) {
-	if(value > max) {
-		return max;
-	}
-	else if(value < -max) {
-		return -max;
-	}
-
-	return value;
-}
 
 	public void setFieldOffset(double fieldOrientationOffset) {
 		this.fieldOrientationOffset = getAbsoluteRotation().getDegrees() + fieldOrientationOffset;
@@ -171,6 +177,10 @@ public static double clamp(double value, double max) {
 			getRotation2d().getDegrees() + wantedPosition
 		);
 	}
+
+	// public void addVisionMeasurements(Pose2d pose) {
+		
+	// }
 	
 	public SwerveDrive getSwerveDrive() {
 		return swerveDrive;
@@ -192,15 +202,19 @@ public static double clamp(double value, double max) {
 		return speeds;
 	}
 
-	public ProfiledPIDController getXController() {
+	public PIDController getXController() {
 		return xToPosController;
 	}
 
-	public ProfiledPIDController getYController() {
+	public PIDController getYController() {
 		return yToPosController;
 	}
 
-	public ProfiledPIDController getRotateController() {
+	// public PIDController getRotateController() {
+	// 	return rotateToAngleController;
+	// }
+
+	public PIDController getRotateController() {
 		return rotateToAngleController;
 	}
 

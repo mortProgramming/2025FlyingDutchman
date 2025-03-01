@@ -1,10 +1,13 @@
 package org.mort11.config;
 
-import org.mort11.commands.actions.Initiate;
 import org.mort11.commands.actions.drivetrain.ResetPosition;
 import org.mort11.commands.actions.drivetrain.SetRobotOrientation;
 import org.mort11.commands.actions.drivetrain.auto.DriveToPosition;
+import org.mort11.commands.actions.drivetrain.auto.Rotate;
+import org.mort11.commands.actions.drivetrain.teleop.DriveAtAngle;
 import org.mort11.commands.actions.drivetrain.teleop.DriveSetSpeed;
+import org.mort11.commands.actions.drivetrain.teleop.DriveTagAngled;
+import org.mort11.commands.actions.endeffector.Initiate;
 import org.mort11.commands.actions.endeffector.pid.SetEndeffector;
 import org.mort11.commands.actions.endeffector.pid.SetTikiTorchArm;
 
@@ -18,33 +21,42 @@ import org.mort11.commands.actions.endeffector.velocity.VelocityTikiTorchArm;
 import static org.mort11.config.Inputs.testingController;
 import static org.mort11.config.Inputs.compController;
 import static org.mort11.config.Inputs.driveController;
-import static org.mort11.config.constants.PhysicalConstants.Drivetrain.IMU_TO_ROBOT_FRONT_ANGLE;
 
+import org.mort11.subsystems.AlgaeArm;
+import org.mort11.subsystems.AlgaeRoller;
 import org.mort11.subsystems.Climber;
 import org.mort11.subsystems.swerve.Drivetrain;
 import org.mort11.subsystems.Elevator;
 import org.mort11.subsystems.TikiTorchArm;
+import org.mort11.subsystems.TikiTorchRoller;
+import org.mort11.subsystems.Vision;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 
 public class IO {
 
+  private static AlgaeArm algaeArm;
+  private static AlgaeRoller algaeRoller;
+  private static Climber climber;
 	private static Drivetrain drivetrain;
   private static Elevator elevator;
-  private static TikiTorchArm tikiTorch;
-  private static Climber climber;
-
+  private static TikiTorchArm tikiTorchArm;
+  private static TikiTorchRoller tikiTorchRoller;
+  private static Vision vision;
 
   public static void init() {
-		drivetrain = Drivetrain.getInstance();
-    tikiTorch = TikiTorchArm.getInstance();
-    elevator = Elevator.getInstance();
+    algaeArm = AlgaeArm.getInstance();
+    algaeRoller = AlgaeRoller.getInstance();
     climber = Climber.getInstance();
+		drivetrain = Drivetrain.getInstance();
+    elevator = Elevator.getInstance();
+    tikiTorchArm = TikiTorchArm.getInstance();
+    tikiTorchRoller = TikiTorchRoller.getInstance();
+    vision = Vision.getInstance();
   }
 
   public static void configure() {
@@ -101,7 +113,17 @@ public class IO {
 
     driveController.pov(270).whileTrue(new Climb(false));
 
-    driveController.button(5).whileTrue(new DriveToPosition(1, 1, 0));
+    // driveController.button(5).whileTrue(
+    //   new DriveAtAngle(
+    //     Inputs::getLeftControllerXSwerve, 
+    //     Inputs::getLeftControllerYSwerve, 
+    //     () -> (vision.getFieldTagPose(vision.getFrontCamera().getId()).getRotation2d().getDegrees())
+    //   )
+    // );
+    driveController.button(5).whileTrue(new DriveTagAngled(
+      Inputs::getLeftControllerXSwerve, Inputs::getLeftControllerYSwerve, Inputs::getRightControllerXSwerve
+    ));
+    driveController.button(6).whileTrue(new Rotate(90));
 
     // //rest
     // compController.pov(90).onTrue(new DriveSetSpeed(

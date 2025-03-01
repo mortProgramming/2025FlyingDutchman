@@ -89,10 +89,15 @@ public class DriveToPosition extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return 
+    if(spinTrue) {
+      return 
       drivetrain.getXController().atSetpoint() &&
       drivetrain.getYController().atSetpoint() &&
       drivetrain.getRotateController().atSetpoint();
-    // return false;
+    }
+
+    return 
+      drivetrain.getXController().atSetpoint() &&
+      drivetrain.getYController().atSetpoint();
   }
 }

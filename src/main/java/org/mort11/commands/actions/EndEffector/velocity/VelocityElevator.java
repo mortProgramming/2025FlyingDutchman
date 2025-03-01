@@ -20,7 +20,11 @@ public class VelocityElevator extends Command  {
 
     @Override
     public void execute() {
-        elevator.setElevatorMotorPercent(speed);
+      elevator.getPIDController().calculate(
+        elevator.getElevatorPositionInches(), 
+        30
+      );
+      elevator.setElevatorMotorPercent(speed);
     }
 
   @Override

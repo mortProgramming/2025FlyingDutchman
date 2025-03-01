@@ -39,9 +39,12 @@ public final class PIDConstants {
 		public final static double ANGLE_KP = 0.07;
 		public final static double ANGLE_KI = 0;
 		public final static double ANGLE_KD = 0.001;
-		public static final Constraints ANGLE_CONSTRAINTS = new Constraints(180, 300);
+		public static final Constraints ANGLE_CONSTRAINTS = new Constraints(100, 720);
 		public final static double ANGLE_POS_TOLERANCE = 3;
 		public final static double ANGLE_VEL_TOLERANCE = 30;
+
+		public final static double TRANSLATIONAL_SLEW_LIMIT = 5;
+		public final static double ROTATIONAL_SLEW_LIMIT = 10;
     }
 	
 

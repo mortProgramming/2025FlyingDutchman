@@ -40,7 +40,7 @@ public class Elevator extends SubsystemBase {
 
     @Override
     public void periodic() {
-        if(motorSpeed > 0.2) {motorSpeed = 0.2;}
+        // if(motorSpeed > 0.2) {motorSpeed = 0.2;}
         motor.setVoltage(motorSpeed * ROBOT_VOLTAGE);
 
         elevatorPosition = calculateElevatorPosition();
@@ -60,7 +60,8 @@ public class Elevator extends SubsystemBase {
 
 
     public double getElevatorPositionInches() {
-        return elevatorPosition;
+        // return elevatorPosition;
+        return getRelativeElevatorPosition();
     }
 
     public double getElevatorVelocityInches() {
@@ -88,6 +89,13 @@ public class Elevator extends SubsystemBase {
         }
 
         return (getAbsoluteEncoderPositionRotations() + rotationsCompleted) * ROTATIONS_TO_INCHES;
+    }
+
+    public double getRelativeElevatorPosition() {
+        return (
+                (-motor.getPositionRotations() * ROTATIONS_TO_INCHES) / GEAR_RATIO
+            ) 
+            + ELEVATOR_START_HEIGHT;
     }
 
     public static Elevator getInstance() {

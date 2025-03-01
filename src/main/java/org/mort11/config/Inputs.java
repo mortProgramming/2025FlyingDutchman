@@ -1,8 +1,8 @@
 package org.mort11.config;
 
-import static org.mort11.config.constants.PhysicalConstants.Drivetrain.DRIVEBASE_RADIUS_METERS;
+import static org.mort11.config.constants.PhysicalConstants.Drivetrain.*;
 import static org.mort11.config.constants.PortConstants.Controller.*;
-import org.mort11.subsystems.Drivetrain;
+import org.mort11.subsystems.swerve.Drivetrain;
 
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandPS5Controller;
@@ -89,15 +89,15 @@ public class Inputs {
     }
 
     public static double getLeftControllerXSwerve() {
-        return -deadband(driveController.getLeftX(), DEAD_BAND)  * drivetrain.getMaxSpeedMeters();
+        return -deadband(driveController.getLeftX(), DEAD_BAND)  * MAX_SPEED;
     }
 
     public static double getLeftControllerYSwerve() {
-        return deadband(driveController.getLeftY(), DEAD_BAND) * drivetrain.getMaxSpeedMeters();
+        return deadband(driveController.getLeftY(), DEAD_BAND) * MAX_SPEED;
     }
     
     public static double getRightControllerXSwerve(){
-        return deadband(driveController.getRawAxis(2), DEAD_BAND) * drivetrain.getMaxSpeedMeters() / 
+        return deadband(driveController.getRawAxis(2), DEAD_BAND) * MAX_SPEED / 
                 DRIVEBASE_RADIUS_METERS;
     }
 }

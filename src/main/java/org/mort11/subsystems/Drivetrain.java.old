@@ -72,7 +72,7 @@ public class Drivetrain extends SubsystemBase {
 			ANGLE_KP, ANGLE_KI, ANGLE_KD, ANGLE_CONSTRAINTS
 		);
 
-		rotateToAngleController.enableContinuousInput(POS_KI, POS_KI);
+		rotateToAngleController.enableContinuousInput(-180, 180);
 
 		fieldOrientationOffset = 0;
 

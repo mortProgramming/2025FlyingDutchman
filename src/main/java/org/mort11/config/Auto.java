@@ -20,11 +20,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 
-import org.mort11.commands.autons.timed.OnePiece;
+import org.mort11.commands.autons.timed.BlueSideOnePiece;
+import org.mort11.commands.autons.timed.RedSideOnePiece;
 import org.mort11.commands.autons.timed.Taxi;
 import org.mort11.library.subsystems.swerve.PathPlanner;
-import org.mort11.subsystems.Drivetrain;
-import org.mort11.commands.autons.odometry.Something;
+import org.mort11.subsystems.swerve.Drivetrain;
+import org.mort11.commands.autons.odometry.Start2F2RStation2E;
 import org.mort11.commands.autons.pathplanned.BasicCommands;
 import org.mort11.commands.autons.pathplanned.ScoreL4JDescoreKL;
 
@@ -51,7 +52,7 @@ public class Auto {
             () -> drivetrain.getPose(),  //get current robot position on the field
             (Pose2d startPose) -> drivetrain.setRobotPosition(startPose), //reset odometry to a given pose. WILL ONLY RUN IF AUTON HAS A SET POSE, DOES NOTHING OTHERWISE. 
             () -> drivetrain.getChassisSpeeds(), //get the current ROBOT RELATIVE SPEEDS
-            (ChassisSpeeds robotRelativeOutput, DriveFeedforwards feedForwards) -> drivetrain.setDrive(robotRelativeOutput), //makes the robot move given ROBOT RELATIVE CHASSISSPEEDS
+            (ChassisSpeeds robotRelativeOutput, DriveFeedforwards feedForwards) -> drivetrain.setDrivePathPlanner(robotRelativeOutput), //makes the robot move given ROBOT RELATIVE CHASSISSPEEDS
             new PPHolonomicDriveController(
                 new PIDConstants(AUTON_POS_KP, AUTON_POS_KI, AUTON_POS_KD),
                 new PIDConstants(AUTON_ROTATION_KP, AUTON_ROTATION_KI, AUTON_ROTATION_KD)
@@ -109,11 +110,14 @@ public class Auto {
 		autoChooser.setDefaultOption("nothing", null);
 		
 		autoChooser.addOption("Timed Taxi", new Taxi());
-		autoChooser.addOption("Timed One Piece", new OnePiece());
+		autoChooser.addOption("Timed One Piece Blue", new BlueSideOnePiece());
+        autoChooser.addOption("Timed One Piece Red", new RedSideOnePiece());
+
 
 		//ODOMETRY
 
-		autoChooser.addOption("Odometry Auto", new Something());
+		autoChooser.addOption("Odometry Auto", new Start2F2RStation2E());
+        
 
 
 
@@ -132,6 +136,8 @@ public class Auto {
         autoChooser.addOption("BBarge2H", new PathPlannerAuto("BBarge2H"));
 
 		autoChooser.addOption("Forward Path", getPathCommand());
+
+        autoChooser.addOption("Start Auto", new PathPlannerAuto("Start2F2RStation2E"));
 		
 
 

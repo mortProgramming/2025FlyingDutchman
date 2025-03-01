@@ -1,8 +1,6 @@
 package org.mort11.subsystems;
 
 import static org.mort11.config.constants.PortConstants.Climber.*;
-import static org.mort11.config.constants.PhysicalConstants.Climber.*;
-import static org.mort11.config.constants.PhysicalConstants.ROBOT_VOLTAGE;
 
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -25,7 +23,7 @@ public class Climber extends SubsystemBase{
         rightPiston = new DoubleSolenoid(PNEUMATICS_MODULE_PORT, PneumaticsModuleType.CTREPCM, CLIMBER_PORT_UP, CLIMBER_PORT_DOWN);
         
         compressor = new Compressor(PNEUMATICS_MODULE_PORT, PneumaticsModuleType.CTREPCM);
-        compressor.enableDigital();
+        // compressor.enableDigital();
 
         rightPiston.set(DoubleSolenoid.Value.kReverse);
     }

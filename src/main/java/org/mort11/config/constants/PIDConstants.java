@@ -19,18 +19,18 @@ public final class PIDConstants {
 	}
     
     public final class Drivetrain {
-        public static final double AUTON_POS_KP = 0.315;
+        public static final double AUTON_POS_KP = 0.4;
 		//public static final double AUTON_POS_KP = 45;
 		public static final double AUTON_POS_KI = 0;
-		// public static final double AUTON_POS_KD = 0.001;
+		// public static final double AUTON_POS_KD = 0.001x;
 		public static final double AUTON_POS_KD = 0;
 	
-		public static final double AUTON_ROTATION_KP = 0.145;
+		public static final double AUTON_ROTATION_KP = 0.4;
 		// public static final double AUTON_ROTATION_KP = 0.01;
-		public static final double AUTON_ROTATION_KI = 0;
+		public static final double AUTON_ROTATION_KI = 0.;
 		public static final double AUTON_ROTATION_KD = 0;
 
-		public final static double POS_KP = 1;
+		public final static double POS_KP = 3;
 		public final static double POS_KI = 0;
 		public final static double POS_KD = 0;
 		public static final Constraints POS_CONSTRAINTS = new Constraints(2, 4);
@@ -39,7 +39,7 @@ public final class PIDConstants {
 		public final static double ANGLE_KP = 0.07;
 		public final static double ANGLE_KI = 0;
 		public final static double ANGLE_KD = 0.001;
-		public static final Constraints ANGLE_CONSTRAINTS = new Constraints(300, 300);
+		public static final Constraints ANGLE_CONSTRAINTS = new Constraints(180, 300);
 		public final static double ANGLE_POS_TOLERANCE = 3;
 		public final static double ANGLE_VEL_TOLERANCE = 30;
     }
@@ -51,7 +51,7 @@ public final class PIDConstants {
 		public static final double POS_KI = 0;
 		public static final double POS_KD = 0;
 		// public static final Constraints POS_CONSTRAINTS = new Constraints(75, 300);
-		public static final Constraints POS_CONSTRAINTS = new Constraints(45, 300);
+		public static final Constraints POS_CONSTRAINTS = new Constraints(60, 300);
 
 		// public static final double POS_POS_TOLERANCE = 0.05;
 		// public static final double POS_VEL_TOLERANCE = 0;

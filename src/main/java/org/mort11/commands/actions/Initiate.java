@@ -28,7 +28,7 @@ public class Initiate extends SequentialCommandGroup {
     public Initiate(double x, double y, double rotationDegrees) {
         addCommands(
             new SequentialCommandGroup(
-                new ResetPosition(x, y, rotationDegrees),
+                new ResetPosition(x, y, rotationDegrees, true),
                 new Climb(true),
                 new VelocityElevator(-0.2).withTimeout(0.5),
                 new ParallelCommandGroup(

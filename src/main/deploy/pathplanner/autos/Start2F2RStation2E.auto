@@ -1,0 +1,31 @@
+{
+  "version": "2025.0",
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Start2F"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "F2RStation"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "RStation2B"
+          }
+        }
+      ]
+    }
+  },
+  "resetOdom": true,
+  "folder": null,
+  "choreoAuto": false
+}

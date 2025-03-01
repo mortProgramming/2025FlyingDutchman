@@ -1,7 +1,7 @@
-package org.mort11.commands.actions.drivetrain;
+package org.mort11.commands.actions.drivetrain.auto;
 
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
-import org.mort11.subsystems.Drivetrain;
+import org.mort11.subsystems.swerve.Drivetrain;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj.Timer;
 
@@ -12,7 +12,7 @@ public class TimedDrive extends Command{
 
   private double x;
   private double y;
-  private double omega;
+  private double degreesPerSecond;
   private boolean fieldOriented;
   /**
    * Moves the drivetrain a certain amount of time given movement parameters.
@@ -22,10 +22,10 @@ public class TimedDrive extends Command{
    * The velocity in the x direction
    * @param y
    * The velocity in the y direction
-   * @param omega
+   * @param degreesPerSecond
    * The angular velocity
    */
-  public TimedDrive(double time, double x, double y, double omega) {
+  public TimedDrive(double time, double x, double y, double degreesPerSecond) {
     drivetrain = Drivetrain.getInstance();
     
     timer  = new Timer();
@@ -33,11 +33,11 @@ public class TimedDrive extends Command{
 
     this.x = x;
     this.y = y;
-    this.omega = omega;
+    this.degreesPerSecond = degreesPerSecond;
     this.fieldOriented = false;
     addRequirements(drivetrain);
   }
-  public TimedDrive(double time, double x, double y, double omega, boolean fieldOriented) {
+  public TimedDrive(double time, double x, double y, double degreesPerSecond, boolean fieldOriented) {
     drivetrain = Drivetrain.getInstance();
     
     timer  = new Timer();
@@ -45,7 +45,7 @@ public class TimedDrive extends Command{
 
     this.x = x;
     this.y = y;
-    this.omega = omega;
+    this.degreesPerSecond = degreesPerSecond;
     this.fieldOriented = fieldOriented;
     addRequirements(drivetrain);
   }
@@ -67,12 +67,12 @@ public class TimedDrive extends Command{
   public void execute() {
     if (fieldOriented) {
 			drivetrain.setDrive(ChassisSpeeds.fromFieldRelativeSpeeds(
-        -y, x, omega,
+        y, -x, degreesPerSecond * Math.PI / 180,
 				drivetrain.getRotation2d())
       );
 		} else {
 			  drivetrain.setDrive(new ChassisSpeeds(
-        -y, x, omega)
+        x, y, degreesPerSecond * Math.PI / 180)
       );
 		}
 	}

@@ -2,11 +2,12 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package org.mort11.commands.actions.drivetrain;
+package org.mort11.commands.actions.drivetrain.auto;
 
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj2.command.Command;
-import org.mort11.subsystems.Drivetrain;
+
+import org.mort11.subsystems.swerve.Drivetrain;
 
 /** An example command that uses an example subsystem. */
 public class DriveToPosition extends Command {
@@ -16,6 +17,8 @@ public class DriveToPosition extends Command {
   private double wantedY;
   private double wantedTheta;
 
+  private boolean spinTrue;
+
   public DriveToPosition(double wantedX, double wantedY, double wantedTheta) {
     // Use addRequirements() here to declare subsystem dependencies.
     drivetrain =  Drivetrain.getInstance();
@@ -23,6 +26,8 @@ public class DriveToPosition extends Command {
     this.wantedX = wantedX;
     this.wantedY = wantedY;
     this.wantedTheta = wantedTheta;
+
+    this.spinTrue = true;
 
     addRequirements(drivetrain);
   }
@@ -33,7 +38,9 @@ public class DriveToPosition extends Command {
 
     this.wantedX = wantedX;
     this.wantedY = wantedY;
-    this.wantedTheta = drivetrain.getRotation2d().getDegrees();
+    this.wantedTheta = 0;
+
+    this.spinTrue = false;
 
     addRequirements(drivetrain);
   }
@@ -45,23 +52,30 @@ public class DriveToPosition extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    // drivetrain.setDrive(
-    //   ChassisSpeeds.fromFieldRelativeSpeeds(
-    //     drivetrain.getXController().calculate(drivetrain.getPose().getX(), wantedX),
-		// drivetrain.getYController().calculate(drivetrain.getPose().getY(), wantedY), 
-    //     drivetrain.getRotateController().calculate(drivetrain.getRotation2d().getDegrees(), wantedTheta),
-    //     drivetrain.getRotation2d()
-    //   )
-    // );
 
-    drivetrain.setDrive(
-      ChassisSpeeds.fromFieldRelativeSpeeds(
-        drivetrain.getXController().calculate(drivetrain.getPose().getX(), wantedX),
-		drivetrain.getYController().calculate(drivetrain.getPose().getY(), wantedY), 
-       0,
-        drivetrain.getRotation2d()
-      )
-    );
+    if(spinTrue) {
+      drivetrain.setDriveWithMax(
+        ChassisSpeeds.fromFieldRelativeSpeeds(
+          drivetrain.getYController().calculate(drivetrain.getPose().getY(), wantedY),
+          -drivetrain.getXController().calculate(drivetrain.getPose().getX(), wantedX), 
+          drivetrain.calculateRotateController(wantedTheta),
+          drivetrain.getRotation2d()
+        ),
+        1
+      );
+    }
+
+    else {
+        drivetrain.setDriveWithMax(
+        ChassisSpeeds.fromFieldRelativeSpeeds(
+          drivetrain.getYController().calculate(drivetrain.getPose().getY(), wantedY),
+          -drivetrain.getXController().calculate(drivetrain.getPose().getX(), wantedX), 
+        0,
+          drivetrain.getRotation2d()
+        ),
+        1
+      );
+    }
   }
 
   // Called once the command ends or is interrupted.
@@ -75,6 +89,10 @@ public class DriveToPosition extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return 
+      drivetrain.getXController().atSetpoint() &&
+      drivetrain.getYController().atSetpoint() &&
+      drivetrain.getRotateController().atSetpoint();
+    // return false;
   }
 }

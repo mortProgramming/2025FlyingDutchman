@@ -27,12 +27,6 @@ public final class PhysicalConstants {
 		public static final double OUTAKE_SPEED = -0.8;
 	} 
 
-
-  public final static class Climber {
-		public static final int COMPRESSER_MIN_PRESSURE = 80;
-		public static final int COMPRESSER_MAX_PRESSURE = 120;
-	}
-
 	public final static class Drivetrain {
         // The left-to-right distance between the drivetrain wheels measured from center
 		// to center.
@@ -50,12 +44,18 @@ public final class PhysicalConstants {
 		public static final double BACK_LEFT_OFFSET = 223.3;
 		public static final double BACK_RIGHT_OFFSET = 255.5;
 
-		public static final int IMU_TO_ROBOT_FRONT_ANGLE = 0;
+		public static final int IMU_TO_ROBOT_FRONT_ANGLE = 270;
 
 		public static final double WHEEL_COEFFICIENT_OF_FRICTION = 1;
 		public static final double ROBOT_MASS = 62.1;
 		public static final double ROBOT_MOMENT_OF_INERTIA = ROBOT_MASS * 0.254 * 0.254 / 2;
 		public static final double DRIVE_MOTOR_CURRENT_LIMIT = 60;
+		public static final double DRIVE_MOTOR_MAX_RPM = 6000;
+
+		public static final double DRIVE_REDUCTION = (16.0 / 50.0) * (28.0 / 16.0) * (15.0 / 45.0);
+		public static final double WHEEL_DIAMETER = 0.1014;
+		public static final double ROTATIONS_TO_METERS = WHEEL_DIAMETER * Math.PI;
+		public static final double MAX_SPEED = DRIVE_REDUCTION * ROTATIONS_TO_METERS * (DRIVE_MOTOR_MAX_RPM / 60);
     }	
 
 	public static final class Elevator {
@@ -63,9 +63,9 @@ public final class PhysicalConstants {
 
 		//3 is elevator stage count
 		public static final double ROTATIONS_TO_INCHES = 5.642 * 3;
-		public static final double MAXIMUM_INCH_CHANGE = 4.0;
+		public static final double MAXIMUM_INCH_CHANGE = 6;
 
-		public static final double ELEVATOR_OFFSET = -0.5;
+		public static final double ELEVATOR_OFFSET = 11.9;
 		public static final double ELEVATOR_REST_HEIGHT = 5.5;
 
 		public static final double ELEVATOR_L1_HEIGHT = 13;

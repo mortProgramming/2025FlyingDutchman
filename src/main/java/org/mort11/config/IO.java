@@ -1,9 +1,10 @@
 package org.mort11.config;
 
 import org.mort11.commands.actions.Initiate;
-import org.mort11.commands.actions.drivetrain.DriveSetSpeed;
 import org.mort11.commands.actions.drivetrain.ResetPosition;
-
+import org.mort11.commands.actions.drivetrain.SetRobotOrientation;
+import org.mort11.commands.actions.drivetrain.auto.DriveToPosition;
+import org.mort11.commands.actions.drivetrain.teleop.DriveSetSpeed;
 import org.mort11.commands.actions.endeffector.pid.SetEndeffector;
 import org.mort11.commands.actions.endeffector.pid.SetTikiTorchArm;
 
@@ -20,7 +21,7 @@ import static org.mort11.config.Inputs.driveController;
 import static org.mort11.config.constants.PhysicalConstants.Drivetrain.IMU_TO_ROBOT_FRONT_ANGLE;
 
 import org.mort11.subsystems.Climber;
-import org.mort11.subsystems.Drivetrain;
+import org.mort11.subsystems.swerve.Drivetrain;
 import org.mort11.subsystems.Elevator;
 import org.mort11.subsystems.TikiTorchArm;
 
@@ -92,13 +93,15 @@ public class IO {
       0.15
     ));
 
-    driveController.pov(0).whileTrue(new InstantCommand(() -> drivetrain.setGyroscopeZero(IMU_TO_ROBOT_FRONT_ANGLE), drivetrain));
+    driveController.pov(0).whileTrue(new SetRobotOrientation(0));
 
     driveController.pov(180).whileTrue(new ResetPosition(0, 0, 0));
 
     driveController.pov(90).whileTrue(new Climb(true));
 
     driveController.pov(270).whileTrue(new Climb(false));
+
+    driveController.button(5).whileTrue(new DriveToPosition(1, 1, 0));
 
     // //rest
     // compController.pov(90).onTrue(new DriveSetSpeed(
@@ -162,18 +165,18 @@ public class IO {
 
       //auto endeffector
 
-      compController.pov(90).whileTrue(SetEndeffector.rest());
-      compController.pov(270).whileTrue(SetEndeffector.l2());
-      compController.pov(180).whileTrue(SetEndeffector.l3());
-      compController.pov(0).whileTrue(SetEndeffector.l4());
-      compController.back().whileTrue(SetEndeffector.lowAlgae());
-      compController.start().whileTrue(SetEndeffector.highAlgae());
-      compController.a().whileTrue(SetEndeffector.floor());
-      compController.b().whileTrue(SetEndeffector.intake());
-      compController.button(9).whileTrue(SetEndeffector.barge());
+      compController.pov(90).onTrue(SetEndeffector.rest());
+      compController.pov(270).onTrue(SetEndeffector.l2());
+      compController.pov(180).onTrue(SetEndeffector.l3());
+      compController.pov(0).onTrue(SetEndeffector.l4());
+      compController.back().onTrue(SetEndeffector.lowAlgae());
+      compController.start().onTrue(SetEndeffector.highAlgae());
+      compController.a().onTrue(SetEndeffector.floor());
+      compController.b().onTrue(SetEndeffector.intake());
+      compController.y().onTrue(SetEndeffector.barge());
 
-      compController.y().whileTrue(SetTikiTorchArm.score());
-      compController.x().whileTrue(SetTikiTorchArm.intake());
+      // compController.y().onTrue(SetTikiTorchArm.score());
+      compController.x().onTrue(SetTikiTorchArm.score());
 
       compController.button(10).whileTrue(new Initiate());
 
@@ -214,7 +217,7 @@ public class IO {
 
       testingController.start().whileTrue(new Initiate());
 
-      testingController.back().whileTrue(new InstantCommand(() -> drivetrain.getSwerveDrive().resetPosition(
+      testingController.back().whileTrue(new InstantCommand(() -> drivetrain.setRobotPosition(
       new Pose2d(7, 4, Rotation2d.fromDegrees(180))
     )));
 

@@ -2,29 +2,36 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package org.mort11.commands.actions.drivetrain;
+package org.mort11.commands.actions.drivetrain.teleop;
 
 import java.util.function.DoubleSupplier;
 
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj2.command.Command;
-import org.mort11.subsystems.Drivetrain;
+import org.mort11.subsystems.swerve.Drivetrain;
 
 /** An example command that uses an example subsystem. */
-public class Drive extends Command {
+public class DriveSetSpeed extends Command {
   private Drivetrain drivetrain;
 
   private DoubleSupplier wantedX;
   private DoubleSupplier wantedY;
   private DoubleSupplier wantedTheta;
+  private double speedLimit;
 
-  public Drive(DoubleSupplier wantedX, DoubleSupplier wantedY, DoubleSupplier wantedTheta) {
+  public DriveSetSpeed(
+        DoubleSupplier wantedX, 
+        DoubleSupplier wantedY, 
+        DoubleSupplier wantedTheta, 
+        double speedLimit
+    ) {
     // Use addRequirements() here to declare subsystem dependencies.
     drivetrain =  Drivetrain.getInstance();
 
     this.wantedX = wantedX;
     this.wantedY = wantedY;
     this.wantedTheta = wantedTheta;
+    this.speedLimit = speedLimit;
 
     addRequirements(drivetrain);
   }
@@ -36,20 +43,13 @@ public class Drive extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    // drivetrain.setDrive(
-    //   new ChassisSpeeds(
-    //     wantedX.getAsDouble(),
-		// 		wantedY.getAsDouble(), 
-    //     wantedTheta.getAsDouble()
-    //   )
-    // );
     drivetrain.setDrive(
       ChassisSpeeds.fromFieldRelativeSpeeds(
         wantedX.getAsDouble(),
 				wantedY.getAsDouble(), 
         wantedTheta.getAsDouble(),
         drivetrain.getRotation2d()
-      )
+      ).times(speedLimit)
     );
   }
 

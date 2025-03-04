@@ -30,18 +30,31 @@ public final class PIDConstants {
 		public static final double AUTON_ROTATION_KI = 0.;
 		public static final double AUTON_ROTATION_KD = 0;
 
-		public final static double POS_KP = 3;
-		public final static double POS_KI = 0;
-		public final static double POS_KD = 0;
-		public static final Constraints POS_CONSTRAINTS = new Constraints(2, 4);
-		public final static double POS_POS_TOLERANCE = 0.05;
+		// public final static double POS_KP = 3;
+		// public final static double POS_KI = 0;
+		// public final static double POS_KD = 0;
+		// public static final Constraints POS_CONSTRAINTS = new Constraints(2, 4);
+		// public final static double POS_POS_TOLERANCE = 0.05;
 
-		public final static double ANGLE_KP = 0.07;
-		public final static double ANGLE_KI = 0;
-		public final static double ANGLE_KD = 0.001;
+		// public final static double ANGLE_KP = 0.07;
+		// public final static double ANGLE_KI = 0.03;
+		// public final static double ANGLE_KD = 0.001;
+		// public static final Constraints ANGLE_CONSTRAINTS = new Constraints(100, 720);
+		// public final static double ANGLE_POS_TOLERANCE = 5;
+		// public final static double ANGLE_VEL_TOLERANCE = 30;
+
+		public final static double POS_KP = 9;
+		public final static double POS_KI = 0;
+		public final static double POS_KD = 1.8;
+		public static final Constraints POS_CONSTRAINTS = new Constraints(2, 4);
+		public final static double POS_POS_TOLERANCE = 0.01;
+
+		public final static double ANGLE_KP = 0.18;
+		public final static double ANGLE_KI = 0.03;
+		public final static double ANGLE_KD = 0.01;
 		public static final Constraints ANGLE_CONSTRAINTS = new Constraints(100, 720);
 		public final static double ANGLE_POS_TOLERANCE = 3;
-		public final static double ANGLE_VEL_TOLERANCE = 30;
+		public final static double ANGLE_VEL_TOLERANCE = 20;
 
 		public final static double TRANSLATIONAL_SLEW_LIMIT = 5;
 		public final static double ROTATIONAL_SLEW_LIMIT = 10;
@@ -54,7 +67,7 @@ public final class PIDConstants {
 		public static final double POS_KI = 0;
 		public static final double POS_KD = 0;
 		// public static final Constraints POS_CONSTRAINTS = new Constraints(75, 300);
-		public static final Constraints POS_CONSTRAINTS = new Constraints(60, 300);
+		public static final Constraints POS_CONSTRAINTS = new Constraints(70, 300);
 
 		// public static final double POS_POS_TOLERANCE = 0.05;
 		// public static final double POS_VEL_TOLERANCE = 0;

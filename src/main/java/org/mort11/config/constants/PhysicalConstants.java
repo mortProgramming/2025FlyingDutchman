@@ -56,6 +56,9 @@ public final class PhysicalConstants {
 		public static final double WHEEL_DIAMETER = 0.1014;
 		public static final double ROTATIONS_TO_METERS = WHEEL_DIAMETER * Math.PI;
 		public static final double MAX_SPEED = DRIVE_REDUCTION * ROTATIONS_TO_METERS * (DRIVE_MOTOR_MAX_RPM / 60);
+
+		public static final double ODOMETRY_MULTIPLIER = 5.67;
+		// public static final double ODOMETRY_MULTIPLIER = 5.575;
     }	
 
 	public static final class Elevator {
@@ -63,10 +66,10 @@ public final class PhysicalConstants {
 
 		//3 is elevator stage count
 		public static final double ROTATIONS_TO_INCHES = 5.642 * 3;
-		public static final double MAXIMUM_INCH_CHANGE = 6;
+		public static final double MAXIMUM_INCH_CHANGE = 4;
 		public static final double GEAR_RATIO = 16;
 
-		public static final double ELEVATOR_OFFSET = 5.4;
+		public static final double ELEVATOR_OFFSET = 2.95;
 		public static final double ELEVATOR_REST_HEIGHT = 5.5;
 		public static final double ELEVATOR_START_HEIGHT = 2.7;
 

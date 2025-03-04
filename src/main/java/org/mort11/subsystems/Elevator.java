@@ -60,8 +60,8 @@ public class Elevator extends SubsystemBase {
 
 
     public double getElevatorPositionInches() {
-        // return elevatorPosition;
-        return getRelativeElevatorPosition();
+        return elevatorPosition;
+        // return getRelativeElevatorPosition();
     }
 
     public double getElevatorVelocityInches() {

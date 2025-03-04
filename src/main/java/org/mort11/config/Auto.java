@@ -25,6 +25,8 @@ import org.mort11.commands.autons.timed.RedSideOnePiece;
 import org.mort11.commands.autons.timed.Taxi;
 import org.mort11.library.subsystems.swerve.PathPlanner;
 import org.mort11.subsystems.swerve.Drivetrain;
+import org.mort11.commands.autons.odometry.Calibrate;
+import org.mort11.commands.autons.odometry.OnePiece;
 import org.mort11.commands.autons.odometry.Start2F2RStation2E;
 import org.mort11.commands.autons.pathplanned.BasicCommands;
 import org.mort11.commands.autons.pathplanned.ScoreL4JDescoreKL;
@@ -105,61 +107,27 @@ public class Auto {
 	
 	public static void addAutoOptions () {
 		autoChooser = new SendableChooser<Command>();
-		pathAutoChooser = AutoBuilder.buildAutoChooser("Forward");
 
 		autoChooser.setDefaultOption("nothing", null);
 		
 		autoChooser.addOption("Timed Taxi", new Taxi());
-		autoChooser.addOption("Timed One Piece Blue", new BlueSideOnePiece());
-        autoChooser.addOption("Timed One Piece Red", new RedSideOnePiece());
-
+		// autoChooser.addOption("Timed One Piece Blue", new BlueSideOnePiece());
+        // autoChooser.addOption("Timed One Piece Red", new RedSideOnePiece());
 
 		//ODOMETRY
 
-		autoChooser.addOption("Odometry Auto", new Start2F2RStation2E());
-        
+        autoChooser.addOption("One Piece", new OnePiece());
+		autoChooser.addOption("Two Piece In Prog", new Start2F2RStation2E());
 
-
-
-
-
-		//PATHPLANNED
-
-		BasicCommands.setCommands();
-
-		// autoChooser.addOption("ScoreL4JDescoreKL", 
-		// 	new ScoreL4JDescoreKL()
-		// );
-
-		autoChooser.addOption("Pathplanner Auto Forward", new PathPlannerAuto("Forward"));
-        autoChooser.addOption("ScoreL4DescoreKL Auto", new PathPlannerAuto("ScoreL4JDescoreKL"));
-        autoChooser.addOption("BBarge2H", new PathPlannerAuto("BBarge2H"));
-
-		autoChooser.addOption("Forward Path", getPathCommand());
-
-        autoChooser.addOption("Start Auto", new PathPlannerAuto("Start2F2RStation2E"));
-		
-
-
-
+        // autoChooser.addOption("Calibrate", new Calibrate());
+    
 		SmartDashboard.putData("Auton Chooser", autoChooser);
-
-		// SmartDashboard.putData("Pathplanner Auton Chooser", pathAutoChooser);
 	}
 
 	public static Command getPlanned(String plan) {
 		BasicCommands.setCommands();
 
 		return new PathPlannerAuto(plan);
-	}
-
-	public static Command getPathCommand(){
-		try {
-			return AutoBuilder.followPath(PathPlannerPath.fromPathFile("Forward"));
-		} catch (Exception e) {
-			DriverStation.reportError(e.getMessage(), e.getStackTrace());
-			return autoChooser.getSelected();
-		}
 	}
 
 	public static Command getAutonomousCommand () {

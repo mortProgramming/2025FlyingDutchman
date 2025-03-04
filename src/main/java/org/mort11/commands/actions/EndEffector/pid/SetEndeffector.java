@@ -48,36 +48,36 @@ public class SetEndeffector extends SequentialCommandGroup {
         // }
     }
 
-    public SetEndeffector(double elevatorPos, double tikiArmPos, double algaeArmPos, double time) {
+    // public SetEndeffector(double elevatorPos, double tikiArmPos, double algaeArmPos, double time) {
 
-        elevator = Elevator.getInstance();
-        tikiTorchArm = TikiTorchArm.getInstance();
+    //     elevator = Elevator.getInstance();
+    //     tikiTorchArm = TikiTorchArm.getInstance();
 
-            addCommands(
+    //         addCommands(
             
-            new SequentialCommandGroup(
-                new ParallelCommandGroup(
-                    SetTikiTorchArm.algaeClear(),
-                    SetAlgaeArm.rest()
-                ).withTimeout(0.5),
+    //         new SequentialCommandGroup(
+    //             new ParallelCommandGroup(
+    //                 SetTikiTorchArm.algaeClear(),
+    //                 SetAlgaeArm.rest()
+    //             ).withTimeout(0.5),
 
-                new ParallelCommandGroup(
-                    new Elevate(elevatorPos),
+    //             new ParallelCommandGroup(
+    //                 new Elevate(elevatorPos),
                     
 
-                    new SequentialCommandGroup(
+    //                 new SequentialCommandGroup(
 
-                        new WaitCommand(time),
-                        new ParallelCommandGroup(
-                            new SetTikiTorchArm(tikiArmPos),
-                           new SetAlgaeArm(algaeArmPos)
-                        )
-                    )
-                )
-            )
-        );
-        // }
-    }
+    //                     new WaitCommand(time),
+    //                     new ParallelCommandGroup(
+    //                         new SetTikiTorchArm(tikiArmPos),
+    //                        new SetAlgaeArm(algaeArmPos)
+    //                     )
+    //                 )
+    //             )
+    //         )
+    //     );
+    //     // }
+    // }
 
     public static Command rest() {
         return new SetEndeffector(ELEVATOR_REST_HEIGHT, TIKI_ALGAE_CLEAR, ALGAE_REST);
@@ -112,7 +112,8 @@ public class SetEndeffector extends SequentialCommandGroup {
     }
 
     public static Command barge() {
-        return new SetEndeffector(ELEVATOR_BARGE_HEIGHT, TIKI_ALGAE_CLEAR, ALGAE_BARGE_SCORE, 2.5);
+        // return new SetEndeffector(ELEVATOR_BARGE_HEIGHT, TIKI_ALGAE_CLEAR, ALGAE_BARGE_SCORE, 2.5);
+        return new SetEndeffector(ELEVATOR_BARGE_HEIGHT, TIKI_ALGAE_CLEAR, ALGAE_BARGE_SCORE);
     }
 
     public static Command processor() {

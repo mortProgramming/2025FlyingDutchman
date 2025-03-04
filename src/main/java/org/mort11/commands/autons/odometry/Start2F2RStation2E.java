@@ -19,19 +19,22 @@ public class Start2F2RStation2E extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
         new SequentialCommandGroup(
-            new Initiate(7.01, 0.54, 270),
-            new DriveToPosition(6, 2),
-            new Rotate(-60).withTimeout(1),
+            new ResetPosition(7.01, 0.54, 270, true),
             new ParallelCommandGroup(
-                new DriveToPosition(5.35, 2.99),
-                SetEndeffector.l4().withTimeout(2.5)
+                // new DriveToPosition(5.3, 3.05, -60),
+                new DriveToPosition(5.32, 3.09, -60).withTimeout(4),
+                new SequentialCommandGroup(
+                    new Initiate(),
+                    SetEndeffector.l4().withTimeout(2)
+                )
             ),
-            new TimedDrive(0.3, -1.25, 0, 0),
             VelocityTikiTorchRoller.outtake().withTimeout(0.5),
-            new TimedDrive(1, 0, -1, 0, true),
-            SetEndeffector.intake().withTimeout(2.5),
-            new Rotate(60).withTimeout(1),
-            new DriveToPosition(1.39, 1.05),
+            new ParallelCommandGroup(
+                new TimedDrive(1, 0, -1, 0, true),
+                SetEndeffector.intake().withTimeout(2)
+            ),
+            //TODO
+            new DriveToPosition(2, 2, 60).withTimeout(3),
             VelocityTikiTorchRoller.intake().withTimeout(0.75),
             new TimedDrive(0.3, 1.25, 0, 0),
             new Rotate(-120).withTimeout(1),

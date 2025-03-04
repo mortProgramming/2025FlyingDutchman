@@ -7,6 +7,9 @@ package org.mort11.commands.actions.drivetrain.auto;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj2.command.Command;
 
+import static org.mort11.config.constants.PhysicalConstants.Drivetrain.IMU_TO_ROBOT_FRONT_ANGLE;
+
+import org.mort11.Utility;
 import org.mort11.subsystems.swerve.Drivetrain;
 
 /** An example command that uses an example subsystem. */
@@ -58,7 +61,7 @@ public class DriveToPosition extends Command {
         ChassisSpeeds.fromFieldRelativeSpeeds(
           drivetrain.getYController().calculate(drivetrain.getPose().getY(), wantedY),
           -drivetrain.getXController().calculate(drivetrain.getPose().getX(), wantedX), 
-          drivetrain.calculateRotateController(wantedTheta),
+          -Utility.clamp(drivetrain.calculateRotateController(wantedTheta + IMU_TO_ROBOT_FRONT_ANGLE), 1.5),
           drivetrain.getRotation2d()
         ),
         1

@@ -178,9 +178,9 @@ public class Drivetrain extends SubsystemBase {
 		);
 	}
 
-	// public void addVisionMeasurements(Pose2d pose) {
-		
-	// }
+	public void addVisionMeasurements(Pose2d pose) {
+		odometer.resetPose(pose);
+	}
 	
 	public SwerveDrive getSwerveDrive() {
 		return swerveDrive;

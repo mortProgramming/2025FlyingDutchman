@@ -12,18 +12,18 @@ import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 
-public class OnePiece extends SequentialCommandGroup {
+public class ProcessorOne extends SequentialCommandGroup {
     
-    public OnePiece() {
+    public ProcessorOne() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
         new SequentialCommandGroup(
             new Initiate(7.01, 0.54, 270),
-            new DriveToPosition(6, 2),
+            new DriveToPosition(6, 2, 270),
             new Rotate(-60).withTimeout(1),
             new ParallelCommandGroup(
-                new DriveToPosition(5.17, 3.08).withTimeout(5),
+                new DriveToPosition(5.17, 3.08, -60).withTimeout(5),
                 SetEndeffector.l4().withTimeout(2.5)
             ),
             VelocityTikiTorchRoller.outtake().withTimeout(0.5),

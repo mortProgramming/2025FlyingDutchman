@@ -35,12 +35,11 @@ public class Elevator extends SubsystemBase {
 
         motorSpeed = 0;
         elevatorPosition = 0;
-        rotationsCompleted = ELEVATOR_OFFSET / ROTATIONS_TO_INCHES;
+        rotationsCompleted = -ELEVATOR_OFFSET / ROTATIONS_TO_INCHES;
     }
 
     @Override
     public void periodic() {
-        // if(motorSpeed > 0.2) {motorSpeed = 0.2;}
         motor.setVoltage(motorSpeed * ROBOT_VOLTAGE);
 
         elevatorPosition = calculateElevatorPosition();
@@ -56,6 +55,10 @@ public class Elevator extends SubsystemBase {
     public void setElevatorMotorPercent(double motorSpeed) {
         this.motorSpeed = motorSpeed + POS_KG;
     }
+
+    // public void setElevatorOffset(double newPoseInches) {
+    //     rotationsCompleted -= (getElevatorPositionInches() + newPoseInches) / ROTATIONS_TO_INCHES;
+    // }
 
 
 

@@ -17,6 +17,11 @@ public class Elevate extends Command {
     }
 
     @Override
+    public void initialize() {
+        elevator.getPIDController().reset(elevator.getElevatorPositionInches());
+    }
+
+    @Override
     public void execute() {
         // elevator.setElevatorPosition(targetPosition);
         elevator.setElevatorMotorPercent(

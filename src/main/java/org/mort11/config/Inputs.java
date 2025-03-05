@@ -13,7 +13,7 @@ public class Inputs {
 	// private static CommandJoystick throttle;
 	public static CommandXboxController testingController;
 
-    public static CommandXboxController compController;
+    public static CommandXboxController operatorController;
 
     public static CommandPS5Controller driveController;
 
@@ -22,7 +22,7 @@ public class Inputs {
     public static void init() {
 		joystick = new CommandJoystick(JOYSTICK);
         testingController = new CommandXboxController(TESTING_CONTROLLER);
-        compController = new CommandXboxController(COMP_CONTROLLER);
+        operatorController = new CommandXboxController(COMP_CONTROLLER);
         driveController = new CommandPS5Controller(DRIVE_CONTROLLER);
 
         joystick.setXChannel(JOYSTICK_X_CHANNEL);

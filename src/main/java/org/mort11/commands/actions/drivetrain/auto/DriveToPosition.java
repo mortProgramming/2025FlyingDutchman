@@ -20,7 +20,9 @@ public class DriveToPosition extends Command {
   private double wantedY;
   private double wantedTheta;
 
-  private boolean spinTrue;
+  private double maxSpeed, maxRotate;
+
+  private double iterations;
 
   public DriveToPosition(double wantedX, double wantedY, double wantedTheta) {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -30,55 +32,46 @@ public class DriveToPosition extends Command {
     this.wantedY = wantedY;
     this.wantedTheta = wantedTheta;
 
-    this.spinTrue = true;
+    this.maxSpeed = 1;
+    this.maxRotate = 0.5;
 
-    addRequirements(drivetrain);
-  }
-
-  public DriveToPosition(double wantedX, double wantedY) {
-    // Use addRequirements() here to declare subsystem dependencies.
-    drivetrain =  Drivetrain.getInstance();
-
-    this.wantedX = wantedX;
-    this.wantedY = wantedY;
-    this.wantedTheta = 0;
-
-    this.spinTrue = false;
+    iterations = 0;
 
     addRequirements(drivetrain);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    drivetrain.getXController().reset(drivetrain.getPose().getX());
+	  drivetrain.getYController().reset(drivetrain.getPose().getY());
+	  drivetrain.getRotateController().reset(drivetrain.getRotation2d().getDegrees());
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
 
-    if(spinTrue) {
-      drivetrain.setDriveWithMax(
-        ChassisSpeeds.fromFieldRelativeSpeeds(
-          drivetrain.getYController().calculate(drivetrain.getPose().getY(), wantedY),
-          -drivetrain.getXController().calculate(drivetrain.getPose().getX(), wantedX), 
-          -Utility.clamp(drivetrain.calculateRotateController(wantedTheta + IMU_TO_ROBOT_FRONT_ANGLE), 1.5),
-          drivetrain.getRotation2d()
-        ),
-        1
-      );
-    }
+      // drivetrain.setDriveWithMax(
+      //   ChassisSpeeds.fromFieldRelativeSpeeds(
+      //     drivetrain.getYController().calculate(drivetrain.getPose().getY(), wantedY),
+      //     -drivetrain.getXController().calculate(drivetrain.getPose().getX(), wantedX), 
+      //     -Utility.clamp(drivetrain.calculateRotateController(wantedTheta + IMU_TO_ROBOT_FRONT_ANGLE), maxRotate),
+      //     drivetrain.getRotation2d()
+      //   ),
+      //   maxSpeed
+      // );
 
-    else {
-        drivetrain.setDriveWithMax(
+      drivetrain.setDrive(
         ChassisSpeeds.fromFieldRelativeSpeeds(
           drivetrain.getYController().calculate(drivetrain.getPose().getY(), wantedY),
           -drivetrain.getXController().calculate(drivetrain.getPose().getX(), wantedX), 
-        0,
+          -Utility.clamp(drivetrain.calculateRotateController(wantedTheta + IMU_TO_ROBOT_FRONT_ANGLE), 3),
           drivetrain.getRotation2d()
-        ),
-        1
+        )
       );
-    }
+
+      iterations += 1;
   }
 
   // Called once the command ends or is interrupted.
@@ -92,15 +85,12 @@ public class DriveToPosition extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(spinTrue) {
+    if (iterations > 10) {
       return 
       drivetrain.getXController().atSetpoint() &&
       drivetrain.getYController().atSetpoint() &&
       drivetrain.getRotateController().atSetpoint();
     }
-
-    return 
-      drivetrain.getXController().atSetpoint() &&
-      drivetrain.getYController().atSetpoint();
+      return false;
   }
 }

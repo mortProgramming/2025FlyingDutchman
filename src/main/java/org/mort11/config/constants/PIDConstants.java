@@ -30,6 +30,8 @@ public final class PIDConstants {
 		public static final double AUTON_ROTATION_KI = 0.;
 		public static final double AUTON_ROTATION_KD = 0;
 
+
+		//og
 		// public final static double POS_KP = 3;
 		// public final static double POS_KI = 0;
 		// public final static double POS_KD = 0;
@@ -43,16 +45,30 @@ public final class PIDConstants {
 		// public final static double ANGLE_POS_TOLERANCE = 5;
 		// public final static double ANGLE_VEL_TOLERANCE = 30;
 
-		public final static double POS_KP = 9;
-		public final static double POS_KI = 0;
-		public final static double POS_KD = 1.8;
-		public static final Constraints POS_CONSTRAINTS = new Constraints(2, 4);
-		public final static double POS_POS_TOLERANCE = 0.01;
+		//non profiled
+		// public final static double POS_KP = 9;
+		// public final static double POS_KI = 0;
+		// public final static double POS_KD = 1.8;
+		// public static final Constraints POS_CONSTRAINTS = new Constraints(2, 4);
+		// public final static double POS_POS_TOLERANCE = 0.01;
 
-		public final static double ANGLE_KP = 0.18;
-		public final static double ANGLE_KI = 0.03;
-		public final static double ANGLE_KD = 0.01;
-		public static final Constraints ANGLE_CONSTRAINTS = new Constraints(100, 720);
+		// public final static double ANGLE_KP = 0.18;
+		// public final static double ANGLE_KI = 0.03;
+		// public final static double ANGLE_KD = 0.01;
+		// public static final Constraints ANGLE_CONSTRAINTS = new Constraints(100, 720);
+		// public final static double ANGLE_POS_TOLERANCE = 3;
+		// public final static double ANGLE_VEL_TOLERANCE = 20;
+
+		public final static double POS_KP = 3;
+		public final static double POS_KI = 0;
+		public final static double POS_KD = 0;
+		public static final Constraints POS_CONSTRAINTS = new Constraints(1, 3);
+		public final static double POS_POS_TOLERANCE = 0.015;
+
+		public final static double ANGLE_KP = 0.1;
+		public final static double ANGLE_KI = 0;
+		public final static double ANGLE_KD = 0;
+		public static final Constraints ANGLE_CONSTRAINTS = new Constraints(100, 180);
 		public final static double ANGLE_POS_TOLERANCE = 3;
 		public final static double ANGLE_VEL_TOLERANCE = 20;
 

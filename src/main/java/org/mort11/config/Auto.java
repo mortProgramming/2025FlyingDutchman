@@ -26,10 +26,11 @@ import org.mort11.commands.autons.timed.Taxi;
 import org.mort11.library.subsystems.swerve.PathPlanner;
 import org.mort11.subsystems.swerve.Drivetrain;
 import org.mort11.commands.autons.odometry.Calibrate;
-import org.mort11.commands.autons.odometry.OnePiece;
-import org.mort11.commands.autons.odometry.Start2F2RStation2E;
+import org.mort11.commands.autons.odometry.ProcessorOne;
+import org.mort11.commands.autons.odometry.ProcessorTwo;
 import org.mort11.commands.autons.pathplanned.BasicCommands;
 import org.mort11.commands.autons.pathplanned.ScoreL4JDescoreKL;
+import org.mort11.commands.autons.timed.CenterOnePiece;
 
 import com.pathplanner.lib.path.PathPlannerPath;
 import com.pathplanner.lib.util.DriveFeedforwards;
@@ -116,8 +117,9 @@ public class Auto {
 
 		//ODOMETRY
 
-        autoChooser.addOption("One Piece", new OnePiece());
-		autoChooser.addOption("Two Piece In Prog", new Start2F2RStation2E());
+        autoChooser.addOption("Processor One Piece", new ProcessorOne());
+		autoChooser.addOption("Processor Two Piece", new ProcessorTwo());
+        autoChooser.addOption("Center One Piece", new CenterOnePiece());
 
         // autoChooser.addOption("Calibrate", new Calibrate());
     

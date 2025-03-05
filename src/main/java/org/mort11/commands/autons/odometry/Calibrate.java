@@ -13,7 +13,7 @@ public class Calibrate extends SequentialCommandGroup {
     addCommands(
         new SequentialCommandGroup(
             new Initiate(0, 0, 270),
-            new DriveToPosition(0, 5)
+            new DriveToPosition(0, 5, 270)
         )
     );
   }

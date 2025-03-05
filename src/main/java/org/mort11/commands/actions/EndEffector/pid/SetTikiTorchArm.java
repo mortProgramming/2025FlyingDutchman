@@ -1,5 +1,6 @@
 package org.mort11.commands.actions.endeffector.pid;
 
+import org.mort11.config.constants.PhysicalConstants;
 import static org.mort11.config.constants.PhysicalConstants.TikiTorchArm.*;
 
 import org.mort11.subsystems.TikiTorchArm;
@@ -20,7 +21,7 @@ public class SetTikiTorchArm extends Command {
 
   @Override
   public void initialize() {
-
+    tiki.getPIDController().reset(tiki.encoderToDegrees());
   }
 
   @Override

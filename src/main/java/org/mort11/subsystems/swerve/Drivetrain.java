@@ -88,10 +88,6 @@ public class Drivetrain extends SubsystemBase {
       swerveDrive.getKinematics(), 
       Rotation2d.fromDegrees(0), 
       swerveDrive.getModulePositions());
-
-	  xToPosController.reset(getPose().getX());
-	  yToPosController.reset(getPose().getY());
-	  rotateToAngleController.reset(getRotation2d().getDegrees());
   }
 
   @Override

@@ -22,8 +22,6 @@ public class DriveToPosition extends Command {
 
   private double maxSpeed, maxRotate;
 
-  private double iterations;
-
   public DriveToPosition(double wantedX, double wantedY, double wantedTheta) {
     // Use addRequirements() here to declare subsystem dependencies.
     drivetrain =  Drivetrain.getInstance();
@@ -35,8 +33,6 @@ public class DriveToPosition extends Command {
     this.maxSpeed = 1;
     this.maxRotate = 0.5;
 
-    iterations = 0;
-
     addRequirements(drivetrain);
   }
 
@@ -46,6 +42,10 @@ public class DriveToPosition extends Command {
     drivetrain.getXController().reset(drivetrain.getPose().getX());
 	  drivetrain.getYController().reset(drivetrain.getPose().getY());
 	  drivetrain.getRotateController().reset(drivetrain.getRotation2d().getDegrees());
+
+    drivetrain.getYController().calculate(drivetrain.getPose().getY(), wantedY);
+    drivetrain.getXController().calculate(drivetrain.getPose().getX(), wantedX);
+    drivetrain.calculateRotateController(wantedTheta + IMU_TO_ROBOT_FRONT_ANGLE);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -70,8 +70,6 @@ public class DriveToPosition extends Command {
           drivetrain.getRotation2d()
         )
       );
-
-      iterations += 1;
   }
 
   // Called once the command ends or is interrupted.
@@ -85,12 +83,6 @@ public class DriveToPosition extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if (iterations > 10) {
-      return 
-      drivetrain.getXController().atSetpoint() &&
-      drivetrain.getYController().atSetpoint() &&
-      drivetrain.getRotateController().atSetpoint();
-    }
       return false;
   }
 }

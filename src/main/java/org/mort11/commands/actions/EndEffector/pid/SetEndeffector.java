@@ -123,4 +123,8 @@ public class SetEndeffector extends SequentialCommandGroup {
     public static Command intake() {
         return new SetEndeffector(ELEVATOR_INTAKE_HEIGHT, TIKI_INTAKE, ALGAE_REST);
     }
+
+    public static Command autoIntake() {
+        return new SetEndeffector(ELEVATOR_AUTO_INTAKE_HEIGHT, TIKI_INTAKE, ALGAE_REST);
+    }
 }

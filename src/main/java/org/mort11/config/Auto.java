@@ -26,8 +26,8 @@ import org.mort11.commands.autons.timed.Taxi;
 import org.mort11.library.subsystems.swerve.PathPlanner;
 import org.mort11.subsystems.swerve.Drivetrain;
 import org.mort11.commands.autons.odometry.Calibrate;
-import org.mort11.commands.autons.odometry.ProcessorOne;
-import org.mort11.commands.autons.odometry.ProcessorTwo;
+import org.mort11.commands.autons.odometry.blue.*;
+import org.mort11.commands.autons.odometry.red.*;
 import org.mort11.commands.autons.pathplanned.BasicCommands;
 import org.mort11.commands.autons.pathplanned.ScoreL4JDescoreKL;
 import org.mort11.commands.autons.timed.CenterOnePiece;
@@ -117,8 +117,11 @@ public class Auto {
 
 		//ODOMETRY
 
-        autoChooser.addOption("Processor One Piece", new ProcessorOne());
-		autoChooser.addOption("Processor Two Piece", new ProcessorTwo());
+        autoChooser.addOption("Blue Right One Piece", new RightOneBlue());
+		autoChooser.addOption("Blue Right Two Piece", new RightTwoBlue());
+        autoChooser.addOption("Red Right One Piece", new RightOneRed());
+		autoChooser.addOption("Red Right Two Piece", new RightTwoRed());
+        autoChooser.addOption("Red Left Two Piece", new LeftTwoRed());
         autoChooser.addOption("Center One Piece", new CenterOnePiece());
 
         // autoChooser.addOption("Calibrate", new Calibrate());

@@ -1,4 +1,4 @@
-package org.mort11.commands.autons.odometry;
+package org.mort11.commands.autons.odometry.blue;
 
 import org.mort11.commands.actions.drivetrain.ResetPosition;
 import org.mort11.commands.actions.drivetrain.auto.DriveToPosition;
@@ -12,9 +12,9 @@ import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 
-public class ProcessorOne extends SequentialCommandGroup {
+public class RightOneBlue extends SequentialCommandGroup {
     
-    public ProcessorOne() {
+    public RightOneBlue() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(

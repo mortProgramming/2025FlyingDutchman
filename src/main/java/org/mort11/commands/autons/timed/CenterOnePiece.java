@@ -7,6 +7,7 @@ import org.mort11.commands.actions.drivetrain.auto.TimedDrive;
 import org.mort11.commands.actions.endeffector.Initiate;
 import org.mort11.commands.actions.endeffector.pid.SetEndeffector;
 import org.mort11.commands.actions.endeffector.velocity.VelocityTikiTorchRoller;
+import org.mort11.commands.actions.drivetrain.SetRobotOrientation;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 
@@ -20,13 +21,13 @@ public class CenterOnePiece extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
       new SequentialCommandGroup(
-        new Initiate(7, 3.5, 270),
-        new TimedDrive(1, 1, 0, 0, false),
+        new SetRobotOrientation(0),
+        new TimedDrive(1, -1, 0, 0, false),
         SetEndeffector.l4().withTimeout(2.5),
-        new TimedDrive(0.46, 1, 0, 0),
+        new TimedDrive(0.7, -1, 0, 0),
         new WaitCommand(0.75),
         VelocityTikiTorchRoller.outtake().withTimeout(2),
-        new TimedDrive(0.25, -1, 0, 0)
+        new TimedDrive(0.25, 1, 0, 0)
       )
     );
   }

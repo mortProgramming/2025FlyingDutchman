@@ -64,7 +64,9 @@ public class SwerveDrive {
         layout.withSize(2, 4).withPosition(0, 5);
         layout.addNumber("X Velocity", () -> velocity.vxMetersPerSecond);
         layout.addNumber("Y Velocity", () -> velocity.vyMetersPerSecond);
-        layout.addNumber("Rotational Velocity", () -> velocity.omegaRadiansPerSecond);
+        layout.addNumber("Overall", () -> Math.sqrt(velocity.vxMetersPerSecond * velocity.vxMetersPerSecond + velocity.vyMetersPerSecond * velocity.vyMetersPerSecond));
+        layout.addNumber("Direction", () -> Math.atan(velocity.vyMetersPerSecond / velocity.vxMetersPerSecond));
+        layout.addNumber("Rotational Velocity", () -> velocity.omegaRadiansPerSecond * 360);
     }
 
     public void makeShuffleboardModuleLayout(String layoutName, int moduleNumber) {

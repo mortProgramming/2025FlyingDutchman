@@ -16,7 +16,7 @@ import org.mort11.Utility;
 import org.mort11.subsystems.swerve.Drivetrain;
 
 /** An example command that uses an example subsystem. */
-public class DriveToPosition extends Command {
+public class DriveToPositionReverseX extends Command {
   private Drivetrain drivetrain;
 
   private double wantedX;
@@ -25,7 +25,7 @@ public class DriveToPosition extends Command {
 
   private double maxSpeed, maxRotate;
 
-  public DriveToPosition(double wantedX, double wantedY, double wantedTheta) {
+  public DriveToPositionReverseX(double wantedX, double wantedY, double wantedTheta) {
     // Use addRequirements() here to declare subsystem dependencies.
     drivetrain =  Drivetrain.getInstance();
 
@@ -39,7 +39,7 @@ public class DriveToPosition extends Command {
     addRequirements(drivetrain);
   }
 
-  public DriveToPosition(double wantedX, double wantedY, double wantedTheta, double maxSpeed, double maxRotate) {
+  public DriveToPositionReverseX(double wantedX, double wantedY, double wantedTheta, double maxSpeed, double maxRotate) {
     // Use addRequirements() here to declare subsystem dependencies.
     drivetrain =  Drivetrain.getInstance();
 
@@ -56,12 +56,12 @@ public class DriveToPosition extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    drivetrain.getXController().reset(drivetrain.getPose().getX());
+    drivetrain.getXController().reset(-drivetrain.getPose().getX());
 	  drivetrain.getYController().reset(drivetrain.getPose().getY());
 	  drivetrain.getRotateController().reset(drivetrain.getRotation2d().getDegrees());
 
     drivetrain.getYController().calculate(drivetrain.getPose().getY(), wantedY);
-    drivetrain.getXController().calculate(drivetrain.getPose().getX(), wantedX);
+    drivetrain.getXController().calculate(-drivetrain.getPose().getX(), -wantedX);
     drivetrain.calculateRotateController(wantedTheta + IMU_TO_ROBOT_FRONT_ANGLE);
 
     drivetrain.getXController().setConstraints(new Constraints(maxSpeed, POS_CONSTRAINTS.maxAcceleration));
@@ -76,7 +76,7 @@ public class DriveToPosition extends Command {
       drivetrain.setDrive(
         ChassisSpeeds.fromFieldRelativeSpeeds(
           drivetrain.getYController().calculate(drivetrain.getPose().getY(), wantedY),
-          -drivetrain.getXController().calculate(drivetrain.getPose().getX(), wantedX), 
+          drivetrain.getXController().calculate(-drivetrain.getPose().getX(), -wantedX), 
           -Utility.clamp(drivetrain.calculateRotateController(wantedTheta + IMU_TO_ROBOT_FRONT_ANGLE), 3),
           drivetrain.getRotation2d()
         )

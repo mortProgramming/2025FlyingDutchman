@@ -59,7 +59,11 @@ public class Elevate extends Command {
     }
 
     public static Command intake() {
-        return new Elevate(ELEVATOR_L1_HEIGHT);
+        return new Elevate(ELEVATOR_INTAKE_HEIGHT);
+    }
+
+    public static Command autoIntake() {
+        return new Elevate(ELEVATOR_AUTO_INTAKE_HEIGHT);
     }
 
     public static Command rest() {

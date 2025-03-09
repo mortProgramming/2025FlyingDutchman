@@ -21,9 +21,9 @@ public class CenterOnePiece extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
       new SequentialCommandGroup(
-        new SetRobotOrientation(0),
-        new TimedDrive(1, -1, 0, 0, false),
-        SetEndeffector.l4().withTimeout(2.5),
+        new SetRobotOrientation(180),
+        new TimedDrive(1, -1, 0, 0),
+        SetEndeffector.autoL4().withTimeout(2.5),
         new TimedDrive(0.7, -1, 0, 0),
         new WaitCommand(0.75),
         VelocityTikiTorchRoller.outtake().withTimeout(2),

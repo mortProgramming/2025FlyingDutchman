@@ -11,6 +11,14 @@ public interface IMUIntf {
 
     public double getRate();
 
+    // public double getAccelerationX();
+
+    // public double getAccelerationY();
+
+    // public double getAccelerationZ();
+
+    // public double getAcceleration();
+
     public void reset();
 
     public Rotation2d getRotation2d();

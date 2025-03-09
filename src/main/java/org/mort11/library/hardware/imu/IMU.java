@@ -59,6 +59,22 @@ public class IMU implements IMUIntf {
         return imu.getRotation3d();
     }
 
+    // public double getAccelerationX() {
+    //     return imu.getAccelerationX();
+    // }
+
+    // public double getAccelerationY() {
+    //     return imu.getAccelerationY();
+    // }
+
+    // public double getAccelerationZ() {
+    //     return imu.getAccelerationZ();
+    // }
+
+    // public double getAcceleration() {
+    //     return imu.getAcceleration();
+    // }
+
     public IMUTypeEnum getIMUType() {
         return imuType;
     }

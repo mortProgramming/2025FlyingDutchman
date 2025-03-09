@@ -51,6 +51,26 @@ public class NavX2IMU implements IMUIntf {
         return imu.getRotation3d();
     }
 
+    // public double getAccelerationX() {
+    //     return imu.get
+    // }
+
+    // public double getAccelerationY() {
+    //     return imu.getAccelerationY().getValueAsDouble();
+    // }
+
+    // public double getAccelerationZ() {
+    //     return imu.getAccelerationZ().getValueAsDouble();
+    // }
+
+    // public double getAcceleration() {
+    //     return Math.sqrt(
+    //         getAccelerationX() * getAccelerationX() +
+    //         getAccelerationY() * getAccelerationY() +
+    //         getAccelerationZ() * getAccelerationZ()
+    //     );
+    // }
+
     public AHRS getIMU() {
         return imu;
     }

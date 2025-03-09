@@ -117,11 +117,11 @@ public class Auto {
 
 		//ODOMETRY
 
-        autoChooser.addOption("Blue Right One Piece", new RightOneBlue());
+        // autoChooser.addOption("Blue Right One Piece", new RightOneBlue());
+        // autoChooser.addOption("Red Right One Piece", new RightOneRed());
 		autoChooser.addOption("Blue Right Two Piece", new RightTwoBlue());
-        autoChooser.addOption("Red Right One Piece", new RightOneRed());
-		autoChooser.addOption("Red Right Two Piece", new RightTwoRed());
-        autoChooser.addOption("Red Left Two Piece", new LeftTwoRed());
+        autoChooser.addOption("Red Right Two Piece", new RightTwoRed());
+        // autoChooser.addOption("Red Left Two Piece", new LeftTwoRed());
         autoChooser.addOption("Center One Piece", new CenterOnePiece());
 
         // autoChooser.addOption("Calibrate", new Calibrate());

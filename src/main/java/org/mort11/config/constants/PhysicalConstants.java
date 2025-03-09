@@ -69,7 +69,7 @@ public final class PhysicalConstants {
 		public static final double MAXIMUM_INCH_CHANGE = 4;
 		public static final double GEAR_RATIO = 16;
 
-		public static final double ELEVATOR_OFFSET = 8.3;
+		public static final double ELEVATOR_OFFSET = 19.1;
 		public static final double ELEVATOR_REST_HEIGHT = 5.5;
 		public static final double ELEVATOR_START_HEIGHT = 2;
 
@@ -77,7 +77,7 @@ public final class PhysicalConstants {
 		public static final double ELEVATOR_L2_HEIGHT = 30.5;
 		public static final double ELEVATOR_L3_HEIGHT = 46;
 		public static final double ELEVATOR_L4_HEIGHT = 72;
-		public static final double ELEVATOR_INTAKE_HEIGHT = 21;
+		public static final double ELEVATOR_INTAKE_HEIGHT = 20.5;
 		public static final double ELEVATOR_AUTO_INTAKE_HEIGHT = 19;
 
 		public static final double ELEVATOR_LOW_ALGAE_HEIGHT = 13.5;
@@ -97,6 +97,7 @@ public final class PhysicalConstants {
 		public static final double ARM_BOTTOM_NEVER_POSITION = 0;
 
 		public static final double TIKI_L234_SCORE = -50;
+		public static final double TIKI_AUTO_L234_SCORE = -60;
 		public static final double TIKI_L1_SCORE = 0;
 
 		public static final double TIKI_INTAKE = 46;

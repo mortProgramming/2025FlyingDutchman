@@ -7,6 +7,8 @@ import org.mort11.commands.actions.drivetrain.auto.Rotate;
 import org.mort11.commands.actions.drivetrain.teleop.DriveAtAngle;
 import org.mort11.commands.actions.drivetrain.teleop.DriveSetSpeed;
 import org.mort11.commands.actions.drivetrain.teleop.DriveTagAngled;
+import org.mort11.commands.actions.drivetrain.teleop.SnapToIntake;
+import org.mort11.commands.actions.drivetrain.teleop.SnapToReef;
 import org.mort11.commands.actions.endeffector.Initiate;
 import org.mort11.commands.actions.endeffector.pid.SetEndeffector;
 import org.mort11.commands.actions.endeffector.pid.SetTikiTorchArm;
@@ -120,10 +122,17 @@ public class IO {
     //     () -> (vision.getFieldTagPose(vision.getFrontCamera().getId()).getRotation2d().getDegrees())
     //   )
     // );
-    driveController.button(5).whileTrue(new DriveTagAngled(
-      Inputs::getLeftControllerXSwerve, Inputs::getLeftControllerYSwerve, Inputs::getRightControllerXSwerve
+    // driveController.button(5).whileTrue(new DriveTagAngled(
+    //   Inputs::getLeftControllerXSwerve, Inputs::getLeftControllerYSwerve, Inputs::getRightControllerXSwerve
+    // ));
+    // driveController.button(6).whileTrue(new Rotate(90));
+
+    driveController.button(5).whileTrue(new SnapToIntake(
+      Inputs::getLeftControllerXSwerve, Inputs::getLeftControllerYSwerve
     ));
-    driveController.button(6).whileTrue(new Rotate(90));
+    driveController.button(6).whileTrue(new SnapToReef(
+      Inputs::getLeftControllerXSwerve, Inputs::getLeftControllerYSwerve
+    ));
 
     // //rest
     // operatorController.pov(90).onTrue(new DriveSetSpeed(

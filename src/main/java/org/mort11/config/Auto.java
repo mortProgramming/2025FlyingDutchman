@@ -29,8 +29,8 @@ import org.mort11.commands.autons.odometry.Calibrate;
 import org.mort11.commands.autons.odometry.blue.*;
 import org.mort11.commands.autons.odometry.red.*;
 import org.mort11.commands.autons.pathplanned.BasicCommands;
-import org.mort11.commands.autons.pathplanned.ScoreL4JDescoreKL;
-import org.mort11.commands.autons.timed.CenterOnePiece;
+// import org.mort11.commands.autons.timed.CenterOnePiece;
+import org.mort11.commands.autons.odometry.CenterOnePiece;
 
 import com.pathplanner.lib.path.PathPlannerPath;
 import com.pathplanner.lib.util.DriveFeedforwards;

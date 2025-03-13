@@ -34,7 +34,6 @@ public class TikiTorchArm extends SubsystemBase {
 
     @Override
     public void periodic(){
-        if(armSpeed > 0.2) {armSpeed = 0.2;}
         tikiTorchArmMotor.setPercent(armSpeed);
         SmartDashboard.putNumber("Tiki Encoder Position Degress", encoderToDegrees());
         SmartDashboard.putNumber("TikiArmSpeed", getEncoderVelocityDegrees());

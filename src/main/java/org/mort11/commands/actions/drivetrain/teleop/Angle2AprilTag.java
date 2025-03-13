@@ -1,6 +1,7 @@
-package org.mort11.commands.actions.drivetrain;
+package org.mort11.commands.actions.drivetrain.teleop;
 
-import org.mort11.subsystems.Drivetrain;
+import org.mort11.subsystems.swerve.Drivetrain;
+import java.util.function.DoubleSupplier;
 import org.mort11.subsystems.Vision;
 
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
@@ -11,16 +12,20 @@ public class Angle2AprilTag extends Command{
     //declare private drivetrain instance
     private Drivetrain drivetrain;
     private Vision vision; 
+    private DoubleSupplier x;
+    private DoubleSupplier y;
     //variable stores wanted angle
     
 
     //initializes command with wanted angle
-    public Angle2AprilTag(double wantedAngle){
+    public Angle2AprilTag(DoubleSupplier translationX, DoubleSupplier translationY){
 
         //gets singleton instance of drivetrain
         drivetrain = Drivetrain.getInstance();
         vision = Vision.getInstance();
         //sets the wanted angle
+        this.x = translationX;
+        this.y = translationY;
         
         addRequirements(drivetrain, vision);
 
@@ -31,9 +36,15 @@ public class Angle2AprilTag extends Command{
     public void execute(){
         //gets yaw angle tx from the limelight
         double wantedAngle = vision.getFrontCamera().getPicturePosition()[0];
-
+        drivetrain.setDrive(
+            new ChassisSpeeds(
+                x.getAsDouble(),
+                y.getAsDouble(), 
+                drivetrain.calculateChangeRotateController(wantedAngle)
+            ).times(0.15)
+        );
+        
         //uses the yaw angle to rotate to wanted angle
-        drivetrain.calculateChangeRotateController(wantedAngle);
         System.out.println(wantedAngle);
     }
 
@@ -44,6 +55,8 @@ public class Angle2AprilTag extends Command{
 
     @Override
     public boolean isFinished(){
-        return drivetrain.getRotateController().atSetpoint();
+        // return drivetrain.getRotateController().atSetpoint();
+        return false;
+
     }   
 }

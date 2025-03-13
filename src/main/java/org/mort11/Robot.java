@@ -19,10 +19,11 @@ import static org.mort11.config.constants.PhysicalConstants.Drivetrain.ROBOT_MOM
 import static org.mort11.config.constants.PhysicalConstants.Drivetrain.WHEEL_COEFFICIENT_OF_FRICTION;
 
 import org.mort11.commands.actions.InitializeTeleop;
-import org.mort11.commands.actions.Initiate;
+import org.mort11.commands.actions.endeffector.Initiate;
+import org.mort11.commands.actions.endeffector.velocity.Climb;
 import org.mort11.config.Auto;
 import org.mort11.config.IO;
-import org.mort11.subsystems.Drivetrain;
+import org.mort11.subsystems.swerve.Drivetrain;
 
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.commands.PathPlannerAuto;
@@ -71,12 +72,15 @@ public class Robot extends TimedRobot {
     // commands, running already-scheduled commands, removing finished or interrupted commands,
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
+
     CommandScheduler.getInstance().run();
   }
 
   /** This function is called once each time the robot enters Disabled mode. */
   @Override
-  public void disabledInit() {}
+  public void disabledInit() {
+    CommandScheduler.getInstance().schedule(new Climb(false));
+  }
 
   @Override
   public void disabledPeriodic() {
@@ -122,6 +126,8 @@ public class Robot extends TimedRobot {
             drivetrain
         );
     m_autonomousCommand = Auto.getAutonomousCommand();
+
+    CommandScheduler.getInstance().schedule(new Climb(true));
 
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {

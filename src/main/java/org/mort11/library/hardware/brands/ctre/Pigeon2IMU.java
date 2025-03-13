@@ -32,6 +32,26 @@ public class Pigeon2IMU implements IMUIntf {
         return imu.getRate();
     }
 
+    public double getAccelerationX() {
+        return imu.getAccelerationX().getValueAsDouble();
+    }
+
+    public double getAccelerationY() {
+        return imu.getAccelerationY().getValueAsDouble();
+    }
+
+    public double getAccelerationZ() {
+        return imu.getAccelerationZ().getValueAsDouble();
+    }
+
+    public double getAcceleration() {
+        return Math.sqrt(
+            getAccelerationX() * getAccelerationX() +
+            getAccelerationY() * getAccelerationY() +
+            getAccelerationZ() * getAccelerationZ()
+        );
+    }
+
     public void reset () {
         imu.reset();
     }

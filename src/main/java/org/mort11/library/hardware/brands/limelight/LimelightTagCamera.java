@@ -70,8 +70,9 @@ public class LimelightTagCamera implements TagCameraIntf {
         );
     }
 
+    // public Pose2d getTagTranslation
+
     public String getCameraName () {
         return cameraName;
     }
-    
 }

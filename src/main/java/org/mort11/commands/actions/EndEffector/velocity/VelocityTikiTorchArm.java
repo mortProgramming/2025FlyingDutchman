@@ -11,13 +11,17 @@ public class VelocityTikiTorchArm extends Command  {
 
     public VelocityTikiTorchArm(double testingSpeed){
       this.testingSpeed = testingSpeed;
-      tikiTorchArm = tikiTorchArm.getInstance();
+      tikiTorchArm = TikiTorchArm.getInstance();
 
       addRequirements(tikiTorchArm);
     }
 
     @Override
     public void execute() {
+      tikiTorchArm.getPIDController().calculate(
+        tikiTorchArm.encoderToDegrees(), 
+        0
+      );
       tikiTorchArm.setArmMotorPercent(testingSpeed);
     }
 

@@ -18,6 +18,10 @@ public class VelocityAlgaeArm extends Command  {
 
     @Override
     public void execute() {
+      algaeArm.getPIDController().calculate(
+        algaeArm.encoderToDegrees(), 
+        45
+      );
       algaeArm.setArmPercent(testingSpeed);
     }
 

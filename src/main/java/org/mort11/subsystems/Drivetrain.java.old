@@ -8,9 +8,15 @@ import static org.mort11.library.hardware.encoder.EncoderTypeEnum.CANCODER;
 import org.mort11.library.hardware.imu.IMU;
 import static org.mort11.library.hardware.imu.IMUTypeEnum.PIGEON2;
 import static org.mort11.library.hardware.motor.MotorTypeEnum.KRAKEN;
-import static org.mort11.library.subsystems.swerve.ModuleConfigEnum.MK4i_L3;
+import static org.mort11.library.subsystems.swerve.ModuleConfigEnum.MK4iPlus;
 import org.mort11.library.subsystems.swerve.SwerveModule;
 import org.mort11.library.subsystems.swerve.swervedrives.OdometeredSwerveDrive;
+
+import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.config.ModuleConfig;
+import com.pathplanner.lib.config.PIDConstants;
+import com.pathplanner.lib.config.RobotConfig;
+import com.pathplanner.lib.controllers.PPHolonomicDriveController;
 
 import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.geometry.Pose2d;
@@ -18,6 +24,8 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
+import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
+import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -42,6 +50,8 @@ public class Drivetrain extends SubsystemBase {
 
   private ProfiledPIDController xToPosController, yToPosController, rotateToAngleController;
 
+  private SwerveDriveOdometry otherOdometry;
+
   private double fieldOrientationOffset;
 
   private Field2d field;
@@ -62,11 +72,16 @@ public class Drivetrain extends SubsystemBase {
 			ANGLE_KP, ANGLE_KI, ANGLE_KD, ANGLE_CONSTRAINTS
 		);
 
-		rotateToAngleController.enableContinuousInput(POS_KI, POS_KI);
+		rotateToAngleController.enableContinuousInput(-180, 180);
 
 		fieldOrientationOffset = 0;
 
 		field = new Field2d();
+
+    otherOdometry = new SwerveDriveOdometry(
+      kinematics, 
+      Rotation2d.fromDegrees(0), 
+      swerveDrive.getModulePositions());
   }
 
   public void configureSwerve () {
@@ -74,28 +89,28 @@ public class Drivetrain extends SubsystemBase {
       KRAKEN, FRONT_LEFT_DRIVE_MOTOR, 
       KRAKEN, FRONT_LEFT_STEER_MOTOR, 
       CANCODER, FRONT_LEFT_ENCODER, 
-      MK4i_L3
+      MK4iPlus
     );
 
     frontRightModule = new SwerveModule(
       KRAKEN, FRONT_RIGHT_DRIVE_MOTOR, 
       KRAKEN, FRONT_RIGHT_STEER_MOTOR, 
       CANCODER, FRONT_RIGHT_ENCODER, 
-      MK4i_L3
+      MK4iPlus
     );
 
     backLeftModule = new SwerveModule(
       KRAKEN, BACK_LEFT_DRIVE_MOTOR, 
       KRAKEN, BACK_LEFT_STEER_MOTOR, 
       CANCODER, BACK_LEFT_ENCODER, 
-      MK4i_L3
+      MK4iPlus
     );
 
     backRightModule = new SwerveModule(
       KRAKEN, BACK_RIGHT_DRIVE_MOTOR, 
       KRAKEN, BACK_RIGHT_STEER_MOTOR, 
       CANCODER, BACK_RIGHT_ENCODER, 
-      MK4i_L3
+      MK4iPlus
     );
 
     kinematics = new SwerveDriveKinematics(
@@ -124,18 +139,23 @@ public class Drivetrain extends SubsystemBase {
 
   @Override
   public void periodic() {
-    if (IO.isBlue()) {
-			speeds = new ChassisSpeeds(
-				speeds.vyMetersPerSecond, -speeds.vxMetersPerSecond,
+    // if (IO.isBlue()) {
+		// 	speeds = new ChassisSpeeds(
+		// 		speeds.vyMetersPerSecond, -speeds.vxMetersPerSecond,
+		// 		speeds.omegaRadiansPerSecond
+		// 	);
+		// }
+		// else {
+		// 	speeds = new ChassisSpeeds(
+		// 		-speeds.vyMetersPerSecond, speeds.vxMetersPerSecond,
+		// 		speeds.omegaRadiansPerSecond
+		// 	);
+		// }
+
+    speeds = new ChassisSpeeds(
+				speeds.vxMetersPerSecond, speeds.vyMetersPerSecond,
 				speeds.omegaRadiansPerSecond
 			);
-		}
-		else {
-			speeds = new ChassisSpeeds(
-				-speeds.vyMetersPerSecond, speeds.vxMetersPerSecond,
-				speeds.omegaRadiansPerSecond
-			);
-		}
 
 		
 
@@ -143,8 +163,15 @@ public class Drivetrain extends SubsystemBase {
 
     swerveDrive.update();
 
+   otherOdometry.update(getAbsoluteRotation(), swerveDrive.getModulePositions());
+
+   SmartDashboard.putNumber("Other XPose", otherOdometry.getPoseMeters().getX());
+    SmartDashboard.putNumber("Other YPose", otherOdometry.getPoseMeters().getY());
+    SmartDashboard.putNumber("Other Odometry Rot", otherOdometry.getPoseMeters().getRotation().getDegrees());
+
     SmartDashboard.putNumber("XPose", swerveDrive.getPosition().getX());
     SmartDashboard.putNumber("YPose", swerveDrive.getPosition().getY());
+    SmartDashboard.putNumber("Odometry Rot", swerveDrive.getPosition().getRotation().getDegrees());
 
     SmartDashboard.putNumber("Yaw", Math.toDegrees(swerveDrive.getRobotRotations().getZ()));
     SmartDashboard.putNumber("Pitch", Math.toDegrees(swerveDrive.getRobotRotations().getY()));
@@ -164,6 +191,16 @@ public class Drivetrain extends SubsystemBase {
 
 	public void setFieldOffset(double fieldOrientationOffset) {
 		this.fieldOrientationOffset = getAbsoluteRotation().getDegrees() + fieldOrientationOffset;
+	}
+
+  public void setRobotPosition(Pose2d pose) {
+		swerveDrive.resetPosition(pose);
+    otherOdometry.resetPose(pose);
+	}
+
+	public Command setRobotPosition(double x, double y, double rotationDegrees) {
+		return new InstantCommand(() -> swerveDrive.resetPosition(
+			new Pose2d(x, y, Rotation2d.fromDegrees(rotationDegrees))));
 	}
 
 
@@ -208,6 +245,10 @@ public class Drivetrain extends SubsystemBase {
 
 	public Pose2d getPose() {
 		return swerveDrive.getPosition();
+	}
+
+  public Pose2d getOtherPose() {
+		return otherOdometry.getPoseMeters();
 	}
 
 	public ChassisSpeeds getSpeed() {

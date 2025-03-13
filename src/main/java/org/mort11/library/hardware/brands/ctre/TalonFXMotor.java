@@ -64,7 +64,8 @@ public class TalonFXMotor implements MotorIntf {
 
 
     public double getPositionRotations() {
-        return motor.getPosition().getValueAsDouble();
+        // return motor.getPosition().getValueAsDouble();
+        return motor.getPosition().getValueAsDouble() * 2.875;
         // return motor.getRotorPosition().getPosition();
     }
     

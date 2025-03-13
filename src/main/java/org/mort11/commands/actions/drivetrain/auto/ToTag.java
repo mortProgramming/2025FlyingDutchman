@@ -1,6 +1,6 @@
-package org.mort11.commands.actions.drivetrain;
+package org.mort11.commands.actions.drivetrain.auto;
 
-import org.mort11.subsystems.Drivetrain;
+import org.mort11.subsystems.swerve.Drivetrain;
 import org.mort11.subsystems.Vision;
 
 import edu.wpi.first.math.kinematics.ChassisSpeeds;

@@ -1,7 +1,9 @@
 package org.mort11.commands.autons.timed;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import org.mort11.commands.actions.drivetrain.TimedDrive;
+
+import org.mort11.commands.actions.drivetrain.auto.TimedDrive;
+import org.mort11.commands.actions.endeffector.Initiate;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -12,7 +14,10 @@ public class Taxi extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new TimedDrive(5, 0, 0.1, 0, false)
+      new SequentialCommandGroup(
+        new Initiate(7, 4, 180),
+        new TimedDrive(3, -0.5, 0, 0, false)
+      )
     );
   }
 }

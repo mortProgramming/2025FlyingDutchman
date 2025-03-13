@@ -34,16 +34,10 @@ public class AlgaeArm extends SubsystemBase {
 
     @Override
     public void periodic() {
-        if(armSpeed > 0.2) {armSpeed = 0.2;}
         scoopArm.setVoltage(armSpeed * ROBOT_VOLTAGE);
 
         SmartDashboard.putNumber("Algae Encoder Position Degress", encoderToDegrees());
         SmartDashboard.putNumber("AlgaeArmSpeed", getEncoderVelocityDegrees());
-    }
-    
-    public void setPosition(double setpoint) {
-        armSpeed = armPidController.calculate(encoderToDegrees(), setpoint) + 
-        feedforward.calculate(Math.toRadians(encoderToDegrees()), getEncoderVelocityDegrees());
     }
 
     public void setArmPercent(double armSpeed) {
@@ -51,13 +45,13 @@ public class AlgaeArm extends SubsystemBase {
     }
 
 public double encoderToDegrees() {
-    double degrees = getEncoderPosition() * 360;
+    double degrees = getEncoderPosition() * 360 + OFFSET;
 
     if (degrees < ARM_TOP_NEVER_POSITION && degrees > ARM_BOTTOM_NEVER_POSITION) {
         degrees += 360;
     }
 
-    return degrees + OFFSET; 
+    return degrees; 
 }
 
 public double getArmVoltage(){

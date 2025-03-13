@@ -1,8 +1,8 @@
 package org.mort11.config;
 
-import static org.mort11.config.constants.PhysicalConstants.Drivetrain.DRIVEBASE_RADIUS_METERS;
+import static org.mort11.config.constants.PhysicalConstants.Drivetrain.*;
 import static org.mort11.config.constants.PortConstants.Controller.*;
-import org.mort11.subsystems.Drivetrain;
+import org.mort11.subsystems.swerve.Drivetrain;
 
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandPS5Controller;
@@ -13,7 +13,7 @@ public class Inputs {
 	// private static CommandJoystick throttle;
 	public static CommandXboxController testingController;
 
-    public static CommandXboxController compController;
+    public static CommandXboxController operatorController;
 
     public static CommandPS5Controller driveController;
 
@@ -22,7 +22,7 @@ public class Inputs {
     public static void init() {
 		joystick = new CommandJoystick(JOYSTICK);
         testingController = new CommandXboxController(TESTING_CONTROLLER);
-        compController = new CommandXboxController(COMP_CONTROLLER);
+        operatorController = new CommandXboxController(COMP_CONTROLLER);
         driveController = new CommandPS5Controller(DRIVE_CONTROLLER);
 
         joystick.setXChannel(JOYSTICK_X_CHANNEL);
@@ -88,42 +88,16 @@ public class Inputs {
         // return joystick.getThrottle();
     }
 
-    /**
-     * 
-     * @return
-     */
-    public static double getJoystickX() {
-		return modifyAxis1(-joystick.getX(), getThrottle()) * drivetrain.getMaxSpeedMeters();
-	}
-
-    /**
-     * 
-     * @return
-     */
-	public static double getJoystickY() {
-		return modifyAxis1(joystick.getY(), getThrottle()) * drivetrain.getMaxSpeedMeters();
-	}
-
-    /**
-     * 
-     * @return
-     */
-	public static double getJoystickTwist() {
-		return modifyAxisTwist(joystick.getTwist(), getThrottle())
-			    * drivetrain.getMaxSpeedMeters() / 
-                DRIVEBASE_RADIUS_METERS;
-    }
-
     public static double getLeftControllerXSwerve() {
-        return -deadband(driveController.getLeftX(), DEAD_BAND)  * drivetrain.getMaxSpeedMeters();
+        return -deadband(driveController.getLeftX(), DEAD_BAND)  * MAX_SPEED;
     }
 
     public static double getLeftControllerYSwerve() {
-        return deadband(driveController.getLeftY(), DEAD_BAND) * drivetrain.getMaxSpeedMeters();
+        return deadband(driveController.getLeftY(), DEAD_BAND) * MAX_SPEED;
     }
     
     public static double getRightControllerXSwerve(){
-        return deadband(driveController.getRawAxis(2), DEAD_BAND) * drivetrain.getMaxSpeedMeters() / 
+        return deadband(driveController.getRawAxis(2), DEAD_BAND) * MAX_SPEED / 
                 DRIVEBASE_RADIUS_METERS;
     }
 }

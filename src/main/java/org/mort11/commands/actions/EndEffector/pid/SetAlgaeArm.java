@@ -21,6 +21,7 @@ public class SetAlgaeArm extends Command {
 
   @Override
   public void initialize(){
+    algaeArm.getPIDController().reset(algaeArm.encoderToDegrees());
   }
 
   @Override

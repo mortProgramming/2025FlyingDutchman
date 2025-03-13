@@ -2,36 +2,28 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package org.mort11.commands.actions.drivetrain;
+package org.mort11.commands.actions.drivetrain.auto;
 
-import java.util.function.DoubleSupplier;
+import static org.mort11.config.constants.PhysicalConstants.Drivetrain.IMU_TO_ROBOT_FRONT_ANGLE;
+
+import org.mort11.Utility;
 
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj2.command.Command;
-import org.mort11.subsystems.Drivetrain;
+
+import org.mort11.subsystems.swerve.Drivetrain;
 
 /** An example command that uses an example subsystem. */
-public class DriveSetSpeed extends Command {
+public class Rotate extends Command {
   private Drivetrain drivetrain;
 
-  private DoubleSupplier wantedX;
-  private DoubleSupplier wantedY;
-  private DoubleSupplier wantedTheta;
-  private double speedLimit;
+  private double wantedTheta;
 
-  public DriveSetSpeed(
-        DoubleSupplier wantedX, 
-        DoubleSupplier wantedY, 
-        DoubleSupplier wantedTheta, 
-        double speedLimit
-    ) {
+  public Rotate(double wantedTheta) {
     // Use addRequirements() here to declare subsystem dependencies.
     drivetrain =  Drivetrain.getInstance();
 
-    this.wantedX = wantedX;
-    this.wantedY = wantedY;
     this.wantedTheta = wantedTheta;
-    this.speedLimit = speedLimit;
 
     addRequirements(drivetrain);
   }
@@ -44,14 +36,14 @@ public class DriveSetSpeed extends Command {
   @Override
   public void execute() {
     drivetrain.setDrive(
-      ChassisSpeeds.fromFieldRelativeSpeeds(
-        wantedX.getAsDouble(),
-				wantedY.getAsDouble(), 
-        wantedTheta.getAsDouble(),
-        drivetrain.getRotation2d()
-      ).times(speedLimit)
-    );
-  }
+        ChassisSpeeds.fromFieldRelativeSpeeds(
+            0,
+            0, 
+            -Utility.clamp(drivetrain.calculateRotateController(wantedTheta + IMU_TO_ROBOT_FRONT_ANGLE), 6),
+            drivetrain.getRotation2d()
+        )
+      );
+    }
 
   // Called once the command ends or is interrupted.
   @Override
@@ -64,6 +56,8 @@ public class DriveSetSpeed extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return
+      drivetrain.getRotateController().atSetpoint();
+    // return false;
   }
 }

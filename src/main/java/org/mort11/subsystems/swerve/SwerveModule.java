@@ -81,8 +81,12 @@ public class SwerveModule {
     }
 
     public SwerveModulePosition getPosition() {
+        // return new SwerveModulePosition(
+        //     (getDrivePositionRotations() * ROTATIONS_TO_METERS / ODOMETRY_MULTIPLIER), 
+        //     getEncoderPosition()
+        // );
         return new SwerveModulePosition(
-            (getDrivePositionRotations() * ROTATIONS_TO_METERS / ODOMETRY_MULTIPLIER), 
+            (getDrivePositionRotations() * ROTATIONS_TO_METERS * DRIVE_REDUCTION), 
             getEncoderPosition()
         );
     }

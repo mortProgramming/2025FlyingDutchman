@@ -19,45 +19,15 @@ public final class PIDConstants {
 	}
     
     public final class Drivetrain {
-        public static final double AUTON_POS_KP = 0.4;
-		//public static final double AUTON_POS_KP = 45;
+        public static final double AUTON_POS_KP = 1;
 		public static final double AUTON_POS_KI = 0;
 		// public static final double AUTON_POS_KD = 0.001x;
-		public static final double AUTON_POS_KD = 0;
+		public static final double AUTON_POS_KD = 0.16;
 	
-		public static final double AUTON_ROTATION_KP = 0.4;
-		// public static final double AUTON_ROTATION_KP = 0.01;
+		public static final double AUTON_ROTATION_KP = 2;
+		// public static final double AUTON_ROTATION_KP = 100;
 		public static final double AUTON_ROTATION_KI = 0.;
 		public static final double AUTON_ROTATION_KD = 0;
-
-
-		//og
-		// public final static double POS_KP = 3;
-		// public final static double POS_KI = 0;
-		// public final static double POS_KD = 0;
-		// public static final Constraints POS_CONSTRAINTS = new Constraints(2, 4);
-		// public final static double POS_POS_TOLERANCE = 0.05;
-
-		// public final static double ANGLE_KP = 0.07;
-		// public final static double ANGLE_KI = 0.03;
-		// public final static double ANGLE_KD = 0.001;
-		// public static final Constraints ANGLE_CONSTRAINTS = new Constraints(100, 720);
-		// public final static double ANGLE_POS_TOLERANCE = 5;
-		// public final static double ANGLE_VEL_TOLERANCE = 30;
-
-		//non profiled
-		// public final static double POS_KP = 9;
-		// public final static double POS_KI = 0;
-		// public final static double POS_KD = 1.8;
-		// public static final Constraints POS_CONSTRAINTS = new Constraints(2, 4);
-		// public final static double POS_POS_TOLERANCE = 0.01;
-
-		// public final static double ANGLE_KP = 0.18;
-		// public final static double ANGLE_KI = 0.03;
-		// public final static double ANGLE_KD = 0.01;
-		// public static final Constraints ANGLE_CONSTRAINTS = new Constraints(100, 720);
-		// public final static double ANGLE_POS_TOLERANCE = 3;
-		// public final static double ANGLE_VEL_TOLERANCE = 20;
 
 		public final static double POS_KP = 3;
 		public final static double POS_KI = 0;

@@ -113,6 +113,7 @@ public class Drivetrain extends SubsystemBase {
 		swerveDrive.setVelocity(speeds);
 
    odometer.update(getAbsoluteRotation(), swerveDrive.getModulePositions());
+	// odometer.update(getRotation2d(), swerveDrive.getModulePositions());
 
    SmartDashboard.putNumber("XPose", odometer.getPoseMeters().getX());
     SmartDashboard.putNumber("YPose", odometer.getPoseMeters().getY());
@@ -131,10 +132,20 @@ public class Drivetrain extends SubsystemBase {
   }
 
   public void setDrivePathPlanner(ChassisSpeeds speeds) {
-    this.speeds = new ChassisSpeeds(
+    // this.speeds = new ChassisSpeeds(
+	// 			speeds.vxMetersPerSecond, speeds.vyMetersPerSecond,
+	// 			speeds.omegaRadiansPerSecond
+	// 		).times(1.15);
+
+	this.speeds = new ChassisSpeeds(
 				speeds.vxMetersPerSecond, speeds.vyMetersPerSecond,
-				speeds.omegaRadiansPerSecond
-			).times(1.15);
+				-speeds.omegaRadiansPerSecond
+			);
+	// this.speeds = ChassisSpeeds.fromFieldRelativeSpeeds(
+	// 			speeds.vxMetersPerSecond, speeds.vyMetersPerSecond,
+	// 			-speeds.omegaRadiansPerSecond,
+	// 			getRotation2d()
+	// 		);
   }
 
   public void setDriveWithMax(ChassisSpeeds speeds, double max) {
@@ -151,6 +162,11 @@ public class Drivetrain extends SubsystemBase {
 
   	public void setRobotPosition(Pose2d pose) {
     	odometer.resetPose(pose);
+	}
+
+	public void setDriveRobotPosition(Pose2d pose) {
+    	odometer.resetPose(pose);
+		setFieldOffset(pose.getRotation().getDegrees());
 	}
 
 	public void setRobotPosition(double x, double y, double rotationDegrees) {
@@ -195,6 +211,22 @@ public class Drivetrain extends SubsystemBase {
 
 	public Pose2d getPose() {
 		return odometer.getPoseMeters();
+	}
+
+	public Pose2d getPathPose() {
+		// return odometer.getPoseMeters()
+		// return new Pose2d(
+		// 	odometer.getPoseMeters().getTranslation(), 
+		// 	getRotation2d().rotateBy(
+		// 		Rotation2d.fromDegrees(90)
+		// 	)
+		// );
+		return new Pose2d(
+			odometer.getPoseMeters().getTranslation(), 
+			getAbsoluteRotation().rotateBy(
+				Rotation2d.fromDegrees(90)
+			)
+		);
 	}
 
 	public ChassisSpeeds getSpeed() {

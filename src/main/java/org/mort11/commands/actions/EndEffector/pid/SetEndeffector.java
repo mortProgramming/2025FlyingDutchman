@@ -125,7 +125,12 @@ public class SetEndeffector extends SequentialCommandGroup {
     }
 
     public static Command intake() {
-        return new SetEndeffector(ELEVATOR_INTAKE_HEIGHT, TIKI_INTAKE, ALGAE_REST);
+        // return new SetEndeffector(ELEVATOR_INTAKE_HEIGHT, TIKI_INTAKE, ALGAE_REST);
+        return new ParallelCommandGroup(
+            Elevate.intake(),
+            SetAlgaeArm.rest(),
+            SetTikiTorchArm.intake()
+        );
     }
 
     public static Command autoIntake() {

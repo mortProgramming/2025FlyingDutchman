@@ -96,35 +96,6 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     Auto.configure();
-    CommandScheduler.getInstance().schedule(new InitializeTeleop());
-
-    drivetrain = Drivetrain.getInstance();
-
-    AutoBuilder.configure(
-            () -> drivetrain.getPose(),  //get current robot position on the field
-            (Pose2d startPose) -> drivetrain.getSwerveDrive().resetPosition(startPose), //reset odometry to a given pose. WILL ONLY RUN IF AUTON HAS A SET POSE, DOES NOTHING OTHERWISE. 
-            () -> drivetrain.getSpeed(), //get the current ROBOT RELATIVE SPEEDS
-            (ChassisSpeeds robotRelativeOutput) -> drivetrain.setDrive(robotRelativeOutput), //makes the robot move given ROBOT RELATIVE CHASSISSPEEDS
-            new PPHolonomicDriveController(
-                new PIDConstants(0.3, 0, 0),
-                new PIDConstants(0.3, 0, 0)
-            ),
-            new RobotConfig(
-                ROBOT_MASS,
-                ROBOT_MOMENT_OF_INERTIA,
-                new ModuleConfig(
-                    0.0515,
-                    5,
-                    WHEEL_COEFFICIENT_OF_FRICTION,
-                    DCMotor.getKrakenX60(1),
-                    DRIVE_MOTOR_CURRENT_LIMIT,
-                    1
-                ),
-                0.609
-            ),
-            () -> false, //method for checking current alliance. Path flips if alliance is red
-            drivetrain
-        );
     m_autonomousCommand = Auto.getAutonomousCommand();
 
     CommandScheduler.getInstance().schedule(new Climb(true));
@@ -133,8 +104,6 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
     }
-
-    // new PathPlannerAuto("Forward").schedule();
   }
 
   /** This function is called periodically during autonomous. */

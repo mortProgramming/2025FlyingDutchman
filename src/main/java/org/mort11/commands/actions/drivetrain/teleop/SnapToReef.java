@@ -32,14 +32,14 @@ public class SnapToReef extends Command{
 
     @Override
     public void execute(){
-        double currentRotation = drivetrain.getRotation2d().getDegrees() - 30;
+        double currentRotation = drivetrain.getRotation2d().getDegrees();
 
-        if(currentRotation >= -30 && currentRotation < 30) {
-            snapAngle = 0;
+        if(currentRotation >= 60 && currentRotation < 120) {
+            snapAngle = 90;
         }
 
-        else if(currentRotation >= 30 && currentRotation < 90) {
-            snapAngle = 60;
+        else if(currentRotation >= 0 && currentRotation < 60) {
+            snapAngle = 30;
         }
 
         else if(currentRotation >= 90 && currentRotation < 150) {

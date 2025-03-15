@@ -3,7 +3,9 @@ package org.mort11.config;
 import org.mort11.commands.actions.drivetrain.ResetPosition;
 import org.mort11.commands.actions.drivetrain.SetRobotOrientation;
 import org.mort11.commands.actions.drivetrain.auto.DriveToPosition;
+import org.mort11.commands.actions.drivetrain.auto.DriveToReef;
 import org.mort11.commands.actions.drivetrain.auto.Rotate;
+import org.mort11.commands.actions.drivetrain.teleop.Angle2AprilTag;
 import org.mort11.commands.actions.drivetrain.teleop.DriveAtAngle;
 import org.mort11.commands.actions.drivetrain.teleop.DriveSetSpeed;
 import org.mort11.commands.actions.drivetrain.teleop.DriveTagAngled;
@@ -115,69 +117,16 @@ public class IO {
 
     driveController.pov(270).whileTrue(new Climb(false));
 
-    // driveController.button(5).whileTrue(
-    //   new DriveAtAngle(
-    //     Inputs::getLeftControllerXSwerve, 
-    //     Inputs::getLeftControllerYSwerve, 
-    //     () -> (vision.getFieldTagPose(vision.getFrontCamera().getId()).getRotation2d().getDegrees())
-    //   )
-    // );
-    // driveController.button(5).whileTrue(new DriveTagAngled(
-    //   Inputs::getLeftControllerXSwerve, Inputs::getLeftControllerYSwerve, Inputs::getRightControllerXSwerve
+    // driveController.button(5).whileTrue(new SnapToIntake(
+    //   Inputs::getLeftControllerXSwerve, Inputs::getLeftControllerYSwerve
     // ));
-    // driveController.button(6).whileTrue(new Rotate(90));
-
-    driveController.button(5).whileTrue(new SnapToIntake(
-      Inputs::getLeftControllerXSwerve, Inputs::getLeftControllerYSwerve
-    ));
-    driveController.button(6).whileTrue(new SnapToReef(
-      Inputs::getLeftControllerXSwerve, Inputs::getLeftControllerYSwerve
-    ));
-
-    // //rest
-    // operatorController.pov(90).onTrue(new DriveSetSpeed(
-    //   Inputs::getLeftControllerXSwerve, Inputs::getLeftControllerYSwerve, Inputs::getRightControllerXSwerve,
-    //   0.4
+    // driveController.button(6).whileTrue(new SnapToReef(
+    //   Inputs::getLeftControllerXSwerve, Inputs::getLeftControllerYSwerve
     // ));
-    // // l2
-    //   operatorController.pov(270).onTrue(new DriveSetSpeed(
-    //     Inputs::getLeftControllerXSwerve, Inputs::getLeftControllerYSwerve, Inputs::getRightControllerXSwerve,
-    //     0.15
-    //   ));
-    //   //l3
-    //   operatorController.pov(180).onTrue(new DriveSetSpeed(
-    //     Inputs::getLeftControllerXSwerve, Inputs::getLeftControllerYSwerve, Inputs::getRightControllerXSwerve,
-    //     0.15
-    //   ));
-    //   //l4
-    //   operatorController.pov(0).onTrue(new DriveSetSpeed(
-    //     Inputs::getLeftControllerXSwerve, Inputs::getLeftControllerYSwerve, Inputs::getRightControllerXSwerve,
-    //     0.15
-    //   ));
-    //   //low algae
-    //   operatorController.back().onTrue(new DriveSetSpeed(
-    //     Inputs::getLeftControllerXSwerve, Inputs::getLeftControllerYSwerve, Inputs::getRightControllerXSwerve,
-    //     0.15
-    //   ));
 
-    //   //high algae
-    //   operatorController.start().onTrue(new DriveSetSpeed(
-    //     Inputs::getLeftControllerXSwerve, Inputs::getLeftControllerYSwerve, Inputs::getRightControllerXSwerve,
-    //     0.15
-    //   ));
-    //   //floor
-    //   operatorController.a().onTrue(new DriveSetSpeed(
-    //     Inputs::getLeftControllerXSwerve, Inputs::getLeftControllerYSwerve, Inputs::getRightControllerXSwerve,
-    //     0.15
-    //   ));
-    //   //intake
-    //   operatorController.b().onTrue(new DriveSetSpeed(
-    //     Inputs::getLeftControllerXSwerve, Inputs::getLeftControllerYSwerve, Inputs::getRightControllerXSwerve,
-    //     0.15
-    //   ));
-
-      // joystick.trigger().whileTrue(new Angle2AprilTag(0));
-      // driveController.axisGreaterThan(3, 0.7).whileTrue(new ToTag(0));
+    // driveController.button(5).whileTrue(new Angle2AprilTag(Inputs::getLeftControllerXSwerve, Inputs::getLeftControllerYSwerve));
+    driveController.button(5).whileTrue(new Angle2AprilTag(0));
+    driveController.button(6).whileTrue(new DriveToReef(false));
 
 
     //TODO Xbox Controller Commands

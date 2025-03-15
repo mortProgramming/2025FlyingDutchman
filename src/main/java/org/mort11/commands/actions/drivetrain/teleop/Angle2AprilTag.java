@@ -1,9 +1,11 @@
 package org.mort11.commands.actions.drivetrain.teleop;
 
 import org.mort11.subsystems.swerve.Drivetrain;
-import java.util.function.DoubleSupplier;
-import org.mort11.subsystems.Vision;
+import org.mort11.subsystems.LimelightHelpers;
 
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj2.command.Command;
 
@@ -11,40 +13,38 @@ public class Angle2AprilTag extends Command{
 
     //declare private drivetrain instance
     private Drivetrain drivetrain;
-    private Vision vision; 
-    private DoubleSupplier x;
-    private DoubleSupplier y;
+    // private NetworkTable limelightTable;
     //variable stores wanted angle
     
 
     //initializes command with wanted angle
-    public Angle2AprilTag(DoubleSupplier translationX, DoubleSupplier translationY){
+    public Angle2AprilTag(double wantedAngle){
 
         //gets singleton instance of drivetrain
         drivetrain = Drivetrain.getInstance();
-        vision = Vision.getInstance();
+        // limelightTable = NetworkTableInstance.getDefault().getTable("limelight");
         //sets the wanted angle
-        this.x = translationX;
-        this.y = translationY;
         
-        addRequirements(drivetrain, vision);
-
+        addRequirements(drivetrain);
     }
 
     //executes the command
     @Override
     public void execute(){
         //gets yaw angle tx from the limelight
-        double wantedAngle = vision.getFrontCamera().getPicturePosition()[0];
-        drivetrain.setDrive(
-            new ChassisSpeeds(
-                x.getAsDouble(),
-                y.getAsDouble(), 
-                drivetrain.calculateChangeRotateController(wantedAngle)
-            ).times(0.15)
-        );
-        
+        //double wantedAngle = limelightTable.getEntry("tx").getDouble(0);
+        double wantedAngle = LimelightHelpers.getTX("limelight-front");
+
         //uses the yaw angle to rotate to wanted angle
+
+        drivetrain.setDrive(
+            ChassisSpeeds.fromFieldRelativeSpeeds(
+                0,
+                0,
+                drivetrain.calculateChangeRotateController(wantedAngle),
+                drivetrain.getRotation2d()
+            )
+        );
         System.out.println(wantedAngle);
     }
 
@@ -55,8 +55,6 @@ public class Angle2AprilTag extends Command{
 
     @Override
     public boolean isFinished(){
-        // return drivetrain.getRotateController().atSetpoint();
         return false;
-
     }   
 }

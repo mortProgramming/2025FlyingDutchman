@@ -40,12 +40,12 @@ public class DriveTagAngled extends Command{
 
         double wantedSpeed = 0;
 
-        if(vision.getFrontCamera().getId() == -1) {
+        if(vision.getId() == -1) {
             wantedSpeed = theta.getAsDouble();
         }   else {
             drivetrain.calculateRotateController(
                 vision.getFieldTagPose(
-                    vision.getFrontCamera().getId()
+                    vision.getId()
                 ).getRotation().getDegrees()
             );
         }

@@ -80,7 +80,6 @@ public class Auto {
             () -> false,
         drivetrain
         );
-		System.out.println ("hi");
 	}
 	
 	public static void addAutoOptions () {

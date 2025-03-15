@@ -69,7 +69,7 @@ public final class PhysicalConstants {
 		public static final double MAXIMUM_INCH_CHANGE = 4;
 		public static final double GEAR_RATIO = 16;
 
-		public static final double ELEVATOR_OFFSET = 26.8;
+		public static final double ELEVATOR_OFFSET = 32.4;
 		public static final double ELEVATOR_REST_HEIGHT = 5.5;
 		public static final double ELEVATOR_START_HEIGHT = 2;
 

@@ -29,15 +29,11 @@ public class Vision extends SubsystemBase {
     private static Vision vision;
 
 	private static HttpCamera feed;
-
-	private AprilTagFieldLayout tagLayout;
 	private AprilTagFieldLayout cameraFieldLayout;
 
 	private NetworkTable cameraTable;
 
     private Vision() {
-
-		tagLayout = new AprilTagFieldLayout(APRIL_TAGS, FIELD_LENGTH, FIELD_WIDTH);
 		cameraFieldLayout = AprilTagFieldLayout.loadField(AprilTagFields.k2025ReefscapeAndyMark);
 
 		cameraTable = NetworkTableInstance.getDefault().getTable(FRONT_CAMERA_NAME);
@@ -94,7 +90,7 @@ public class Vision extends SubsystemBase {
 		
 		poseNums = cameraTable.getEntry("botpose_orb_wpiblue").getDoubleArray(new double[6]);
 
-		return new Pose2d(poseNums[0], poseNums[2], new Rotation2d(Math.toRadians(poseNums[4])));
+		return new Pose2d(poseNums[0], poseNums[1], new Rotation2d(Math.toRadians(poseNums[4])));
 	}
 
     public Pose3d get3dRobotPosition() {
@@ -135,7 +131,7 @@ public class Vision extends SubsystemBase {
 	// }
 
 	public Pose2d getFieldTagPose(int tagID) {
-		return tagLayout.getTagPose(tagID).get().toPose2d();
+		return cameraFieldLayout.getTagPose(tagID).get().toPose2d();
 	}
 
 	// public TagCamera getFrontCamera() {

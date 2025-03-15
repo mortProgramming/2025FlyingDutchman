@@ -214,18 +214,8 @@ public class Drivetrain extends SubsystemBase {
 	}
 
 	public Pose2d getPathPose() {
-		// return odometer.getPoseMeters()
-		// return new Pose2d(
-		// 	odometer.getPoseMeters().getTranslation(), 
-		// 	getRotation2d().rotateBy(
-		// 		Rotation2d.fromDegrees(90)
-		// 	)
-		// );
-		return new Pose2d(
-			odometer.getPoseMeters().getTranslation(), 
-			getAbsoluteRotation().rotateBy(
-				Rotation2d.fromDegrees(90)
-			)
+		return
+			odometer.getPoseMeters().rotateBy(Rotation2d.fromDegrees(90)
 		);
 	}
 

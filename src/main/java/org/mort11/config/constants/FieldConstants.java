@@ -8,8 +8,8 @@ import edu.wpi.first.math.geometry.Rotation3d;
 import edu.wpi.first.math.geometry.Translation3d;
 
 public final class FieldConstants {
-    public static final double FIELD_LENGTH = 3; //16.541
-    public static final double FIELD_WIDTH = 3; //8.211
+    public static final double FIELD_LENGTH = 16.541;
+    public static final double FIELD_WIDTH = 8.211;
 
     public final class Reef {
         public static final double REEF_CORNER_30_DEG_X = 1;

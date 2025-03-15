@@ -33,14 +33,14 @@ public final class PIDConstants {
 		public final static double POS_KI = 0;
 		public final static double POS_KD = 0;
 		public static final Constraints POS_CONSTRAINTS = new Constraints(1, 3);
-		public final static double POS_POS_TOLERANCE = 0.015;
+		public final static double POS_POS_TOLERANCE = 0.03;
 
 		public final static double ANGLE_KP = 0.1;
 		public final static double ANGLE_KI = 0;
 		public final static double ANGLE_KD = 0;
 		public static final Constraints ANGLE_CONSTRAINTS = new Constraints(100, 180);
 		// public static final Constraints ANGLE_CONSTRAINTS = new Constraints(50, 1000);
-		public final static double ANGLE_POS_TOLERANCE = 3;
+		public final static double ANGLE_POS_TOLERANCE = 5;
 		public final static double ANGLE_VEL_TOLERANCE = 20;
 
 		public final static double TRANSLATIONAL_SLEW_LIMIT = 5;

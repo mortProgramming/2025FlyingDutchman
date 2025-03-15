@@ -4,6 +4,8 @@ import org.mort11.commands.actions.drivetrain.ResetPosition;
 import org.mort11.commands.actions.drivetrain.SetRobotOrientation;
 import org.mort11.commands.actions.drivetrain.auto.DriveToPosition;
 import org.mort11.commands.actions.drivetrain.auto.DriveToReef;
+import org.mort11.commands.actions.drivetrain.auto.MoveToReef;
+import org.mort11.commands.actions.drivetrain.auto.DriveNearToReef;
 import org.mort11.commands.actions.drivetrain.auto.Rotate;
 import org.mort11.commands.actions.drivetrain.teleop.Angle2AprilTag;
 import org.mort11.commands.actions.drivetrain.teleop.DriveAtAngle;
@@ -125,8 +127,14 @@ public class IO {
     // ));
 
     // driveController.button(5).whileTrue(new Angle2AprilTag(Inputs::getLeftControllerXSwerve, Inputs::getLeftControllerYSwerve));
-    driveController.button(5).whileTrue(new Angle2AprilTag(0));
-    driveController.button(6).whileTrue(new DriveToReef(false));
+    //driveController.button(5).whileTrue(new Angle2AprilTag(0));
+    // driveController.button(6).whileTrue(new DriveNearToReef(true));
+    // driveController.button(5).whileTrue(new DriveNearToReef(false));
+    driveController.button(6).whileTrue(new DriveToReef(true));
+    driveController.button(5).whileTrue(new DriveToReef(false));
+    // driveController.button(6).whileTrue(new MoveToReef(true));
+    // driveController.button(5).whileTrue(new MoveToReef(false));
+    driveController.button(10).whileTrue(new SnapToReef(Inputs::getLeftControllerXSwerve, Inputs::getLeftControllerYSwerve));
 
 
     //TODO Xbox Controller Commands

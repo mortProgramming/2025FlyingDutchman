@@ -45,7 +45,7 @@ public class TikiTorchArm extends SubsystemBase {
         // }
 
         public void setArmMotorPercent(double percent){
-            this.armSpeed = percent + feedforward.calculate(Math.toRadians(encoderToDegrees()), getEncoderVelocityDegrees());
+            this.armSpeed = -percent - feedforward.calculate(Math.toRadians(encoderToDegrees()), getEncoderVelocityDegrees());
             //this.armSpeed = percent;
 
         }
@@ -65,7 +65,7 @@ public class TikiTorchArm extends SubsystemBase {
     }
 
     public double getEncoderPosition(){
-        return tikiTorchArmMotor.getAbsoluteValueEncoderPosition();
+        return 1 - tikiTorchArmMotor.getAbsoluteValueEncoderPosition();
     }
     
     public double getEncoderVelocityDegrees() {

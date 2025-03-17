@@ -41,7 +41,7 @@ public class AlgaeArm extends SubsystemBase {
     }
 
     public void setArmPercent(double armSpeed) {
-       this.armSpeed = armSpeed + feedforward.calculate(Math.toRadians(encoderToDegrees()), getEncoderVelocityDegrees());
+       this.armSpeed = -armSpeed - feedforward.calculate(Math.toRadians(encoderToDegrees()), getEncoderVelocityDegrees());
     }
 
 public double encoderToDegrees() {
@@ -59,7 +59,7 @@ public double getArmVoltage(){
 }
 
 public double getEncoderPosition(){
-    return scoopArm.getAbsoluteValueEncoderPosition();
+    return 1 - scoopArm.getAbsoluteValueEncoderPosition();
 }
 
 public double getEncoderVelocityDegrees() {

@@ -8,7 +8,7 @@ public final class PhysicalConstants {
 
 	public final static class AlgaeArm {
 
-		public static final double OFFSET = -261;
+		public static final double OFFSET = -197;
 
 		public static final double ALGAE_REST = 95;
 
@@ -89,7 +89,7 @@ public final class PhysicalConstants {
 
 	public final static class TikiTorchArm {
 
-		public static final double OFFSET = 295;
+		public static final double OFFSET = 284;
 
 		public static final double TIKI_REST = 59.3;
 

@@ -4,6 +4,8 @@
 
 package org.mort11.commands.actions.drivetrain.auto;
 
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.trajectory.TrapezoidProfile.Constraints;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -13,11 +15,13 @@ import static org.mort11.config.constants.PIDConstants.Drivetrain.POS_CONSTRAINT
 import static org.mort11.config.constants.PhysicalConstants.Drivetrain.IMU_TO_ROBOT_FRONT_ANGLE;
 
 import org.mort11.Utility;
+import org.mort11.subsystems.Vision;
 import org.mort11.subsystems.swerve.Drivetrain;
 
 /** An example command that uses an example subsystem. */
 public class DriveToPosition extends Command {
   private Drivetrain drivetrain;
+  private Vision vision;
 
   private double wantedX;
   private double wantedY;
@@ -28,6 +32,7 @@ public class DriveToPosition extends Command {
   public DriveToPosition(double wantedX, double wantedY, double wantedTheta) {
     // Use addRequirements() here to declare subsystem dependencies.
     drivetrain =  Drivetrain.getInstance();
+    vision = Vision.getInstance();
 
     this.wantedX = wantedX;
     this.wantedY = wantedY;
@@ -91,10 +96,23 @@ public class DriveToPosition extends Command {
         ChassisSpeeds.fromFieldRelativeSpeeds(
           drivetrain.getYController().calculate(drivetrain.getPose().getY(), wantedY),
           -drivetrain.getXController().calculate(drivetrain.getPose().getX(), wantedX), 
-          -Utility.clamp(drivetrain.calculateRotateController(wantedTheta + IMU_TO_ROBOT_FRONT_ANGLE), 3),
+          // -Utility.clamp(drivetrain.calculateRotateController(wantedTheta + IMU_TO_ROBOT_FRONT_ANGLE), 3),
+          -drivetrain.calculateRotateController(wantedTheta + IMU_TO_ROBOT_FRONT_ANGLE),
           drivetrain.getRotation2d()
         )
       );
+
+    //   if(
+    //     Math.sqrt(
+    //         vision.getRelativeRobotPosition().getTranslation().getX() * vision.getRelativeRobotPosition().getTranslation().getX() + 
+    //         vision.getRelativeRobotPosition().getTranslation().getY() * vision.getRelativeRobotPosition().getTranslation().getY()
+    //     )
+    //     < 3 &&
+    //     vision.hasTag()
+
+    // ) {
+    //     drivetrain.setRobotPosition(new Pose2d(vision.getRobotPosition().getMeasureX(), vision.getRobotPosition().getMeasureY(), vision.getRobotPosition().getRotation().rotateBy(Rotation2d.fromDegrees(180))));
+    // }
   }
 
   // Called once the command ends or is interrupted.

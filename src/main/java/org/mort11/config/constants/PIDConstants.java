@@ -52,7 +52,7 @@ public final class PIDConstants {
   public final class Elevator {
 		public static final double POS_KP = 0.08;
 		public static final double POS_KI = 0;
-		public static final double POS_KD = 0;
+		public static final double POS_KD = 0.003;
 		// public static final Constraints POS_CONSTRAINTS = new Constraints(75, 300);
 		public static final Constraints POS_CONSTRAINTS = new Constraints(70, 300);
 

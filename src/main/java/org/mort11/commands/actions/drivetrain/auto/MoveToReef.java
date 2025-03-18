@@ -73,8 +73,8 @@ public class MoveToReef extends Command {
         tagPose = vision.getFieldTagPose(vision.getId());
     }
 
-    // Pose2d modifiedTagPose = tagPose.plus(new Transform2d(isRight ? 0.25 : -0.175, 0, Rotation2d.fromDegrees(0)));
-    Pose2d modifiedTagPose = tagPose;
+    // Pose2d reefPose = tagPose.plus(new Transform2d(isRight ? 0.25 : -0.175, 0, Rotation2d.fromDegrees(0)));
+    Pose2d reefPose = tagPose;
 
 
     if(
@@ -91,11 +91,11 @@ public class MoveToReef extends Command {
 
     drivetrain.setDrive(
         ChassisSpeeds.fromFieldRelativeSpeeds(
-            // drivetrain.getXController().calculate(drivetrain.getPose().getX(), modifiedTagPose.getX() - 1), 
-            // drivetrain.getYController().calculate(drivetrain.getPose().getY(), modifiedTagPose.getY()),
+            // drivetrain.getXController().calculate(drivetrain.getPose().getX(), reefPose.getX() - 1), 
+            // drivetrain.getYController().calculate(drivetrain.getPose().getY(), reefPose.getY()),
             0,
-            drivetrain.getXController().calculate(drivetrain.getPose().getX(), modifiedTagPose.getX() - 1), 
-            // -Utility.clamp(drivetrain.calculateRotateController(modifiedTagPose.getRotation().getDegrees() + IMU_TO_ROBOT_FRONT_ANGLE - 180), 3),
+            drivetrain.getXController().calculate(drivetrain.getPose().getX(), reefPose.getX()), 
+            // -Utility.clamp(drivetrain.calculateRotateController(reefPose.getRotation().getDegrees() + IMU_TO_ROBOT_FRONT_ANGLE - 180), 3),
             0,
             drivetrain.getRotation2d()
         )
@@ -113,12 +113,6 @@ public class MoveToReef extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-      // return drivetrain.getXController().atSetpoint() 
-      // && drivetrain.getYController().atSetpoint() 
-      // && drivetrain.getRotateController().atSetpoint();
-        // return drivetrain.getXController().getPositionError() < 0.03 &&
-        // drivetrain.getYController().getPositionError() < 0.03 &&
-        // drivetrain.getRotateController().getPositionError() < 3;
-        return false;
+    return false;
   }
 }

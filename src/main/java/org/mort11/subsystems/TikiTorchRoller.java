@@ -26,9 +26,9 @@ public class TikiTorchRoller extends SubsystemBase {
         tikiTorchRollerMotor.setVoltage(rollerSpeed * ROBOT_VOLTAGE);
     }
     
-        public void setRollerSpeed(double rollerSpeed){
-            this.rollerSpeed = rollerSpeed;
-        }
+    public void setRollerSpeed(double rollerSpeed){
+        this.rollerSpeed = -rollerSpeed;
+    }
 
     public Motor getRollerMotor(){
         return tikiTorchRollerMotor;

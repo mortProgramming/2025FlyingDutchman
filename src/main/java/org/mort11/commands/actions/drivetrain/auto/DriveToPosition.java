@@ -39,6 +39,20 @@ public class DriveToPosition extends Command {
     addRequirements(drivetrain);
   }
 
+  public DriveToPosition(double wantedX, double wantedY, double wantedTheta, double maxSpeed) {
+    // Use addRequirements() here to declare subsystem dependencies.
+    drivetrain =  Drivetrain.getInstance();
+
+    this.wantedX = wantedX;
+    this.wantedY = wantedY;
+    this.wantedTheta = wantedTheta;
+
+    this.maxSpeed = maxSpeed;
+    this.maxRotate = 100;
+
+    addRequirements(drivetrain);
+  }
+
   public DriveToPosition(double wantedX, double wantedY, double wantedTheta, double maxSpeed, double maxRotate) {
     // Use addRequirements() here to declare subsystem dependencies.
     drivetrain =  Drivetrain.getInstance();
@@ -47,8 +61,8 @@ public class DriveToPosition extends Command {
     this.wantedY = wantedY;
     this.wantedTheta = wantedTheta;
 
-    this.maxSpeed = 1;
-    this.maxRotate = 100;
+    this.maxSpeed = maxSpeed;
+    this.maxRotate = maxRotate;
 
     addRequirements(drivetrain);
   }

@@ -23,8 +23,8 @@ public final class PhysicalConstants {
 	} 
 
 	public final static class AlgaeRoller {
-		public static final double INTAKE_SPEED = 0.6;
-		public static final double OUTAKE_SPEED = -0.8;
+		public static final double INTAKE_SPEED = -0.6;
+		public static final double OUTAKE_SPEED = 0.8;
 	} 
 
 	public final static class Drivetrain {
@@ -66,47 +66,74 @@ public final class PhysicalConstants {
 
 		//3 is elevator stage count
 		public static final double ROTATIONS_TO_INCHES = 5.642 * 3;
-		public static final double MAXIMUM_INCH_CHANGE = 4;
+		public static final double MAXIMUM_INCH_CHANGE = 5; //The maximum inch displacement for every 0.02 sec cycle
 		public static final double GEAR_RATIO = 16;
 
-		public static final double ELEVATOR_OFFSET = 32.4;
-		public static final double ELEVATOR_REST_HEIGHT = 5.5;
+		public static final double ELEVATOR_OFFSET = 16.5;
+		public static final double ELEVATOR_REST_HEIGHT = 5.6;
 		public static final double ELEVATOR_START_HEIGHT = 2;
 
 		public static final double ELEVATOR_L1_HEIGHT = 13;
-		public static final double ELEVATOR_L2_HEIGHT = 30.5;
-		public static final double ELEVATOR_L3_HEIGHT = 46;
-		public static final double ELEVATOR_L4_HEIGHT = 72;
-		public static final double ELEVATOR_INTAKE_HEIGHT = 20.5;
+		public static final double ELEVATOR_L2_HEIGHT = 27.6;
+		public static final double ELEVATOR_L3_HEIGHT = 43.6;
+		public static final double ELEVATOR_L4_HEIGHT = 68;
+		public static final double ELEVATOR_INTAKE_HEIGHT = 17.4;
 		public static final double ELEVATOR_AUTO_INTAKE_HEIGHT = 19;
 
-		public static final double ELEVATOR_LOW_ALGAE_HEIGHT = 13.5;
-		public static final double ELEVATOR_HIGH_ALGAE_HEIGHT = 29;
+		public static final double ELEVATOR_LOW_ALGAE_HEIGHT = 4.4;
+		public static final double ELEVATOR_HIGH_ALGAE_HEIGHT = 22.3;
 		public static final double ELEVATOR_PROCESSOR_HEIGHT = 0;
 		public static final double ELEVATOR_BARGE_HEIGHT = 72;
 		public static final double ELEVATOR_FLOOR_HEIGHT = 0;
+
+		//everything is in inches
+
+		//unused for offset until fixed
+		// public static final double ELEVATOR_TO_ZERO = 0;
+
+		// public static final double ELEVATOR_OFFSET = -15.4;
+		// public static final double ELEVATOR_REST_HEIGHT = 5.5;
+		// public static final double ELEVATOR_START_HEIGHT = 2;
+
+		// public static final double ELEVATOR_L1_HEIGHT = 13;
+		// public static final double ELEVATOR_L2_HEIGHT = 30.5; // Elevator height at L2
+		// public static final double ELEVATOR_L3_HEIGHT = 46; // Elevator height at L3
+		// public static final double ELEVATOR_L4_HEIGHT = 72; // Elevator height at L4
+		// public static final double ELEVATOR_INTAKE_HEIGHT = 20.5; // Elevator Intake height in teleop
+		// public static final double ELEVATOR_AUTO_INTAKE_HEIGHT = 19; // Elevator height to intake in auton
+
+		// public static final double ELEVATOR_LOW_ALGAE_HEIGHT = 13.5; // Elevator height at low algae height
+		// public static final double ELEVATOR_HIGH_ALGAE_HEIGHT = 29; // Elevator height at high algae height 
+		// public static final double ELEVATOR_PROCESSOR_HEIGHT = 0; // Elevator height at processor height for algae
+		// public static final double ELEVATOR_BARGE_HEIGHT = 72; // Elevator height at barge height for algae
+		// public static final double ELEVATOR_FLOOR_HEIGHT = 0; // Elevator height at floor intake for algae
 	}
 
 	public final static class TikiTorchArm {
 
-		public static final double OFFSET = 284;
+		public static final double OFFSET = 284; //The amount in degrees to ensure that the algae arm reads 0 when flat
 
-		public static final double TIKI_REST = 59.3;
+		public static final double TIKI_REST = 59.3; //The rest position of the tiki torch in degrees
 
-		public static final double ARM_TOP_NEVER_POSITION = 45;
-		public static final double ARM_BOTTOM_NEVER_POSITION = 0;
+		public static final double ARM_TOP_NEVER_POSITION = 45; // Position in degrees where the tiki torch cannot go to (top)
+		public static final double ARM_BOTTOM_NEVER_POSITION = 0; //Position in degeres where the tiki torch cannot go to (bottom)
 
-		public static final double TIKI_L234_SCORE = -50;
-		public static final double TIKI_AUTO_L234_SCORE = -60;
-		public static final double TIKI_L1_SCORE = 0;
+		public static final double TIKI_L234_SCORE = -58; // Position in degrees where the tiki torch goes to score at L2 3 and 4
+		public static final double TIKI_AUTO_L234_SCORE = -58; // Position in degrees where the tiki torch goes to score at L2 3 and 4
+		public static final double TIKI_L1_SCORE = 0; // Position in degrees where the tiki torch goes to score L1
 
-		public static final double TIKI_INTAKE = 46;
+		public static final double TIKI_INTAKE = 46; // Position in degrees where the tiki torch goes to intake
 
-		public static final double TIKI_ALGAE_CLEAR = -89;
+		public static final double TIKI_ALGAE_CLEAR = -89; // Position the tiki torch goes to when having an algae
 	}
 
 	public final static class TikiTorchRoller {
 		public static final double INTAKE_SPEED = -1;
 		public static final double OUTAKE_SPEED = 1;
+	}
+
+	public static final class Vision {
+		public static final double CAMERA_LEFT_OFFSET = Units.inchesToMeters(-2.5); //measurement from camera to left side of reef pipe
+		public static final double CAMERA_RIGHT_OFFSET = Units.inchesToMeters(11.5); //measurement from camera to right side of reef pipe
 	}
 }

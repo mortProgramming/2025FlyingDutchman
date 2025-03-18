@@ -12,6 +12,8 @@ import edu.wpi.first.wpilibj2.command.Command;
 import static org.mort11.config.constants.PIDConstants.Drivetrain.ANGLE_CONSTRAINTS;
 import static org.mort11.config.constants.PIDConstants.Drivetrain.POS_CONSTRAINTS;
 import static org.mort11.config.constants.PhysicalConstants.Drivetrain.IMU_TO_ROBOT_FRONT_ANGLE;
+import static org.mort11.config.constants.PhysicalConstants.Vision.CAMERA_RIGHT_OFFSET;
+import static org.mort11.config.constants.PhysicalConstants.Vision.CAMERA_LEFT_OFFSET;
 
 import org.mort11.Utility;
 import org.mort11.config.constants.PortConstants;
@@ -26,8 +28,6 @@ public class DriveNearToReef extends Command {
   private Timer timer;
 
   private boolean isRight;
-  private boolean isAtGoal;
-  private boolean hasStartedMoving;
 
   public DriveNearToReef(boolean isRight) {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -37,8 +37,6 @@ public class DriveNearToReef extends Command {
     timer = new Timer();
 
     this.isRight = isRight;
-    isAtGoal = false;
-    hasStartedMoving = false;
 
     addRequirements(drivetrain, vision);
   }
@@ -55,7 +53,7 @@ public class DriveNearToReef extends Command {
     // drivetrain.getRotateController().reset(vision.getPicturePosition()[0]);
 
     drivetrain.getYController().calculate(vision.getRelativeRobotPosition().getY(), -0.5);
-    drivetrain.getXController().calculate(vision.getRelativeRobotPosition().getX(), isRight ? 0.2 : -0.175);
+    drivetrain.getXController().calculate(vision.getRelativeRobotPosition().getX(), isRight ? CAMERA_RIGHT_OFFSET : CAMERA_LEFT_OFFSET);
     drivetrain.getRotateController().calculate(vision.getPicturePosition()[0], 0);
 
     drivetrain.getXController().setConstraints(new Constraints(2, POS_CONSTRAINTS.maxAcceleration));
@@ -68,7 +66,7 @@ public class DriveNearToReef extends Command {
   public void execute() {
     System.out.println(vision.getRelativeRobotPosition().toString());
 
-    double xValue = isRight ? 0.2 : -0.175;
+    double xValue = isRight ? CAMERA_RIGHT_OFFSET : CAMERA_LEFT_OFFSET;
 
     if(vision.hasTag()) {
 

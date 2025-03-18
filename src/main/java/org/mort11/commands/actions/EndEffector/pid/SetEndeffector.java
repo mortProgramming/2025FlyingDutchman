@@ -23,8 +23,26 @@ public class SetEndeffector extends SequentialCommandGroup {
         elevator = Elevator.getInstance();
         tikiTorchArm = TikiTorchArm.getInstance();
 
-            addCommands(
+        addCommands(
             
+            // new SequentialCommandGroup(
+            //     new ParallelCommandGroup(
+            //         SetTikiTorchArm.algaeClear(),
+            //         SetAlgaeArm.rest()
+            //     ).withTimeout(0.5),
+
+            //     new ParallelCommandGroup(
+            //         new Elevate(elevatorPos),
+            //         new SequentialCommandGroup(
+            //             new WaitCommand(0.75),
+            //             new ParallelCommandGroup(
+            //                 new SetTikiTorchArm(tikiArmPos),
+            //                 new SetAlgaeArm(algaeArmPos)
+            //             )
+            //         )
+            //     )
+            // )
+
             new SequentialCommandGroup(
                 new ParallelCommandGroup(
                     SetTikiTorchArm.algaeClear(),
@@ -33,13 +51,14 @@ public class SetEndeffector extends SequentialCommandGroup {
 
                 new ParallelCommandGroup(
                     new Elevate(elevatorPos),
-
                     new SequentialCommandGroup(
-
-                        new WaitCommand(0.75),
                         new ParallelCommandGroup(
-                            new SetTikiTorchArm(tikiArmPos),
-                            new SetAlgaeArm(algaeArmPos)
+                            SetTikiTorchArm.algaeClear(),
+                            SetAlgaeArm.rest()
+                        ).withTimeout(0.75),
+                        new ParallelCommandGroup(
+                            new SetAlgaeArm(algaeArmPos),
+                            new SetTikiTorchArm(tikiArmPos)
                         )
                     )
                 )

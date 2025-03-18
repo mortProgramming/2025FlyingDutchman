@@ -96,6 +96,7 @@ public class Auto {
         // autoChooser.addOption("Blue Right One Piece", new RightOneBlue());
         // autoChooser.addOption("Red Right One Piece", new RightOneRed());
 		autoChooser.addOption("Blue Right Two Piece", new RightTwoBlue());
+        // autoChooser.addOption("Blue Right Three Piece", new RightThreeBlue());
         autoChooser.addOption("Red Right Two Piece", new RightTwoRed());
         // autoChooser.addOption("Red Left Two Piece", new LeftTwoRed());
         autoChooser.addOption("Center One Piece", new CenterOnePiece());

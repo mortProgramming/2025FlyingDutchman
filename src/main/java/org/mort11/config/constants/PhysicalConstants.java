@@ -133,7 +133,7 @@ public final class PhysicalConstants {
 	}
 
 	public static final class Vision {
-		public static final double CAMERA_LEFT_OFFSET = Units.inchesToMeters(-3.5); //measurement from camera to left side of reef pipe
-		public static final double CAMERA_RIGHT_OFFSET = Units.inchesToMeters(9.5); //measurement from camera to right side of reef pipe
+		public static final double CAMERA_LEFT_OFFSET = Units.inchesToMeters(-2); //measurement from camera to left side of reef pipe
+		public static final double CAMERA_RIGHT_OFFSET = Units.inchesToMeters(13); //measurement from camera to right side of reef pipe
 	}
 }

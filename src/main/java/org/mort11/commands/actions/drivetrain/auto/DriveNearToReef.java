@@ -58,7 +58,7 @@ public class DriveNearToReef extends Command {
 
     drivetrain.getXController().setConstraints(new Constraints(2, POS_CONSTRAINTS.maxAcceleration));
     drivetrain.getYController().setConstraints(new Constraints(2, POS_CONSTRAINTS.maxAcceleration));
-    drivetrain.getRotateController().setConstraints(new Constraints(40, ANGLE_CONSTRAINTS.maxAcceleration));
+    drivetrain.getRotateController().setConstraints(new Constraints(100, ANGLE_CONSTRAINTS.maxAcceleration));
   }
 
   // Called every time the scheduler runs while the command is scheduled.

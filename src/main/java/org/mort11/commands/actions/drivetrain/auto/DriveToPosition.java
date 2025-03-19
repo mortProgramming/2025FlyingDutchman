@@ -41,12 +41,13 @@ public class DriveToPosition extends Command {
     this.maxSpeed = 1;
     this.maxRotate = 100;
 
-    addRequirements(drivetrain);
+    addRequirements(drivetrain, vision);
   }
 
   public DriveToPosition(double wantedX, double wantedY, double wantedTheta, double maxSpeed) {
     // Use addRequirements() here to declare subsystem dependencies.
     drivetrain =  Drivetrain.getInstance();
+    vision = Vision.getInstance();
 
     this.wantedX = wantedX;
     this.wantedY = wantedY;
@@ -55,12 +56,13 @@ public class DriveToPosition extends Command {
     this.maxSpeed = maxSpeed;
     this.maxRotate = 100;
 
-    addRequirements(drivetrain);
+    addRequirements(drivetrain, vision);
   }
 
   public DriveToPosition(double wantedX, double wantedY, double wantedTheta, double maxSpeed, double maxRotate) {
     // Use addRequirements() here to declare subsystem dependencies.
     drivetrain =  Drivetrain.getInstance();
+    vision = Vision.getInstance();
 
     this.wantedX = wantedX;
     this.wantedY = wantedY;
@@ -69,7 +71,7 @@ public class DriveToPosition extends Command {
     this.maxSpeed = maxSpeed;
     this.maxRotate = maxRotate;
 
-    addRequirements(drivetrain);
+    addRequirements(drivetrain, vision);
   }
 
   // Called when the command is initially scheduled.
@@ -102,17 +104,11 @@ public class DriveToPosition extends Command {
         )
       );
 
-    //   if(
-    //     Math.sqrt(
-    //         vision.getRelativeRobotPosition().getTranslation().getX() * vision.getRelativeRobotPosition().getTranslation().getX() + 
-    //         vision.getRelativeRobotPosition().getTranslation().getY() * vision.getRelativeRobotPosition().getTranslation().getY()
-    //     )
-    //     < 3 &&
-    //     vision.hasTag()
-
-    // ) {
-    //     drivetrain.setRobotPosition(new Pose2d(vision.getRobotPosition().getMeasureX(), vision.getRobotPosition().getMeasureY(), vision.getRobotPosition().getRotation().rotateBy(Rotation2d.fromDegrees(180))));
-    // }
+      if(
+        vision.hasTag()
+    ) {
+        drivetrain.setRobotCameraPosition(vision.getRobotPosition());
+    }
   }
 
   // Called once the command ends or is interrupted.

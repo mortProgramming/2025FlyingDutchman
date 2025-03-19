@@ -164,6 +164,27 @@ public class Drivetrain extends SubsystemBase {
     	odometer.resetPose(pose);
 	}
 
+	public void setRobotCameraPosition(Pose2d pose) {
+    	if(
+        	Math.sqrt(
+				Math.pow(pose.getX() -  odometer.getPoseMeters().getX(), 2) + 
+            	Math.pow(pose.getY() -  odometer.getPoseMeters().getY(), 2)
+        	)
+        	< 0.5 &&
+
+			Math.sqrt(
+				Math.pow(getChassisSpeeds().vxMetersPerSecond, 2) + 
+				Math.pow(getChassisSpeeds().vyMetersPerSecond, 2)
+			)
+			< 1 &&
+
+			getChassisSpeeds().omegaRadiansPerSecond 
+			< 3
+    	) {
+        	odometer.resetPose(new Pose2d(pose.getMeasureX(), pose.getMeasureY(), pose.getRotation().rotateBy(Rotation2d.fromDegrees(180))));
+    	}
+	}
+
 	public void setDriveRobotPosition(Pose2d pose) {
     	odometer.resetPose(pose);
 		setFieldOffset(pose.getRotation().getDegrees());

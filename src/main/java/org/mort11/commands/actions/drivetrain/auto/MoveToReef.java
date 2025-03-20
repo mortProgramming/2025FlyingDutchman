@@ -29,6 +29,8 @@ public class MoveToReef extends Command {
   private Drivetrain drivetrain;
   private Vision vision;
 
+  private Timer timer;
+
   private boolean isRight;
 
   private Pose2d tagPose, reefPose;
@@ -37,6 +39,8 @@ public class MoveToReef extends Command {
     // Use addRequirements() here to declare subsystem dependencies.
     drivetrain =  Drivetrain.getInstance();
     vision = Vision.getInstance();
+
+    timer = new Timer();
 
     this.isRight = isRight;
 
@@ -49,17 +53,22 @@ public class MoveToReef extends Command {
   @Override
   public void initialize() {
 
+    timer.reset();
+    timer.start();
+
     drivetrain.getXController().reset(drivetrain.getPose().getX());
 	  drivetrain.getYController().reset(drivetrain.getPose().getY());
 	  drivetrain.getRotateController().reset(drivetrain.getRotation2d().getDegrees());
 
-    drivetrain.getYController().calculate(vision.getRelativeRobotPosition().getY(), -0.5);
-    drivetrain.getXController().calculate(vision.getRelativeRobotPosition().getX(), isRight ? CAMERA_RIGHT_OFFSET : CAMERA_LEFT_OFFSET);
-    drivetrain.getRotateController().calculate(vision.getPicturePosition()[0], 0);
+    // drivetrain.getYController().calculate(vision.getRelativeRobotPosition().getY(), -0.5);
+    // drivetrain.getXController().calculate(vision.getRelativeRobotPosition().getX(), isRight ? CAMERA_RIGHT_OFFSET : CAMERA_LEFT_OFFSET);
+    // drivetrain.getRotateController().calculate(vision.getPicturePosition()[0], 0);
 
     drivetrain.getXController().setConstraints(new Constraints(0.5, POS_CONSTRAINTS.maxAcceleration));
     drivetrain.getYController().setConstraints(new Constraints(0.5, POS_CONSTRAINTS.maxAcceleration));
     drivetrain.getRotateController().setConstraints(new Constraints(40, ANGLE_CONSTRAINTS.maxAcceleration));
+
+    tagPose = new Pose2d(0, 0, new Rotation2d());
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -74,16 +83,16 @@ public class MoveToReef extends Command {
         tagPose = vision.getFieldTagPose(vision.getId());
     }
 
-    // reefPose = new Pose2d(
-    //   (tagPose.getX() + 
-    //     sideValue * Math.cos(tagPose.getRotation().getRadians())
-    //   ),
-    //   (tagPose.getY() + 
-    //     sideValue * Math.sin(tagPose.getRotation().getRadians())
-    //   ), 
-    //   Rotation2d.fromDegrees(tagPose.getRotation().getDegrees() - 180)
-    // );
-    Pose2d reefPose = tagPose;
+    reefPose = new Pose2d(
+      (tagPose.getX() + 
+        sideValue * Math.cos(tagPose.getRotation().getRadians())
+      ),
+      (tagPose.getY() + 
+        sideValue * Math.sin(tagPose.getRotation().getRadians())
+      ), 
+      Rotation2d.fromDegrees(tagPose.getRotation().getDegrees() - 180)
+    );
+    // reefPose = tagPose;
 
 
     if(
@@ -116,6 +125,10 @@ public class MoveToReef extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+    //  return drivetrain.getXController().atSetpoint() 
+    //   && drivetrain.getYController().atSetpoint() 
+    //   && drivetrain.getRotateController().atSetpoint();
+    //   && timer.get() > 0.25;
     return false;
   }
 }

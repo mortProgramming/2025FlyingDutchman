@@ -104,9 +104,7 @@ public class DriveToPosition extends Command {
         )
       );
 
-      if(
-        vision.hasTag()
-    ) {
+      if(vision.hasTag()) {
         drivetrain.setRobotCameraPosition(vision.getRobotPosition());
     }
   }

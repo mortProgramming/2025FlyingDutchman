@@ -69,7 +69,7 @@ public final class PhysicalConstants {
 		public static final double MAXIMUM_INCH_CHANGE = 5; //The maximum inch displacement for every 0.02 sec cycle
 		public static final double GEAR_RATIO = 16;
 
-		public static final double ELEVATOR_OFFSET = -29.95;
+		public static final double ELEVATOR_OFFSET = -18.45;
 		public static final double ELEVATOR_REST_HEIGHT = 5.6;
 		public static final double ELEVATOR_START_HEIGHT = 2;
 
@@ -122,7 +122,7 @@ public final class PhysicalConstants {
 		public static final double TIKI_AUTO_L234_SCORE = -58; // Position in degrees where the tiki torch goes to score at L2 3 and 4
 		public static final double TIKI_L1_SCORE = 0; // Position in degrees where the tiki torch goes to score L1
 
-		public static final double TIKI_INTAKE = 46; // Position in degrees where the tiki torch goes to intake
+		public static final double TIKI_INTAKE = 40; // Position in degrees where the tiki torch goes to intake
 
 		public static final double TIKI_ALGAE_CLEAR = -89; // Position the tiki torch goes to when having an algae
 	}
@@ -135,6 +135,6 @@ public final class PhysicalConstants {
 
 	public static final class Vision {
 		public static final double CAMERA_LEFT_OFFSET = Units.inchesToMeters(-1); //measurement from camera to left side of reef pipe
-		public static final double CAMERA_RIGHT_OFFSET = Units.inchesToMeters(13); //measurement from camera to right side of reef pipe
+		public static final double CAMERA_RIGHT_OFFSET = Units.inchesToMeters(12); //measurement from camera to right side of reef pipe
 	}
 }

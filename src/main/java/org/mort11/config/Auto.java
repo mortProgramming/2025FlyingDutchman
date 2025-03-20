@@ -96,15 +96,24 @@ public class Auto {
 
         // autoChooser.addOption("Blue Right One Piece", new RightOneBlue());
         // autoChooser.addOption("Red Right One Piece", new RightOneRed());
-		autoChooser.addOption("Blue Right Two Piece", new RightTwoBlue());
-        autoChooser.addOption("Blue Left Two Piece", new LeftTwoBlue());
-        // autoChooser.addOption("Blue Right Three Piece", new RightThreeBlue());
-        autoChooser.addOption("Red Right Two Piece", new RightTwoRed());
-        autoChooser.addOption("Red Left Two Piece", new LeftTwoRed());
+
+		autoChooser.addOption("Blue Right 2 Piece", new RightTwoBlue());
+        autoChooser.addOption("Blue Left 2 Piece", new LeftTwoBlue());
+        autoChooser.addOption("Red Right 2 Piece", new RightTwoRed());
+        autoChooser.addOption("Red Left 2 Piece", new LeftTwoRed());
+
+        autoChooser.addOption("Blue Right 2.5 Piece", new RightTwoHalfBlue());
+        autoChooser.addOption("Blue Left 2.5 Piece", new LeftTwoHalfBlue());
+        autoChooser.addOption("Red Right 2.5 Piece", new RightTwoHalfRed());
+        autoChooser.addOption("Red Left 2.5 Piece", new LeftTwoHalfRed());
+
+        // autoChooser.addOption("Blue Right 3 Piece", new RightThreeBlue());
+
         autoChooser.addOption("Right Center One Piece", new CenterOnePiece(true));
         autoChooser.addOption("Left Center One Piece", new CenterOnePiece(false));
 
-        autoChooser.addOption("Path?", new PathPlannerAuto("Forward"));
+        //pathplanner
+        // autoChooser.addOption("Path?", new PathPlannerAuto("Forward"));
     
 		SmartDashboard.putData("Auton Chooser", autoChooser);
 	}

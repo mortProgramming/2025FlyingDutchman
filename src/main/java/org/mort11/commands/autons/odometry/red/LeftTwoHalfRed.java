@@ -16,9 +16,9 @@ import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 
-public class LeftTwoRed extends SequentialCommandGroup {
+public class LeftTwoHalfRed extends SequentialCommandGroup {
     
-    public LeftTwoRed() {
+    public LeftTwoHalfRed() {
     addCommands(
         new SequentialCommandGroup(
             new ResetPosition(7.122, 7.657, 90, true),
@@ -26,28 +26,22 @@ public class LeftTwoRed extends SequentialCommandGroup {
             //piece one
             new ParallelCommandGroup(
                 new SequentialCommandGroup(
-                    new DriveToPosition(5.25, 5.5, 60, 2).withTimeout(2),
+                    new DriveToPosition(5.1, 5.5, 60, 2).withTimeout(2),
                     new DriveToReef(true)
                 ),
                 new SequentialCommandGroup(
                     Elevate.rest().withTimeout(0.5),
-                    new WaitCommand(0.5),
-                    SetEndeffector.l4().withTimeout(2),
-                    SetTikiTorchArm.score().withTimeout(0.5)
+                    SetEndeffector.slowL4().withTimeout(2.5)
                 )
             ),
-            new ParallelCommandGroup(
-                SetTikiTorchArm.score().withTimeout(0.5),
-                VelocityTikiTorchRoller.outtake().withTimeout(0.5)
-            ),
+            VelocityTikiTorchRoller.outtake().withTimeout(0.5),
 
             //intake one
             new ParallelCommandGroup(
                 new TimedDrive(0.5, 0, 1.5, 0, true),
                 new SequentialCommandGroup(
                     new WaitCommand(0.25),
-                    // Elevate.intake().withTimeout(0.5)
-                    SetEndeffector.intake().withTimeout(0.5)
+                    Elevate.intake().withTimeout(0.5)
                 )
             ),
             new ParallelCommandGroup(

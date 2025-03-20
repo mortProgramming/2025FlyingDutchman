@@ -133,7 +133,7 @@ public class IO {
     driveController.button(6).whileTrue(new DriveToReef(true));
     driveController.button(5).whileTrue(new DriveToReef(false));
     // driveController.button(6).whileTrue(new MoveToReef(true));
-    // driveController.button(5).whileTrue(new MoveToReef(false));
+    // driveController.button(9).whileTrue(new MoveToReef(false));
     driveController.button(10).whileTrue(new SnapToReef(Inputs::getLeftControllerXSwerve, Inputs::getLeftControllerYSwerve));
 
 

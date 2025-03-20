@@ -27,7 +27,7 @@ public class RightTwoRed extends SequentialCommandGroup {
             new ParallelCommandGroup(
                 new SequentialCommandGroup(
                     // new DriveToPosition(5.3, 2.3, -60, 2).withTimeout(1.5),
-                    new DriveToPosition(5.50, 2.50, -60, 2).withTimeout(2),
+                    new DriveToPosition(5.45, 2.50, -60, 2).withTimeout(2),
                     new DriveToReef(false)
                 ),
                 new SequentialCommandGroup(
@@ -42,7 +42,8 @@ public class RightTwoRed extends SequentialCommandGroup {
                 new TimedDrive(0.5, 0, -1.5, 0, true),
                 new SequentialCommandGroup(
                     new WaitCommand(0.25),
-                    Elevate.intake().withTimeout(0.5)
+                    // Elevate.intake().withTimeout(0.5)
+                    SetEndeffector.intake().withTimeout(0.5)
                 )
             ),
             new ParallelCommandGroup(

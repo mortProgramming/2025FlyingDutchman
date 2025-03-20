@@ -13,6 +13,8 @@ import edu.wpi.first.wpilibj2.command.Command;
 import static org.mort11.config.constants.PIDConstants.Drivetrain.ANGLE_CONSTRAINTS;
 import static org.mort11.config.constants.PIDConstants.Drivetrain.POS_CONSTRAINTS;
 import static org.mort11.config.constants.PhysicalConstants.Drivetrain.IMU_TO_ROBOT_FRONT_ANGLE;
+import static org.mort11.config.constants.PhysicalConstants.Vision.CAMERA_RIGHT_OFFSET;
+import static org.mort11.config.constants.PhysicalConstants.Vision.CAMERA_LEFT_OFFSET;
 
 import org.mort11.Utility;
 import org.mort11.config.constants.PortConstants;
@@ -29,7 +31,7 @@ public class MoveToReef extends Command {
 
   private boolean isRight;
 
-  private Pose2d tagPose;
+  private Pose2d tagPose, reefPose;
 
   public MoveToReef(boolean isRight) {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -47,13 +49,12 @@ public class MoveToReef extends Command {
   @Override
   public void initialize() {
 
-    drivetrain.getXController().reset(vision.getRelativeRobotPosition().getX());
-	  drivetrain.getYController().reset(vision.getRelativeRobotPosition().getY());
-	  drivetrain.getRotateController().reset(vision.getRelativeRobotPosition().getRotation().getDegrees());
-    // drivetrain.getRotateController().reset(vision.getPicturePosition()[0]);
+    drivetrain.getXController().reset(drivetrain.getPose().getX());
+	  drivetrain.getYController().reset(drivetrain.getPose().getY());
+	  drivetrain.getRotateController().reset(drivetrain.getRotation2d().getDegrees());
 
     drivetrain.getYController().calculate(vision.getRelativeRobotPosition().getY(), -0.5);
-    drivetrain.getXController().calculate(vision.getRelativeRobotPosition().getX(), isRight ? 0.25 : -0.175);
+    drivetrain.getXController().calculate(vision.getRelativeRobotPosition().getX(), isRight ? CAMERA_RIGHT_OFFSET : CAMERA_LEFT_OFFSET);
     drivetrain.getRotateController().calculate(vision.getPicturePosition()[0], 0);
 
     drivetrain.getXController().setConstraints(new Constraints(0.5, POS_CONSTRAINTS.maxAcceleration));
@@ -67,26 +68,28 @@ public class MoveToReef extends Command {
     System.out.println(vision.getRobotPosition().toString());
     System.out.println(tagPose.toString());
 
-    double xValue = isRight ? 0.25 : -0.175;
+    double sideValue = isRight ? CAMERA_RIGHT_OFFSET : CAMERA_LEFT_OFFSET;
 
     if (vision.hasTag()) {
         tagPose = vision.getFieldTagPose(vision.getId());
     }
 
-    // Pose2d reefPose = tagPose.plus(new Transform2d(isRight ? 0.25 : -0.175, 0, Rotation2d.fromDegrees(0)));
+    // reefPose = new Pose2d(
+    //   (tagPose.getX() + 
+    //     sideValue * Math.cos(tagPose.getRotation().getRadians())
+    //   ),
+    //   (tagPose.getY() + 
+    //     sideValue * Math.sin(tagPose.getRotation().getRadians())
+    //   ), 
+    //   Rotation2d.fromDegrees(tagPose.getRotation().getDegrees() - 180)
+    // );
     Pose2d reefPose = tagPose;
 
 
     if(
-        Math.sqrt(
-            vision.getRelativeRobotPosition().getTranslation().getX() * vision.getRelativeRobotPosition().getTranslation().getX() + 
-            vision.getRelativeRobotPosition().getTranslation().getY() * vision.getRelativeRobotPosition().getTranslation().getY()
-        )
-        < 3
+        vision.hasTag()
     ) {
-            
-        // drivetrain.setRobotPosition(vision.getRobotPosition());
-        drivetrain.setRobotPosition(new Pose2d(vision.getRobotPosition().getMeasureX(), vision.getRobotPosition().getMeasureY(), vision.getRobotPosition().getRotation().rotateBy(Rotation2d.fromDegrees(180))));
+        drivetrain.setRobotCameraPosition(vision.getRobotPosition());
     }
 
     drivetrain.setDrive(

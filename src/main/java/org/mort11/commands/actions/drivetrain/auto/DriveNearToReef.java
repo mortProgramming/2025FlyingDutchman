@@ -52,7 +52,7 @@ public class DriveNearToReef extends Command {
 	  drivetrain.getRotateController().reset(vision.getRelativeRobotPosition().getRotation().getDegrees());
     // drivetrain.getRotateController().reset(vision.getPicturePosition()[0]);
 
-    drivetrain.getYController().calculate(vision.getRelativeRobotPosition().getY(), -0.5);
+    drivetrain.getYController().calculate(vision.getRelativeRobotPosition().getY(), -0.3);
     drivetrain.getXController().calculate(vision.getRelativeRobotPosition().getX(), isRight ? CAMERA_RIGHT_OFFSET : CAMERA_LEFT_OFFSET);
     drivetrain.getRotateController().calculate(vision.getPicturePosition()[0], 0);
 
@@ -72,7 +72,7 @@ public class DriveNearToReef extends Command {
 
       drivetrain.setDrive(
         new ChassisSpeeds(
-          -Utility.clamp(drivetrain.getYController().calculate(vision.getRelativeRobotPosition().getY(), -0.5), 2),
+          -Utility.clamp(drivetrain.getYController().calculate(vision.getRelativeRobotPosition().getY(), -0.3), 2),
           Utility.clamp(drivetrain.getXController().calculate(vision.getRelativeRobotPosition().getX(), xValue), 2),
           // -Utility.clamp(drivetrain.getRotateController().calculate(vision.getPicturePosition()[0], 0), 6)
           Utility.clamp(drivetrain.getRotateController().calculate(vision.getRelativeRobotPosition().getRotation().getDegrees(), 0), 6)
@@ -115,7 +115,7 @@ public class DriveNearToReef extends Command {
 
         // return isAtGoal;
 
-        return timer.get() > 1 &&
+        return timer.get() > 1.3 &&
         drivetrain.getSpeed().vxMetersPerSecond < 0.01 &&
         drivetrain.getSpeed().vxMetersPerSecond < 0.01 &&
         drivetrain.getSpeed().omegaRadiansPerSecond < 0.3;

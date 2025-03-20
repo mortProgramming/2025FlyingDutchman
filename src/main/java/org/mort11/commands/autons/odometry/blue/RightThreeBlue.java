@@ -24,18 +24,30 @@ public class RightThreeBlue extends SequentialCommandGroup {
             new ResetPosition(7.122, 0.554, 270, true),
 
             //piece one
-            new DriveToPosition(5.3, 2.3, -60, 2).withTimeout(1.5),
-            new DriveToReef(false),
-            SetEndeffector.l4().withTimeout(2),
+            new ParallelCommandGroup(
+                new SequentialCommandGroup(
+                    // new DriveToPosition(5.3, 2.3, -60, 2).withTimeout(1.5),
+                    new DriveToPosition(5.5, 2.6, -60, 2).withTimeout(2),
+                    new DriveToReef(false)
+                ),
+                new SequentialCommandGroup(
+                    Elevate.rest().withTimeout(0.5),
+                    SetEndeffector.slowL4().withTimeout(2.5)
+                )
+            ),
             VelocityTikiTorchRoller.outtake().withTimeout(0.5),
 
-
             //intake one
-            new TimedDrive(0.5, 0, -1.5, 0, true),
-            SetEndeffector.intake().withTimeout(2),
+            new ParallelCommandGroup(
+                new TimedDrive(0.5, 0, -1.5, 0, true),
+                new SequentialCommandGroup(
+                    new WaitCommand(0.25),
+                    Elevate.intake().withTimeout(0.5)
+                )
+            ),
             new ParallelCommandGroup(
                 new DriveToPosition(1.317, 1.1, 60, 2, 50),
-                //0.895
+                SetEndeffector.intake(),
                 VelocityTikiTorchRoller.intake()
             ).withTimeout(2.5),
             VelocityTikiTorchRoller.intake().withTimeout(0.75),
@@ -46,12 +58,16 @@ public class RightThreeBlue extends SequentialCommandGroup {
                 VelocityTikiTorchRoller.intake().withTimeout(0.3)
             ),
             new ParallelCommandGroup(
-                new DriveToPosition(3.406, 2.462, -120).withTimeout(2.5),
-                VelocityTikiTorchRoller.intake().withTimeout(1),
-                SetTikiTorchArm.algaeClear().withTimeout(1)
+                new SequentialCommandGroup(
+                    new DriveToPosition(3.406, 2.462, -120).withTimeout(2.5),
+                    new DriveToReef(true)
+                ),
+                new SequentialCommandGroup(
+                    SetTikiTorchArm.algaeClear().withTimeout(1),
+                    SetEndeffector.slowL4().withTimeout(2.5)
+                ),
+                VelocityTikiTorchRoller.intake().withTimeout(1)
             ),
-            new DriveToReef(true),
-            SetEndeffector.l4().withTimeout(2),
             VelocityTikiTorchRoller.outtake().withTimeout(0.5),
 
             //intake take two

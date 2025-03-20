@@ -34,7 +34,7 @@ public class VelocityTikiTorchRoller extends Command {
 
   @Override
   public void end(boolean interrupted){
-    tikiTorchRoller.setRollerSpeed(0);
+    tikiTorchRoller.setRollerSpeed(REST_SPEED);
   }
 
   public static Command intake() {
@@ -45,8 +45,8 @@ public class VelocityTikiTorchRoller extends Command {
     return new VelocityTikiTorchRoller(OUTAKE_SPEED);
   }
 
-  public static Command nothing(){
-    return new VelocityTikiTorchRoller(0);
+  public static Command rest(){
+    return new VelocityTikiTorchRoller(REST_SPEED);
   }
 
 }

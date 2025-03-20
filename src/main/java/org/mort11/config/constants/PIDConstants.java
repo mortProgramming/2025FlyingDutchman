@@ -55,6 +55,7 @@ public final class PIDConstants {
 		public static final double POS_KD = 0.003;
 		// public static final Constraints POS_CONSTRAINTS = new Constraints(75, 300);
 		public static final Constraints POS_CONSTRAINTS = new Constraints(70, 300);
+		public static final double SLOW_MAX_ELEVATOR_SPEED = 40;
 
 		// public static final double POS_POS_TOLERANCE = 0.05;
 		// public static final double POS_VEL_TOLERANCE = 0;

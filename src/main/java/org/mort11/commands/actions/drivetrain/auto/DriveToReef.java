@@ -10,8 +10,9 @@ public class DriveToReef extends SequentialCommandGroup {
         if(isRight) {
             addCommands(
                 new SequentialCommandGroup(
+                    // new DriveNearToReef(true),
+                    // new TimedDrive(0.75, -0.5, 0, 0)
                     new DriveNearToReef(true),
-                    // new SnapToReef(() -> 0, () -> 0).withTimeout(0.5),
                     new TimedDrive(0.5, -1, 0, 0)
                 )
             );
@@ -20,8 +21,9 @@ public class DriveToReef extends SequentialCommandGroup {
         else {
             addCommands(
                 new SequentialCommandGroup(
+                    // new DriveNearToReef(false),
+                    // new TimedDrive(0.75, -0.5, 0, 0)
                     new DriveNearToReef(false),
-                    // new SnapToReef(() -> 0, () -> 0).withTimeout(0.5),
                     new TimedDrive(0.5, -1, 0, 0)
                 )
             );

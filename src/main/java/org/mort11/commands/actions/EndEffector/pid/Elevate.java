@@ -2,16 +2,29 @@ package org.mort11.commands.actions.endeffector.pid;
 
 import static org.mort11.config.constants.PhysicalConstants.Elevator.*;
 import org.mort11.subsystems.Elevator;
+import static org.mort11.config.constants.PIDConstants.Elevator.POS_CONSTRAINTS;
 
+import edu.wpi.first.math.trajectory.TrapezoidProfile.Constraints;
 import edu.wpi.first.wpilibj2.command.Command;
 
 public class Elevate extends Command {
     private Elevator elevator;
     private double targetPosition;
 
+    private double elevatorSpeed;
+
     public Elevate(double targetPosition) {
         this.elevator = Elevator.getInstance();
         this.targetPosition = targetPosition;
+        this.elevatorSpeed = POS_CONSTRAINTS.maxVelocity;
+
+        addRequirements(elevator);
+    }
+
+    public Elevate(double targetPosition, double elevatorSpeed) {
+        this.elevator = Elevator.getInstance();
+        this.targetPosition = targetPosition;
+        this.elevatorSpeed = elevatorSpeed;
 
         addRequirements(elevator);
     }
@@ -19,6 +32,7 @@ public class Elevate extends Command {
     @Override
     public void initialize() {
         elevator.getPIDController().reset(elevator.getElevatorPositionInches());
+        elevator.getPIDController().setConstraints(new Constraints(elevatorSpeed, POS_CONSTRAINTS.maxAcceleration));
     }
 
     @Override

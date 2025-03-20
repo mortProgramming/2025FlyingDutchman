@@ -35,7 +35,7 @@ public class Elevator extends SubsystemBase {
 
         motorSpeed = 0;
         elevatorPosition = 0;
-        rotationsCompleted = -ELEVATOR_OFFSET / ROTATIONS_TO_INCHES;
+        rotationsCompleted = ELEVATOR_OFFSET / ROTATIONS_TO_INCHES;
     }
 
     @Override

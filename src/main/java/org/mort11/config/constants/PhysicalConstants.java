@@ -69,7 +69,7 @@ public final class PhysicalConstants {
 		public static final double MAXIMUM_INCH_CHANGE = 5; //The maximum inch displacement for every 0.02 sec cycle
 		public static final double GEAR_RATIO = 16;
 
-		public static final double ELEVATOR_OFFSET = 16.5;
+		public static final double ELEVATOR_OFFSET = -29.95;
 		public static final double ELEVATOR_REST_HEIGHT = 5.6;
 		public static final double ELEVATOR_START_HEIGHT = 2;
 
@@ -130,10 +130,11 @@ public final class PhysicalConstants {
 	public final static class TikiTorchRoller {
 		public static final double INTAKE_SPEED = -1;
 		public static final double OUTAKE_SPEED = 1;
+		public static final double REST_SPEED = -0.1;
 	}
 
 	public static final class Vision {
-		public static final double CAMERA_LEFT_OFFSET = Units.inchesToMeters(-2); //measurement from camera to left side of reef pipe
+		public static final double CAMERA_LEFT_OFFSET = Units.inchesToMeters(-1); //measurement from camera to left side of reef pipe
 		public static final double CAMERA_RIGHT_OFFSET = Units.inchesToMeters(13); //measurement from camera to right side of reef pipe
 	}
 }

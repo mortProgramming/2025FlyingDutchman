@@ -140,10 +140,10 @@ public class IO {
     //TODO Xbox Controller Commands
 
       operatorController.axisGreaterThan(3, 0.25).whileTrue(VelocityTikiTorchRoller.intake());
-      operatorController.axisGreaterThan(3, 0.25).whileFalse(VelocityTikiTorchRoller.nothing());
+      operatorController.axisGreaterThan(3, 0.25).whileFalse(VelocityTikiTorchRoller.rest());
 
       operatorController.rightBumper().whileTrue(VelocityTikiTorchRoller.outtake());
-      operatorController.rightBumper().whileFalse(VelocityTikiTorchRoller.nothing());
+      operatorController.rightBumper().whileFalse(VelocityTikiTorchRoller.rest());
 
       operatorController.leftBumper().whileTrue(VelocityAlgaeRoller.intake());
       operatorController.leftBumper().whileFalse(VelocityAlgaeRoller.nothing());
@@ -192,10 +192,10 @@ public class IO {
       testingController.pov(270).toggleOnTrue(new Climb(false));
 
       testingController.axisGreaterThan(3, 0.25).whileTrue(VelocityTikiTorchRoller.outtake());
-      testingController.axisGreaterThan(3, 0.25).whileFalse(VelocityTikiTorchRoller.nothing());
+      testingController.axisGreaterThan(3, 0.25).whileFalse(VelocityTikiTorchRoller.rest());
 
       testingController.rightBumper().whileTrue(VelocityTikiTorchRoller.intake());
-      testingController.rightBumper().whileFalse(VelocityTikiTorchRoller.nothing());
+      testingController.rightBumper().whileFalse(VelocityTikiTorchRoller.rest());
 
       testingController.leftBumper().whileTrue(VelocityAlgaeRoller.intake());
       testingController.leftBumper().whileFalse(VelocityAlgaeRoller.nothing());

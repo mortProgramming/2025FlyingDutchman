@@ -26,11 +26,12 @@ import org.mort11.commands.autons.timed.Taxi;
 import org.mort11.library.subsystems.swerve.PathPlanner;
 import org.mort11.subsystems.swerve.Drivetrain;
 import org.mort11.commands.autons.odometry.Calibrate;
+import org.mort11.commands.autons.odometry.CenterOnePiece;
 import org.mort11.commands.autons.odometry.blue.*;
 import org.mort11.commands.autons.odometry.red.*;
 import org.mort11.commands.autons.pathplanned.BasicCommands;
 // import org.mort11.commands.autons.timed.CenterOnePiece;
-import org.mort11.commands.autons.odometry.CenterOnePiece;
+import org.mort11.commands.autons.odometry.OldCenterOnePiece;
 
 import com.pathplanner.lib.path.PathPlannerPath;
 import com.pathplanner.lib.util.DriveFeedforwards;
@@ -96,17 +97,16 @@ public class Auto {
         // autoChooser.addOption("Blue Right One Piece", new RightOneBlue());
         // autoChooser.addOption("Red Right One Piece", new RightOneRed());
 		autoChooser.addOption("Blue Right Two Piece", new RightTwoBlue());
-        autoChooser.addOption("Blue Right Three Piece", new RightThreeBlue());
+        autoChooser.addOption("Blue Left Two Piece", new LeftTwoBlue());
+        // autoChooser.addOption("Blue Right Three Piece", new RightThreeBlue());
         autoChooser.addOption("Red Right Two Piece", new RightTwoRed());
-        // autoChooser.addOption("Red Left Two Piece", new LeftTwoRed());
-        autoChooser.addOption("Center One Piece", new CenterOnePiece());
+        autoChooser.addOption("Red Left Two Piece", new LeftTwoRed());
+        autoChooser.addOption("Right Center One Piece", new CenterOnePiece(true));
+        autoChooser.addOption("Left Center One Piece", new CenterOnePiece(false));
 
         autoChooser.addOption("Path?", new PathPlannerAuto("Forward"));
-
-        // autoChooser.addOption("Calibrate", new Calibrate());
     
 		SmartDashboard.putData("Auton Chooser", autoChooser);
-		
 	}
 
 	public static Command getPlanned(String plan) {
@@ -118,5 +118,4 @@ public class Auto {
 	public static Command getAutonomousCommand () {
 		return autoChooser.getSelected();
 	}
-
 }

@@ -33,6 +33,9 @@ public class Elevator extends SubsystemBase {
 
         encoder = new Encoder(THROUGHBORE, ENCODER);
 
+        lowerLimitSwitch = new DigitalInput(LOWER_LIMIT_SWITCH);
+        upperLimitSwitch = new DigitalInput(UPPER_LIMIT_SWITCH);
+
         controller = new ProfiledPIDController(POS_KP, POS_KI, POS_KD, POS_CONSTRAINTS);
         feedforward = new ElevatorFeedforward(POS_KS, POS_KG, POS_KV, POS_KA);
 
@@ -47,27 +50,30 @@ public class Elevator extends SubsystemBase {
 
         elevatorPosition = calculateElevatorPosition();
 
+        // fixWithLimitSwitch();
+
         SmartDashboard.putNumber("Elevator Height", getElevatorPositionInches());
         SmartDashboard.putNumber("Elevator Speed Inches", getElevatorVelocityInches());
-    }
-
-    public void setElevatorPosition(double positionInches) {
-        motorSpeed = controller.calculate(positionInches, getElevatorPositionInches()) + 
-        POS_KG;
     }
 
     public void setElevatorMotorPercent(double motorSpeed) {
         this.motorSpeed = motorSpeed + POS_KG;
     }
 
-    public void setElevatorOffset(double newPoseInches) {
+    public void setElevatorPosition(double newPoseInches) {
         rotationsCompleted -= (getElevatorPositionInches() + newPoseInches) / ROTATIONS_TO_INCHES;
 
         elevatorPosition = (getAbsoluteEncoderPositionRotations() + rotationsCompleted) * ROTATIONS_TO_INCHES;
     }
 
     public void fixWithLimitSwitch() {
-        // if ()
+        if (getAtLowerLimitSwitch()) {
+            setElevatorPosition(LOWER_ELEVATOR_LIMIT_SWITCH_HEIGHT);
+        }
+
+        if(getAtUpperLimitSwitch()) {
+            setElevatorPosition(UPPER_ELEVATOR_LIMIT_SWITCH_HEIGHT);
+        }
     }
 
 
@@ -109,6 +115,14 @@ public class Elevator extends SubsystemBase {
                 (-motor.getPositionRotations() * ROTATIONS_TO_INCHES) / GEAR_RATIO
             ) 
             + ELEVATOR_START_HEIGHT;
+    }
+
+    public boolean getAtLowerLimitSwitch() {
+        return lowerLimitSwitch.get();
+    }
+
+    public boolean getAtUpperLimitSwitch() {
+        return upperLimitSwitch.get();
     }
 
     public static Elevator getInstance() {

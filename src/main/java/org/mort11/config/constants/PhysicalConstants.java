@@ -62,27 +62,37 @@ public final class PhysicalConstants {
     }	
 
 	public static final class Elevator {
-		//all in inches
+		//all in inches of carriage
 
 		//3 is elevator stage count
 		public static final double ROTATIONS_TO_INCHES = 5.642 * 3;
-		public static final double MAXIMUM_INCH_CHANGE = 5; //The maximum inch displacement for every 0.02 sec cycle
+
+		//The maximum inch displacement for every 0.02 sec cycle, has to be less than half of the rotations to inches		
+		public static final double MAXIMUM_INCH_CHANGE = 5;
 		public static final double GEAR_RATIO = 16;
+
 		public static final double LOWER_ELEVATOR_LIMIT_SWITCH_HEIGHT = 0;
 		public static final double UPPER_ELEVATOR_LIMIT_SWITCH_HEIGHT = 0;
 
+		/*
+			to fix offset, move the elevator to its lowest possible position, 
+			then subtract the position value from the current offset value
+			and make that the new offset
+		*/
 		public static final double ELEVATOR_OFFSET = -18.45;
-		public static final double ELEVATOR_START_HEIGHT = 2;
+		public static final double ELEVATOR_START_HEIGHT = 0.8; //for relative encoder
 
 		public static final double ELEVATOR_REST_HEIGHT = 5.6;
 
+		//coral
 		public static final double ELEVATOR_L1_HEIGHT = 13;
 		public static final double ELEVATOR_L2_HEIGHT = 27.6;
 		public static final double ELEVATOR_L3_HEIGHT = 43.6;
 		public static final double ELEVATOR_L4_HEIGHT = 68;
 		public static final double ELEVATOR_INTAKE_HEIGHT = 17.4;
-		public static final double ELEVATOR_AUTO_INTAKE_HEIGHT = 19;
+		public static final double ELEVATOR_AUTO_INTAKE_HEIGHT = 19; //old autos
 
+		//algae
 		public static final double ELEVATOR_LOW_ALGAE_HEIGHT = 4.4;
 		public static final double ELEVATOR_HIGH_ALGAE_HEIGHT = 22.3;
 		public static final double ELEVATOR_PROCESSOR_HEIGHT = 0;

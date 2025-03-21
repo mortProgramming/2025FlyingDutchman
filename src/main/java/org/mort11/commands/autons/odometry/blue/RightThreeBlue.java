@@ -90,7 +90,7 @@ public class RightThreeBlue extends SequentialCommandGroup {
                 new DriveToPosition(3.606, 2.462, -120).withTimeout(3.65),
                 VelocityTikiTorchRoller.intake().withTimeout(1),
                 new SequentialCommandGroup(
-                    SetEndeffector.l4().withTimeout(2)
+                    SetEndeffector.mediumL4().withTimeout(2)
                 )
             ),
             new DriveToReef(false),

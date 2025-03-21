@@ -24,7 +24,7 @@ public class CenterOnePiece extends SequentialCommandGroup {
       new SequentialCommandGroup(
         new ResetPosition(7.085, 0.59, 180, true),
         new TimedDrive(1, -1, 0, 0, true),
-        SetEndeffector.l4().withTimeout(2.5),
+        SetEndeffector.mediumL4().withTimeout(2.5),
         new TimedDrive(0.7, -1, 0, 0, true),
         new WaitCommand(0.75),
         VelocityTikiTorchRoller.outtake().withTimeout(2),

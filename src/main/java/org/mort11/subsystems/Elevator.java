@@ -12,6 +12,7 @@ import org.mort11.library.hardware.motor.Motor;
 
 import edu.wpi.first.math.controller.ElevatorFeedforward;
 import edu.wpi.first.math.controller.ProfiledPIDController;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -20,6 +21,8 @@ public class Elevator extends SubsystemBase {
 
     private Motor motor;
     private Encoder encoder;
+    private DigitalInput lowerLimitSwitch, upperLimitSwitch;
+
     private double motorSpeed, elevatorPosition, rotationsCompleted;
 
     private ProfiledPIDController controller;
@@ -43,6 +46,7 @@ public class Elevator extends SubsystemBase {
         motor.setVoltage(motorSpeed * ROBOT_VOLTAGE);
 
         elevatorPosition = calculateElevatorPosition();
+
         SmartDashboard.putNumber("Elevator Height", getElevatorPositionInches());
         SmartDashboard.putNumber("Elevator Speed Inches", getElevatorVelocityInches());
     }
@@ -56,9 +60,15 @@ public class Elevator extends SubsystemBase {
         this.motorSpeed = motorSpeed + POS_KG;
     }
 
-    // public void setElevatorOffset(double newPoseInches) {
-    //     rotationsCompleted -= (getElevatorPositionInches() + newPoseInches) / ROTATIONS_TO_INCHES;
-    // }
+    public void setElevatorOffset(double newPoseInches) {
+        rotationsCompleted -= (getElevatorPositionInches() + newPoseInches) / ROTATIONS_TO_INCHES;
+
+        elevatorPosition = (getAbsoluteEncoderPositionRotations() + rotationsCompleted) * ROTATIONS_TO_INCHES;
+    }
+
+    public void fixWithLimitSwitch() {
+        // if ()
+    }
 
 
 

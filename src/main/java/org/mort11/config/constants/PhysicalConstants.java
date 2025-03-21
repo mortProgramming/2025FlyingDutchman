@@ -68,10 +68,13 @@ public final class PhysicalConstants {
 		public static final double ROTATIONS_TO_INCHES = 5.642 * 3;
 		public static final double MAXIMUM_INCH_CHANGE = 5; //The maximum inch displacement for every 0.02 sec cycle
 		public static final double GEAR_RATIO = 16;
+		public static final double LOWER_ELEVATOR_LIMIT_SWITCH_HEIGHT = 0;
+		public static final double UPPER_ELEVATOR_LIMIT_SWITCH_HEIGHT = 0;
 
 		public static final double ELEVATOR_OFFSET = -18.45;
-		public static final double ELEVATOR_REST_HEIGHT = 5.6;
 		public static final double ELEVATOR_START_HEIGHT = 2;
+
+		public static final double ELEVATOR_REST_HEIGHT = 5.6;
 
 		public static final double ELEVATOR_L1_HEIGHT = 13;
 		public static final double ELEVATOR_L2_HEIGHT = 27.6;
@@ -85,28 +88,6 @@ public final class PhysicalConstants {
 		public static final double ELEVATOR_PROCESSOR_HEIGHT = 0;
 		public static final double ELEVATOR_BARGE_HEIGHT = 72;
 		public static final double ELEVATOR_FLOOR_HEIGHT = 0;
-
-		//everything is in inches
-
-		//unused for offset until fixed
-		// public static final double ELEVATOR_TO_ZERO = 0;
-
-		// public static final double ELEVATOR_OFFSET = -15.4;
-		// public static final double ELEVATOR_REST_HEIGHT = 5.5;
-		// public static final double ELEVATOR_START_HEIGHT = 2;
-
-		// public static final double ELEVATOR_L1_HEIGHT = 13;
-		// public static final double ELEVATOR_L2_HEIGHT = 30.5; // Elevator height at L2
-		// public static final double ELEVATOR_L3_HEIGHT = 46; // Elevator height at L3
-		// public static final double ELEVATOR_L4_HEIGHT = 72; // Elevator height at L4
-		// public static final double ELEVATOR_INTAKE_HEIGHT = 20.5; // Elevator Intake height in teleop
-		// public static final double ELEVATOR_AUTO_INTAKE_HEIGHT = 19; // Elevator height to intake in auton
-
-		// public static final double ELEVATOR_LOW_ALGAE_HEIGHT = 13.5; // Elevator height at low algae height
-		// public static final double ELEVATOR_HIGH_ALGAE_HEIGHT = 29; // Elevator height at high algae height 
-		// public static final double ELEVATOR_PROCESSOR_HEIGHT = 0; // Elevator height at processor height for algae
-		// public static final double ELEVATOR_BARGE_HEIGHT = 72; // Elevator height at barge height for algae
-		// public static final double ELEVATOR_FLOOR_HEIGHT = 0; // Elevator height at floor intake for algae
 	}
 
 	public final static class TikiTorchArm {

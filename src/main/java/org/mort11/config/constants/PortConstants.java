@@ -62,6 +62,9 @@ public static final class Controller {
   public static final class Elevator {
 		public static final int MOTOR = 11;
     public static final int ENCODER = 0;
+    //one is 2, one is 3, someone figure out which
+    public static final int LOWER_LIMIT_SWITCH = 9;
+    public static final int UPPER_LIMIT_SWITCH = 9;
 	}
 
   public static final class TikiTorchArm {

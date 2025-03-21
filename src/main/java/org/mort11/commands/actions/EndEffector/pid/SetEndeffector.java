@@ -3,6 +3,8 @@ package org.mort11.commands.actions.endeffector.pid;
 import org.mort11.config.constants.PhysicalConstants;
 import org.mort11.subsystems.TikiTorchArm;
 import org.mort11.subsystems.Elevator;
+
+import static org.mort11.config.constants.PIDConstants.Elevator.MEDIUM_MAX_ELEVATOR_SPEED;
 import static org.mort11.config.constants.PIDConstants.Elevator.SLOW_MAX_ELEVATOR_SPEED;
 
 import edu.wpi.first.wpilibj2.command.Command;
@@ -92,8 +94,8 @@ public class SetEndeffector extends SequentialCommandGroup {
         return new SetEndeffector(ELEVATOR_L4_HEIGHT, TIKI_L234_SCORE, ALGAE_REST, SLOW_MAX_ELEVATOR_SPEED);
     }
 
-    public static Command autoL4() {
-        return new SetEndeffector(ELEVATOR_L4_HEIGHT, TIKI_AUTO_L234_SCORE, ALGAE_REST);
+    public static Command mediumL4() {
+        return new SetEndeffector(ELEVATOR_L4_HEIGHT, TIKI_AUTO_L234_SCORE, ALGAE_REST, MEDIUM_MAX_ELEVATOR_SPEED);
     }
 
     public static Command lowAlgae() {

@@ -105,8 +105,9 @@ public class MoveToReef extends Command {
         ChassisSpeeds.fromFieldRelativeSpeeds(
             // drivetrain.getXController().calculate(drivetrain.getPose().getX(), reefPose.getX() - 1), 
             // drivetrain.getYController().calculate(drivetrain.getPose().getY(), reefPose.getY()),
+            -drivetrain.getXController().calculate(drivetrain.getPose().getX(), reefPose.getX()),
+            // -drivetrain.getXController().calculate(drivetrain.getPose().getX(), reefPose.getX()), 
             0,
-            drivetrain.getXController().calculate(drivetrain.getPose().getX(), reefPose.getX()), 
             // -Utility.clamp(drivetrain.calculateRotateController(reefPose.getRotation().getDegrees() + IMU_TO_ROBOT_FRONT_ANGLE - 180), 3),
             0,
             drivetrain.getRotation2d()

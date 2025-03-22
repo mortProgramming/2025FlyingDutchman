@@ -63,8 +63,8 @@ public static final class Controller {
 		public static final int MOTOR = 11;
     public static final int ENCODER = 0;
     
-    public static final int LOWER_LIMIT_SWITCH = 9;
-    public static final int UPPER_LIMIT_SWITCH = 9;
+    public static final int LOWER_LIMIT_SWITCH = 3;
+    public static final int UPPER_LIMIT_SWITCH = 2;
 	}
 
   public static final class TikiTorchArm {

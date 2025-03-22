@@ -53,7 +53,6 @@ public final class PIDConstants {
 		public static final double POS_KP = 0.08;
 		public static final double POS_KI = 0;
 		public static final double POS_KD = 0.003;
-		// public static final Constraints POS_CONSTRAINTS = new Constraints(75, 300);
 		public static final Constraints POS_CONSTRAINTS = new Constraints(80, 300);
 		public static final double SLOW_MAX_ELEVATOR_SPEED = 40;
 		public static final double MEDIUM_MAX_ELEVATOR_SPEED = 70;
@@ -75,8 +74,7 @@ public final class PIDConstants {
 		public final static double ROT_KA = 0;
 
 		//PID Rotational
-		public final static double ROT_KP = 0.024;
-		//0.006
+		public final static double ROT_KP = 0.024;//.024 0.006
 		public final static double ROT_KI = 0;
 		public final static double ROT_KD = 0;
 		public final static Constraints ARM_ROT_CONSTRAINTS = new Constraints(300,1000);

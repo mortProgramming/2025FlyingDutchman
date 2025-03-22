@@ -72,14 +72,14 @@ public final class PhysicalConstants {
 		public static final double GEAR_RATIO = 16;
 
 		public static final double LOWER_ELEVATOR_LIMIT_SWITCH_HEIGHT = 0;
-		public static final double UPPER_ELEVATOR_LIMIT_SWITCH_HEIGHT = 0;
+		public static final double UPPER_ELEVATOR_LIMIT_SWITCH_HEIGHT = -71.5;
 
 		/*
 			to fix offset, move the elevator to its lowest possible position, 
 			then subtract the position value from the current offset value
 			and make that the new offset
 		*/
-		public static final double ELEVATOR_OFFSET = -18.45;
+		public static final double ELEVATOR_OFFSET = -19.85;
 		public static final double ELEVATOR_START_HEIGHT = 0.8; //for relative encoder
 
 		public static final double ELEVATOR_REST_HEIGHT = 5.6;
@@ -125,7 +125,7 @@ public final class PhysicalConstants {
 	}
 
 	public static final class Vision {
-		public static final double CAMERA_LEFT_OFFSET = Units.inchesToMeters(-1); //measurement from camera to left side of reef pipe
-		public static final double CAMERA_RIGHT_OFFSET = Units.inchesToMeters(12); //measurement from camera to right side of reef pipe
+		public static final double CAMERA_LEFT_OFFSET = Units.inchesToMeters(-3); //measurement from camera to left side of reef pipe
+		public static final double CAMERA_RIGHT_OFFSET = Units.inchesToMeters(11); //measurement from camera to right side of reef pipe
 	}
 }

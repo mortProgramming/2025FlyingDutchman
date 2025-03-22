@@ -171,10 +171,10 @@ public class IO {
 
       //TESTING XBOXCONTROLLER SETTINGS
 
-      testingController.a().whileTrue(new VelocityTikiTorchArm(-0.2));
+      testingController.a().whileTrue(new VelocityTikiTorchArm(-0.6));
       testingController.a().whileFalse(new VelocityTikiTorchArm(0));
 
-      testingController.b().whileTrue(new VelocityTikiTorchArm(0.2));
+      testingController.b().whileTrue(new VelocityTikiTorchArm(0.6));
       testingController.b().whileFalse(new VelocityTikiTorchArm(0));
 
       testingController.x().whileTrue(new VelocityAlgaeArm(-0.2));

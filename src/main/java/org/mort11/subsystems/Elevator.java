@@ -50,10 +50,12 @@ public class Elevator extends SubsystemBase {
 
         elevatorPosition = calculateElevatorPosition();
 
-        // fixWithLimitSwitch();
+        fixWithLimitSwitch();
 
         SmartDashboard.putNumber("Elevator Height", getElevatorPositionInches());
         SmartDashboard.putNumber("Elevator Speed Inches", getElevatorVelocityInches());
+        SmartDashboard.putBoolean("Lower Limit Switch", getAtLowerLimitSwitch());
+        SmartDashboard.putBoolean("Upper Limit Switch", getAtUpperLimitSwitch());
     }
 
     public void setElevatorMotorPercent(double motorSpeed) {
@@ -118,11 +120,12 @@ public class Elevator extends SubsystemBase {
     }
 
     public boolean getAtLowerLimitSwitch() {
-        return lowerLimitSwitch.get();
+        return !lowerLimitSwitch.get();
     }
 
     public boolean getAtUpperLimitSwitch() {
-        return upperLimitSwitch.get();
+        return !upperLimitSwitch.get();
+        // return false;
     }
 
     public static Elevator getInstance() {

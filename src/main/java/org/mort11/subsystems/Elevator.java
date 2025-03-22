@@ -70,12 +70,12 @@ public class Elevator extends SubsystemBase {
 
     public void fixWithLimitSwitch() {
         if (getAtLowerLimitSwitch()) {
-            setElevatorPosition(LOWER_ELEVATOR_LIMIT_SWITCH_HEIGHT);
+            setElevatorPosition(ELEVATOR_LOWER_LIMIT_SWITCH_HEIGHT);
         }
 
-        if(getAtUpperLimitSwitch()) {
-            setElevatorPosition(UPPER_ELEVATOR_LIMIT_SWITCH_HEIGHT);
-        }
+        // if(getAtUpperLimitSwitch()) {
+        //     setElevatorPosition(ELEVATOR_UPPER_LIMIT_SWITCH_HEIGHT);
+        // }
     }
 
 

@@ -80,6 +80,14 @@ public class Elevate extends Command {
         return new Elevate(ELEVATOR_AUTO_INTAKE_HEIGHT);
     }
 
+    public static Command zero() {
+        return new Elevate(ELEVATOR_LOWER_LIMIT_SWITCH_HEIGHT);
+    }
+
+    public static Command max() {
+        return new Elevate(-ELEVATOR_UPPER_LIMIT_SWITCH_HEIGHT);
+    }
+
     public static Command rest() {
         return new Elevate(ELEVATOR_REST_HEIGHT);
     }

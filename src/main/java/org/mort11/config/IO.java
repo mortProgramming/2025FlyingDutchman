@@ -5,7 +5,7 @@ import org.mort11.commands.actions.drivetrain.SetRobotOrientation;
 import org.mort11.commands.actions.drivetrain.auto.DriveToPosition;
 import org.mort11.commands.actions.drivetrain.auto.DriveToReef;
 import org.mort11.commands.actions.drivetrain.auto.MoveToReef;
-import org.mort11.commands.actions.drivetrain.auto.DriveNearToReef;
+import org.mort11.commands.actions.drivetrain.auto.DriveFastNearToReef;
 import org.mort11.commands.actions.drivetrain.auto.Rotate;
 import org.mort11.commands.actions.drivetrain.teleop.Angle2AprilTag;
 import org.mort11.commands.actions.drivetrain.teleop.DriveAtAngle;
@@ -171,10 +171,10 @@ public class IO {
 
       //TESTING XBOXCONTROLLER SETTINGS
 
-      testingController.a().whileTrue(new VelocityTikiTorchArm(-0.6));
+      testingController.a().whileTrue(new VelocityTikiTorchArm(-0.2));
       testingController.a().whileFalse(new VelocityTikiTorchArm(0));
 
-      testingController.b().whileTrue(new VelocityTikiTorchArm(0.6));
+      testingController.b().whileTrue(new VelocityTikiTorchArm(0.2));
       testingController.b().whileFalse(new VelocityTikiTorchArm(0));
 
       testingController.x().whileTrue(new VelocityAlgaeArm(-0.2));
@@ -188,8 +188,8 @@ public class IO {
       testingController.pov(180).whileTrue(new VelocityElevator(0.2));
       testingController.pov(180).whileFalse(new VelocityElevator(0));
 
-      testingController.pov(90).toggleOnTrue(new Climb(true));
-      testingController.pov(270).toggleOnTrue(new Climb(false));
+      // testingController.pov(90).toggleOnTrue(new Climb(true));
+      // testingController.pov(270).toggleOnTrue(new Climb(false));
 
       testingController.axisGreaterThan(3, 0.25).whileTrue(VelocityTikiTorchRoller.outtake());
       testingController.axisGreaterThan(3, 0.25).whileFalse(VelocityTikiTorchRoller.rest());

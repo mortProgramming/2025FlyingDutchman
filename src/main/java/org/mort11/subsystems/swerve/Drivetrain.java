@@ -181,7 +181,7 @@ public class Drivetrain extends SubsystemBase {
 			getChassisSpeeds().omegaRadiansPerSecond 
 			< 3
     	) {
-        	odometer.resetPose(new Pose2d(pose.getMeasureX(), pose.getMeasureY(), pose.getRotation().rotateBy(Rotation2d.fromDegrees(180))));
+        	// odometer.resetPose(new Pose2d(pose.getMeasureX(), pose.getMeasureY(), pose.getRotation().rotateBy(Rotation2d.fromDegrees(180))));
     	}
 	}
 

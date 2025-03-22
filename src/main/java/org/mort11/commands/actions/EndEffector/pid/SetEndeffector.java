@@ -74,6 +74,17 @@ public class SetEndeffector extends SequentialCommandGroup {
         return new SetEndeffector(ELEVATOR_REST_HEIGHT, TIKI_ALGAE_CLEAR, ALGAE_REST);
     }
 
+    public static Command start() {
+        return new SequentialCommandGroup(
+            new ParallelCommandGroup(
+                new Elevate(2),
+                SetAlgaeArm.rest(),
+                new SetTikiTorchArm(-45)
+            ).withTimeout(0.4),
+            Elevate.zero()
+        );
+    }
+
     public static Command l1() {
         return new SetEndeffector(ELEVATOR_L1_HEIGHT, TIKI_L1_SCORE, ALGAE_REST);
     }
@@ -88,6 +99,10 @@ public class SetEndeffector extends SequentialCommandGroup {
 
     public static Command l4() {
         return new SetEndeffector(ELEVATOR_L4_HEIGHT, TIKI_L234_SCORE, ALGAE_REST);
+    }
+
+    public static Command autoL4() {
+        return new SetEndeffector(ELEVATOR_AUTO_L4_HEIGHT, TIKI_L234_SCORE, ALGAE_REST);
     }
 
     public static Command slowL4() {
@@ -118,13 +133,29 @@ public class SetEndeffector extends SequentialCommandGroup {
         return new SetEndeffector(ELEVATOR_FLOOR_HEIGHT, TIKI_ALGAE_CLEAR, ALGAE_FLOOR_INTAKE);
     }
 
+    public static Command maxScore() {
+        return new SetEndeffector(-ELEVATOR_UPPER_LIMIT_SWITCH_HEIGHT, TIKI_L234_SCORE, ALGAE_REST);
+    }
+
     public static Command intake() {
         // return new SetEndeffector(ELEVATOR_INTAKE_HEIGHT, TIKI_INTAKE, ALGAE_REST);
-        return new ParallelCommandGroup(
-            Elevate.intake(),
-            SetAlgaeArm.rest(),
-            SetTikiTorchArm.intake()
+        return new SequentialCommandGroup(
+            new ParallelCommandGroup(
+                Elevate.zero(),
+                SetAlgaeArm.rest(),
+                SetTikiTorchArm.intake()
+            ).withTimeout(1.25),
+            new ParallelCommandGroup(
+                Elevate.intake(),
+                SetAlgaeArm.rest(),
+                SetTikiTorchArm.intake()
+            )
         );
+        // new ParallelCommandGroup(
+        //     Elevate.rest(),
+        //     SetAlgaeArm.rest(),
+        //     SetTikiTorchArm.intake()
+        // ).withTimeout(0.75);
     }
 
     public static Command fastIntake() {

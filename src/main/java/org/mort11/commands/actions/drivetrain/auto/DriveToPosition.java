@@ -27,7 +27,7 @@ public class DriveToPosition extends Command {
   private double wantedY;
   private double wantedTheta;
 
-  private double maxSpeed, maxRotate;
+  private double maxSpeed, maxRotate, maxAcceleration;
 
   public DriveToPosition(double wantedX, double wantedY, double wantedTheta) {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -38,8 +38,9 @@ public class DriveToPosition extends Command {
     this.wantedY = wantedY;
     this.wantedTheta = wantedTheta;
 
-    this.maxSpeed = 1;
-    this.maxRotate = 100;
+    this.maxSpeed = POS_CONSTRAINTS.maxVelocity;
+    this.maxRotate = ANGLE_CONSTRAINTS.maxVelocity;
+    this.maxAcceleration = POS_CONSTRAINTS.maxAcceleration;
 
     addRequirements(drivetrain, vision);
   }
@@ -54,7 +55,8 @@ public class DriveToPosition extends Command {
     this.wantedTheta = wantedTheta;
 
     this.maxSpeed = maxSpeed;
-    this.maxRotate = 100;
+    this.maxRotate = ANGLE_CONSTRAINTS.maxVelocity;
+    this.maxAcceleration = POS_CONSTRAINTS.maxAcceleration;
 
     addRequirements(drivetrain, vision);
   }
@@ -70,6 +72,23 @@ public class DriveToPosition extends Command {
 
     this.maxSpeed = maxSpeed;
     this.maxRotate = maxRotate;
+    this.maxAcceleration = POS_CONSTRAINTS.maxAcceleration;
+
+    addRequirements(drivetrain, vision);
+  }
+
+  public DriveToPosition(double wantedX, double wantedY, double wantedTheta, double maxSpeed, double maxRotate, double maxAcceleration) {
+    // Use addRequirements() here to declare subsystem dependencies.
+    drivetrain =  Drivetrain.getInstance();
+    vision = Vision.getInstance();
+
+    this.wantedX = wantedX;
+    this.wantedY = wantedY;
+    this.wantedTheta = wantedTheta;
+
+    this.maxSpeed = maxSpeed;
+    this.maxRotate = maxRotate;
+    this.maxAcceleration = maxAcceleration;
 
     addRequirements(drivetrain, vision);
   }
@@ -85,8 +104,8 @@ public class DriveToPosition extends Command {
     drivetrain.getXController().calculate(drivetrain.getPose().getX(), wantedX);
     drivetrain.calculateRotateController(wantedTheta + IMU_TO_ROBOT_FRONT_ANGLE);
 
-    drivetrain.getXController().setConstraints(new Constraints(maxSpeed, POS_CONSTRAINTS.maxAcceleration));
-    drivetrain.getYController().setConstraints(new Constraints(maxSpeed, POS_CONSTRAINTS.maxAcceleration));
+    drivetrain.getXController().setConstraints(new Constraints(maxSpeed, maxAcceleration));
+    drivetrain.getYController().setConstraints(new Constraints(maxSpeed, maxAcceleration));
     drivetrain.getRotateController().setConstraints(new Constraints(maxRotate, ANGLE_CONSTRAINTS.maxAcceleration));
   }
 

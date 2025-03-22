@@ -21,12 +21,12 @@ public class CenterOnePiece extends SequentialCommandGroup {
         new SequentialCommandGroup(
             new ResetPosition(0, 0, 180, true),
             //piece one
-            new DriveToPosition(0, 1.5, 180).withTimeout(3),
+            new TimedDrive(3, -0.5, 0, 0),
             new DriveToReef(isRight),
             new WaitCommand(0.5),
             SetEndeffector.mediumL4().withTimeout(2),
             VelocityTikiTorchRoller.outtake().withTimeout(0.5),
-            new TimedDrive(1, -0.5, 0, 0),
+            new TimedDrive(1, 0.5, 0, 0),
             SetEndeffector.rest().withTimeout(2)
         )
     );

@@ -10,6 +10,7 @@ import org.mort11.commands.actions.endeffector.Initiate;
 import org.mort11.commands.actions.endeffector.pid.Elevate;
 import org.mort11.commands.actions.endeffector.pid.SetEndeffector;
 import org.mort11.commands.actions.endeffector.pid.SetTikiTorchArm;
+import org.mort11.commands.actions.endeffector.velocity.AllTheWayDown;
 import org.mort11.commands.actions.endeffector.velocity.VelocityElevator;
 import org.mort11.commands.actions.endeffector.velocity.VelocityTikiTorchArm;
 import org.mort11.commands.actions.endeffector.velocity.VelocityTikiTorchRoller;
@@ -35,7 +36,8 @@ public class RightTwoHalfBlue extends SequentialCommandGroup {
                     ),
                     new SequentialCommandGroup(
                         // Elevate.zero().withTimeout(0.7),
-                        new VelocityElevator(0.4).withTimeout(0.6),
+                        // new VelocityElevator(0.4).withTimeout(0.6),
+                        new AllTheWayDown(),
                         Elevate.rest().withTimeout(0.5),
                         SetEndeffector.autoL4().withTimeout(2.3)
                     )
@@ -50,7 +52,8 @@ public class RightTwoHalfBlue extends SequentialCommandGroup {
                     )
                 ),
                 new ParallelCommandGroup(
-                    new DriveToPosition(0.6, 1.211, 60, 3, 100),
+                    // new DriveToPosition(0.6, 1.211, 60, 3, 100),
+                    new DriveToPosition(0.5, 0.8, 60, 3, 100),
                     // SetEndeffector.fastIntake(),
                     SetEndeffector.intake(),
                     VelocityTikiTorchRoller.intake()

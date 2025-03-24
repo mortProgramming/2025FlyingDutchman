@@ -9,6 +9,7 @@ import org.mort11.commands.actions.endeffector.Initiate;
 import org.mort11.commands.actions.endeffector.pid.Elevate;
 import org.mort11.commands.actions.endeffector.pid.SetEndeffector;
 import org.mort11.commands.actions.endeffector.pid.SetTikiTorchArm;
+import org.mort11.commands.actions.endeffector.velocity.AllTheWayDown;
 import org.mort11.commands.actions.endeffector.velocity.VelocityTikiTorchArm;
 import org.mort11.commands.actions.endeffector.velocity.VelocityTikiTorchRoller;
 
@@ -30,6 +31,7 @@ public class LeftTwoRed extends SequentialCommandGroup {
                     new DriveToReef(true)
                 ),
                 new SequentialCommandGroup(
+                    new AllTheWayDown(),
                     Elevate.rest().withTimeout(0.5),
                     new WaitCommand(0.5),
                     SetEndeffector.mediumL4().withTimeout(2),

@@ -23,7 +23,7 @@ public final class PhysicalConstants {
 	} 
 
 	public final static class AlgaeRoller {
-		public static final double INTAKE_SPEED = -0.6;
+		public static final double INTAKE_SPEED = -1;
 		public static final double OUTAKE_SPEED = 0.8;
 	} 
 
@@ -72,14 +72,15 @@ public final class PhysicalConstants {
 		public static final double GEAR_RATIO = 16;
 
 		public static final double ELEVATOR_LOWER_LIMIT_SWITCH_HEIGHT = 0;
-		public static final double ELEVATOR_UPPER_LIMIT_SWITCH_HEIGHT = -71.8;
+		// public static final double ELEVATOR_UPPER_LIMIT_SWITCH_HEIGHT = -71.8;
+		public static final double ELEVATOR_UPPER_LIMIT_SWITCH_HEIGHT = -69.4;
 
 		/*
 			to fix offset, move the elevator to its lowest possible position, 
 			then subtract the position value from the current offset value
 			and make that the new offset
 		*/
-		public static final double ELEVATOR_OFFSET = -15.31;
+		public static final double ELEVATOR_OFFSET = -23.11;
 		public static final double ELEVATOR_START_HEIGHT = 0.8; //for relative encoder
 
 		public static final double ELEVATOR_REST_HEIGHT = 5.6;

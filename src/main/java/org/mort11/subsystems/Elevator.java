@@ -73,9 +73,9 @@ public class Elevator extends SubsystemBase {
             setElevatorPosition(ELEVATOR_LOWER_LIMIT_SWITCH_HEIGHT);
         }
 
-        // if(getAtUpperLimitSwitch()) {
-        //     setElevatorPosition(ELEVATOR_UPPER_LIMIT_SWITCH_HEIGHT);
-        // }
+        if(getAtUpperLimitSwitch()) {
+            setElevatorPosition(ELEVATOR_UPPER_LIMIT_SWITCH_HEIGHT);
+        }
     }
 
 

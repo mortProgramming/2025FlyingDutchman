@@ -1,7 +1,6 @@
 package org.mort11.library.subsystems.swerve.pathfollower;
 
 import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 
 public class Follower {
@@ -12,9 +11,9 @@ public class Follower {
     public Follower(FollowerConfig config) {
         this.config = config;
 
-        longitudinalController = new PIDController(0, 0, 0);
-        lateralController = new PIDController(0, 0, 0);
-        rotationalController = new PIDController(0, 0, 0);
+        longitudinalController = new PIDController(config.longitudinal_kp, config.longitudinal_ki, config.longitudinal_kd);
+        lateralController = new PIDController(config.lateral_kp, config.lateral_ki, config.lateral_kd);
+        rotationalController = new PIDController(config.rotational_kp, config.rotational_ki, config.rotational_kd);
 
         rotationalController.enableContinuousInput(-180, 180);
     }
@@ -39,7 +38,7 @@ public class Follower {
     }
 
     public Point controllerHelp(double time, CubicBezierCurveSpline curve) {
-        Point wantedPoint = new Point(timeToPose(time, curve).getTranslation() .getX(), timeToPose(time, curve).getY());
+        Point wantedPoint = timeToPoint(time, curve);
 
         double movementAngle = curve.getDirection(config.precision, timeToPercent(time, curve));
 
@@ -66,18 +65,60 @@ public class Follower {
     }
 
     public double timeToSpeed(double time, CubicBezierCurveSpline curve) {
-        return 0;
+        double timeToAccelerate = config.maxVelocity / config.maxAcceleration;
+
+        if(time < timeToAccelerate) {
+            return config.maxAcceleration * time;
+        }
+
+        else if(time > (getTotalTime(curve) - timeToAccelerate)) {
+            return (getTotalTime(curve) - time) * config.maxAcceleration;
+        }
+
+        return config.maxVelocity;
     }
 
     public double timeToRotation(double time, CubicBezierCurveSpline curve, double endingRotation) {
         return rotationalController.calculate(config.poseSupplier.get().getRotation().getDegrees(), endingRotation);
     }
 
-    public Pose2d timeToPose(double time, CubicBezierCurveSpline curve) {
-        return new Pose2d();
+    public Point timeToPoint(double time, CubicBezierCurveSpline curve) {
+        return curve.getPoint(timeToPercent(time, curve));
     }
 
     public double timeToPercent(double time, CubicBezierCurveSpline curve) {
-        return 0;
+        return curve.getPercent(config.precision, timeToLength(time, curve));
+    }
+
+    public double timeToLength(double time, CubicBezierCurveSpline curve) {
+        double timeToAccelerate = config.maxVelocity / config.maxAcceleration;
+
+        double accelerateDistance = config.maxAcceleration * Math.pow(timeToAccelerate, 2) / 2;
+        
+        double fullSpeedDistance = curve.getLength(config.precision, curve.curves.length) - accelerateDistance * 2;
+
+        if(time < timeToAccelerate) {
+            return config.maxAcceleration * Math.pow(time, 2) / 2;
+        }
+
+        else if(time > (getTotalTime(curve) - timeToAccelerate)) {
+            double timeLeft = getTotalTime(curve) - (timeToAccelerate + fullSpeedDistance / config.maxVelocity);
+            return config.maxAcceleration * Math.pow(accelerateDistance, 2) / 2
+            + fullSpeedDistance
+            + config.maxVelocity * timeLeft - (config.maxAcceleration * Math.pow(timeLeft, 2) / 2);
+        }
+
+        return accelerateDistance + time * config.maxVelocity;
+
+    }
+
+    public double getTotalTime(CubicBezierCurveSpline curve) {
+        double timeToAccelerate = config.maxVelocity / config.maxAcceleration;
+
+        double accelerateDistance = config.maxAcceleration * Math.pow(timeToAccelerate, 2) / 2;
+        
+        double fullSpeedDistance = curve.getLength(config.precision, curve.curves.length) - accelerateDistance * 2;
+
+        return (fullSpeedDistance / config.maxVelocity) + timeToAccelerate * 2;
     }
 }

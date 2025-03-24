@@ -24,7 +24,20 @@ public class CubicBezierCurveSpline {
         return curves[(int) percent].getDirection(precision, percent - Math.floor(percent));
     }
 
-    // public double getPercent(int precision, double length) {
+    public double getPercent(int precision, double length) {
+        int curveNum = 0;
+        for (int i = 0; length < getLength(precision, i); i++) {
+            curveNum = i;
+        }
 
-    // }
+        double previousCurveLength = 0;
+
+        for (int i = 0; i <= curveNum; i++) {
+            previousCurveLength += getLength(precision, 1);
+        }
+
+        double finalCurvePercent = curves[curveNum].getPercent(precision, length - previousCurveLength);
+
+        return curveNum + finalCurvePercent;
+    }
 }

@@ -58,7 +58,7 @@ public final class PhysicalConstants {
 		public static final double DRIVE_MOTOR_MAX_RPM = 6000;
 
 		public static final double DRIVE_REDUCTION = (16.0 / 50.0) * (28.0 / 16.0) * (15.0 / 45.0);
-		public static final double WHEEL_DIAMETER = 0.1014;
+		public static final double WHEEL_DIAMETER = 0.1014;  //0.1014
 		public static final double ROTATIONS_TO_METERS = WHEEL_DIAMETER * Math.PI;
 		public static final double MAX_SPEED = DRIVE_REDUCTION * ROTATIONS_TO_METERS * (DRIVE_MOTOR_MAX_RPM / 60);
 

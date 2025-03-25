@@ -110,7 +110,7 @@ public class SetEndeffector extends SequentialCommandGroup {
     }
 
     public static Command mediumL4() {
-        return new SetEndeffector(ELEVATOR_L4_HEIGHT, TIKI_AUTO_L234_SCORE, ALGAE_REST, MEDIUM_MAX_ELEVATOR_SPEED);
+        return new SetEndeffector(ELEVATOR_L4_HEIGHT, TIKI_L234_SCORE, ALGAE_REST, MEDIUM_MAX_ELEVATOR_SPEED);
     }
 
     public static Command lowAlgae() {

@@ -67,6 +67,10 @@ public static final class Controller {
     public static final int UPPER_LIMIT_SWITCH = 2;
 	}
 
+  public static final class Lights {
+    public static final int LEDS_PORT = 0;
+  }
+
   public static final class TikiTorchArm {
     public static final int ARM_MOTOR = 15;
   }

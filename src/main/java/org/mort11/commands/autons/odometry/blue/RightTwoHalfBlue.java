@@ -53,7 +53,7 @@ public class RightTwoHalfBlue extends SequentialCommandGroup {
                 ),
                 new ParallelCommandGroup(
                     // new DriveToPosition(0.6, 1.211, 60, 3, 100),
-                    new DriveToPosition(0.5, 0.8, 60, 3, 100),
+                    new DriveToPosition(0.2, 0.9, 60, 3, 100),
                     // SetEndeffector.fastIntake(),
                     SetEndeffector.intake(),
                     VelocityTikiTorchRoller.intake()

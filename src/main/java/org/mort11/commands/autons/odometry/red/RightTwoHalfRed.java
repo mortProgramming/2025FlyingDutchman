@@ -38,6 +38,7 @@ public class RightTwoHalfRed extends SequentialCommandGroup {
                         // Elevate.zero().withTimeout(0.7),
                         // new VelocityElevator(0.4).withTimeout(0.6),
                         new AllTheWayDown(),
+                        VelocityTikiTorchRoller.rest().withTimeout(0.1),
                         Elevate.rest().withTimeout(0.5),
                         SetEndeffector.autoL4().withTimeout(2.3)
                     )
@@ -52,7 +53,7 @@ public class RightTwoHalfRed extends SequentialCommandGroup {
                     )
                 ),
                 new ParallelCommandGroup(
-                    new DriveToPosition(0.6, 1.111, 60, 3, 100),
+                    new DriveToPosition(0.4, 1.05, 60, 3, 100),
                     // SetEndeffector.fastIntake(),
                     SetEndeffector.intake(),
                     VelocityTikiTorchRoller.intake()
@@ -66,7 +67,7 @@ public class RightTwoHalfRed extends SequentialCommandGroup {
                 ),
                 new ParallelCommandGroup(
                     new SequentialCommandGroup(
-                        new DriveToPosition(3.25, 2.211, -120, 3, 125, 6).withTimeout(2),
+                        new DriveToPosition(3.1, 2.211, -120, 3, 125, 6).withTimeout(2),
                         // new DriveToReef(true)
                         new DriveFastToReef(true)
                     ),

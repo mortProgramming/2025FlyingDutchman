@@ -52,7 +52,7 @@ public class LeftTwoHalfBlue extends SequentialCommandGroup {
                     )
                 ),
                 new ParallelCommandGroup(
-                    new DriveToPosition(0.6, 7, -60, 3, 100),
+                    new DriveToPosition(0.5, 7.025, -60, 3, 100),
                     // SetEndeffector.fastIntake(),
                     SetEndeffector.intake(),
                     VelocityTikiTorchRoller.intake()
@@ -84,7 +84,7 @@ public class LeftTwoHalfBlue extends SequentialCommandGroup {
                 ),
                 new ParallelCommandGroup(
                     // new DriveToPosition(0.6, 7, -60, 4, 150, 9),
-                    new DriveToPosition(0.2, 6, -60, 4, 150, 9),
+                    new DriveToPosition(2, 6.5, -60, 2, 150, 4),
                     SetEndeffector.intake(),
                     VelocityTikiTorchRoller.intake()
                 ).withTimeout(3),

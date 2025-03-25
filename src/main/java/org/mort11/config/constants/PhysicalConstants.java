@@ -39,10 +39,15 @@ public final class PhysicalConstants {
 			DRIVETRAIN_TRACKWIDTH_METERS / 2.0, DRIVETRAIN_WHEELBASE_METERS / 2.0
 		);
 
-		public static final double FRONT_LEFT_OFFSET = 293.9;
-		public static final double FRONT_RIGHT_OFFSET = 273.1;
-		public static final double BACK_LEFT_OFFSET = 223.3;
-		public static final double BACK_RIGHT_OFFSET = 255.5;
+		// public static final double FRONT_LEFT_OFFSET = 293.9;
+		// public static final double FRONT_RIGHT_OFFSET = 273.1;
+		// public static final double BACK_LEFT_OFFSET = 223.3;
+		// public static final double BACK_RIGHT_OFFSET = 255.5;
+
+		public static final double FRONT_LEFT_OFFSET = 21.3 + 90 + 180;
+		public static final double FRONT_RIGHT_OFFSET = 3.08 + 90 + 180;
+		public static final double BACK_LEFT_OFFSET = 311.75 + 90 + 180;
+		public static final double BACK_RIGHT_OFFSET = 346.73 + 90 + 180;
 
 		public static final int IMU_TO_ROBOT_FRONT_ANGLE = 270;
 
@@ -100,6 +105,22 @@ public final class PhysicalConstants {
 		public static final double ELEVATOR_PROCESSOR_HEIGHT = 0;
 		public static final double ELEVATOR_BARGE_HEIGHT = 71.5;
 		public static final double ELEVATOR_FLOOR_HEIGHT = 0;
+	}
+
+	public static final class Lights {
+		public static final double GREEN = 0.77;
+		public static final double RED = 0.61;
+		public static final double BLUE = 0.87;
+		public static final double GOLD = 0.67;
+		public static final double PINK = 0.57;
+		public static final double DARK_BLUE = 0.85;
+		public static final double PURPLE = 0.91;
+		public static final double WHITE = 0.93;
+		public static final double BLACK = 0.99;
+		public static final double YELLOW = 0.69;
+		public static final double ORANGE = 0.65;
+
+		
 	}
 
 	public final static class TikiTorchArm {

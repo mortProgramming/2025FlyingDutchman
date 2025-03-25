@@ -35,6 +35,7 @@ public class RightTwoRed extends SequentialCommandGroup {
                 new SequentialCommandGroup(
                     // new VelocityElevator(0.4).withTimeout(0.6),
                     new AllTheWayDown(),
+                    VelocityTikiTorchRoller.rest().withTimeout(0.1),
                     Elevate.rest().withTimeout(0.5),
                     SetEndeffector.slowL4().withTimeout(2.5)
                 )
@@ -44,6 +45,7 @@ public class RightTwoRed extends SequentialCommandGroup {
             //intake one
             new ParallelCommandGroup(
                 new TimedDrive(0.5, 0, -1.5, 0, true),
+                VelocityTikiTorchRoller.outtake().withTimeout(0.5),
                 new SequentialCommandGroup(
                     new WaitCommand(0.25)
                     // Elevate.intake().withTimeout(0.5)

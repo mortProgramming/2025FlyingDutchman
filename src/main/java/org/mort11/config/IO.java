@@ -6,6 +6,7 @@ import org.mort11.commands.actions.drivetrain.auto.DriveToPosition;
 import org.mort11.commands.actions.drivetrain.auto.DriveToReef;
 import org.mort11.commands.actions.drivetrain.auto.MoveToReef;
 import org.mort11.commands.actions.drivetrain.auto.DriveFastNearToReef;
+import org.mort11.commands.actions.drivetrain.auto.DriveTeleopToReef;
 import org.mort11.commands.actions.drivetrain.auto.Rotate;
 import org.mort11.commands.actions.drivetrain.teleop.Angle2AprilTag;
 import org.mort11.commands.actions.drivetrain.teleop.DriveAtAngle;
@@ -20,6 +21,7 @@ import org.mort11.commands.actions.endeffector.pid.SetTikiTorchArm;
 import org.mort11.commands.actions.endeffector.velocity.Climb;
 import org.mort11.commands.actions.endeffector.velocity.VelocityAlgaeRoller;
 import org.mort11.commands.actions.endeffector.velocity.VelocityTikiTorchRoller;
+import org.mort11.commands.actions.lights.LightsCommand;
 import org.mort11.commands.actions.endeffector.velocity.VelocityAlgaeArm;
 import org.mort11.commands.actions.endeffector.velocity.VelocityElevator;
 import org.mort11.commands.actions.endeffector.velocity.VelocityTikiTorchArm;
@@ -33,6 +35,7 @@ import org.mort11.subsystems.AlgaeRoller;
 import org.mort11.subsystems.Climber;
 import org.mort11.subsystems.swerve.Drivetrain;
 import org.mort11.subsystems.Elevator;
+import org.mort11.subsystems.Lights;
 import org.mort11.subsystems.TikiTorchArm;
 import org.mort11.subsystems.TikiTorchRoller;
 import org.mort11.subsystems.Vision;
@@ -50,6 +53,7 @@ public class IO {
   private static Climber climber;
 	private static Drivetrain drivetrain;
   private static Elevator elevator;
+  private static Lights lights;
   private static TikiTorchArm tikiTorchArm;
   private static TikiTorchRoller tikiTorchRoller;
   private static Vision vision;
@@ -60,6 +64,7 @@ public class IO {
     climber = Climber.getInstance();
 		drivetrain = Drivetrain.getInstance();
     elevator = Elevator.getInstance();
+    lights = Lights.getInstance();
     tikiTorchArm = TikiTorchArm.getInstance();
     tikiTorchRoller = TikiTorchRoller.getInstance();
     vision = Vision.getInstance();
@@ -130,8 +135,8 @@ public class IO {
     //driveController.button(5).whileTrue(new Angle2AprilTag(0));
     // driveController.button(6).whileTrue(new DriveNearToReef(true));
     // driveController.button(5).whileTrue(new DriveNearToReef(false));
-    driveController.button(6).whileTrue(new DriveToReef(true));
-    driveController.button(5).whileTrue(new DriveToReef(false));
+    driveController.button(6).whileTrue(new DriveTeleopToReef(true));
+    driveController.button(5).whileTrue(new DriveTeleopToReef(false));
     // driveController.button(6).whileTrue(new MoveToReef(true));
     // driveController.button(9).whileTrue(new MoveToReef(false));
     driveController.button(10).whileTrue(new SnapToReef(Inputs::getLeftControllerXSwerve, Inputs::getLeftControllerYSwerve));
@@ -209,6 +214,7 @@ public class IO {
       new Pose2d(7, 4, Rotation2d.fromDegrees(180))
     )));
 
+    lights.setDefaultCommand(new LightsCommand());
     }
 
   public static Boolean isBlue () {

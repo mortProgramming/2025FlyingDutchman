@@ -15,6 +15,7 @@ import org.mort11.commands.actions.endeffector.velocity.VelocityElevator;
 import org.mort11.commands.actions.endeffector.velocity.VelocityTikiTorchArm;
 import org.mort11.commands.actions.endeffector.velocity.VelocityTikiTorchRoller;
 
+import edu.wpi.first.units.measure.Velocity;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
@@ -30,7 +31,7 @@ public class LeftTwoHalfRed extends SequentialCommandGroup {
                 new ParallelCommandGroup(
                     new SequentialCommandGroup(
                         // new DriveToPosition(5.3, 2.3, -60, 2).withTimeout(1.5),
-                        new DriveToPosition(5.3, 5.611, 60, 3, 100, 6).withTimeout(1.5),
+                        new DriveToPosition(5.30, 5.70, 60, 3, 100, 6).withTimeout(1.5),
                         // new DriveToReef(true)
                         new DriveFastToReef(true)
                     ),
@@ -38,6 +39,7 @@ public class LeftTwoHalfRed extends SequentialCommandGroup {
                         // Elevate.zero().withTimeout(0.7),
                         // new VelocityElevator(0.4).withTimeout(0.6),
                         new AllTheWayDown(),
+                        VelocityTikiTorchRoller.rest().withTimeout(0.1),
                         Elevate.rest().withTimeout(0.5),
                         SetEndeffector.autoL4().withTimeout(2.3)
                     )
@@ -52,7 +54,7 @@ public class LeftTwoHalfRed extends SequentialCommandGroup {
                     )
                 ),
                 new ParallelCommandGroup(
-                    new DriveToPosition(0.2, 7.8, -60, 3, 100),
+                    new DriveToPosition(0.2, 7.35, -60, 3, 100),
                     // SetEndeffector.fastIntake(),
                     SetEndeffector.intake(),
                     VelocityTikiTorchRoller.intake()
@@ -66,7 +68,7 @@ public class LeftTwoHalfRed extends SequentialCommandGroup {
                 ),
                 new ParallelCommandGroup(
                     new SequentialCommandGroup(
-                        new DriveToPosition(3.25, 6, 120, 3, 125, 6).withTimeout(2),
+                        new DriveToPosition(3, 6.5, 120, 3, 125, 6).withTimeout(2),
                         // new DriveToReef(false)
                         new DriveFastToReef(false)
                     ),
@@ -84,7 +86,7 @@ public class LeftTwoHalfRed extends SequentialCommandGroup {
                 ),
                 new ParallelCommandGroup(
                     // new DriveToPosition(0.6, 7, -60, 4, 150, 9),
-                    new DriveToPosition(0.2, 6.8, -60, 4, 150, 9),
+                    new DriveToPosition(1, 7, -60, 4, 150, 9),
                     SetEndeffector.intake(),
                     VelocityTikiTorchRoller.intake()
                 ).withTimeout(3),

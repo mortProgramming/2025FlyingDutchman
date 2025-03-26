@@ -40,7 +40,7 @@ public class RightTwoRed extends SequentialCommandGroup {
                     SetEndeffector.slowL4().withTimeout(2.5)
                 )
             ),
-            VelocityTikiTorchRoller.outtake().withTimeout(0.5),
+            VelocityTikiTorchRoller.outtake().withTimeout(0.25),
 
             //intake one
             new ParallelCommandGroup(
@@ -76,11 +76,12 @@ public class RightTwoRed extends SequentialCommandGroup {
                 ),
                 VelocityTikiTorchRoller.intake().withTimeout(1)
             ),
-            VelocityTikiTorchRoller.outtake().withTimeout(0.5),
+            VelocityTikiTorchRoller.outtake().withTimeout(0.25),
 
             //intake take two
             new ParallelCommandGroup(
-                new TimedDrive(0.5, 1, 0, 0)
+                new TimedDrive(0.5, 1, 0, 0),
+                VelocityTikiTorchRoller.outtake().withTimeout(0.5)
             )
         )
     );

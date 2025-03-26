@@ -13,22 +13,15 @@ import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 
-public class CenterOnePiece extends SequentialCommandGroup {
+public class Push extends SequentialCommandGroup {
     
-    public CenterOnePiece(boolean isRight) {
+    public Push() {
 
     addCommands(
         new SequentialCommandGroup(
-            new ResetPosition(0, 0, 180, true),
-            //piece one
-            new TimedDrive(2, -0.5, 0, 0),
-            new DriveToReef(isRight),
-            new TimedDrive(0.5, -0.5, 0, 0),
-            new WaitCommand(0.5),
-            SetEndeffector.l4().withTimeout(2),
-            VelocityTikiTorchRoller.outtake().withTimeout(0.5),
-            new TimedDrive(1, 0.5, 0, 0),
-            SetEndeffector.rest().withTimeout(2)
+            new ResetPosition(0, 0, 225, true),
+            //push
+            new TimedDrive(2, 0, 1.5, 0)
         )
     );
   }

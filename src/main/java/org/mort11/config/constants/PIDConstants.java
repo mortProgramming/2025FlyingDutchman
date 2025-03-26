@@ -74,7 +74,7 @@ public final class PIDConstants {
 		public final static double ROT_KA = 0;
 
 		//PID Rotational
-		public final static double ROT_KP = 0.002;//.024 0.006
+		public final static double ROT_KP = 0.006;//.024 0.006
 		// public final static double ROT_KI = 0.0105;
 		// public final static double ROT_KD = 0.00175;
 		public final static double ROT_KI = 0.001;

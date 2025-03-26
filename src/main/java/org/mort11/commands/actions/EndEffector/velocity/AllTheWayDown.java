@@ -27,7 +27,7 @@ public class AllTheWayDown extends Command  {
 
     @Override
     public void execute() {
-      elevator.setElevatorMotorPercent(0.25);
+      elevator.setElevatorMotorPercent(0.15);
 
       elevator.setElevatorPosition(0);
     }

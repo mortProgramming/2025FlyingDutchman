@@ -21,6 +21,7 @@ import static org.mort11.config.constants.PhysicalConstants.Drivetrain.WHEEL_COE
 import org.mort11.commands.actions.InitializeTeleop;
 import org.mort11.commands.actions.endeffector.Initiate;
 import org.mort11.commands.actions.endeffector.velocity.Climb;
+import org.mort11.commands.actions.lights.DisabledLights;
 import org.mort11.config.Auto;
 import org.mort11.config.IO;
 import org.mort11.subsystems.swerve.Drivetrain;
@@ -90,6 +91,8 @@ public class Robot extends TimedRobot {
 		// 		alliance = DriverStation.getAlliance().get();
 		// 	}
 		// }
+
+    // CommandScheduler.getInstance().schedule(new DisabledLights());
   }
 
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */

@@ -32,6 +32,8 @@ import org.mort11.commands.autons.odometry.red.*;
 import org.mort11.commands.autons.pathplanned.BasicCommands;
 // import org.mort11.commands.autons.timed.CenterOnePiece;
 import org.mort11.commands.autons.odometry.OldCenterOnePiece;
+import org.mort11.commands.autons.odometry.Push;
+import org.mort11.commands.autons.odometry.PushOne;
 
 import com.pathplanner.lib.path.PathPlannerPath;
 import com.pathplanner.lib.util.DriveFeedforwards;
@@ -102,15 +104,19 @@ public class Auto {
         autoChooser.addOption("Red Right 2 Piece", new RightTwoRed());
         autoChooser.addOption("Red Left 2 Piece", new LeftTwoRed());
 
-        autoChooser.addOption("Blue Right 2.4 Piece", new RightTwoHalfBlue());
-        autoChooser.addOption("Blue Left 2.4 Piece", new LeftTwoHalfBlue());
-        autoChooser.addOption("Red Right 2.4 Piece", new RightTwoHalfRed());
-        autoChooser.addOption("Red Left 2.4 Piece", new LeftTwoHalfRed());
+        // autoChooser.addOption("Blue Right 2.4 Piece", new RightTwoHalfBlue());
+        // autoChooser.addOption("Blue Left 2.4 Piece", new LeftTwoHalfBlue());
+        // autoChooser.addOption("Red Right 2.4 Piece", new RightTwoHalfRed());
+        // autoChooser.addOption("Red Left 2.4 Piece", new LeftTwoHalfRed());
 
         // autoChooser.addOption("Blue Right 3 Piece", new RightThreeBlue());
 
         autoChooser.addOption("Right Center One Piece", new CenterOnePiece(true));
         autoChooser.addOption("Left Center One Piece", new CenterOnePiece(false));
+
+        autoChooser.addOption("Push", new Push());
+        // autoChooser.addOption("Push One Piece Right", new PushOne(true));
+        // autoChooser.addOption("Push One Piece Left", new PushOne(false));
 
         //pathplanner
         // autoChooser.addOption("Path?", new PathPlannerAuto("Forward"));

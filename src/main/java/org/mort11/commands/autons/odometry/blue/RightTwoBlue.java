@@ -1,6 +1,7 @@
 package org.mort11.commands.autons.odometry.blue;
 
 import org.mort11.commands.actions.drivetrain.ResetPosition;
+import org.mort11.commands.actions.drivetrain.auto.DriveFastToReef;
 import org.mort11.commands.actions.drivetrain.auto.DriveToPosition;
 import org.mort11.commands.actions.drivetrain.auto.DriveToReef;
 import org.mort11.commands.actions.drivetrain.auto.Rotate;
@@ -28,27 +29,30 @@ public class RightTwoBlue extends SequentialCommandGroup {
             new ParallelCommandGroup(
                 new SequentialCommandGroup(
                     // new DriveToPosition(5.3, 2.3, -60, 2).withTimeout(1.5),
-                    new DriveToPosition(5.57, 2.38, -60, 2).withTimeout(2),
-                    new DriveToReef(false)
+                    new DriveToPosition(5.35, 2.75, -60, 2).withTimeout(2),
+                    new DriveToReef(false),
+                    new TimedDrive(0.25, -0.5, 0, 0)
                 ),
                 new SequentialCommandGroup(
                     new AllTheWayDown(),
+                    VelocityTikiTorchRoller.rest().withTimeout(0.1),
                     Elevate.rest().withTimeout(0.5),
-                    SetEndeffector.slowL4().withTimeout(2.5)
+                    SetEndeffector.l4().withTimeout(2.5)
                 )
             ),
-            VelocityTikiTorchRoller.outtake().withTimeout(0.5),
+            VelocityTikiTorchRoller.outtake().withTimeout(0.25),
 
             //intake one
             new ParallelCommandGroup(
                 new TimedDrive(0.5, 0, -1.5, 0, true),
+                VelocityTikiTorchRoller.outtake().withTimeout(0.5),
                 new SequentialCommandGroup(
                     new WaitCommand(0.25),
                     Elevate.intake().withTimeout(0.5)
                 )
             ),
             new ParallelCommandGroup(
-                new DriveToPosition(1.317, 1.1, 60, 2, 50),
+                new DriveToPosition(0.8, 1.1, 60, 2, 50),
                 SetEndeffector.intake(),
                 VelocityTikiTorchRoller.intake()
             ).withTimeout(2.5),
@@ -61,20 +65,21 @@ public class RightTwoBlue extends SequentialCommandGroup {
             ),
             new ParallelCommandGroup(
                 new SequentialCommandGroup(
-                    new DriveToPosition(3.406, 2.462, -120).withTimeout(2.5),
+                    new DriveToPosition(4.1, 2.95, -120).withTimeout(2.5),
                     new DriveToReef(true)
                 ),
                 new SequentialCommandGroup(
                     SetTikiTorchArm.algaeClear().withTimeout(1),
-                    SetEndeffector.slowL4().withTimeout(2.5)
+                    SetEndeffector.l4().withTimeout(2.5)
                 ),
                 VelocityTikiTorchRoller.intake().withTimeout(1)
             ),
-            VelocityTikiTorchRoller.outtake().withTimeout(0.5),
+            VelocityTikiTorchRoller.outtake().withTimeout(0.25),
 
             //intake take two
             new ParallelCommandGroup(
-                new TimedDrive(0.5, 1, 0, 0)
+                new TimedDrive(0.5, 1, 0, 0),
+                VelocityTikiTorchRoller.outtake().withTimeout(0.5)
             )
         )
     );

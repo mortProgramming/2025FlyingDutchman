@@ -1,6 +1,7 @@
 package org.mort11.commands.autons.odometry.blue;
 
 import org.mort11.commands.actions.drivetrain.ResetPosition;
+import org.mort11.commands.actions.drivetrain.auto.DriveFastToReef;
 import org.mort11.commands.actions.drivetrain.auto.DriveToPosition;
 import org.mort11.commands.actions.drivetrain.auto.DriveToReef;
 import org.mort11.commands.actions.drivetrain.auto.Rotate;
@@ -27,28 +28,38 @@ public class LeftTwoBlue extends SequentialCommandGroup {
             //piece one
             new ParallelCommandGroup(
                 new SequentialCommandGroup(
-                    // new DriveToPosition(5.3, 2.3, -60, 2).withTimeout(1.5),
-                    new DriveToPosition(5.3, 5.611, 60, 2).withTimeout(2),
-                    new DriveToReef(true)
+                    new DriveToPosition(5.125, 5.6, 60, 2).withTimeout(2),
+                    new DriveFastToReef(true)
                 ),
                 new SequentialCommandGroup(
                     new AllTheWayDown(),
+                    VelocityTikiTorchRoller.rest().withTimeout(0.1),
                     Elevate.rest().withTimeout(0.5),
-                    SetEndeffector.slowL4().withTimeout(2.5)
+                    new WaitCommand(0.5),
+                    // SetEndeffector.mediumL4().withTimeout(2)
+                    SetEndeffector.l4().withTimeout(2)
+                    // VelocityTikiTorchRoller.outtake().withTimeout(0.5)
+                    // SetTikiTorchArm.score().withTimeout(0.5)
                 )
             ),
-            VelocityTikiTorchRoller.outtake().withTimeout(0.5),
+            new ParallelCommandGroup(
+                // SetTikiTorchArm.score().withTimeout(0.5),
+                new WaitCommand(0.25),
+                VelocityTikiTorchRoller.outtake().withTimeout(0.25)
+            ),
 
             //intake one
             new ParallelCommandGroup(
                 new TimedDrive(0.5, 0, 1.5, 0, true),
+                VelocityTikiTorchRoller.outtake().withTimeout(0.5),
                 new SequentialCommandGroup(
                     new WaitCommand(0.25),
-                    Elevate.intake().withTimeout(0.5)
+                    // Elevate.intake().withTimeout(0.5)
+                    SetEndeffector.intake().withTimeout(1)
                 )
             ),
             new ParallelCommandGroup(
-                new DriveToPosition(1.317, 7.6, -60, 2, 50),
+                new DriveToPosition(0.85, 7.161, -60, 2, 50),
                 SetEndeffector.intake(),
                 VelocityTikiTorchRoller.intake()
             ).withTimeout(3),
@@ -61,20 +72,22 @@ public class LeftTwoBlue extends SequentialCommandGroup {
             ),
             new ParallelCommandGroup(
                 new SequentialCommandGroup(
-                    new DriveToPosition(3.75, 5.749, 120).withTimeout(2.5),
+                    new DriveToPosition(5.8, 5.6, 120).withTimeout(2.5),
                     new DriveToReef(false)
                 ),
                 new SequentialCommandGroup(
                     SetTikiTorchArm.algaeClear().withTimeout(1),
-                    SetEndeffector.slowL4().withTimeout(2.5)
-                ),
-                VelocityTikiTorchRoller.intake().withTimeout(1)
+                    new WaitCommand(0.5),
+                    SetEndeffector.mediumL4().withTimeout(2.5)
+                    // SetEndeffector.slowL4().withTimeout(2.5)
+                )
+                // VelocityTikiTorchRoller.intake().withTimeout(1)
             ),
-            VelocityTikiTorchRoller.outtake().withTimeout(0.5),
+            VelocityTikiTorchRoller.outtake().withTimeout(0.25),
 
-            //intake take two
             new ParallelCommandGroup(
-                new TimedDrive(0.5, 1, 0, 0)
+                new TimedDrive(0.5, 1, 0, 0),
+                VelocityTikiTorchRoller.outtake().withTimeout(0.25)
             )
         )
     );

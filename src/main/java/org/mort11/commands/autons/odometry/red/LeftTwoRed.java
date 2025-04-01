@@ -40,8 +40,12 @@ public class LeftTwoRed extends SequentialCommandGroup {
                     SetEndeffector.l4().withTimeout(2)
                     // VelocityTikiTorchRoller.outtake().withTimeout(0.5)
                     // SetTikiTorchArm.score().withTimeout(0.5)
+                    
                 )
             ),
+
+            new WaitCommand(0.25),
+            
             new ParallelCommandGroup(
                 // SetTikiTorchArm.score().withTimeout(0.5),
                 new WaitCommand(0.25),
@@ -55,15 +59,15 @@ public class LeftTwoRed extends SequentialCommandGroup {
                 new SequentialCommandGroup(
                     new WaitCommand(0.25),
                     // Elevate.intake().withTimeout(0.5)
-                    SetEndeffector.intake().withTimeout(1)
+                    SetEndeffector.autoIntake().withTimeout(1)
                 )
             ),
             new ParallelCommandGroup(
-                new DriveToPosition(0.85, 7.161, -60, 2, 50),
-                SetEndeffector.intake(),
+                new DriveToPosition(0.65, 7.429, -60, 2, 50),
+                SetEndeffector.autoIntake(),
                 VelocityTikiTorchRoller.intake()
             ).withTimeout(3),
-            VelocityTikiTorchRoller.intake().withTimeout(0.75),
+            VelocityTikiTorchRoller.intake().withTimeout(1),
 
             //twoed piece
             new ParallelCommandGroup(

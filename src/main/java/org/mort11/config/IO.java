@@ -17,14 +17,13 @@ import org.mort11.commands.actions.drivetrain.teleop.SnapToReef;
 import org.mort11.commands.actions.endeffector.Initiate;
 import org.mort11.commands.actions.endeffector.pid.SetEndeffector;
 import org.mort11.commands.actions.endeffector.pid.SetTikiTorchArm;
-
 import org.mort11.commands.actions.endeffector.velocity.Climb;
-import org.mort11.commands.actions.endeffector.velocity.VelocityAlgaeRoller;
-import org.mort11.commands.actions.endeffector.velocity.VelocityTikiTorchRoller;
-import org.mort11.commands.actions.lights.LightsCommand;
 import org.mort11.commands.actions.endeffector.velocity.VelocityAlgaeArm;
+import org.mort11.commands.actions.endeffector.velocity.VelocityAlgaeRoller;
 import org.mort11.commands.actions.endeffector.velocity.VelocityElevator;
 import org.mort11.commands.actions.endeffector.velocity.VelocityTikiTorchArm;
+import org.mort11.commands.actions.endeffector.velocity.VelocityTikiTorchRoller;
+import org.mort11.commands.actions.lights.LightsCommand;
 
 import static org.mort11.config.Inputs.testingController;
 import static org.mort11.config.Inputs.operatorController;
@@ -156,7 +155,7 @@ public class IO {
       operatorController.axisGreaterThan(2, 0.25).whileTrue(VelocityAlgaeRoller.outtake());
       operatorController.axisGreaterThan(2, 0.25).whileFalse(VelocityAlgaeRoller.nothing());
 
-      //auto endeffector
+      //auto endeffectorector
 
       operatorController.pov(90).onTrue(SetEndeffector.rest());
       operatorController.pov(270).onTrue(SetEndeffector.l2());

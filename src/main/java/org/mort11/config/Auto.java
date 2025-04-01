@@ -26,14 +26,14 @@ import org.mort11.commands.autons.timed.Taxi;
 import org.mort11.library.subsystems.swerve.PathPlanner;
 import org.mort11.subsystems.swerve.Drivetrain;
 import org.mort11.commands.autons.odometry.Calibrate;
-import org.mort11.commands.autons.odometry.CenterOnePiece;
 import org.mort11.commands.autons.odometry.blue.*;
+import org.mort11.commands.autons.odometry.center.CenterOne;
+import org.mort11.commands.autons.odometry.center.CenterOneAlgae;
+import org.mort11.commands.autons.odometry.center.OldCenterOnePiece;
+import org.mort11.commands.autons.odometry.center.Push;
+import org.mort11.commands.autons.odometry.center.PushOne;
 import org.mort11.commands.autons.odometry.red.*;
 import org.mort11.commands.autons.pathplanned.BasicCommands;
-// import org.mort11.commands.autons.timed.CenterOnePiece;
-import org.mort11.commands.autons.odometry.OldCenterOnePiece;
-import org.mort11.commands.autons.odometry.Push;
-import org.mort11.commands.autons.odometry.PushOne;
 
 import com.pathplanner.lib.path.PathPlannerPath;
 import com.pathplanner.lib.util.DriveFeedforwards;
@@ -100,7 +100,7 @@ public class Auto {
         // autoChooser.addOption("Red Right One Piece", new RightOneRed());
 
 		autoChooser.addOption("Blue Right 2 Piece", new RightTwoBlue());
-        autoChooser.addOption("Blue Left 2 Piece", new LeftTwoBlue());
+        autoChooser.addOption("Blue Left 2 Piece - DO NOT TOUCH", new LeftTwoBlue());
         autoChooser.addOption("Red Right 2 Piece", new RightTwoRed());
         autoChooser.addOption("Red Left 2 Piece", new LeftTwoRed());
 
@@ -111,8 +111,11 @@ public class Auto {
 
         // autoChooser.addOption("Blue Right 3 Piece", new RightThreeBlue());
 
-        autoChooser.addOption("Right Center One Piece", new CenterOnePiece(true));
-        autoChooser.addOption("Left Center One Piece", new CenterOnePiece(false));
+        autoChooser.addOption("Right Center One Piece", new CenterOne(true));
+        autoChooser.addOption("Left Center One Piece", new CenterOne(false));
+
+        autoChooser.addOption("Right Center One Piece And Algae", new CenterOneAlgae(true));
+        autoChooser.addOption("Left Center One Piece And Algae", new CenterOneAlgae(false));
 
         autoChooser.addOption("Push", new Push());
         // autoChooser.addOption("Push One Piece Right", new PushOne(true));

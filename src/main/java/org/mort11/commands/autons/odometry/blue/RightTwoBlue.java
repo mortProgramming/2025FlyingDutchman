@@ -48,15 +48,15 @@ public class RightTwoBlue extends SequentialCommandGroup {
                 VelocityTikiTorchRoller.outtake().withTimeout(0.5),
                 new SequentialCommandGroup(
                     new WaitCommand(0.25),
-                    Elevate.intake().withTimeout(0.5)
+                    Elevate.autoIntake().withTimeout(0.5)
                 )
             ),
             new ParallelCommandGroup(
-                new DriveToPosition(0.8, 1.1, 60, 2, 50),
-                SetEndeffector.intake(),
+                new DriveToPosition(0.6, 1, 60, 2, 50),
+                SetEndeffector.autoIntake(),
                 VelocityTikiTorchRoller.intake()
             ).withTimeout(2.5),
-            VelocityTikiTorchRoller.intake().withTimeout(0.75),
+            VelocityTikiTorchRoller.intake().withTimeout(1),
 
             //twoed piece
             new ParallelCommandGroup(

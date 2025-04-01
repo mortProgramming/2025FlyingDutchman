@@ -16,7 +16,7 @@ public final class PhysicalConstants {
 		public static final double ARM_BOTTOM_NEVER_POSITION = -300;
 
 		public static final double ALGAE_REEF_INTAKE = 45;
-		public static final double ALGAE_FLOOR_INTAKE = -20;
+		public static final double ALGAE_FLOOR_INTAKE = -27;
 
 		public static final double ALGAE_PROCESSOR_SCORE = 0;
 		public static final double ALGAE_BARGE_SCORE = 45;
@@ -96,8 +96,8 @@ public final class PhysicalConstants {
 		public static final double ELEVATOR_L3_HEIGHT = 43.6;
 		public static final double ELEVATOR_L4_HEIGHT = 68;
 		public static final double ELEVATOR_AUTO_L4_HEIGHT = 69;
-		public static final double ELEVATOR_INTAKE_HEIGHT = 17.4;
-		public static final double ELEVATOR_AUTO_INTAKE_HEIGHT = 19; //old autos
+		public static final double ELEVATOR_INTAKE_HEIGHT = 17.75;
+		public static final double ELEVATOR_AUTO_INTAKE_HEIGHT = 17.75; //old autos
 
 		//algae
 		public static final double ELEVATOR_LOW_ALGAE_HEIGHT = 4.4;
@@ -136,7 +136,7 @@ public final class PhysicalConstants {
 		public static final double TIKI_AUTO_L234_SCORE = -58; // Position in degrees where the tiki torch goes to score at L2 3 and 4
 		public static final double TIKI_L1_SCORE = 0; // Position in degrees where the tiki torch goes to score L1
 
-		public static final double TIKI_INTAKE = 27; // Position in degrees where the tiki torch goes to intake 40
+		public static final double TIKI_INTAKE = 35; // Position in degrees where the tiki torch goes to intake 40
 
 		public static final double TIKI_ALGAE_CLEAR = -89; // Position the tiki torch goes to when having an algae
 	}
@@ -150,5 +150,7 @@ public final class PhysicalConstants {
 	public static final class Vision {
 		public static final double CAMERA_LEFT_OFFSET = Units.inchesToMeters(-1.5); //measurement from camera to left side of reef pipe
 		public static final double CAMERA_RIGHT_OFFSET = Units.inchesToMeters(9); //measurement from camera to right side of reef pipe
+
+		public static final double CAMERA_CENTER_OFFSET = Units.inchesToMeters(-0.75);
 	}
 }

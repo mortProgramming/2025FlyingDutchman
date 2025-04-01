@@ -169,10 +169,23 @@ public class SetEndeffector extends SequentialCommandGroup {
 
     public static Command autoIntake() {
         // return new SetEndeffector(ELEVATOR_AUTO_INTAKE_HEIGHT, TIKI_INTAKE, ALGAE_REST);
-        return new ParallelCommandGroup(
-            Elevate.autoIntake(),
-            SetAlgaeArm.rest(),
-            SetTikiTorchArm.intake()
+        // return new ParallelCommandGroup(
+        //     Elevate.autoIntake(),
+        //     SetAlgaeArm.rest(),
+        //     SetTikiTorchArm.intake()
+        // );
+
+        return new SequentialCommandGroup(
+            new ParallelCommandGroup(
+                Elevate.zero(),
+                SetAlgaeArm.rest(),
+                SetTikiTorchArm.intake()
+            ).withTimeout(1.25),
+            new ParallelCommandGroup(
+                Elevate.autoIntake(),
+                SetAlgaeArm.rest(),
+                SetTikiTorchArm.intake()
+            )
         );
     }
 }

@@ -1,4 +1,4 @@
-package org.mort11.commands.autons.odometry;
+package org.mort11.commands.autons.odometry.center;
 
 import org.mort11.commands.actions.drivetrain.ResetPosition;
 import org.mort11.commands.actions.drivetrain.auto.DriveToPosition;
@@ -13,15 +13,22 @@ import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 
-public class Push extends SequentialCommandGroup {
+public class CenterOne extends SequentialCommandGroup {
     
-    public Push() {
+    public CenterOne(boolean isRight) {
 
     addCommands(
         new SequentialCommandGroup(
-            new ResetPosition(0, 0, 225, true),
-            //push
-            new TimedDrive(2, 0, 1.5, 0)
+            new ResetPosition(0, 0, 180, true),
+            //piece one
+            new TimedDrive(2, -0.5, 0, 0),
+            new DriveToReef(isRight),
+            new TimedDrive(0.5, -0.5, 0, 0),
+            new WaitCommand(0.5),
+            SetEndeffector.l4().withTimeout(2),
+            VelocityTikiTorchRoller.outtake().withTimeout(0.5),
+            new TimedDrive(1, 0.5, 0, 0),
+            SetEndeffector.rest().withTimeout(2)
         )
     );
   }

@@ -28,15 +28,15 @@ public class LightsCommand extends Command {
     double height = Elevator.getInstance().getElevatorPositionInches();
 
     if(height > 60) {
-        lights.setLightsPurple();
+        lights.setLightsYellow();
     }
 
-    else if(height > 20) {
-        lights.setLightsBlue();
+    else if(height > 35) {
+        lights.setLightsDarkBlue();
     }
 
     else if(height > 10) {
-        lights.setLightsGold();
+        lights.setLightsWhite();
     }
 
     else {

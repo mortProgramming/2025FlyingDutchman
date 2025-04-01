@@ -41,6 +41,8 @@ public class Drivetrain extends SubsystemBase {
 
   private SwerveDriveOdometry odometer;
 
+  private SwerveDriveOdometry extraOdometer;
+
   private Field2d field;
 
   private Drivetrain() {
@@ -87,7 +89,14 @@ public class Drivetrain extends SubsystemBase {
     odometer = new SwerveDriveOdometry(
       swerveDrive.getKinematics(), 
       Rotation2d.fromDegrees(0), 
-      swerveDrive.getModulePositions());
+      swerveDrive.getModulePositions()
+	);
+
+	extraOdometer = new SwerveDriveOdometry(
+      swerveDrive.getKinematics(), 
+      Rotation2d.fromDegrees(0), 
+      swerveDrive.getModulePositions()
+	);
   }
 
   @Override
@@ -114,6 +123,8 @@ public class Drivetrain extends SubsystemBase {
 
    odometer.update(getAbsoluteRotation(), swerveDrive.getModulePositions());
 	// odometer.update(getRotation2d(), swerveDrive.getModulePositions());
+
+	extraOdometer.update(getAbsoluteRotation(), swerveDrive.getModulePositions());
 
    SmartDashboard.putNumber("XPose", odometer.getPoseMeters().getX());
     SmartDashboard.putNumber("YPose", odometer.getPoseMeters().getY());
@@ -194,6 +205,10 @@ public class Drivetrain extends SubsystemBase {
 		odometer.resetPose(new Pose2d(x, y, Rotation2d.fromDegrees(rotationDegrees)));
 	}
 
+	public void setExtraOdometerPosition(Pose2d pose) {
+		extraOdometer.resetPose(pose);
+	}
+
 
 
 	public ChassisSpeeds getChassisSpeeds() {
@@ -232,6 +247,10 @@ public class Drivetrain extends SubsystemBase {
 
 	public Pose2d getPose() {
 		return odometer.getPoseMeters();
+	}
+
+	public Pose2d getExtraPose() {
+		return extraOdometer.getPoseMeters();
 	}
 
 	public Pose2d getPathPose() {

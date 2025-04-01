@@ -3,9 +3,9 @@ package org.mort11.commands.autons.timed;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
 import org.mort11.commands.actions.drivetrain.auto.TimedDrive;
-import org.mort11.commands.actions.endeffector.Initiate;
-import org.mort11.commands.actions.endeffector.pid.SetEndeffector;
-import org.mort11.commands.actions.endeffector.velocity.VelocityTikiTorchRoller;
+import org.mort11.commands.actions.endeff.Initiate;
+import org.mort11.commands.actions.endeff.pid.SetEndeffector;
+import org.mort11.commands.actions.endeff.velocity.VelocityTikiTorchRoller;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 

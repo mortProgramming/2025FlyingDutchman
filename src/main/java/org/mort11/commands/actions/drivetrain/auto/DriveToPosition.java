@@ -27,7 +27,7 @@ public class DriveToPosition extends Command {
   private double wantedY;
   private double wantedTheta;
 
-  private double maxSpeed, maxRotate, maxAcceleration;
+  private double maxSpeed, maxRotate, maxAcceleration, maxRotateAcceleration;
 
   public DriveToPosition(double wantedX, double wantedY, double wantedTheta) {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -41,6 +41,7 @@ public class DriveToPosition extends Command {
     this.maxSpeed = POS_CONSTRAINTS.maxVelocity;
     this.maxRotate = ANGLE_CONSTRAINTS.maxVelocity;
     this.maxAcceleration = POS_CONSTRAINTS.maxAcceleration;
+    this.maxRotateAcceleration = ANGLE_CONSTRAINTS.maxAcceleration;
 
     addRequirements(drivetrain, vision);
   }
@@ -57,6 +58,7 @@ public class DriveToPosition extends Command {
     this.maxSpeed = maxSpeed;
     this.maxRotate = ANGLE_CONSTRAINTS.maxVelocity;
     this.maxAcceleration = POS_CONSTRAINTS.maxAcceleration;
+    this.maxRotateAcceleration = ANGLE_CONSTRAINTS.maxAcceleration;
 
     addRequirements(drivetrain, vision);
   }
@@ -73,6 +75,7 @@ public class DriveToPosition extends Command {
     this.maxSpeed = maxSpeed;
     this.maxRotate = maxRotate;
     this.maxAcceleration = POS_CONSTRAINTS.maxAcceleration;
+    this.maxRotateAcceleration = ANGLE_CONSTRAINTS.maxAcceleration;
 
     addRequirements(drivetrain, vision);
   }
@@ -89,6 +92,24 @@ public class DriveToPosition extends Command {
     this.maxSpeed = maxSpeed;
     this.maxRotate = maxRotate;
     this.maxAcceleration = maxAcceleration;
+    this.maxRotateAcceleration = ANGLE_CONSTRAINTS.maxAcceleration;
+
+    addRequirements(drivetrain, vision);
+  }
+
+  public DriveToPosition(double wantedX, double wantedY, double wantedTheta, double maxSpeed, double maxRotate, double maxAcceleration, double maxRotateAcceleration) {
+    // Use addRequirements() here to declare subsystem dependencies.
+    drivetrain =  Drivetrain.getInstance();
+    vision = Vision.getInstance();
+
+    this.wantedX = wantedX;
+    this.wantedY = wantedY;
+    this.wantedTheta = wantedTheta;
+
+    this.maxSpeed = maxSpeed;
+    this.maxRotate = maxRotate;
+    this.maxAcceleration = maxAcceleration;
+    this.maxRotateAcceleration = maxRotateAcceleration;
 
     addRequirements(drivetrain, vision);
   }
@@ -106,7 +127,7 @@ public class DriveToPosition extends Command {
 
     drivetrain.getXController().setConstraints(new Constraints(maxSpeed, maxAcceleration));
     drivetrain.getYController().setConstraints(new Constraints(maxSpeed, maxAcceleration));
-    drivetrain.getRotateController().setConstraints(new Constraints(maxRotate, ANGLE_CONSTRAINTS.maxAcceleration));
+    drivetrain.getRotateController().setConstraints(new Constraints(maxRotate, maxRotateAcceleration));
   }
 
   // Called every time the scheduler runs while the command is scheduled.

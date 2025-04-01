@@ -19,8 +19,8 @@ import static org.mort11.config.constants.PhysicalConstants.Drivetrain.ROBOT_MOM
 import static org.mort11.config.constants.PhysicalConstants.Drivetrain.WHEEL_COEFFICIENT_OF_FRICTION;
 
 import org.mort11.commands.actions.InitializeTeleop;
-import org.mort11.commands.actions.endeffector.Initiate;
-import org.mort11.commands.actions.endeffector.velocity.Climb;
+import org.mort11.commands.actions.endeff.Initiate;
+import org.mort11.commands.actions.endeff.velocity.Climb;
 import org.mort11.commands.actions.lights.DisabledLights;
 import org.mort11.config.Auto;
 import org.mort11.config.IO;

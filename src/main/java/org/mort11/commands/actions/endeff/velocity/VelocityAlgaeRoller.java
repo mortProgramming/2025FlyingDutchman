@@ -1,4 +1,4 @@
-package org.mort11.commands.actions.endeffector.velocity;
+package org.mort11.commands.actions.endeff.velocity;
 
 import static org.mort11.config.constants.PhysicalConstants.AlgaeRoller.*;
 
@@ -33,7 +33,9 @@ public class VelocityAlgaeRoller extends Command {
   }
 
   @Override
-  public void end(boolean interrupted){}
+  public void end(boolean interrupted){
+    algaeRoller.setRollerSpeed(0);
+  }
 
   public static Command intake() {
     return new VelocityAlgaeRoller(INTAKE_SPEED);

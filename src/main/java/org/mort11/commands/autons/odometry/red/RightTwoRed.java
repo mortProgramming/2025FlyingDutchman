@@ -4,15 +4,15 @@ import org.mort11.commands.actions.drivetrain.ResetPosition;
 import org.mort11.commands.actions.drivetrain.auto.DriveToPosition;
 import org.mort11.commands.actions.drivetrain.auto.Rotate;
 import org.mort11.commands.actions.drivetrain.auto.TimedDrive;
-import org.mort11.commands.actions.drivetrain.auto.badlimelight.DriveToReef;
-import org.mort11.commands.actions.endeffector.Initiate;
-import org.mort11.commands.actions.endeffector.pid.Elevate;
-import org.mort11.commands.actions.endeffector.pid.SetEndeffector;
-import org.mort11.commands.actions.endeffector.pid.SetTikiTorchArm;
-import org.mort11.commands.actions.endeffector.velocity.AllTheWayDown;
-import org.mort11.commands.actions.endeffector.velocity.VelocityElevator;
-import org.mort11.commands.actions.endeffector.velocity.VelocityTikiTorchArm;
-import org.mort11.commands.actions.endeffector.velocity.VelocityTikiTorchRoller;
+import org.mort11.commands.actions.drivetrain.auto.badlimelight.destination.DriveToReef;
+import org.mort11.commands.actions.endeff.Initiate;
+import org.mort11.commands.actions.endeff.pid.Elevate;
+import org.mort11.commands.actions.endeff.pid.SetEndeffector;
+import org.mort11.commands.actions.endeff.pid.SetTikiTorchArm;
+import org.mort11.commands.actions.endeff.velocity.AllTheWayDown;
+import org.mort11.commands.actions.endeff.velocity.VelocityElevator;
+import org.mort11.commands.actions.endeff.velocity.VelocityTikiTorchArm;
+import org.mort11.commands.actions.endeff.velocity.VelocityTikiTorchRoller;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
@@ -53,7 +53,7 @@ public class RightTwoRed extends SequentialCommandGroup {
                 )
             ),
             new ParallelCommandGroup(
-                new DriveToPosition(0.65, 0.95, 60, 2, 50),
+                new DriveToPosition(0.25, 0.85, 60, 2, 50),
                 SetEndeffector.autoIntake(),
                 VelocityTikiTorchRoller.intake()
             ).withTimeout(3),

@@ -1,15 +1,15 @@
 package org.mort11.commands.autons.odometry.center;
 
 import org.mort11.commands.actions.drivetrain.ResetPosition;
-import org.mort11.commands.actions.drivetrain.auto.DriveToCenterReef;
 import org.mort11.commands.actions.drivetrain.auto.DriveToPosition;
-import org.mort11.commands.actions.drivetrain.auto.DriveToReef;
+import org.mort11.commands.actions.drivetrain.auto.badlimelight.destination.DriveToReef;
+import org.mort11.commands.actions.endeff.pid.SetEndeffector;
+import org.mort11.commands.actions.endeff.pid.SetTikiTorchArm;
+import org.mort11.commands.actions.endeff.velocity.VelocityAlgaeRoller;
+import org.mort11.commands.actions.endeff.velocity.VelocityTikiTorchArm;
+import org.mort11.commands.actions.endeff.velocity.VelocityTikiTorchRoller;
 import org.mort11.commands.actions.drivetrain.auto.TimedDrive;
-import org.mort11.commands.actions.endeffector.pid.SetEndeffector;
-import org.mort11.commands.actions.endeffector.pid.SetTikiTorchArm;
-import org.mort11.commands.actions.endeffector.velocity.VelocityAlgaeRoller;
-import org.mort11.commands.actions.endeffector.velocity.VelocityTikiTorchArm;
-import org.mort11.commands.actions.endeffector.velocity.VelocityTikiTorchRoller;
+import org.mort11.commands.actions.drivetrain.auto.badlimelight.destination.DriveToCenterReef;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
@@ -30,7 +30,7 @@ public class CenterOneAlgae extends SequentialCommandGroup {
             SetEndeffector.l4().withTimeout(2),
             VelocityTikiTorchRoller.outtake().withTimeout(0.5),
             new TimedDrive(1, 0.5, 0, 0),
-            SetEndeffector.highAlgae().withTimeout(2),
+            SetEndeffector.lowAlgae().withTimeout(2),
             new ParallelCommandGroup(
                 new DriveToCenterReef(),
                 VelocityAlgaeRoller.intake().withTimeout(3)

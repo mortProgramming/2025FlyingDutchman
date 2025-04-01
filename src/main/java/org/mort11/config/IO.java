@@ -4,25 +4,26 @@ import org.mort11.commands.actions.drivetrain.ResetPosition;
 import org.mort11.commands.actions.drivetrain.SetRobotOrientation;
 import org.mort11.commands.actions.drivetrain.auto.DriveToPosition;
 import org.mort11.commands.actions.drivetrain.auto.Rotate;
-import org.mort11.commands.actions.drivetrain.auto.badlimelight.DriveFastNearToReef;
-import org.mort11.commands.actions.drivetrain.auto.badlimelight.DriveTeleopToReef;
-import org.mort11.commands.actions.drivetrain.auto.badlimelight.DriveToReef;
+import org.mort11.commands.actions.drivetrain.auto.badlimelight.destination.DriveToIntake;
 import org.mort11.commands.actions.drivetrain.auto.badlimelight.MoveToReef;
+import org.mort11.commands.actions.drivetrain.auto.badlimelight.destination.DriveTeleopToReef;
+import org.mort11.commands.actions.drivetrain.auto.badlimelight.destination.DriveToReef;
+import org.mort11.commands.actions.drivetrain.auto.badlimelight.near.DriveFastNearToReef;
 import org.mort11.commands.actions.drivetrain.teleop.Angle2AprilTag;
 import org.mort11.commands.actions.drivetrain.teleop.DriveAtAngle;
 import org.mort11.commands.actions.drivetrain.teleop.DriveSetSpeed;
 import org.mort11.commands.actions.drivetrain.teleop.DriveTagAngled;
 import org.mort11.commands.actions.drivetrain.teleop.SnapToIntake;
 import org.mort11.commands.actions.drivetrain.teleop.SnapToReef;
-import org.mort11.commands.actions.endeffector.Initiate;
-import org.mort11.commands.actions.endeffector.pid.SetEndeffector;
-import org.mort11.commands.actions.endeffector.pid.SetTikiTorchArm;
-import org.mort11.commands.actions.endeffector.velocity.Climb;
-import org.mort11.commands.actions.endeffector.velocity.VelocityAlgaeArm;
-import org.mort11.commands.actions.endeffector.velocity.VelocityAlgaeRoller;
-import org.mort11.commands.actions.endeffector.velocity.VelocityElevator;
-import org.mort11.commands.actions.endeffector.velocity.VelocityTikiTorchArm;
-import org.mort11.commands.actions.endeffector.velocity.VelocityTikiTorchRoller;
+import org.mort11.commands.actions.endeff.Initiate;
+import org.mort11.commands.actions.endeff.pid.SetEndeffector;
+import org.mort11.commands.actions.endeff.pid.SetTikiTorchArm;
+import org.mort11.commands.actions.endeff.velocity.Climb;
+import org.mort11.commands.actions.endeff.velocity.VelocityAlgaeArm;
+import org.mort11.commands.actions.endeff.velocity.VelocityAlgaeRoller;
+import org.mort11.commands.actions.endeff.velocity.VelocityElevator;
+import org.mort11.commands.actions.endeff.velocity.VelocityTikiTorchArm;
+import org.mort11.commands.actions.endeff.velocity.VelocityTikiTorchRoller;
 import org.mort11.commands.actions.lights.LightsCommand;
 
 import static org.mort11.config.Inputs.testingController;
@@ -139,6 +140,8 @@ public class IO {
     // driveController.button(6).whileTrue(new MoveToReef(true));
     // driveController.button(9).whileTrue(new MoveToReef(false));
     driveController.button(10).whileTrue(new SnapToReef(Inputs::getLeftControllerXSwerve, Inputs::getLeftControllerYSwerve));
+    // driveController.button(9).whileTrue(new DriveToIntake(false));
+    driveController.button(9).whileTrue(new DriveToIntake());
 
 
     //TODO Xbox Controller Commands

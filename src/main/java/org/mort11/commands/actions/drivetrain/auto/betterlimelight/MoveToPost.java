@@ -69,21 +69,9 @@ public class MoveToPost extends Command {
     System.out.println(vision.getRobotPosition().toString());
     System.out.println(tagPose.toString());
 
-    double sideValue =  isRight(post) ? CAMERA_RIGHT_OFFSET : CAMERA_LEFT_OFFSET;
-
     if (vision.hasTag()) {
         tagSeen = true;
     }
-
-    reefPose = new Pose2d(
-      (tagPose.getX() + 
-        sideValue * Math.cos(tagPose.getRotation().getRadians())
-      ),
-      (tagPose.getY() + 
-        sideValue * Math.sin(tagPose.getRotation().getRadians())
-      ), 
-      Rotation2d.fromDegrees(tagPose.getRotation().getDegrees() - 180)
-    );
 
     if(tagSeen) {
       drivetrain.setDrive(
@@ -135,13 +123,13 @@ public class MoveToPost extends Command {
     double sideValue =  isRight(post) ? CAMERA_RIGHT_OFFSET : CAMERA_LEFT_OFFSET;
 
     return new Pose2d(
-      (tagPose.getX() + 
-        sideValue * Math.cos(pose.getRotation().getRadians())
+      (pose.getX() + 
+        sideValue * Math.cos(vision.getRelativeRobotPosition().getRotation().getRadians())
       ),
-      (tagPose.getY() + 
-        sideValue * Math.sin(pose.getRotation().getRadians())
+      (pose.getY() + 
+        sideValue * Math.sin(vision.getRelativeRobotPosition().getRotation().getRadians())
       ), 
-      Rotation2d.fromDegrees(pose.getRotation().getDegrees() - 180)
+      Rotation2d.fromDegrees(vision.getRelativeRobotPosition().getRotation().getDegrees() - 180)
     );
   }
 }

@@ -1,4 +1,4 @@
-package org.mort11.commands.actions.endeffector.velocity;
+package org.mort11.commands.actions.endeff.velocity;
 
 import static org.mort11.config.constants.PhysicalConstants.TikiTorchRoller.*;
 

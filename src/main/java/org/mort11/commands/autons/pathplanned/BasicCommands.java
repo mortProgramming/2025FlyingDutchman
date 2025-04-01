@@ -1,8 +1,8 @@
 package org.mort11.commands.autons.pathplanned;
 
-import org.mort11.commands.actions.endeffector.pid.Elevate;
-import org.mort11.commands.actions.endeffector.pid.SetAlgaeArm;
-import org.mort11.commands.actions.endeffector.pid.SetEndeffector;
+import org.mort11.commands.actions.endeff.pid.Elevate;
+import org.mort11.commands.actions.endeff.pid.SetAlgaeArm;
+import org.mort11.commands.actions.endeff.pid.SetEndeffector;
 import org.mort11.config.constants.PhysicalConstants;
 
 import com.pathplanner.lib.auto.NamedCommands;

@@ -1,4 +1,4 @@
-package org.mort11.commands.actions.endeffector.velocity;
+package org.mort11.commands.actions.endeff.velocity;
 
 import org.mort11.subsystems.Elevator;
 

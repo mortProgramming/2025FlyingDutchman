@@ -1,4 +1,4 @@
-package org.mort11.commands.actions.endeffector.pid;
+package org.mort11.commands.actions.endeff.pid;
 
 import static org.mort11.config.constants.PhysicalConstants.AlgaeArm.ALGAE_REST;
 import static org.mort11.config.constants.PhysicalConstants.AlgaeArm.ALGAE_REEF_INTAKE;

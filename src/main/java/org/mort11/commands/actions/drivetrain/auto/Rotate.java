@@ -30,7 +30,11 @@ public class Rotate extends Command {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    drivetrain.getRotateController().reset(drivetrain.getRotation2d().getDegrees());
+
+    drivetrain.calculateRotateController(wantedTheta + IMU_TO_ROBOT_FRONT_ANGLE);
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
@@ -39,7 +43,7 @@ public class Rotate extends Command {
         ChassisSpeeds.fromFieldRelativeSpeeds(
             0,
             0, 
-            -Utility.clamp(drivetrain.calculateRotateController(wantedTheta + IMU_TO_ROBOT_FRONT_ANGLE), 6),
+            -drivetrain.calculateRotateController(wantedTheta + IMU_TO_ROBOT_FRONT_ANGLE),
             drivetrain.getRotation2d()
         )
       );

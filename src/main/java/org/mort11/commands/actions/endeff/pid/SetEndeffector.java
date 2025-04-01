@@ -1,4 +1,4 @@
-package org.mort11.commands.actions.endeffector.pid;
+package org.mort11.commands.actions.endeff.pid;
 
 import org.mort11.config.constants.PhysicalConstants;
 import org.mort11.subsystems.TikiTorchArm;

@@ -4,15 +4,16 @@ import org.mort11.commands.actions.drivetrain.ResetPosition;
 import org.mort11.commands.actions.drivetrain.auto.DriveToPosition;
 import org.mort11.commands.actions.drivetrain.auto.Rotate;
 import org.mort11.commands.actions.drivetrain.auto.TimedDrive;
-import org.mort11.commands.actions.drivetrain.auto.badlimelight.DriveFastToReef;
-import org.mort11.commands.actions.drivetrain.auto.badlimelight.DriveToReef;
-import org.mort11.commands.actions.endeffector.Initiate;
-import org.mort11.commands.actions.endeffector.pid.Elevate;
-import org.mort11.commands.actions.endeffector.pid.SetEndeffector;
-import org.mort11.commands.actions.endeffector.pid.SetTikiTorchArm;
-import org.mort11.commands.actions.endeffector.velocity.AllTheWayDown;
-import org.mort11.commands.actions.endeffector.velocity.VelocityTikiTorchArm;
-import org.mort11.commands.actions.endeffector.velocity.VelocityTikiTorchRoller;
+import org.mort11.commands.actions.drivetrain.auto.badlimelight.destination.DriveFastToReef;
+import org.mort11.commands.actions.drivetrain.auto.badlimelight.destination.DriveToIntake;
+import org.mort11.commands.actions.drivetrain.auto.badlimelight.destination.DriveToReef;
+import org.mort11.commands.actions.endeff.Initiate;
+import org.mort11.commands.actions.endeff.pid.Elevate;
+import org.mort11.commands.actions.endeff.pid.SetEndeffector;
+import org.mort11.commands.actions.endeff.pid.SetTikiTorchArm;
+import org.mort11.commands.actions.endeff.velocity.AllTheWayDown;
+import org.mort11.commands.actions.endeff.velocity.VelocityTikiTorchArm;
+import org.mort11.commands.actions.endeff.velocity.VelocityTikiTorchRoller;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
@@ -44,7 +45,7 @@ public class LeftTwoRed extends SequentialCommandGroup {
                 )
             ),
 
-            new WaitCommand(0.25),
+            // new WaitCommand(0.25),
             
             new ParallelCommandGroup(
                 // SetTikiTorchArm.score().withTimeout(0.5),
@@ -64,6 +65,13 @@ public class LeftTwoRed extends SequentialCommandGroup {
             ),
             new ParallelCommandGroup(
                 new DriveToPosition(0.65, 7.429, -60, 2, 50),
+                // new DriveToPosition(4, 6.7, -30, 2, 100),
+                // new SequentialCommandGroup(
+                    // new Rotate(-60),
+                    // new DriveToPosition(2.5, 5.75, 0, 2, 360, 3, 720).withTimeout(1),
+                    // new DriveToIntake()
+                // ),
+
                 SetEndeffector.autoIntake(),
                 VelocityTikiTorchRoller.intake()
             ).withTimeout(3),
@@ -76,7 +84,7 @@ public class LeftTwoRed extends SequentialCommandGroup {
             ),
             new ParallelCommandGroup(
                 new SequentialCommandGroup(
-                    new DriveToPosition(4.15, 5.6, 120).withTimeout(2.5),
+                    new DriveToPosition(4.15, 5.8, 120).withTimeout(2.5),
                     new DriveToReef(false)
                 ),
                 new SequentialCommandGroup(

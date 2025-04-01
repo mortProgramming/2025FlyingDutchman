@@ -21,15 +21,15 @@ import org.mort11.subsystems.Vision;
 import org.mort11.subsystems.swerve.Drivetrain;
 
 /** An example command that uses an example subsystem. */
-public class DriveFastNearToReef extends Command {
+public class DriveToIntake extends Command {
   private Drivetrain drivetrain;
   private Vision vision;
 
   private Timer timer;
 
-  private boolean isRight;
+  private boolean isRight, seenTag;
 
-  public DriveFastNearToReef(boolean isRight) {
+  public DriveToIntake(boolean isRight) {
     // Use addRequirements() here to declare subsystem dependencies.
     drivetrain =  Drivetrain.getInstance();
     vision = Vision.getInstance();
@@ -52,8 +52,8 @@ public class DriveFastNearToReef extends Command {
 	  drivetrain.getRotateController().reset(vision.getRelativeRobotPosition().getRotation().getDegrees());
     // drivetrain.getRotateController().reset(vision.getPicturePosition()[0]);
 
-    drivetrain.getYController().calculate(vision.getRelativeRobotPosition().getY(), -0.3);
-    drivetrain.getXController().calculate(vision.getRelativeRobotPosition().getX(), isRight ? CAMERA_RIGHT_OFFSET : CAMERA_LEFT_OFFSET);
+    drivetrain.getYController().calculate(vision.getRelativeRobotPosition().getY(), 0);
+    drivetrain.getXController().calculate(vision.getRelativeRobotPosition().getX(), 0);
     drivetrain.getRotateController().calculate(vision.getPicturePosition()[0], 0);
 
     drivetrain.getXController().setConstraints(new Constraints(3, 6));
@@ -68,15 +68,25 @@ public class DriveFastNearToReef extends Command {
 
     double xValue = isRight ? CAMERA_RIGHT_OFFSET : CAMERA_LEFT_OFFSET;
 
-    if(vision.hasTag()) {
+    if (vision.hasTag()) {
+      seenTag = true;
+  }
+
+    if(vision.hasTag() && seenTag) {
 
       drivetrain.setDrive(
         new ChassisSpeeds(
-          -Utility.clamp(drivetrain.getYController().calculate(vision.getRelativeRobotPosition().getY(), -0.3), 3),
-          Utility.clamp(drivetrain.getXController().calculate(vision.getRelativeRobotPosition().getX(), xValue), 3),
+          -Utility.clamp(drivetrain.getYController().calculate(vision.getRelativeRobotPosition().getY(), 0), 3),
+          Utility.clamp(drivetrain.getXController().calculate(vision.getRelativeRobotPosition().getX(), 0), 3),
           // -Utility.clamp(drivetrain.getRotateController().calculate(vision.getPicturePosition()[0], 0), 6)
           Utility.clamp(drivetrain.getRotateController().calculate(vision.getRelativeRobotPosition().getRotation().getDegrees(), 0), 6)
         )
+      );
+    }
+
+    else if(seenTag) {
+      drivetrain.setDrive(
+        new ChassisSpeeds(-1, 0, 0)
       );
     }
   
@@ -88,7 +98,8 @@ public class DriveFastNearToReef extends Command {
   
       drivetrain.setDrive(
         ChassisSpeeds.fromFieldRelativeSpeeds(
-          0, 0, 0,
+          0, 0, 
+          0,
           drivetrain.getRotation2d()
         )
       );

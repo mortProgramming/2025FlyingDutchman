@@ -1,7 +1,7 @@
 package org.mort11.commands.autons.odometry;
 
 import org.mort11.commands.actions.drivetrain.auto.DriveToPosition;
-import org.mort11.commands.actions.endeffector.Initiate;
+import org.mort11.commands.actions.endeff.Initiate;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 

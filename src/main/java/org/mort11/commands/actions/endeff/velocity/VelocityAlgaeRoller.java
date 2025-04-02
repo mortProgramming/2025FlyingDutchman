@@ -34,7 +34,7 @@ public class VelocityAlgaeRoller extends Command {
 
   @Override
   public void end(boolean interrupted){
-    algaeRoller.setRollerSpeed(0);
+    algaeRoller.setRollerSpeed(REST_SPEED);
   }
 
   public static Command intake() {
@@ -45,7 +45,11 @@ public class VelocityAlgaeRoller extends Command {
     return new VelocityAlgaeRoller(OUTAKE_SPEED);
   }
 
-  public static Command nothing(){
-    return new VelocityAlgaeRoller(0);
+  public static Command rest(){
+    return new VelocityAlgaeRoller(REST_SPEED);
   }
+
+  // public static Command nothing(){
+  //   return new VelocityAlgaeRoller(0);
+  // }
 }

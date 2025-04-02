@@ -16,6 +16,7 @@ public final class PhysicalConstants {
 		public static final double ARM_BOTTOM_NEVER_POSITION = -300;
 
 		public static final double ALGAE_REEF_INTAKE = 45;
+		public static final double ALGAE_AUTO_REEF_INTAKE = 40;
 		public static final double ALGAE_FLOOR_INTAKE = -27;
 
 		public static final double ALGAE_PROCESSOR_SCORE = 0;
@@ -25,6 +26,8 @@ public final class PhysicalConstants {
 	public final static class AlgaeRoller {
 		public static final double INTAKE_SPEED = -1;
 		public static final double OUTAKE_SPEED = 0.8;
+
+		public static final double REST_SPEED = -0.05;
 	} 
 
 	public final static class Drivetrain {
@@ -91,7 +94,7 @@ public final class PhysicalConstants {
 		public static final double ELEVATOR_REST_HEIGHT = 5.6;
 
 		//coral
-		public static final double ELEVATOR_L1_HEIGHT = 13;
+		public static final double ELEVATOR_L1_HEIGHT = 0;
 		public static final double ELEVATOR_L2_HEIGHT = 27.6;
 		public static final double ELEVATOR_L3_HEIGHT = 43.6;
 		public static final double ELEVATOR_L4_HEIGHT = 68;
@@ -132,9 +135,11 @@ public final class PhysicalConstants {
 		public static final double ARM_TOP_NEVER_POSITION = 45; // Position in degrees where the tiki torch cannot go to (top)
 		public static final double ARM_BOTTOM_NEVER_POSITION = 0; //Position in degeres where the tiki torch cannot go to (bottom)
 
-		public static final double TIKI_L234_SCORE = -65; // Position in degrees where the tiki torch goes to score at L2 3 and 4
-		public static final double TIKI_AUTO_L234_SCORE = -58; // Position in degrees where the tiki torch goes to score at L2 3 and 4
-		public static final double TIKI_L1_SCORE = 0; // Position in degrees where the tiki torch goes to score L1
+		// public static final double TIKI_AUTO_L4_SCORE = -58; // Position in degrees where the tiki torch goes to score at L4 in auto
+		public static final double TIKI_L4_SCORE = -65; // Position in degrees where the tiki torch goes to score at L4
+		public static final double TIKI_L3_SCORE = -60; // Position in degrees where the tiki torch goes to score at L3
+		public static final double TIKI_L2_SCORE = -60; // Position in degrees where the tiki torch goes to score at L2
+		public static final double TIKI_L1_SCORE = 35; // Position in degrees where the tiki torch goes to score L1
 
 		public static final double TIKI_INTAKE = 35; // Position in degrees where the tiki torch goes to intake 40
 

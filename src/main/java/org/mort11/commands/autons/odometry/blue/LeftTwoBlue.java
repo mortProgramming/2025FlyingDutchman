@@ -5,6 +5,7 @@ import org.mort11.commands.actions.drivetrain.auto.DriveToPosition;
 import org.mort11.commands.actions.drivetrain.auto.Rotate;
 import org.mort11.commands.actions.drivetrain.auto.TimedDrive;
 import org.mort11.commands.actions.drivetrain.auto.badlimelight.destination.DriveFastToReef;
+import org.mort11.commands.actions.drivetrain.auto.badlimelight.destination.DriveToIntake;
 import org.mort11.commands.actions.drivetrain.auto.badlimelight.destination.DriveToReef;
 import org.mort11.commands.actions.endeff.Initiate;
 import org.mort11.commands.actions.endeff.pid.Elevate;
@@ -28,7 +29,7 @@ public class LeftTwoBlue extends SequentialCommandGroup {
             //piece one
             new ParallelCommandGroup(
                 new SequentialCommandGroup(
-                    new DriveToPosition(5.125, 5.6, 60, 2).withTimeout(2),
+                    new DriveToPosition(5.25, 5.5, 60, 2).withTimeout(2),
                     new DriveFastToReef(true)
                 ),
                 new SequentialCommandGroup(
@@ -40,11 +41,14 @@ public class LeftTwoBlue extends SequentialCommandGroup {
                     SetEndeffector.l4().withTimeout(2)
                     // VelocityTikiTorchRoller.outtake().withTimeout(0.5)
                     // SetTikiTorchArm.score().withTimeout(0.5)
+                    
                 )
             ),
+
+            // new WaitCommand(0.25),
+            
             new ParallelCommandGroup(
                 // SetTikiTorchArm.score().withTimeout(0.5),
-                new WaitCommand(0.25),
                 VelocityTikiTorchRoller.outtake().withTimeout(0.25)
             ),
 
@@ -59,7 +63,14 @@ public class LeftTwoBlue extends SequentialCommandGroup {
                 )
             ),
             new ParallelCommandGroup(
-                new DriveToPosition(0.65, 7.261, -60, 2, 50),
+                new DriveToPosition(0.45, 7.53, -60, 2, 50),
+                // new DriveToPosition(4, 6.7, -30, 2, 100),
+                // new SequentialCommandGroup(
+                    // new Rotate(-60),
+                    // new DriveToPosition(2.5, 5.75, 0, 2, 360, 3, 720).withTimeout(1),
+                    // new DriveToIntake()
+                // ),
+
                 SetEndeffector.autoIntake(),
                 VelocityTikiTorchRoller.intake()
             ).withTimeout(3),
@@ -72,7 +83,7 @@ public class LeftTwoBlue extends SequentialCommandGroup {
             ),
             new ParallelCommandGroup(
                 new SequentialCommandGroup(
-                    new DriveToPosition(5.8, 5.6, 120).withTimeout(2.5),
+                    new DriveToPosition(4.15, 5.8, 120).withTimeout(2.5),
                     new DriveToReef(false)
                 ),
                 new SequentialCommandGroup(

@@ -49,7 +49,6 @@ public class LeftTwoRed extends SequentialCommandGroup {
             
             new ParallelCommandGroup(
                 // SetTikiTorchArm.score().withTimeout(0.5),
-                new WaitCommand(0.25),
                 VelocityTikiTorchRoller.outtake().withTimeout(0.25)
             ),
 

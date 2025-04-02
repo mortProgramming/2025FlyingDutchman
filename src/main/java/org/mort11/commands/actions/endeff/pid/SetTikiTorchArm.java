@@ -48,13 +48,13 @@ public class SetTikiTorchArm extends Command {
     return new SetTikiTorchArm(TIKI_L1_SCORE);
   }
 
-  public static Command score() {
-    return new SetTikiTorchArm(TIKI_L234_SCORE);
+  public static Command l4() {
+    return new SetTikiTorchArm(TIKI_L4_SCORE);
   }
 
-  public static Command autoScore() {
-    return new SetTikiTorchArm(TIKI_AUTO_L234_SCORE);
-  }
+  // public static Command autoL4() {
+  //   return new SetTikiTorchArm(TIKI_AUTO_L4_SCORE);
+  // }
 
   public static Command intake() {
     return new SetTikiTorchArm(TIKI_INTAKE);

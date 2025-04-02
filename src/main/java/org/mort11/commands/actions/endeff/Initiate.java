@@ -22,7 +22,7 @@ public class Initiate extends SequentialCommandGroup {
                 new ParallelCommandGroup(
                     Elevate.l2().withTimeout(0.5),
                     SetAlgaeArm.l23Intake(),
-                    SetTikiTorchArm.score()
+                    SetTikiTorchArm.l4()
                 ),
                 SetEndeffector.rest()
             ).withTimeout(1.5)
@@ -38,7 +38,7 @@ public class Initiate extends SequentialCommandGroup {
                 new ParallelCommandGroup(
                     Elevate.l2().withTimeout(0.5),
                     SetAlgaeArm.l23Intake(),
-                    SetTikiTorchArm.score()
+                    SetTikiTorchArm.l4()
                 ),
                 SetEndeffector.rest()
             ).withTimeout(1.5)

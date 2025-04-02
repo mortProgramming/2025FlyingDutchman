@@ -30,14 +30,14 @@ public class CenterOneAlgae extends SequentialCommandGroup {
             SetEndeffector.l4().withTimeout(2),
             VelocityTikiTorchRoller.outtake().withTimeout(0.5),
             new TimedDrive(1, 0.5, 0, 0),
-            SetEndeffector.lowAlgae().withTimeout(2),
+            SetEndeffector.lowAutoAlgae().withTimeout(2),
             new ParallelCommandGroup(
                 new DriveToCenterReef(),
-                VelocityAlgaeRoller.intake().withTimeout(3)
+                VelocityAlgaeRoller.intake().withTimeout(2.25)
             ),
             new ParallelCommandGroup(
-                new TimedDrive(1, 0.5, 0, 0),
-                VelocityAlgaeRoller.intake().withTimeout(1)
+                new TimedDrive(1, 0.5, 0, 0)
+                // VelocityAlgaeRoller.intake().withTimeout(0.5)
             )
         )
     );

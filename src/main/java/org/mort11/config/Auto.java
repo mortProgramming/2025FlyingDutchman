@@ -100,7 +100,7 @@ public class Auto {
         // autoChooser.addOption("Red Right One Piece", new RightOneRed());
 
 		autoChooser.addOption("Blue Right 2 Piece", new RightTwoBlue());
-        autoChooser.addOption("Blue Left 2 Piece - DO NOT TOUCH", new LeftTwoBlue());
+        autoChooser.addOption("Blue Left 2 Piece", new LeftTwoBlue());
         autoChooser.addOption("Red Right 2 Piece", new RightTwoRed());
         autoChooser.addOption("Red Left 2 Piece", new LeftTwoRed());
 

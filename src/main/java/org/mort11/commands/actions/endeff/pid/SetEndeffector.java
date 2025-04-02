@@ -90,31 +90,35 @@ public class SetEndeffector extends SequentialCommandGroup {
     }
 
     public static Command l2() {
-        return new SetEndeffector(ELEVATOR_L2_HEIGHT, TIKI_L234_SCORE, ALGAE_REST);
+        return new SetEndeffector(ELEVATOR_L2_HEIGHT, TIKI_L2_SCORE, ALGAE_REST);
     }
 
     public static Command l3() {
-        return new SetEndeffector(ELEVATOR_L3_HEIGHT, TIKI_L234_SCORE, ALGAE_REST);
+        return new SetEndeffector(ELEVATOR_L3_HEIGHT, TIKI_L3_SCORE, ALGAE_REST);
     }
 
     public static Command l4() {
-        return new SetEndeffector(ELEVATOR_L4_HEIGHT, TIKI_L234_SCORE, ALGAE_REST);
+        return new SetEndeffector(ELEVATOR_L4_HEIGHT, TIKI_L4_SCORE, ALGAE_REST);
     }
 
     public static Command autoL4() {
-        return new SetEndeffector(ELEVATOR_AUTO_L4_HEIGHT, TIKI_L234_SCORE, ALGAE_REST);
+        return new SetEndeffector(ELEVATOR_AUTO_L4_HEIGHT, TIKI_L4_SCORE, ALGAE_REST);
     }
 
     public static Command slowL4() {
-        return new SetEndeffector(ELEVATOR_L4_HEIGHT, TIKI_L234_SCORE, ALGAE_REST, SLOW_MAX_ELEVATOR_SPEED);
+        return new SetEndeffector(ELEVATOR_L4_HEIGHT, TIKI_L4_SCORE, ALGAE_REST, SLOW_MAX_ELEVATOR_SPEED);
     }
 
     public static Command mediumL4() {
-        return new SetEndeffector(ELEVATOR_L4_HEIGHT, TIKI_L234_SCORE, ALGAE_REST, MEDIUM_MAX_ELEVATOR_SPEED);
+        return new SetEndeffector(ELEVATOR_L4_HEIGHT, TIKI_L4_SCORE, ALGAE_REST, MEDIUM_MAX_ELEVATOR_SPEED);
     }
 
     public static Command lowAlgae() {
         return new SetEndeffector(ELEVATOR_LOW_ALGAE_HEIGHT, TIKI_ALGAE_CLEAR, ALGAE_REEF_INTAKE);
+    }
+
+    public static Command lowAutoAlgae() {
+        return new SetEndeffector(ELEVATOR_LOW_ALGAE_HEIGHT, TIKI_ALGAE_CLEAR, ALGAE_AUTO_REEF_INTAKE);
     }
 
     public static Command highAlgae() {
@@ -134,7 +138,7 @@ public class SetEndeffector extends SequentialCommandGroup {
     }
 
     public static Command maxScore() {
-        return new SetEndeffector(-ELEVATOR_UPPER_LIMIT_SWITCH_HEIGHT, TIKI_L234_SCORE, ALGAE_REST);
+        return new SetEndeffector(-ELEVATOR_UPPER_LIMIT_SWITCH_HEIGHT, TIKI_ALGAE_CLEAR, ALGAE_REST);
     }
 
     public static Command intake() {

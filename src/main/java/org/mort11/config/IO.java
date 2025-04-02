@@ -153,10 +153,10 @@ public class IO {
       operatorController.rightBumper().whileFalse(VelocityTikiTorchRoller.rest());
 
       operatorController.leftBumper().whileTrue(VelocityAlgaeRoller.intake());
-      operatorController.leftBumper().whileFalse(VelocityAlgaeRoller.nothing());
+      operatorController.leftBumper().whileFalse(VelocityAlgaeRoller.rest());
 
       operatorController.axisGreaterThan(2, 0.25).whileTrue(VelocityAlgaeRoller.outtake());
-      operatorController.axisGreaterThan(2, 0.25).whileFalse(VelocityAlgaeRoller.nothing());
+      operatorController.axisGreaterThan(2, 0.25).whileFalse(VelocityAlgaeRoller.rest());
 
       //auto endeffectorector
 
@@ -169,9 +169,10 @@ public class IO {
       operatorController.a().onTrue(SetEndeffector.floor());
       operatorController.b().onTrue(SetEndeffector.intake());
       operatorController.y().onTrue(SetEndeffector.barge());
+      operatorController.x().onTrue(SetEndeffector.l1());
 
       // operatorController.y().onTrue(SetTikiTorchArm.score());
-      operatorController.x().onTrue(SetTikiTorchArm.score());
+      // operatorController.x().onTrue(SetTikiTorchArm.score());
 
       operatorController.button(10).whileTrue(new Initiate());
 
@@ -205,10 +206,10 @@ public class IO {
       testingController.rightBumper().whileFalse(VelocityTikiTorchRoller.rest());
 
       testingController.leftBumper().whileTrue(VelocityAlgaeRoller.intake());
-      testingController.leftBumper().whileFalse(VelocityAlgaeRoller.nothing());
+      testingController.leftBumper().whileFalse(VelocityAlgaeRoller.rest());
 
       testingController.axisGreaterThan(2, 0.25).whileTrue(VelocityAlgaeRoller.outtake());
-      testingController.axisGreaterThan(2, 0.25).whileFalse(VelocityAlgaeRoller.nothing());
+      testingController.axisGreaterThan(2, 0.25).whileFalse(VelocityAlgaeRoller.rest());
 
       testingController.start().whileTrue(new Initiate());
 

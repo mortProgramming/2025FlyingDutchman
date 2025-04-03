@@ -92,7 +92,7 @@ public class Robot extends TimedRobot {
 		// 	}
 		// }
 
-    // CommandScheduler.getInstance().schedule(new DisabledLights());
+    CommandScheduler.getInstance().schedule(new DisabledLights());
   }
 
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */

@@ -24,7 +24,8 @@ import org.mort11.commands.actions.endeff.velocity.VelocityAlgaeRoller;
 import org.mort11.commands.actions.endeff.velocity.VelocityElevator;
 import org.mort11.commands.actions.endeff.velocity.VelocityTikiTorchArm;
 import org.mort11.commands.actions.endeff.velocity.VelocityTikiTorchRoller;
-import org.mort11.commands.actions.lights.LightsCommand;
+import org.mort11.commands.actions.lights.LineUpLights;
+import org.mort11.commands.actions.lights.TeleopLights;
 
 import static org.mort11.config.Inputs.testingController;
 import static org.mort11.config.Inputs.operatorController;
@@ -137,6 +138,8 @@ public class IO {
     // driveController.button(5).whileTrue(new DriveNearToReef(false));
     driveController.button(6).whileTrue(new DriveTeleopToReef(true));
     driveController.button(5).whileTrue(new DriveTeleopToReef(false));
+    driveController.button(6).whileTrue(new LineUpLights());
+    driveController.button(5).whileTrue(new LineUpLights());
     // driveController.button(6).whileTrue(new MoveToReef(true));
     // driveController.button(9).whileTrue(new MoveToReef(false));
     driveController.button(10).whileTrue(new SnapToReef(Inputs::getLeftControllerXSwerve, Inputs::getLeftControllerYSwerve));
@@ -217,7 +220,7 @@ public class IO {
       new Pose2d(7, 4, Rotation2d.fromDegrees(180))
     )));
 
-    lights.setDefaultCommand(new LightsCommand());
+    lights.setDefaultCommand(new TeleopLights());
     }
 
   public static Boolean isBlue () {

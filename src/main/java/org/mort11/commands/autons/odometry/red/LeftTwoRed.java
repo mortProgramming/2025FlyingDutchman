@@ -63,7 +63,7 @@ public class LeftTwoRed extends SequentialCommandGroup {
                 )
             ),
             new ParallelCommandGroup(
-                new DriveToPosition(0.65, 7.429, -60, 2, 50),
+                new DriveToPosition(0.80, 7.429, -60, 2, 50),
                 // new DriveToPosition(4, 6.7, -30, 2, 100),
                 // new SequentialCommandGroup(
                     // new Rotate(-60),

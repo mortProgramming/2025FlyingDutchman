@@ -35,8 +35,9 @@ public class CenterOneAlgae extends SequentialCommandGroup {
                 new DriveToCenterReef(),
                 VelocityAlgaeRoller.intake().withTimeout(2.25)
             ),
+            VelocityAlgaeRoller.intake().withTimeout(0.5),
             new ParallelCommandGroup(
-                new TimedDrive(1, 0.5, 0, 0)
+                // new TimedDrive(1, 0.5, 0, 0)
                 // VelocityAlgaeRoller.intake().withTimeout(0.5)
             )
         )

@@ -99,10 +99,12 @@ public class Auto {
         // autoChooser.addOption("Blue Right One Piece", new RightOneBlue());
         // autoChooser.addOption("Red Right One Piece", new RightOneRed());
 
-		autoChooser.addOption("Blue Right 2 Piece", new RightTwoBlue());
-        autoChooser.addOption("Blue Left 2 Piece", new LeftTwoBlue());
-        autoChooser.addOption("Red Right 2 Piece", new RightTwoRed());
-        autoChooser.addOption("Red Left 2 Piece", new LeftTwoRed());
+		// autoChooser.addOption("Blue Right 2 Piece", new RightTwoBlue());
+        // autoChooser.addOption("Blue Left 2 Piece", new LeftTwoBlue());
+        // autoChooser.addOption("Red Right 2 Piece", new RightTwoRed());
+        // autoChooser.addOption("Red Left 2 Piece", new LeftTwoRed());
+        autoChooser.addOption("Right 2 Piece", new RightTwoRed());
+        autoChooser.addOption("Left 2 Piece", new LeftTwoRed());
 
         // autoChooser.addOption("Blue Right 2.4 Piece", new RightTwoHalfBlue());
         // autoChooser.addOption("Blue Left 2.4 Piece", new LeftTwoHalfBlue());

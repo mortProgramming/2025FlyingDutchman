@@ -29,8 +29,8 @@ public class LeftTwoRed extends SequentialCommandGroup {
             //piece one
             new ParallelCommandGroup(
                 new SequentialCommandGroup(
-                    new DriveToPosition(5.25, 5.5, 60, 2).withTimeout(2),
-                    new DriveFastToReef(true)
+                    new DriveToPosition(5.35, 5.6, 60, 2).withTimeout(2),
+                    new DriveToReef(true)
                 ),
                 new SequentialCommandGroup(
                     new AllTheWayDown(),
@@ -63,7 +63,7 @@ public class LeftTwoRed extends SequentialCommandGroup {
                 )
             ),
             new ParallelCommandGroup(
-                new DriveToPosition(0.80, 7.429, -60, 2, 50),
+                new DriveToPosition(0.80, 7.329, -60, 2, 50),
                 // new DriveToPosition(4, 6.7, -30, 2, 100),
                 // new SequentialCommandGroup(
                     // new Rotate(-60),

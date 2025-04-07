@@ -55,7 +55,7 @@ public class RightTwoRed extends SequentialCommandGroup {
                 )
             ),
             new ParallelCommandGroup(
-                new DriveToPosition(0.65, 0.782, 60, 2, 50),
+                new DriveToPosition(0.8, 0.782, 60, 2, 50),
                 SetEndeffector.autoIntake(),
                 VelocityTikiTorchRoller.intake()
             ).withTimeout(3),

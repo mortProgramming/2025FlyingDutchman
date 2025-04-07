@@ -10,11 +10,11 @@ import org.mort11.subsystems.swerve.Drivetrain;
 import org.mort11.subsystems.Lights;
 import org.mort11.subsystems.Elevator;
 
-public class LightsCommand extends Command {
+public class TeleopLights extends Command {
   /** Creates a new IntakeBeamBreak. */
   private Lights lights;
 
-  public LightsCommand() {
+  public TeleopLights() {
     lights = Lights.getInstance();
 
     addRequirements(lights);

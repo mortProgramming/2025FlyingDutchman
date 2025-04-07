@@ -10,11 +10,11 @@ import org.mort11.subsystems.swerve.Drivetrain;
 import org.mort11.subsystems.Lights;
 import org.mort11.subsystems.Elevator;
 
-public class DisabledLights extends Command {
+public class LineUpLights extends Command {
   /** Creates a new IntakeBeamBreak. */
   private Lights lights;
 
-  public DisabledLights() {
+  public LineUpLights() {
     lights = Lights.getInstance();
 
     addRequirements(lights);
@@ -25,13 +25,11 @@ public class DisabledLights extends Command {
 
   @Override
   public void execute() {
-    lights.setLightsWhite();
+    lights.setLightsRed();
   }
 
   @Override
-  public void end(boolean interrupted) {
-    lights.setLightsBlue();
-  }
+  public void end(boolean interrupted) {}
 
   @Override
   public boolean isFinished() {

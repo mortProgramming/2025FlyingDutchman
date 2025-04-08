@@ -29,7 +29,7 @@ import org.mort11.commands.autons.odometry.Calibrate;
 import org.mort11.commands.autons.odometry.blue.*;
 import org.mort11.commands.autons.odometry.center.CenterOne;
 import org.mort11.commands.autons.odometry.center.CenterOneAlgae;
-import org.mort11.commands.autons.odometry.center.CenterOneGoodAlgae;
+import org.mort11.commands.autons.odometry.center.CenterOneScoreAlgae;
 import org.mort11.commands.autons.odometry.center.OldCenterOnePiece;
 import org.mort11.commands.autons.odometry.center.Push;
 import org.mort11.commands.autons.odometry.center.PushOne;
@@ -117,11 +117,11 @@ public class Auto {
         autoChooser.addOption("Right Center One Piece", new CenterOne(true));
         autoChooser.addOption("Left Center One Piece", new CenterOne(false));
 
-        autoChooser.addOption("Right Center One Piece And Algae", new CenterOneAlgae(true));
-        autoChooser.addOption("Left Center One Piece And Algae", new CenterOneAlgae(false));
+        autoChooser.addOption("Right Center One Piece And Grab Algae", new CenterOneAlgae(true));
+        autoChooser.addOption("Left Center One Piece And Grab Algae", new CenterOneAlgae(false));
 
-        // autoChooser.addOption("Right Center One Piece And Fast Algae", new CenterOneGoodAlgae(true));
-        // autoChooser.addOption("Left Center One Piece And Fast Algae", new CenterOneGoodAlgae(false));
+        autoChooser.addOption("Right Center One Piece And Score Algae", new CenterOneScoreAlgae(true));
+        autoChooser.addOption("Left Center One Piece And Score Algae", new CenterOneScoreAlgae(false));
 
         autoChooser.addOption("Push", new Push());
         // autoChooser.addOption("Push One Piece Right", new PushOne(true));

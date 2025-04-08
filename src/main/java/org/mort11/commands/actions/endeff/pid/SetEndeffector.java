@@ -126,11 +126,29 @@ public class SetEndeffector extends SequentialCommandGroup {
     }
 
     public static Command floor() {
-        return new SetEndeffector(ELEVATOR_FLOOR_HEIGHT, TIKI_ALGAE_CLEAR, ALGAE_FLOOR_INTAKE);
+        // return new SetEndeffector(ELEVATOR_FLOOR_HEIGHT, TIKI_ALGAE_CLEAR, ALGAE_FLOOR_INTAKE);
+        return new ParallelCommandGroup(
+            Elevate.floor(),
+            SetAlgaeArm.floor(),
+            SetTikiTorchArm.algaeClear()
+        );
+    }
+
+    public static Command pop() {
+        // return new SetEndeffector(ELEVATOR_POP_HEIGHT, TIKI_ALGAE_CLEAR, ALGAE_POP_INTAKE);
+        return new ParallelCommandGroup(
+            Elevate.pop(),
+            SetAlgaeArm.pop(),
+            SetTikiTorchArm.algaeClear()
+        );
     }
 
     public static Command barge() {
         return new SetEndeffector(ELEVATOR_BARGE_HEIGHT, TIKI_ALGAE_CLEAR, ALGAE_BARGE_SCORE);
+    }
+
+    public static Command slowBarge() {
+        return new SetEndeffector(ELEVATOR_BARGE_HEIGHT, TIKI_ALGAE_CLEAR, ALGAE_BARGE_SCORE, 40);
     }
 
     public static Command processor() {
@@ -148,7 +166,7 @@ public class SetEndeffector extends SequentialCommandGroup {
                 Elevate.zero(),
                 SetAlgaeArm.rest(),
                 SetTikiTorchArm.intake()
-            ).withTimeout(1.25),
+            ).withTimeout(1),
             new ParallelCommandGroup(
                 Elevate.intake(),
                 SetAlgaeArm.rest(),

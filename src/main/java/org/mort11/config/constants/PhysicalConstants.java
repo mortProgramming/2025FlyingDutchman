@@ -8,7 +8,7 @@ public final class PhysicalConstants {
 
 	public final static class AlgaeArm {
 
-		public static final double OFFSET = -197;
+		public static final double OFFSET = -257;
 
 		public static final double ALGAE_REST = 95;
 
@@ -18,6 +18,7 @@ public final class PhysicalConstants {
 		public static final double ALGAE_REEF_INTAKE = 45;
 		public static final double ALGAE_AUTO_REEF_INTAKE = 40;
 		public static final double ALGAE_FLOOR_INTAKE = -27;
+		public static final double ALGAE_POP_INTAKE = 18;
 
 		public static final double ALGAE_PROCESSOR_SCORE = 0;
 		public static final double ALGAE_BARGE_SCORE = 45;
@@ -109,6 +110,7 @@ public final class PhysicalConstants {
 		public static final double ELEVATOR_PROCESSOR_HEIGHT = 0;
 		public static final double ELEVATOR_BARGE_HEIGHT = 71.5;
 		public static final double ELEVATOR_FLOOR_HEIGHT = 0;
+		public static final double ELEVATOR_POP_HEIGHT = 0;
 	}
 
 	public static final class Lights {
@@ -129,7 +131,7 @@ public final class PhysicalConstants {
 
 	public final static class TikiTorchArm {
 
-		public static final double OFFSET = 284; //The amount in degrees to ensure that the algae arm reads 0 when flat
+		public static final double OFFSET = 224; //The amount in degrees to ensure that the algae arm reads 0 when flat
 
 		public static final double TIKI_REST = 59.3; //The rest position of the tiki torch in degrees
 
@@ -157,6 +159,6 @@ public final class PhysicalConstants {
 		public static final double CAMERA_LEFT_OFFSET = Units.inchesToMeters(-1.5); //measurement from camera to left side of reef pipe
 		public static final double CAMERA_RIGHT_OFFSET = Units.inchesToMeters(9); //measurement from camera to right side of reef pipe
 
-		public static final double CAMERA_CENTER_OFFSET = Units.inchesToMeters(-0.75);
+		public static final double CAMERA_CENTER_OFFSET = Units.inchesToMeters(1.5);
 	}
 }

@@ -100,6 +100,10 @@ public class Elevate extends Command {
         return new Elevate(ELEVATOR_HIGH_ALGAE_HEIGHT);
     }
 
+    public static Command pop() {
+        return new Elevate(ELEVATOR_POP_HEIGHT);
+    }
+
     public static Command processor() {
         return new Elevate(ELEVATOR_PROCESSOR_HEIGHT);
     }

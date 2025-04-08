@@ -52,6 +52,10 @@ public class SetAlgaeArm extends Command {
     return new SetAlgaeArm(ALGAE_FLOOR_INTAKE);
   }
 
+  public static Command pop() {
+    return new SetAlgaeArm(ALGAE_POP_INTAKE);
+  }
+
   public static Command processor() {
     return new SetAlgaeArm(ALGAE_PROCESSOR_SCORE);
   }

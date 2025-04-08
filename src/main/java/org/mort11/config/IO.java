@@ -7,6 +7,7 @@ import org.mort11.commands.actions.drivetrain.auto.Rotate;
 import org.mort11.commands.actions.drivetrain.auto.badlimelight.destination.DriveToIntake;
 import org.mort11.commands.actions.drivetrain.auto.badlimelight.MoveToReef;
 import org.mort11.commands.actions.drivetrain.auto.badlimelight.destination.DriveTeleopToReef;
+import org.mort11.commands.actions.drivetrain.auto.badlimelight.destination.DriveToCenterReef;
 import org.mort11.commands.actions.drivetrain.auto.badlimelight.destination.DriveToReef;
 import org.mort11.commands.actions.drivetrain.auto.badlimelight.near.DriveFastNearToReef;
 import org.mort11.commands.actions.drivetrain.teleop.Angle2AprilTag;
@@ -104,18 +105,18 @@ public class IO {
 
     driveController.triangle().onTrue(new DriveSetSpeed(
       Inputs::getLeftControllerXSwerve, Inputs::getLeftControllerYSwerve, Inputs::getRightControllerXSwerve, 
-      0.75
+      1
     ));
 
-    driveController.axisGreaterThan(4, 0.25).onTrue(new DriveSetSpeed(
-      Inputs::getLeftControllerXSwerve, Inputs::getLeftControllerYSwerve, Inputs::getRightControllerXSwerve, 
-      0.4
-    ));
+    // driveController.axisGreaterThan(4, 0.25).onTrue(new DriveSetSpeed(
+    //   Inputs::getLeftControllerXSwerve, Inputs::getLeftControllerYSwerve, Inputs::getRightControllerXSwerve, 
+    //   0.4
+    // ));
 
-    driveController.axisLessThan(4, 0.25).onFalse(new DriveSetSpeed(
-      Inputs::getLeftControllerXSwerve, Inputs::getLeftControllerYSwerve, Inputs::getRightControllerXSwerve, 
-      0.15
-    ));
+    // driveController.axisLessThan(4, 0.25).onFalse(new DriveSetSpeed(
+    //   Inputs::getLeftControllerXSwerve, Inputs::getLeftControllerYSwerve, Inputs::getRightControllerXSwerve, 
+    //   0.15
+    // ));
 
     driveController.pov(0).whileTrue(new SetRobotOrientation(0));
 
@@ -144,7 +145,10 @@ public class IO {
     // driveController.button(9).whileTrue(new MoveToReef(false));
     driveController.button(10).whileTrue(new SnapToReef(Inputs::getLeftControllerXSwerve, Inputs::getLeftControllerYSwerve));
     // driveController.button(9).whileTrue(new DriveToIntake(false));
-    driveController.button(9).whileTrue(new DriveToIntake());
+    // driveController.button(9).whileTrue(new DriveToIntake());
+    driveController.button(14).onTrue(SetEndeffector.pop());
+    // driveController.axisGreaterThan(8, 0.8).onTrue(SetEndeffector.pop());
+    // driveController.button(14).onTrue(new DriveToCenterReef());
 
 
     //TODO Xbox Controller Commands

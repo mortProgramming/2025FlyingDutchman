@@ -11,7 +11,7 @@ public class DriveToCenterReef extends SequentialCommandGroup {
         addCommands(
             new SequentialCommandGroup(
                 new DriveNearToCenterReef(),
-                new TimedDrive(0.75, -0.5, 0, 0)
+                new TimedDrive(1, -0.5, 0, 0)
             )
         );
     }

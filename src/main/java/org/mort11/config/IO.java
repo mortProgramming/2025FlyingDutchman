@@ -44,6 +44,7 @@ import org.mort11.subsystems.Vision;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.units.measure.Velocity;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
@@ -141,6 +142,10 @@ public class IO {
     driveController.button(5).whileTrue(new DriveTeleopToReef(false));
     driveController.button(6).whileTrue(new LineUpLights());
     driveController.button(5).whileTrue(new LineUpLights());
+    driveController.axisGreaterThan(4, 0.25).whileTrue(VelocityTikiTorchRoller.L1());
+    driveController.axisGreaterThan(4, 0.25).whileFalse(VelocityTikiTorchRoller.rest());
+    driveController.axisGreaterThan(3, 0.25).whileTrue(VelocityTikiTorchRoller.intake());
+    driveController.axisGreaterThan(3, 0.25).whileFalse(VelocityTikiTorchRoller.rest());
     // driveController.button(6).whileTrue(new MoveToReef(true));
     // driveController.button(9).whileTrue(new MoveToReef(false));
     driveController.button(10).whileTrue(new SnapToReef(Inputs::getLeftControllerXSwerve, Inputs::getLeftControllerYSwerve));
@@ -170,7 +175,8 @@ public class IO {
       operatorController.pov(90).onTrue(SetEndeffector.rest());
       operatorController.pov(270).onTrue(SetEndeffector.l2());
       operatorController.pov(180).onTrue(SetEndeffector.l3());
-      operatorController.pov(0).onTrue(SetEndeffector.l4());
+      // operatorController.pov(0).onTrue(SetEndeffector.l4());
+      operatorController.pov(0).onTrue(SetEndeffector.teleopL4());
       operatorController.back().onTrue(SetEndeffector.lowAlgae());
       operatorController.start().onTrue(SetEndeffector.highAlgae());
       operatorController.a().onTrue(SetEndeffector.floor());
@@ -206,7 +212,7 @@ public class IO {
       // testingController.pov(90).toggleOnTrue(new Climb(true));
       // testingController.pov(270).toggleOnTrue(new Climb(false));
 
-      testingController.axisGreaterThan(3, 0.25).whileTrue(VelocityTikiTorchRoller.outtake());
+      testingController.axisGreaterThan(3, 0.25).whileTrue(VelocityTikiTorchRoller.L1());
       testingController.axisGreaterThan(3, 0.25).whileFalse(VelocityTikiTorchRoller.rest());
 
       testingController.rightBumper().whileTrue(VelocityTikiTorchRoller.intake());

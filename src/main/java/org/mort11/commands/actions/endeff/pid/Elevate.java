@@ -3,6 +3,7 @@ package org.mort11.commands.actions.endeff.pid;
 import static org.mort11.config.constants.PhysicalConstants.Elevator.*;
 import org.mort11.subsystems.Elevator;
 import static org.mort11.config.constants.PIDConstants.Elevator.POS_CONSTRAINTS;
+import static org.mort11.config.constants.PIDConstants.Elevator.POS_TELEOP_CONSTRAINTS;
 
 import edu.wpi.first.math.trajectory.TrapezoidProfile.Constraints;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -11,12 +12,13 @@ public class Elevate extends Command {
     private Elevator elevator;
     private double targetPosition;
 
-    private double elevatorSpeed;
+    private double elevatorSpeed, elevatorAcceleration;
 
     public Elevate(double targetPosition) {
         this.elevator = Elevator.getInstance();
         this.targetPosition = targetPosition;
         this.elevatorSpeed = POS_CONSTRAINTS.maxVelocity;
+        this.elevatorAcceleration = POS_CONSTRAINTS.maxAcceleration;
 
         addRequirements(elevator);
     }
@@ -25,6 +27,16 @@ public class Elevate extends Command {
         this.elevator = Elevator.getInstance();
         this.targetPosition = targetPosition;
         this.elevatorSpeed = elevatorSpeed;
+        this.elevatorAcceleration = POS_CONSTRAINTS.maxAcceleration;
+
+        addRequirements(elevator);
+    }
+
+    public Elevate(double targetPosition, double elevatorSpeed, double elevatorAcceleration) {
+        this.elevator = Elevator.getInstance();
+        this.targetPosition = targetPosition;
+        this.elevatorSpeed = elevatorSpeed;
+        this.elevatorAcceleration = elevatorAcceleration;
 
         addRequirements(elevator);
     }
@@ -32,7 +44,7 @@ public class Elevate extends Command {
     @Override
     public void initialize() {
         elevator.getPIDController().reset(elevator.getElevatorPositionInches());
-        elevator.getPIDController().setConstraints(new Constraints(elevatorSpeed, POS_CONSTRAINTS.maxAcceleration));
+        elevator.getPIDController().setConstraints(new Constraints(elevatorSpeed, elevatorAcceleration));
     }
 
     @Override
@@ -70,6 +82,10 @@ public class Elevate extends Command {
 
     public static Command l4() {
         return new Elevate(ELEVATOR_L4_HEIGHT);
+    }
+
+    public static Command teleopL4(){
+        return new Elevate(ELEVATOR_L4_HEIGHT, POS_TELEOP_CONSTRAINTS.maxVelocity, POS_TELEOP_CONSTRAINTS.maxAcceleration);
     }
 
     public static Command intake() {

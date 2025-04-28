@@ -49,6 +49,10 @@ public class VelocityTikiTorchRoller extends Command {
     return new VelocityTikiTorchRoller(REST_SPEED);
   }
 
+  public static Command L1(){
+    return new VelocityTikiTorchRoller(L1_SPEED);
+  }
+
 }
 
 

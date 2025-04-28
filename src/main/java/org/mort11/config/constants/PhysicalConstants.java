@@ -153,6 +153,9 @@ public final class PhysicalConstants {
 		public static final double INTAKE_SPEED = -1;
 		public static final double OUTAKE_SPEED = 1;
 		public static final double REST_SPEED = -0.1;
+
+		public static final double L1_SPEED = 0.65;
+
 	}
 
 	public static final class Vision {

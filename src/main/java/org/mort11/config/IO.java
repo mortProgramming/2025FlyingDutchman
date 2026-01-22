@@ -89,10 +89,10 @@ public class IO {
           )
       );
 
-    driveController.cross().onTrue(new DriveSetSpeed(
-      Inputs::getLeftControllerXSwerve, Inputs::getLeftControllerYSwerve, Inputs::getRightControllerXSwerve, 
-      0.15
-    ));
+    // driveController.cross().onTrue(new DriveSetSpeed(
+    //   Inputs::getLeftControllerXSwerve, Inputs::getLeftControllerYSwerve, Inputs::getRightControllerXSwerve, 
+    //   0.15
+    // ));
 
     driveController.circle().onTrue(new DriveSetSpeed(
       Inputs::getLeftControllerXSwerve, Inputs::getLeftControllerYSwerve, Inputs::getRightControllerXSwerve, 
@@ -191,7 +191,7 @@ public class IO {
 
 
       //TESTING XBOXCONTROLLER SETTINGS
-
+    
       testingController.a().whileTrue(new VelocityTikiTorchArm(-0.2));
       testingController.a().whileFalse(new VelocityTikiTorchArm(0));
 
@@ -220,6 +220,9 @@ public class IO {
 
       testingController.leftBumper().whileTrue(VelocityAlgaeRoller.intake());
       testingController.leftBumper().whileFalse(VelocityAlgaeRoller.rest());
+
+      //temporary testing controller limelight stuff
+      driveController.cross().whileTrue(new SnapToReef(Inputs::getLeftControllerXSwerve, Inputs::getLeftControllerYSwerve));
 
       testingController.axisGreaterThan(2, 0.25).whileTrue(VelocityAlgaeRoller.outtake());
       testingController.axisGreaterThan(2, 0.25).whileFalse(VelocityAlgaeRoller.rest());
